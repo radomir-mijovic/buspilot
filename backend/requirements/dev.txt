@@ -1,0 +1,9 @@
+# dev.txt
+-r base.txt
+
+flake8==7.3.0
+isort==8.0.1
+ruff==0.15.8
+debugpy==1.8.20
+django-debug-toolbar==6.2.0
+django-extensions==4.1
