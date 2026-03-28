@@ -94,14 +94,14 @@
                                                     </thead>
                                                     <tbody class="list form-check-all">
                                                         {% for vehicle in vehicles %}
-                                                        <tr>
-                                                            <td class="id"><a href="" class="fw-medium link-primary">#{{ vehicle.id }}</a></td>
-                                                            <td class="customer_name">{{ vehicle.brand }}</td>
-                                                            <td class="product_name">{{ vehicle.model }}</td>
-                                                            <td class="type">{{ vehicle.vehicle_type }}</td>
-                                                            <td class="amount">{{ vehicle.year_of_production }}</td>
-                                                            <td class="payment">{{ vehicle.number_of_seats }}</td>
-                                                        </tr>
+                                                        <tr style="cursor:pointer" onclick="window.location='{% url 'vehicle:vehicles_details' vehicle.id %}'">
+                                                                <td class="id">#{{ vehicle.id }}</td>
+                                                                <td class="customer_name">{{ vehicle.brand }}</td>
+                                                                <td class="product_name">{{ vehicle.model }}</td>
+                                                                <td class="type">{{ vehicle.vehicle_type }}</td>
+                                                                <td class="amount">{{ vehicle.year_of_production }}</td>
+                                                                <td class="payment">{{ vehicle.number_of_seats }}</td>
+                                                            </tr>
                                                         {% endfor %}
                                                     </tbody>
                                                 </table>
@@ -115,17 +115,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="d-flex justify-content-end">
-                                                <div class="pagination-wrap hstack gap-2">
-                                                    <a class="page-item pagination-prev disabled" href="#">
-                                                        Previous
-                                                    </a>
-                                                    <ul class="pagination listjs-pagination mb-0"></ul>
-                                                    <a class="page-item pagination-next" href="#">
-                                                        Next
-                                                    </a>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="modal fade" id="showModal" tabindex="-1"
                                             aria-labelledby="addVehicleModalLabel" aria-hidden="true">
@@ -136,26 +125,26 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <form action="{% url 'vehicle:vehicles' %}" method="POST">
+                                                    <form action="{% url 'vehicle:vehicles_create' %}" method="POST">
                                                         {% csrf_token %}
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <label for="brand-field" class="form-label">Marka</label>
                                                                 <input type="text" name="brand" id="brand-field"
-                                                                    class="form-control" placeholder="npr. Mercedes" required />
+                                                                    class="form-control" placeholder="npr. Mercedes"/>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="model-field" class="form-label">Model</label>
                                                                 <input type="text" name="model" id="model-field"
-                                                                    class="form-control" placeholder="npr. Sprinter 412" required />
+                                                                    class="form-control" placeholder="npr. Sprinter 412"/>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="vehicle-type-field" class="form-label">Vrsta</label>
                                                                 <select name="vehicle_type" id="vehicle-type-field" class="form-control" required>
                                                                     <option value="">-- Odaberi vrstu --</option>
-                                                                    <option value="Bus">Bus</option>
-                                                                    <option value="Van">Van</option>
-                                                                    <option value="Car">Car</option>
+                                                                    <option value="Bus">Autobus</option>
+                                                                    <option value="Van">Kombi</option>
+                                                                    <option value="Car">Malo vozilo</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
@@ -167,6 +156,36 @@
                                                                 <label for="seats-field" class="form-label">Broj sjedišta</label>
                                                                 <input type="text" name="number_of_seats" id="seats-field"
                                                                     class="form-control" placeholder="npr. 50 + 5" />
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="chassis_number" class="form-label">Broj šasije</label>
+                                                                <input type="text" name="chassis_number" id="chassis_number"
+                                                                    class="form-control" placeholder="npr. HGCM8..." />
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="engine_number" class="form-label">Broj motora</label>
+                                                                <input type="text" name="engine_number" id="engine_number"
+                                                                    class="form-control" placeholder="npr. ALF 123 456..." />
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="horse_power" class="form-label">Konjska snaga</label>
+                                                                <input type="text" name="horse_power" id="horse_power"
+                                                                    class="form-control" placeholder="HP" />
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="weigth" class="form-label">Kilaža (KG)</label>
+                                                                <input type="text" name="weigth" id="weigth"
+                                                                    class="form-control" placeholder="npr. 3120kg" />
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="licence_number" class="form-label">Broj Tablica</label>
+                                                                <input type="text" name="licence_number" id="licence_number"
+                                                                    class="form-control" placeholder="npr. PG-AU352" />
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="color" class="form-label">Boja</label>
+                                                                <input type="text" name="color" id="color"
+                                                                    class="form-control" placeholder="npr. Svijetlo plava" />
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -212,30 +231,10 @@
     <script src="{% static 'libs/sweetalert2/dist/sweetalert2.min.js' %}"></script>
 
     {% for message in messages %}
-            {% if message.tags == 'alert-success' %}
-            <!-- sweetalert js -->
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script>
-                var m = "{{ message }}";
-                Swal.fire({
-                    icon: 'success',
-                    title: m,
-                    showConfirmButton: false,
-                    timer: 1500,
-                })
-            </script>
-            {% else %}
-                <!-- sweetalert js -->
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script>
-                var m = "{{ message }}";
-                Swal.fire({
-                    icon: 'error',
-                    title: m,
-                    showConfirmButton: false,
-                    timer: 1500,
-                })
-                </script>
-            {% endif %}
-        {% endfor %}
+      {% if 'vehicle-error' in message.tags %}
+  <script>
+      Swal.fire({ icon: 'error', title: "{{ message }}", showConfirmButton: false, timer: 2000 })
+  </script>
+  {% endif %}
+                    {% endfor %}
 {% endblock extra_js %}

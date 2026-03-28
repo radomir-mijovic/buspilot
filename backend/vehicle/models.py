@@ -16,8 +16,10 @@ class Vehicle(models.Model):
         blank=True,
     )
     chassis_number = models.CharField(max_length=100, blank=True)
+    color = models.CharField(max_length=100, blank=True)
     engine_number = models.CharField(max_length=100, blank=True)
     horse_power = models.CharField(max_length=100, blank=True)
+    licence_number = models.CharField(max_length=100, blank=True)
     model = models.CharField(max_length=100)
     number_of_seats = models.CharField(max_length=20, blank=True)
     year_of_production = models.CharField(max_length=100, blank=True)

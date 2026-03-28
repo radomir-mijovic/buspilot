@@ -9,7 +9,10 @@ class VehicleCreateForm(ModelForm):
         fields = [
             "brand",
             "chassis_number",
+            "color",
             "engine_number",
+            "horse_power",
+            "licence_number",
             "model",
             "number_of_seats",
             "year_of_production",
