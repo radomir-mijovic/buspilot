@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
 
-class AuthConfig(AppConfig):
+class UserAuthConfig(AppConfig):
     name = "auth"
+    label = "user_auth"

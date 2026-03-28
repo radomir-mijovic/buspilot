@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("dashboard.urls")),
     path("", include("vehicle.urls")),
+    path("", include("auth.urls")),
 ]
