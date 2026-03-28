@@ -6,4 +6,14 @@ from .models import User
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    list_display = ["id", "username"]
+    list_display = ["id", "username", "company"]
+    list_filter = ["company"]
+    search_fields = ["username", "company__name"]
+
+    fieldsets = BaseUserAdmin.fieldsets + (
+        ("Company Info", {"fields": ("company",)}),
+    )
+
+    add_fieldsets = BaseUserAdmin.add_fieldsets + (
+        ("Company Info", {"fields": ("company",)}),
+    )

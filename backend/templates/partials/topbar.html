@@ -42,19 +42,15 @@
                                     class="rounded">
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
-
-                                <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="en"
                                     title="English">
-                                    <img src="{% static 'images/flags/us.svg'%}" alt="user-image" class="me-2 rounded" height="18">
+                                    <img src="{% static 'images/flags/us.svg'%}" alt="English" class="me-2 rounded" height="18">
                                     <span class="align-middle">English</span>
                                 </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp"
-                                    title="Spanish">
-                                    <img src="{% static 'images/flags/spain.svg'%}" alt="user-image" class="me-2 rounded" height="18">
-                                    <span class="align-middle">Española</span>
+                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="me"
+                                    title="Crnogorski">
+                                    <img src="{% static 'images/flags/me.svg'%}" alt="Crnogorski" class="me-2 rounded" height="18">
+                                    <span class="align-middle">Crnogorski</span>
                                 </a>
                             </div>
                         </div>
@@ -73,7 +69,7 @@
                                         alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{user.username|title}}</span>
-                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Korisnik</span>
+                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text" data-key="t-user-role">Korisnik</span>
                                     </span>
                                 </span>
                             </button>
@@ -85,8 +81,8 @@
                                             <span class="align-middle" data-key="t-change-password">Promijeni lozinku</span>
                                         </button>
                                         <a class="dropdown-item" href="{% url 'auth:logout' %}">
-                                            <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> 
-                                            <span class="align-middle" data-key="t-logout">Logout</span>
+                                            <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                                            <span class="align-middle" data-key="t-logout">Odjava</span>
                                         </a>
                             </div>
                         </div>

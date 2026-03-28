@@ -1,0 +1,15 @@
+{
+    "t-menu": "Meni",
+    "t-dashboards": "Dashboard",
+    "t-vehicles": "Vozila",
+    "t-vehicle-list": "Spisak Vozila",
+    "t-drivers": "Vozači",
+    "t-driver-list": "Spisak Vozača",
+    "t-guides": "Vodiči",
+    "t-agencies": "Agencije",
+    "t-finance": "Finansije",
+    "t-invoices-list": "Fakture",
+    "t-change-password": "Promijeni Lozinku",
+    "t-logout": "Odjava",
+    "t-user-role": "Korisnik"
+}
