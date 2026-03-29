@@ -1,0 +1,25 @@
+<tr id="row-{{ vehicle.id }}"
+    style="cursor:pointer"
+    onclick="window.location='{% url 'vehicle:vehicles_details' vehicle.id %}'">
+    <td class="id">#{{ vehicle.id }}</td>
+    <td class="customer_name">{{ vehicle.brand }}</td>
+    <td class="product_name">{{ vehicle.model }}</td>
+    <td class="type">{{ vehicle.vehicle_type }}</td>
+    <td class="amount">{{ vehicle.year_of_production }}</td>
+    <td class="payment">{{ vehicle.number_of_seats }}</td>
+    <td>
+        <div class="hstack gap-3 flex-wrap">
+            <a data-bs-toggle="modal"
+               data-bs-target="#showUpdateModal-{{ vehicle.id }}"
+               type="button"
+               class="btn btn-sm btn-light"
+               onclick="event.stopPropagation();">Izmjeni</a>
+            <button onclick="event.stopPropagation();"
+                    class="delete-vehicle-btn link-danger fs-15 border-0 bg-transparent p-0"
+                    data-vehicle-id="{{ vehicle.id }}"
+                    data-delete-url="{% url 'vehicle:vehicles_delete' vehicle.id %}">
+                <i class="ri-delete-bin-line"></i>
+            </button>
+        </div>
+    </td>
+</tr>

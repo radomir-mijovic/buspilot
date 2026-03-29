@@ -7,3 +7,13 @@ ruff==0.15.8
 debugpy==1.8.20
 django-debug-toolbar==6.2.0
 django-extensions==4.1
+colorama==0.4.6
+cssbeautifier==1.15.4
+djlint==1.36.4
+editorconfig==0.17.1
+jsbeautifier==1.15.4
+json5==0.14.0
+pyyaml==6.0.3
+regex==2026.3.32
+six==1.17.0
+tqdm==4.67.3

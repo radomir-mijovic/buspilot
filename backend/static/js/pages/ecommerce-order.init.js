@@ -1,26 +1,9 @@
-var perPage = 8,
-  options = {
-    valueNames: ["id", "customer_name", "product_name", "type", "amount", "payment"],
-    page: perPage,
-    pagination: true,
-    plugins: [ListPagination({ left: 2, right: 2 })],
-  },
-  orderList = new List("orderList", options).on("updated", function (e) {
-    var noresult = document.getElementsByClassName("noresult")[0];
-    var paginationWrap = document.querySelector(".pagination-wrap");
-    var paginationPrev = document.querySelector(".pagination-prev");
-    var paginationNext = document.querySelector(".pagination-next");
-
-    if (e.matchingItems.length === 0) {
-      noresult.style.display = "block";
-    } else {
-      noresult.style.display = "none";
-    }
-
-    if (paginationPrev) paginationPrev.classList.toggle("disabled", e.i === 1);
-    if (paginationNext) paginationNext.classList.toggle("disabled", e.i > e.matchingItems.length - e.page);
-    if (paginationWrap) paginationWrap.style.display = e.matchingItems.length <= perPage ? "none" : "flex";
-  });
+var orderList = new List("orderList", {
+  valueNames: ["id", "customer_name", "product_name", "type", "amount", "payment"],
+}).on("updated", function (e) {
+  var noresult = document.getElementsByClassName("noresult")[0];
+  noresult.style.display = e.matchingItems.length === 0 ? "block" : "none";
+});
 
 var tabEl = document.querySelectorAll('a[data-bs-toggle="tab"]');
 
@@ -42,19 +25,38 @@ function SearchData() {
   if (s) orderList.search(s.value);
 }
 
-var paginationNext = document.querySelector(".pagination-next");
-var paginationPrev = document.querySelector(".pagination-prev");
-
-if (paginationNext) {
-  paginationNext.addEventListener("click", function () {
-    var active = document.querySelector(".pagination.listjs-pagination .active");
-    if (active && active.nextElementSibling) active.nextElementSibling.children[0].click();
+document.addEventListener("click", function (e) {
+  var btn = e.target.closest(".delete-vehicle-btn");
+  if (!btn) return;
+  e.stopPropagation();
+  var vehicleId = btn.dataset.vehicleId;
+  var deleteUrl = btn.dataset.deleteUrl;
+  Swal.fire({
+    html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon><div class="mt-4 pt-2 fs-15 mx-5"><h4>Da li ste sigurni?</h4><p class="text-muted mx-4 mb-0">Da li ste sigurni da želite obrisati ovo vozilo?</p></div></div>',
+    showCancelButton: true,
+    customClass: {
+      confirmButton: "btn btn-primary w-xs me-2 mb-1",
+      cancelButton: "btn btn-danger w-xs mb-1",
+    },
+    confirmButtonText: "Da, obriši!",
+    cancelButtonText: "Otkaži",
+    buttonsStyling: false,
+    showCloseButton: true,
+  }).then(function (result) {
+    if (!result.isConfirmed) return;
+    var csrfToken = (document.cookie.match(/csrftoken=([^;]+)/) || [])[1] || "";
+    fetch(deleteUrl, {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": csrfToken,
+        "HX-Request": "true",
+      },
+    }).then(function (response) {
+      if (response.ok) {
+        var row = document.getElementById("row-" + vehicleId);
+        if (row) row.remove();
+        orderList.reIndex();
+      }
+    });
   });
-}
-
-if (paginationPrev) {
-  paginationPrev.addEventListener("click", function () {
-    var active = document.querySelector(".pagination.listjs-pagination .active");
-    if (active && active.previousSibling) active.previousSibling.children[0].click();
-  });
-}
+});
