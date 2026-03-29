@@ -29,6 +29,7 @@ document.addEventListener("click", function (e) {
   var btn = e.target.closest(".delete-vehicle-btn");
   if (!btn) return;
   e.stopPropagation();
+  e.preventDefault();
   var vehicleId = btn.dataset.vehicleId;
   var deleteUrl = btn.dataset.deleteUrl;
   Swal.fire({
@@ -59,4 +60,4 @@ document.addEventListener("click", function (e) {
       }
     });
   });
-});
+}, true);
