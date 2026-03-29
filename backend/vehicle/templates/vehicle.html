@@ -127,11 +127,6 @@
                                                         <td class="payment">{{ vehicle.number_of_seats }}</td>
                                                         <td>
                                                             <div class="hstack gap-3 flex-wrap">
-                                                                <a data-bs-toggle="modal"
-                                                                   data-bs-target="#showUpdateModal-{{ vehicle.id }}"
-                                                                   type="button"
-                                                                   class="link-success fs-15"
-                                                                   onclick="event.stopPropagation();"><i class="ri-edit-2-line"></i></a>
                                                                 <button class="delete-vehicle-btn link-danger fs-15 border-0 bg-transparent p-0"
                                                                         data-vehicle-id="{{ vehicle.id }}"
                                                                         data-delete-url="{% url 'vehicle:vehicles_delete' vehicle.id %}">
@@ -263,7 +258,7 @@
                                                                     <div class="modal-footer">
                                                                         <div class="hstack gap-2 justify-content-end">
                                                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Zatvori</button>
-                                                                            <button type="submit" class="btn btn-success">Dodaj vozilo</button>
+                                                                            <button type="submit" class="btn btn-success">Izmjeni vozilo</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -295,7 +290,7 @@
                                             <form hx-post="{% url 'vehicle:vehicles_create' %}"
                                                   hx-target="#vehicle-tbody"
                                                   hx-swap="beforeend"
-                                                  hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('showModal')).hide();this.reset();orderList.reIndex();}">
+                                                  hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('showModal')).hide();this.reset();orderList.reIndex();htmx.process(document.body);}">
                                                 {% csrf_token %}
                                                 <div class="modal-body">
                                                     <div class="mb-3">

@@ -35,7 +35,7 @@
                                            data-bs-toggle="tab"
                                            href="#overview-tab"
                                            role="tab">
-                                            <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Overview</span>
+                                            <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Pregled</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -43,7 +43,7 @@
                                            data-bs-toggle="tab"
                                            href="#activities"
                                            role="tab">
-                                            <i class="ri-list-unordered d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Activities</span>
+                                            <i class="ri-list-unordered d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Calendar</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -59,7 +59,7 @@
                                            data-bs-toggle="tab"
                                            href="#documents"
                                            role="tab">
-                                            <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Documents</span>
+                                            <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Documenti</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -110,6 +110,14 @@
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Kilaža (KG) :</th>
                                                                     <td class="text-muted">{{ vehicle.weight }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Broj tablica :</th>
+                                                                    <td class="text-muted">{{ vehicle.licence_number }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="ps-0" scope="row">Boja :</th>
+                                                                    <td class="text-muted">{{ vehicle.color }}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
