@@ -24,6 +24,12 @@ class TestVehicleDocument:
                 "vehicle_pk": self.vehicle.pk,
             },
         )
+        self.delete_url = reverse(
+            "vehicle:document_delete",
+            kwargs={
+                "pk": self.vehicle_document.pk,
+            },
+        )
 
     def test_document_created_ok(self, client):
         file = SimpleUploadedFile(
@@ -57,13 +63,6 @@ class TestVehicleDocument:
     def test_document_delete_ok(self, client, user):
         client.force_login(user)
         assert self.vehicle.documents.count() == 1
-
-        self.delete_url = reverse(
-            "vehicle:document_delete",
-            kwargs={
-                "pk": self.vehicle_document.pk,
-            },
-        )
 
         client.post(self.delete_url)
         assert self.vehicle.documents.count() == 0
