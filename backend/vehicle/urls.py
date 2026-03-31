@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from .documents.views import VehicleDocumentDeleteView, VehicleDocumentUploadView
 
 app_name = "vehicle"
 
@@ -29,5 +30,15 @@ urlpatterns = [
         "vehicles-delete/<int:pk>/",
         views.VehicleDeleteView.as_view(),
         name="vehicles_delete",
+    ),
+    path(
+        "vehicle-documents/<int:vehicle_pk>/",
+        VehicleDocumentUploadView.as_view(),
+        name="document_upload",
+    ),
+    path(
+        "vehicle-documents-delete/<int:pk>/",
+        VehicleDocumentDeleteView.as_view(),
+        name="document_delete",
     ),
 ]

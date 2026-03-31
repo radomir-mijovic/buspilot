@@ -17,7 +17,7 @@ class LoginForm(AuthenticationForm):
             attrs={
                 "class": "form-control pe-5 password-input",
                 "placeholder": "Unesite password",
-                "id": "password-input"
+                "id": "password-input",
             }
         )
     )

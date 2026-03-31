@@ -34,6 +34,7 @@ services:
       - "8001:8000"
     volumes:
       - ./backend:/code
+      - ./backend/media:/code/media
     environment:
       - PYTHONUNBUFFERED=1
       - DATABASE_URL=postgresql://radomir:biljana4@192.168.1.10:5432/buspilot
@@ -57,6 +58,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /var/www/certbot:/var/www/certbot:ro
       - ./backend/staticfiles:/code/staticfiles:ro
+      - ./backend/media:/code/media:ro
     depends_on:
       - backend
     networks:

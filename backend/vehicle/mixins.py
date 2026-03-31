@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponse
+from django.template.loader import render_to_string
 
 
 class VehicleViewMixin:
@@ -11,12 +12,15 @@ class VehicleViewMixin:
                 errors.append(f"{label}: {error}")
         return errors
 
-    def _return_partials_http_response(self, errors):
-        return HttpResponse(b", ".join(errors), status=422)
+    def _render_messages_oob(self):
+        return render_to_string("partials/toast_messages.html", request=self.request)
 
     def _handle_form_partials_errors(self, form):
-        errors = self._get_hx_field_errors(form)
-        return self._return_partials_http_response(errors)
+        for error in self._get_hx_field_errors(form):
+            messages.error(self.request, error, extra_tags="vehicle-error")
+        response = HttpResponse(self._render_messages_oob())
+        response["HX-Reswap"] = "none"
+        return response
 
     def _handle_form_errors(self, form):
         for field, errors in form.errors.items():

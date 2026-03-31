@@ -8,7 +8,6 @@ class CompanyAdmin(admin.ModelAdmin):
     list_display = ["id", "name"]
 
 
-
 @admin.register(CompanyAddress)
 class CompanyAddressAdmin(admin.ModelAdmin):
     list_display = ["id", "company"]

@@ -25,6 +25,7 @@ class Company(models.Model):
     class Meta:
         verbose_name_plural = "Company"
 
+
 class CompanyAddress(models.Model):
     city = models.CharField(max_length=255, blank=True)
     company = models.ForeignKey(

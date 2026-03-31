@@ -5,6 +5,7 @@ from django.http import (
     HttpResponseRedirect,
 )
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -33,7 +34,11 @@ class VehicleDetailView(LoginRequiredMixin, generic.DetailView):
         ).select_related("company")
 
 
-class VehicleCreateView(LoginRequiredMixin, VehicleViewMixin, generic.CreateView):
+class VehicleCreateView(
+    LoginRequiredMixin,
+    VehicleViewMixin,
+    generic.CreateView,
+):
     model = Vehicle
     form_class = VehicleCreateForm
     success_url = reverse_lazy("vehicle:vehicles")
@@ -56,11 +61,12 @@ class VehicleCreateView(LoginRequiredMixin, VehicleViewMixin, generic.CreateView
 
     def _message_and_render_partials(self, vehicle: Vehicle) -> HttpResponse:
         self._self_message_success("Vozilo je uspješno dodano.")
-        return render(
-            self.request,
+        row_html = render_to_string(
             "partials/vehicle_row.html",
             {"vehicle": vehicle, "include_modal": True},
+            request=self.request,
         )
+        return HttpResponse(row_html + self._render_messages_oob())
 
     def _message_and_render_template(
         self,
@@ -69,7 +75,11 @@ class VehicleCreateView(LoginRequiredMixin, VehicleViewMixin, generic.CreateView
         return redirect("vehicle:vehicles")
 
 
-class VehicleUpdateView(LoginRequiredMixin, VehicleViewMixin, generic.UpdateView):
+class VehicleUpdateView(
+    LoginRequiredMixin,
+    VehicleViewMixin,
+    generic.UpdateView,
+):
     model = Vehicle
     form_class = VehicleCreateForm
 
@@ -95,7 +105,11 @@ class VehicleUpdateView(LoginRequiredMixin, VehicleViewMixin, generic.UpdateView
         return template
 
 
-class VehicleDeleteView(LoginRequiredMixin, generic.DeleteView):
+class VehicleDeleteView(
+    LoginRequiredMixin,
+    VehicleViewMixin,
+    generic.DeleteView,
+):
     model = Vehicle
     success_url = reverse_lazy("vehicle:vehicles")
 
@@ -105,6 +119,7 @@ class VehicleDeleteView(LoginRequiredMixin, generic.DeleteView):
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.delete()
+        self._self_message_success("Vozilo je orisano.")
         if request.headers.get("HX-Request"):
             return HttpResponse(status=200)
         return redirect(self.success_url)

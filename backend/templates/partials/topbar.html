@@ -91,10 +91,9 @@
             </div>
         </header>
 
-        {% if messages %}
-        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+        <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
             {% for message in messages %}
-            <div class="toast align-items-center text-white border-0 mb-2 {% if message.tags == 'success' %}bg-success{% else %}bg-danger{% endif %}"
+            <div class="toast align-items-center text-white border-0 mb-2 {% if 'error' in message.tags %}bg-danger{% else %}bg-success{% endif %}"
                 role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="d-flex">
                     <div class="toast-body">{{ message }}</div>
@@ -104,18 +103,14 @@
             {% endfor %}
         </div>
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                document.querySelectorAll(".toast").forEach(function (el) {
+            function initToasts() {
+                document.querySelectorAll("#toast-container .toast:not(.showing):not(.show)").forEach(function (el) {
                     new bootstrap.Toast(el, { delay: 4000 }).show();
                 });
-                {% for message in messages %}
-                    {% if message.tags == 'error' %}
-                        bootstrap.Modal.getOrCreateInstance(document.getElementById("signupModals")).show();
-                    {% endif %}
-                {% endfor %}
-            });
+            }
+            document.addEventListener("DOMContentLoaded", initToasts);
+            document.addEventListener("htmx:afterSettle", initToasts);
         </script>
-        {% endif %}
 
         <!-- signupModals - must be outside header to avoid z-index/overflow issues -->
         <div id="signupModals" class="modal fade" tabindex="-1" aria-hidden="true">

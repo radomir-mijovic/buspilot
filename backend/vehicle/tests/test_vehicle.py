@@ -3,8 +3,8 @@ from auth.models import User
 from company.tests.factories import CompanyFactory
 from django.urls import reverse
 
-from .factories import VehicleFactory
 from ..models import Vehicle
+from .factories import VehicleFactory
 
 
 @pytest.fixture
@@ -56,7 +56,9 @@ class TestVehicle:
             {"model": "Sprinter"},
         )
         assert response.status_code == 302
-        assert not Vehicle.objects.filter(model="Sprinter", company=self.company).exists()
+        assert not Vehicle.objects.filter(
+            model="Sprinter", company=self.company
+        ).exists()
 
     def test_create_vehicle_missing_model(self, client, user):
         client.force_login(user)
@@ -65,7 +67,9 @@ class TestVehicle:
             {"brand": "Mercedes"},
         )
         assert response.status_code == 302
-        assert not Vehicle.objects.filter(brand="Mercedes", company=self.company).exists()
+        assert not Vehicle.objects.filter(
+            brand="Mercedes", company=self.company
+        ).exists()
 
     def test_create_vehicle_missing_all_required_fields(self, client, user):
         client.force_login(user)
@@ -119,3 +123,7 @@ class TestVehicle:
         self.vehicle.refresh_from_db()
         assert self.vehicle.brand == original_brand
         assert self.vehicle.model == original_model
+
+    def test_user_must_be_authenticated(self, client) -> None:
+        response = client.get(reverse("vehicle:vehicles"))
+        assert response.status_code == 302
