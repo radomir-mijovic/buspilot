@@ -27,6 +27,7 @@ LOCAL_APPS = [
     "auth.apps.UserAuthConfig",
     "company.apps.CompanyConfig",
     "dashboard.apps.DashboardConfig",
+    "driver.apps.DriverConfig",
     "vehicle.apps.VehicleConfig",
 ]
 
@@ -40,7 +41,6 @@ INSTALLED_APPS += LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -49,12 +49,17 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-DEV_MIDDLEWARE = []
+DEV_MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+]
 
 if DEBUG:
     INSTALLED_APPS += DEV_APPS
     MIDDLEWARE += DEV_MIDDLEWARE
-    INTERNAL_IPS = ["127.0.0.1"]
+
+DEBUG_TOOLBAR_CONFIG = {
+     "SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG,
+}
 
 ROOT_URLCONF = "backend.urls"
 

@@ -17,3 +17,5 @@ pyyaml==6.0.3
 regex==2026.3.32
 six==1.17.0
 tqdm==4.67.3
+django-types==0.23.0
+types-psycopg2==2.9.21.20260223

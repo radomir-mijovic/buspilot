@@ -842,7 +842,7 @@
                                                                                     <li>
                                                                                         <a class="dropdown-item"
                                                                                            hx-target="#row-{{ document.id }}"
-                                                                                           hx-swap="outerHTML"
+                                                                                           hx-swap="delete"
                                                                                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                                                                                            hx-post="{% url 'vehicle:document_delete' pk=document.pk %}">
                                                                                             <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i>Delete</a>

@@ -29,9 +29,13 @@ class VehicleDetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = "vehicle"
 
     def get_queryset(self):
-        return Vehicle.objects.filter(
-            company=self.request.user.company,
-        ).select_related("company")
+        return (
+            Vehicle.objects.filter(
+                company=self.request.user.company,
+            )
+            .select_related("company")
+            .prefetch_related("documents")
+        )
 
 
 class VehicleCreateView(
@@ -98,7 +102,7 @@ class VehicleUpdateView(
 
         self._handle_form_errors(form)
         vehicle = self.get_object()
-        return redirect("vehicle:vehicles_details", pk=vehicle.id)
+        return redirect("vehicle:vehicles_details", pk=vehicle.pk)
 
     def _get_partial_template(self):
         template = "partials/vehicle_details_row.html"

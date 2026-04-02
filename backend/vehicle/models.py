@@ -18,6 +18,7 @@ class Vehicle(models.Model):
     )
     chassis_number = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=100, blank=True)
+    driver = models.ManyToManyField("driver.Driver", related_name="vehicles")
     engine_number = models.CharField(max_length=100, blank=True)
     horse_power = models.CharField(max_length=100, blank=True)
     licence_number = models.CharField(max_length=100, blank=True)
@@ -34,6 +35,7 @@ class Vehicle(models.Model):
 
     @property
     def all_documents(self):
+        """Using it for templates"""
         return self.documents.all()
 
 

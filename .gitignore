@@ -27,6 +27,12 @@ env/
 ENV/
 .venv
 
+/media
+backend/media
+
+.nvim.lua
+setup.cfg
+
 
 # IDE
 .vscode/

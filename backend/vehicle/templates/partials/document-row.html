@@ -48,10 +48,11 @@
         <li>
           <a
             class="dropdown-item"
-            href="{% url 'vehicle:document_delete' pk=document.pk %}"
-            ><i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i
-            >Delete</a
-          >
+            hx-post="{% url 'vehicle:document_delete' pk=document.pk %}"
+            hx-target="#row-{{ document.id }}"
+            hx-swap="delete"
+            href="javascript:void(0);">
+            <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i>Delete</a>
         </li>
       </ul>
     </div>
