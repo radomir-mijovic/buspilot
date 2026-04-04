@@ -41,6 +41,9 @@ services:
         condition: service_healthy
     networks:
       - app-network
+    volumes:
+      - static_files:/code/staticfiles
+      - media_files:/code/media
     restart: unless-stopped
 
   nginx:
@@ -52,8 +55,8 @@ services:
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /var/www/certbot:/var/www/certbot:ro
-      - ./backend/staticfiles:/code/staticfiles:ro
-      - ./backend/media:/code/media:ro
+      - media_files:/code/media:ro
+      - static_files:/code/staticfiles:ro
     depends_on:
       - backend
     networks:
@@ -66,3 +69,5 @@ networks:
 
 volumes:
   postgres_data:
+  static_files:
+  media_files:
