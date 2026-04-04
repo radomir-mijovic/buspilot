@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -56,6 +56,7 @@ DEV_MIDDLEWARE = [
 if DEBUG:
     INSTALLED_APPS += DEV_APPS
     MIDDLEWARE += DEV_MIDDLEWARE
+    ALLOWED_HOSTS = []
 
 # DEBUG_TOOLBAR_CONFIG = {
 #     "SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG,
