@@ -35,6 +35,7 @@ services:
       - DATABASE_HOST=postgres
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
     depends_on:
       postgres:
         condition: service_healthy
