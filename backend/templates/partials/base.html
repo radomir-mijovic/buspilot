@@ -52,6 +52,12 @@
                 document.addEventListener("htmx:configRequest", function(evt) {
                     evt.detail.headers["X-CSRFToken"] = "{{ csrf_token }}";
                 });
+                document.addEventListener("htmx:beforeSwap", function(evt) {
+                    if (evt.detail.xhr.status === 422) {
+                        evt.detail.shouldSwap = true;
+                        evt.detail.isError = false;
+                    }
+                });
             </script>
         {% endblock css %}
     </head>

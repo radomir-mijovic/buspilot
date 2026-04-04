@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import BaseModelForm
 from django.http import (
     HttpResponse,
     HttpResponsePermanentRedirect,
@@ -52,30 +53,15 @@ class VehicleCreateView(
         vehicle = form.save()
 
         if self.request.headers.get("HX-Request"):
-            return self._message_and_render_partials(vehicle)
+            return render(
+                self.request,
+                "partials/vehicle_row.html",
+                {"vehicle": vehicle},
+            )
 
-        return self._message_and_render_template()
-
-    def form_invalid(self, form):
-        if self.request.headers.get("HX-Request"):
-            return self._handle_form_partials_errors(form)
-
-        self._handle_form_errors(form)
         return redirect("vehicle:vehicles")
 
-    def _message_and_render_partials(self, vehicle: Vehicle) -> HttpResponse:
-        self._self_message_success("Vozilo je uspješno dodano.")
-        row_html = render_to_string(
-            "partials/vehicle_row.html",
-            {"vehicle": vehicle, "include_modal": True},
-            request=self.request,
-        )
-        return HttpResponse(row_html + self._render_messages_oob())
-
-    def _message_and_render_template(
-        self,
-    ) -> HttpResponsePermanentRedirect | HttpResponseRedirect:
-        self._self_message_success("Vozilo je uspješno dodano.")
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
         return redirect("vehicle:vehicles")
 
 
@@ -87,26 +73,24 @@ class VehicleUpdateView(
     model = Vehicle
     form_class = VehicleCreateForm
 
-    def form_valid(self, form):
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
         vehicle = form.save()
 
         if self.request.headers.get("HX-Request"):
-            template = self._get_partial_template()
-            return render(self.request, template, {"vehicle": vehicle})
+            return render(
+                self.request,
+                "partials/vehicle_details_row.html",
+                {"vehicle": vehicle},
+            )
 
         return redirect("vehicle:vehicles_details", pk=vehicle.pk)
 
-    def form_invalid(self, form):
-        if self.request.headers.get("HX-Request"):
-            return self._handle_form_partials_errors(form)
-
-        self._handle_form_errors(form)
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
         vehicle = self.get_object()
-        return redirect("vehicle:vehicles_details", pk=vehicle.pk)
-
-    def _get_partial_template(self):
-        template = "partials/vehicle_details_row.html"
-        return template
+        return redirect(
+            "vehicle:vehicles_details",
+            pk=vehicle.pk,
+        )
 
 
 class VehicleDeleteView(
@@ -123,7 +107,8 @@ class VehicleDeleteView(
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.delete()
-        self._self_message_success("Vozilo je orisano.")
+
         if request.headers.get("HX-Request"):
             return HttpResponse(status=200)
+
         return redirect(self.success_url)

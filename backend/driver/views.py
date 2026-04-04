@@ -80,7 +80,10 @@ class DriverUpdateView(LoginRequiredMixin, generic.UpdateView):
                 {"driver": driver},
             )
 
-        return redirect("driver:drivers", pk=driver.pk)
+        return redirect("driver:drivers")
+
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
+        return redirect("driver:drivers")
 
 
 class DriverDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -95,9 +98,11 @@ class DriverDeleteView(LoginRequiredMixin, generic.DeleteView):
     def post(self, request, *args, **kwargs):
         driver = self.get_object()
         driver.delete()
+
         if request.headers.get("HX-Request"):
             return HttpResponse(status=200)
+
         return redirect("driver:drivers")
 
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
+    # def get(self, request, *args, **kwargs):
+    #    return self.post(request, *args, **kwargs)

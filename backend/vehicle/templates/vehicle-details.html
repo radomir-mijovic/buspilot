@@ -1018,10 +1018,10 @@
                         <form hx-swap="beforeend"
                               hx-post="{% url 'vehicle:document_upload' vehicle.pk %}"
                               hx-target="#documents-t-body"
-                              hx-on::after-request="if(event.detail.successful){ bootstrap.Modal.getInstance(document.getElementById('addDocumentModal')).hide(); this.reset(); }"
+                              hx-on::after-request="if(event.detail.xhr.status === 200){ document.querySelector('#addDocumentModalBody .alert-danger')?.remove(); bootstrap.Modal.getInstance(document.getElementById('addDocumentModal')).hide(); this.reset(); }"
                               enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div class="modal-body">
+                            <div class="modal-body" id="addDocumentModalBody">
                                 <div class="mb-3">
                                     <label for="doc-title" class="form-label">Naziv dokumenta</label>
                                     <input type="text"
@@ -1041,7 +1041,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc-expiry" class="form-label">Datum isteka</label>
-                                    <input type="date" name="expiring_at" id="doc-expiry" class="form-control" />
+                                    <input type="date"
+                                           required
+                                           name="expiring_at"
+                                           id="doc-expiry"
+                                           class="form-control" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc-file" class="form-label">Fajl</label>
@@ -1077,6 +1081,12 @@
         <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
         <script src="{% static 'libs/fullcalendar/index.global.min.js' %}"></script>
         <script src="{% static 'js/pages/calendar.init.js' %}"></script>
+        <script>
+            document.getElementById('addDocumentModal').addEventListener('hidden.bs.modal', function() {
+                this.querySelector('.alert-danger')?.remove();
+                this.querySelector('form')?.reset();
+            });
+        </script>
         <script>
             var activitiesTab = document.querySelector('a[href="#activities"]');
             if (activitiesTab) {

@@ -399,7 +399,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         id: 783,
-        title: "Click for Google",
+        title: "Click for Goo",
         start: new Date(e, n, 28),
         end: new Date(e, n, 29),
         allDay: !0,
@@ -636,7 +636,9 @@ document.addEventListener("DOMContentLoaded", function () {
   (window.buspilotCalendar.render(),
     upcomingEvent(y),
     l.addEventListener("submit", function (e) {
+        console.log(e)
       e.preventDefault();
+
       var t,
         n,
         e = document.getElementById("event-title").value,
@@ -747,4 +749,3 @@ var str_dt = function (e) {
     [(n = n.length < 2 ? "0" + n : n) + " " + t, e].join(",")
   );
 };
-

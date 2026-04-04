@@ -1,0 +1,39 @@
+{% if form.errors %}
+    <div class="alert alert-danger">
+        {% for field in form %}
+            {% for error in field.errors %}<p>{{ field.label }}: {{ error }}</p>{% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+    </div>
+{% endif %}
+<div class="mb-3">
+    <label for="doc-title" class="form-label">Naziv dokumenta</label>
+    <input type="text"
+           name="title"
+           id="doc-title"
+           class="form-control"
+           required
+           placeholder="npr. Saobraćajna dozvola"
+           value="{{ form.title.value|default:'' }}" />
+</div>
+<div class="mb-3">
+    <label for="doc-type" class="form-label">Tip dokumenta</label>
+    <input type="text"
+           name="document_type"
+           id="doc-type"
+           class="form-control"
+           placeholder="npr. Registracija"
+           value="{{ form.document_type.value|default:'' }}" />
+</div>
+<div class="mb-3">
+    <label for="doc-expiry" class="form-label">Datum isteka</label>
+    <input type="date"
+           name="expiring_at"
+           id="doc-expiry"
+           class="form-control"
+           value="{{ form.expiring_at.value|default:'' }}" />
+</div>
+<div class="mb-3">
+    <label for="doc-file" class="form-label">Fajl</label>
+    <input type="file" name="file" id="doc-file" class="form-control" required />
+</div>

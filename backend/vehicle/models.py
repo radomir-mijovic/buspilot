@@ -1,5 +1,9 @@
-from common.models import CreatedUpdatedAtTimestampMixin
+from django.core.validators import FileExtensionValidator
 from django.db import models
+
+from common.models import CreatedUpdatedAtTimestampMixin
+
+VALID_FILE_EXTENSIONS = ["pdf", "jpg", "jpeg", "png", "docx", "txt", "xlsx"]
 
 
 class Vehicle(models.Model):
@@ -43,7 +47,14 @@ class VehicleDocument(CreatedUpdatedAtTimestampMixin, models.Model):
     title = models.CharField(max_length=255, blank=True)
     document_type = models.CharField(max_length=255, blank=True)
     expiring_at = models.DateField(blank=True, null=True)
-    file = models.FileField(upload_to="vehicle/documents/")
+    file = models.FileField(
+        upload_to="vehicle/documents/",
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=VALID_FILE_EXTENSIONS,
+            ),
+        ],
+    )
     vehicle = models.ForeignKey(
         Vehicle,
         on_delete=models.CASCADE,
@@ -54,7 +65,7 @@ class VehicleDocument(CreatedUpdatedAtTimestampMixin, models.Model):
     def __str__(self):
         return self.title
 
-    def get_file_size(self):
+    def get_file_size(self) -> float:
         if self.file:
             return self.file.size
         return 0

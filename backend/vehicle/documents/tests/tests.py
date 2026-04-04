@@ -1,7 +1,8 @@
 import pytest
-from common.tests.fixtures import user
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
+
+from common.tests.fixtures import user
 from vehicle.documents.tests.factories import VehicleDocumentFactory
 from vehicle.models import VehicleDocument
 from vehicle.tests.factories import VehicleFactory
@@ -31,7 +32,7 @@ class TestVehicleDocument:
             },
         )
 
-    def test_document_created_ok(self, client):
+    def test_document_created_ok(self, client) -> None:
         file = SimpleUploadedFile(
             "test_document.pdf",
             b"document content",
@@ -48,7 +49,40 @@ class TestVehicleDocument:
             vehicle=self.vehicle, title="Test document"
         ).exists()
 
-    def test_document_create_not_ok(self, client):
+    def test_invalid_format(self, client) -> None:
+        file = SimpleUploadedFile(
+            "test_document.xmlx",
+            b"document content",
+            content_type="application/pdf",
+        )
+        response = client.post(
+            self.upload_url,
+            data={
+                "file": file,
+                "title": "Test document",
+            },
+        )
+        assert response.status_code == 302
+
+    def test_invalid_format_htmx(self, client) -> None:
+        file = SimpleUploadedFile(
+            "test_document.exe",
+            b"document content",
+            content_type="application/pdf",
+        )
+        headers = {"HTTP_HX_REQUEST": "true"}
+        response = client.post(
+            self.upload_url,
+            data={
+                "file": file,
+                "title": "Test document",
+            },
+            **headers,
+        )
+        assert "File extension “exe” is not allowed." in response.text
+        assert response.status_code == 422
+
+    def test_document_create_not_ok(self, client) -> None:
         client.post(
             self.upload_url,
             data={
@@ -60,7 +94,7 @@ class TestVehicleDocument:
             vehicle=self.vehicle, title="Test document"
         ).exists()
 
-    def test_document_delete_ok(self, client, user):
+    def test_document_delete_ok(self, client, user) -> None:
         client.force_login(user)
         assert self.vehicle.documents.count() == 1
 

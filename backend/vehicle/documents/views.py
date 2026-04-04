@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
@@ -7,7 +8,33 @@ from ..models import Vehicle, VehicleDocument
 from .forms import VehicleDocumentUploadForm
 
 
-class VehicleDocumentUploadView(LoginRequiredMixin, generic.CreateView):
+class VehicleHtmxFormsViewHandlers(generic.CreateView):
+    def handle_form_valid_htmx(
+        self,
+        document: VehicleDocument,
+    ) -> HttpResponse:
+        return render(
+            self.request,
+            "partials/document-row.html",
+            {"document": document},
+        )
+
+    def handle_form_invalid_htmx(self, form: BaseModelForm) -> HttpResponse:
+        response = render(
+            self.request,
+            "partials/document-upload-form.html",
+            {"form": form},
+            status=422,
+        )
+        response["HX-Retarget"] = "#addDocumentModalBody"
+        response["HX-Reswap"] = "innerHTML"
+        return response
+
+
+class VehicleDocumentUploadView(
+    VehicleHtmxFormsViewHandlers,
+    LoginRequiredMixin,
+):
     form_class = VehicleDocumentUploadForm
     model = VehicleDocument
     template_name = "../templates/vehicle-details.html"
@@ -16,18 +43,15 @@ class VehicleDocumentUploadView(LoginRequiredMixin, generic.CreateView):
         form.instance.vehicle = self.vehicle
         document = form.save()
 
-        context = {"document": document}
-
         if self.request.headers.get("HX-Request"):
-            return render(
-                self.request,
-                "partials/document-row.html",
-                context=context,
-            )
+            return self.handle_form_valid_htmx(document)
 
         return self.redirect_to_vehicle_details()
 
     def form_invalid(self, form):
+        if self.request.headers.get("HX-Request"):
+            return self.handle_form_invalid_htmx(form)
+
         return self.redirect_to_vehicle_details()
 
     def redirect_to_vehicle_details(self):
@@ -54,9 +78,8 @@ class VehicleDocumentDeleteView(LoginRequiredMixin, generic.DeleteView):
         instance = self.get_object()
         vehicle_pk = instance.vehicle.pk
         instance.delete()
+
         if request.headers.get("HX-Request"):
             return HttpResponse(status=200)
-        return redirect("vehicle:vehicles_details", pk=vehicle_pk)
 
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
+        return redirect("vehicle:vehicles_details", pk=vehicle_pk)
