@@ -57,9 +57,9 @@ if DEBUG:
     INSTALLED_APPS += DEV_APPS
     MIDDLEWARE += DEV_MIDDLEWARE
 
-#DEBUG_TOOLBAR_CONFIG = {
+# DEBUG_TOOLBAR_CONFIG = {
 #     "SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG,
-#}
+# }
 
 ROOT_URLCONF = "backend.urls"
 
@@ -101,7 +101,7 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",

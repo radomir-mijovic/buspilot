@@ -103,6 +103,3 @@ class DriverDeleteView(LoginRequiredMixin, generic.DeleteView):
             return HttpResponse(status=200)
 
         return redirect("driver:drivers")
-
-    # def get(self, request, *args, **kwargs):
-    #    return self.post(request, *args, **kwargs)

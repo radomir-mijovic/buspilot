@@ -1,6 +1,7 @@
 import pytest
 from auth.models import User
 from company.tests.factories import CompanyFactory
+from parameterized import parameterized
 from django.urls import reverse
 
 from ..models import Vehicle
@@ -18,11 +19,12 @@ def user(db):
 @pytest.mark.django_db
 class TestVehicle:
     @pytest.fixture(autouse=True)
-    def setup(self, user):
+    def setup(self, client, user):
         self.company = CompanyFactory()
         user.company = self.company
         user.save()
         self.vehicle = VehicleFactory(company=self.company)
+        self.client = client
 
     def test_return_list_ok(self, client, user):
         client.force_login(user)
@@ -124,6 +126,14 @@ class TestVehicle:
         assert self.vehicle.brand == original_brand
         assert self.vehicle.model == original_model
 
-    def test_user_must_be_authenticated(self, client) -> None:
-        response = client.get(reverse("vehicle:vehicles"))
+    @parameterized.expand(
+        (
+            ["vehicle:vehicles", None],
+            ["vehicle:vehicles_create", None],
+            ["vehicle:vehicles_delete", {"pk": 1}],
+            ["vehicle:vehicles_update", {"pk": 1}],
+        )
+    )
+    def test_user_must_be_authenticated(self, url, kwargs) -> None:
+        response = self.client.get(reverse(url, kwargs=kwargs))
         assert response.status_code == 302

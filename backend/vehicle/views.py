@@ -1,12 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import BaseModelForm
-from django.http import (
-    HttpResponse,
-    HttpResponsePermanentRedirect,
-    HttpResponseRedirect,
-)
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -111,4 +106,4 @@ class VehicleDeleteView(
         if request.headers.get("HX-Request"):
             return HttpResponse(status=200)
 
-        return redirect(self.success_url)
+        return redirect("vehicle:vehicles")

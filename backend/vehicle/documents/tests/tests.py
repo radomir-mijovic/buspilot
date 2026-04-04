@@ -1,6 +1,7 @@
 import pytest
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
+from parameterized import parameterized
 
 from common.tests.fixtures import user
 from vehicle.documents.tests.factories import VehicleDocumentFactory
@@ -13,6 +14,7 @@ class TestVehicleDocument:
     @pytest.fixture(autouse=True)
     def setup(self, client, user):
         client.force_login(user)
+        self.client = client
         self.vehicle = VehicleFactory()
         user.company = self.vehicle.company
         user.save()
@@ -101,7 +103,13 @@ class TestVehicleDocument:
         client.post(self.delete_url)
         assert self.vehicle.documents.count() == 0
 
-    def test_user_must_be_authenticated(self, client) -> None:
-        client.logout()
-        response = client.post(self.upload_url)
+    @parameterized.expand(
+        (
+            ["vehicle:document_delete", {"pk": 1}],
+            ["vehicle:document_upload", {"vehicle_pk": 1}],
+        )
+    )
+    def test_user_must_be_authenticated(self, url, kwargs) -> None:
+        self.client.logout()
+        response = self.client.post(reverse(url, kwargs=kwargs))
         assert response.status_code == 302
