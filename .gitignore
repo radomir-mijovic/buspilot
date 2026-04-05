@@ -6,7 +6,6 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -30,8 +29,8 @@ ENV/
 /media
 backend/media
 
+# Local nvim setup
 .nvim.lua
-setup.cfg
 
 
 # IDE
