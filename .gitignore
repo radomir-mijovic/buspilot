@@ -28,6 +28,11 @@ ENV/
 
 /media
 backend/media
+backend/backend/staticfiles
+backend/backend/media
+
+# Testing
+test_db
 
 # Local nvim setup
 .nvim.lua

@@ -37,6 +37,7 @@ services:
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
       - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
+      - DJANGO_SETTINGS_MODULE=backend.settings.prod
     depends_on:
       postgres:
         condition: service_healthy

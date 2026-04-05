@@ -1,30 +1,4 @@
 services:
-  #redis:
-  #  image: redis:7-alpine
-  #  container_name: buspilot-redis
-  #  command: >
-  #    redis-server
-  #    --requirepass ${REDIS_PASSWORD:-your_secure_redis_password_change_this}
-  #    --rename-command FLUSHDB ""
-  #    --rename-command FLUSHALL ""
-  #    --rename-command CONFIG ""
-  #    --rename-command SHUTDOWN ""
-  #    --rename-command REPLICAOF ""
-  #    --rename-command SLAVEOF ""
-  #    --maxmemory 256mb
-  #    --maxmemory-policy allkeys-lru
-  #  ports:
-  #    - "6379:6379"
-  #  volumes:
-  #    - redis_data:/data
-  #  networks:
-  #    - app-network
-  #  healthcheck:
-  #    test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
-  #    interval: 10s
-  #    timeout: 5s
-  #    retries: 5
-
   backend:
     build:
       context: ./backend
@@ -37,30 +11,8 @@ services:
       - ./backend/media:/code/media
     environment:
       - PYTHONUNBUFFERED=1
+      - DJANGO_SETTINGS_MODULE=backend.settings.dev
       - DATABASE_URL=postgresql://radomir:biljana4@192.168.1.10:5432/buspilot
-      #- REDIS_PASSWORD=${REDIS_PASSWORD:-your_secure_redis_password_change_this}
-      #- REDIS_URL=redis://:${REDIS_PASSWORD:-your_secure_redis_password_change_this}@redis:6379/0
-      #- CELERY_BROKER_URL=redis://:${REDIS_PASSWORD:-your_secure_redis_password_change_this}@redis:6379/0
-      #- CELERY_RESULT_BACKEND=redis://:${REDIS_PASSWORD:-your_secure_redis_password_change_this}@redis:6379/0
-    #depends_on:
-    #  redis:
-        #condition: service_healthy
-    networks:
-      - app-network
-
-  nginx:
-    build: ./nginx
-    container_name: buspilot-nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-      - /var/www/certbot:/var/www/certbot:ro
-      - ./backend/staticfiles:/code/staticfiles:ro
-      - ./backend/media:/code/media:ro
-    depends_on:
-      - backend
     networks:
       - app-network
 
@@ -73,17 +25,10 @@ services:
       - ./backend:/code
     environment:
       - PYTHONUNBUFFERED=1
-      - DATABASE_URL=postgresql://radomir:biljana4@192.168.1.10:5432/buspilot
-      #- REDIS_PASSWORD=${REDIS_PASSWORD:-your_secure_redis_password_change_this}
-      #- REDIS_URL=redis://:${REDIS_PASSWORD:-your_secure_redis_password_change_this}@redis:6379/0
-      #- CELERY_BROKER_URL=redis://:${REDIS_PASSWORD:-your_secure_redis_password_change_this}@redis:6379/0
-      #- CELERY_RESULT_BACKEND=redis://:${REDIS_PASSWORD:-your_secure_redis_password_change_this}@redis:6379/0
+      - DJANGO_SETTINGS_MODULE=backend.settings.test
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
-
-#volumes:
-#  redis_data:
