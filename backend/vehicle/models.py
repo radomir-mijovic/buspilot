@@ -35,7 +35,7 @@ class Vehicle(models.Model):
     weight = models.CharField(max_length=100, blank=True, help_text="weight in KG")
 
     def __str__(self):
-        return str(self.brand) + str(self.model)
+        return str(self.brand) + " " + str(self.model) + " " + self.number_of_seats
 
     @property
     def all_documents(self):

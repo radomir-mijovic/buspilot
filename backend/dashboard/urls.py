@@ -4,4 +4,10 @@ from .views import dashboard
 
 app_name = "dashboard"
 
-urlpatterns = [path(r"", dashboard, name="dashboard")]
+urlpatterns = [
+    path(
+        r"",
+        dashboard,
+        name="dashboard",
+    ),
+]

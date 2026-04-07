@@ -1,0 +1,100 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}
+    Izmijeni Vožnju
+{% endblock title %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block content %}
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                {% block pagetitle %}
+                    {% include "partials/page-title.html" with  title="Izmijeni Vožnju" %}
+                {% endblock pagetitle %}
+                <div class="row">
+                    <div class="col-xxl-9">
+                        <div class="card">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Forma</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="live-preview">
+                                    <form method="POST"
+                                          action="{% url 'ride:ride_update' ride.id %}"
+                                          class="row g-3">
+                                        {% csrf_token %}
+                                        <div class="col-md-12">
+                                            <label for="title" class="form-label">Naziv vožnje</label>
+                                            {{ form.title }}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="ForminputState" class="form-label">Tip vožnje</label>
+                                            {{ form.ride_type }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="start_date" class="form-label">Datum početka vožnje</label>
+                                            {{ form.start_date }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="end_date" class="form-label">Datum završetka vožnje</label>
+                                            {{ form.end_date }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="start_time" class="form-label">Vrijeme početka vožnje</label>
+                                            {{ form.start_time }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="end_time" class="form-label">Vrijeme završetka vožnje</label>
+                                            {{ form.end_time }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="start_location" class="form-label">Početna lokacija</label>
+                                            {{ form.start_location }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="end_location" class="form-label">Završna lokacija</label>
+                                            {{ form.end_location }}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="vehicles" class="form-label">Izaberite autobuse</label>
+                                            {{ form.vehicles }}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="drivers" class="form-label">Izaberite vozace</label>
+                                            {{ form.drivers }}
+                                        </div>
+                                        <div class="mb-3">
+                                            {{ form.is_all_day }}
+                                            <label class="form-check-label" for="autoSizingCheck">Autobus zauzet cijeli dan</label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="description" class="form-label">Opis</label>
+                                            {{ form.description }}
+                                        </div>
+                                        <div class="text-end">
+                                            <button type="submit" class="btn btn-primary">Izmijeni vožnju</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+        {% block footer %}
+            {% include "partials/footer.html" %}
+        {% endblock footer %}
+    </div>
+    <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+    <!-- prismjs plugin -->
+    <script src="{% static 'libs/prismjs/prism.js'%}"></script>
+{% endblock extra_js %}

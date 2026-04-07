@@ -16,4 +16,4 @@ class Driver(models.Model):
     passport_number = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return self.last_name
+        return self.last_name + " " + self.first_name

@@ -1,0 +1,5 @@
+# Ride Type Choices
+LINE = 1
+TRANSFER = 2
+EXCURSION = 3
+ROUND_TOUR = 4

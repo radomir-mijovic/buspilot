@@ -1,462 +1,128 @@
 {% extends "partials/base.html" %}
 {% load static %}
-{% block title %}Pregled Dana{% endblock title %}
+{% block title %}
+    Pregled Dana
+{% endblock title %}
 {% block extra_css %}
 {% endblock extra_css %}
 {% block content %}
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="main-content">
-
-                <div class="page-content">
-                    <div class="container-fluid">
-
-                        {% block pagetitle %}
-                        {% include "partials/page-title.html" with title="Pregled Dana" %}
-                        {% endblock pagetitle %}    
-                        
-                        <div class="row">
-                            <div class="col-xl-13">
-                                <div class="card">
-                                    <div class="card-header align-items-center d-flex">
-                                        <h4 class="card-title mb-0 flex-grow-1">Linije</h4>
-                                    </div><!-- end card header -->
-
-                                    <div class="card-body">
-                                        <div class="table-responsive table-card" style="max-height: 530px; overflow-y: auto;">
-                                            <table class="table table-borderless table-hover table-nowrap align-middle mb-0">
-                                                <thead class="table-light">
-                                                    <tr class="text-muted">
-                                                        <th scope="col">Linija</th>
-                                                        <th scope="col" style="width: 20%;">Vozaci</th>
-                                                        <th scope="col" >Vrijeme Polaska</th>
-                                                        <th scope="col" style="width: 12%;">Vozilo</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><a href="" class="text-body fw-medium">Sabac</a></td>
-                                                        <td><div class="text-body fw-medium"><a href="" class="text-body fw-medium">Marko Markovic, Mitar Mitrovic</a></div></td>
-                                                        <td><div class="text-nowrap"><a href="" class="text-body fw-medium">10:00h</a></div></td>
-                                                        <td><a href="" class="text-body fw-medium">Setra</a></td>
-                                                    </tr>
-                                                </tbody><!-- end tbody -->
-                                            </table><!-- end table -->
-                                        </div><!-- end table responsive -->
-                                    </div><!-- end card body -->
-                                </div><!-- end card -->
-                            </div><!-- end col -->
-                        </div><!-- end row -->
-
-                        <div class="row">
-                            <div class="col-xxl-5">
-                                <div class="card">
-                                    <div class="card-header align-items-center d-flex">
-                                        <h4 class="card-title mb-0 flex-grow-1">Transferi</h4>
-                                    </div><!-- end card header -->
-                                    <div class="card-body pt-0">
-                                        <ul class="list-group list-group-flush border-dashed" style="max-height: 400px; overflow-y: auto;">
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                            <li class="list-group-item ps-0">
-                                                <div class="row align-items-center g-3">
-                                                    <div class="col-auto">
-                                                        <div class="p-2 py-2 h-auto bg-light rounded-3">
-                                                            <div class="text-center">
-                                                                <h6 class="mb-0">20:00h</h6>
-                                                           </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Setra - BD777</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Hotel Tara - Tivat</a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h5 class="text-muted mt-0 mb-1 fs-12 fw-semibold">Vodic</h5>
-                                                        <a href="#" class="text-reset fs-14 mb-0">Ivana Ivanovic</a>
-                                                    </div>
-                                                </div>
-                                            </li><!-- end -->
-                                        </ul><!-- end -->
-                                    </div><!-- end card body -->
-                                </div><!-- end card -->
-                            </div><!-- end col -->
-                            
-                            <div class="col-xxl-7">
-                                <div class="card card-height-100">
-                                    <div class="card-header align-items-center d-flex">
-                                        <h4 class="card-title mb-0 flex-grow-1">Izleti</h4>
-                                    </div><!-- end card header -->
-
-                                    <div class="card-body">
-                                        <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
-                                            <table class="table table-bordered table-nowrap align-middle mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col" style="width: 20%;">Izlet</th>
-                                                        <th scope="col" style="width: 25%;">Vodic</th>
-                                                        <th scope="col" style="width: 15%;">Vozilo</th>
-                                                        <th scope="col" style="width: 20%;">Vozac</th>
-                                                        <th scope="col" style="width: 10%;">Vrijeme</th>
-                                                        <th scope="col" style="width: 25%;">Mjesto</th>
-                                                    </tr>
-                                                </thead>
-                                                
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Montenegro tura</td>
-                                                        <td><a href="#javascript: void(0);" class="text-body fw-medium">Katarina Bulatovic</a></td> 
-                                                        <td>Setra</td>
-                                                        <td>Ivan Ivanovic</td>
-                                                        <td>10:00h</td>
-                                                        <td>Hotel Tara</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Montenegro tura</td>
-                                                        <td><a href="#javascript: void(0);" class="text-body fw-medium">Katarina Bulatovic</a></td> 
-                                                        <td>Setra</td>
-                                                        <td>Ivan Ivanovic</td>
-                                                        <td>10:00h</td>
-                                                        <td>Hotel Tara</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Montenegro tura</td>
-                                                        <td><a href="#javascript: void(0);" class="text-body fw-medium">Katarina Bulatovic</a></td> 
-                                                        <td>Setra</td>
-                                                        <td>Ivan Ivanovic</td>
-                                                        <td>10:00h</td>
-                                                        <td>Hotel Tara</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Montenegro tura</td>
-                                                        <td><a href="#javascript: void(0);" class="text-body fw-medium">Katarina Bulatovic</a></td> 
-                                                        <td>Setra</td>
-                                                        <td>Ivan Ivanovic</td>
-                                                        <td>10:00h</td>
-                                                        <td>Hotel Tara</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Montenegro tura</td>
-                                                        <td><a href="#javascript: void(0);" class="text-body fw-medium">Katarina Bulatovic</a></td> 
-                                                        <td>Setra</td>
-                                                        <td>Ivan Ivanovic</td>
-                                                        <td>10:00h</td>
-                                                        <td>Hotel Tara</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Montenegro tura</td>
-                                                        <td><a href="#javascript: void(0);" class="text-body fw-medium">Katarina Bulatovic</a></td> 
-                                                        <td>Setra</td>
-                                                        <td>Ivan Ivanovic</td>
-                                                        <td>10:00h</td>
-                                                        <td>Hotel Tara</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Montenegro tura</td>
-                                                        <td><a href="#javascript: void(0);" class="text-body fw-medium">Katarina Bulatovic</a></td> 
-                                                        <td>Setra</td>
-                                                        <td>Ivan Ivanovic</td>
-                                                        <td>10:00h</td>
-                                                        <td>Hotel Tara</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Montenegro tura</td>
-                                                        <td><a href="#javascript: void(0);" class="text-body fw-medium">Katarina Bulatovic</a></td> 
-                                                        <td>Setra</td>
-                                                        <td>Ivan Ivanovic</td>
-                                                        <td>10:00h</td>
-                                                        <td>Hotel Tara</td>
-                                                    </tr>
-                                                </tbody><!-- end tbody -->
-                                            </table><!-- end table -->
-                                        </div><!-- end table responsive -->
-                                    </div><!-- end card body -->
-                                </div><!-- end card -->
-                            </div><!-- end col -->
-                        </div><!-- end row -->
-
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                {% block pagetitle %}
+                    {% include "partials/page-title.html" with title="Pregled Dana" %}
+                {% endblock pagetitle %}
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="card card-height-100">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Transferi</h4>
+                            </div>
+                            <!-- end card header -->
+                            <div class="card-body">
+                                <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                                    <table class="table table-bordered align-middle mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="width: 20%;">Transfer</th>
+                                                <th scope="col" style="width: 25%;">Vodiči</th>
+                                                <th scope="col" style="width: 15%;">Vozilo</th>
+                                                <th scope="col" style="width: 20%;">Vozači</th>
+                                                <th scope="col" style="width: 10%;">Vrijeme</th>
+                                                <th scope="col" style="width: 25%;">Mjesto</th>
+                                                <th scope="col" style="min-width: 400px;">Napomena</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for transfer in transfers %}
+                                                <tr style="cursor:pointer"
+                                                    onclick="window.location='{% url 'ride:ride_update' transfer.id %}'">
+                                                    <td>{{ transfer.title }}</td>
+                                                    <td>Katarina Bulatovic</td>
+                                                    <td>
+                                                        <ul class="list-unstyled">
+                                                            {% for vehicle in excursion.vehicles.all %}<li>{{ vehicle }}</li>{% endfor %}
+                                                        </ul>
+                                                    </td>
+                                                    <td>
+                                                        <ul class="list-unstyled">
+                                                            {% for driver in excursion.drivers.all %}<li>{{ driver }}</li>{% endfor %}
+                                                        </ul>
+                                                    </td>
+                                                    <td>{{ transfer.start_time }}</td>
+                                                    <td>{{ transfer.start_location }}</td>
+                                                    <td>{{ transfer.description }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- container-fluid -->
+                    <div class="col-xxl-12">
+                        <div class="card card-height-100">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Izleti</h4>
+                            </div>
+                            <!-- end card header -->
+                            <div class="card-body">
+                                <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                                    <table class="table table-bordered align-middle mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="width: 20%;">Izlet</th>
+                                                <th scope="col" style="width: 25%;">Vodic</th>
+                                                <th scope="col" style="width: 15%;">Vozilo</th>
+                                                <th scope="col" style="width: 20%;">Vozac</th>
+                                                <th scope="col" style="width: 10%;">Vrijeme</th>
+                                                <th scope="col" style="width: 25%;">Mjesto</th>
+                                                <th scope="col" style="min-width: 400px;">Napomena</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for excursion in excursions %}
+                                                <tr style="cursor:pointer"
+                                                    onclick="window.location='{% url 'ride:ride_update' excursion.id %}'">
+                                                    <td>{{ excursion.title }}</td>
+                                                    <td>Katarina Bulatovic</td>
+                                                    <td>
+                                                        <ul class="list-unstyled">
+                                                            {% for vehicle in excursion.vehicles.all %}<li>{{ vehicle }}</li>{% endfor %}
+                                                        </ul>
+                                                    </td>
+                                                    <td>
+                                                        <ul class="list-unstyled">
+                                                            {% for driver in excursion.drivers.all %}<li>{{ driver }}</li>{% endfor %}
+                                                        </ul>
+                                                    </td>
+                                                    <td>{{ excursion.start_time }}</td>
+                                                    <td>{{ excursion.start_location }}</td>
+                                                    <td>{{ excursion.description }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- End Page-content -->
-
-            {% block footer %}
-            {% include "partials/footer.html" %}
-            {% endblock footer %}
             </div>
-            <!-- end main content-->
+        </div>
+        <!-- End Page-content -->
+        {% block footer %}
+            {% include "partials/footer.html" %}
+        {% endblock footer %}
+    </div>
+    <!-- end main content-->
 {% endblock content %}
 {% block extra_js %}
-        <!-- apexcharts -->
-        <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js'%}"></script>
-
-        <!-- Dashboard init -->
-        <script  src="{% static 'js/pages/dashboard-crm.init.js'%}"></script>
+    <!-- apexcharts -->
+    <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js'%}"></script>
+    <!-- Dashboard init -->
+    <script src="{% static 'js/pages/dashboard-crm.init.js'%}"></script>
 {% endblock extra_js %}
