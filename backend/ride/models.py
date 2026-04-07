@@ -37,8 +37,16 @@ class Ride(DateSlot, LocationSlot, TimeSlot, RideQueryManager):
     )
     title = models.CharField(max_length=255)
 
-    vehicles = models.ManyToManyField("vehicle.Vehicle", blank=True)
-    drivers = models.ManyToManyField("driver.Driver", blank=True)
+    vehicles = models.ManyToManyField(
+        "vehicle.Vehicle",
+        blank=True,
+        related_name="rides",
+    )
+    drivers = models.ManyToManyField(
+        "driver.Driver",
+        blank=True,
+        related_name="rides",
+    )
 
     objects = models.Manager()
 
@@ -47,4 +55,3 @@ class Ride(DateSlot, LocationSlot, TimeSlot, RideQueryManager):
 
     class Meta:
         verbose_name_plural = "Ride"
-

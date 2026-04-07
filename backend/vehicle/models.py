@@ -22,7 +22,7 @@ class Vehicle(models.Model):
     )
     chassis_number = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=100, blank=True)
-    driver = models.ManyToManyField("driver.Driver", related_name="vehicles")
+    driver = models.ManyToManyField("driver.Driver", related_name="vehicles", blank=True,)
     engine_number = models.CharField(max_length=100, blank=True)
     horse_power = models.CharField(max_length=100, blank=True)
     licence_number = models.CharField(max_length=100, blank=True)
