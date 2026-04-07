@@ -1,0 +1,52 @@
+<div class="col-xxl-12">
+    <div class="card card-height-100">
+        <div class="card-header align-items-center d-flex">
+            <h4 class="card-title mb-0 flex-grow-1">{{table_title}}</h4>
+        </div>
+        <!-- end card header -->
+        <div class="card-body">
+            <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                <table class="table table-bordered align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Vožnja</th>
+                            <th scope="col">Vodiči</th>
+                            <th scope="col">Vozilo</th>
+                            <th scope="col">Vozači</th>
+                            <th scope="col">Polazak</th>
+                            <th scope="col">Završava</th>
+                            <th scope="col">Mjesto polaska</th>
+                            <th scope="col"
+                                style="width: 400px;
+                                       white-space:normal;
+                                       word-break:break-word">Napomena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ride in rides %}
+                            <tr style="cursor:pointer"
+                                onclick="window.location='{% url 'ride:ride_update' ride.id %}'">
+                                <td>{{ ride.title }}</td>
+                                <td>Katarina Bulatovic</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        {% for vehicle in ride.vehicles.all %}<li>{{ vehicle }}</li>{% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        {% for driver in ride.drivers.all %}<li>{{ driver }}</li>{% endfor %}
+                                    </ul>
+                                </td>
+                                <td>{{ ride.start_time }}</td>
+                                <td>{{ ride.end_time }}</td>
+                                <td>{{ ride.start_location }}</td>
+                                <td>{{ ride.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
