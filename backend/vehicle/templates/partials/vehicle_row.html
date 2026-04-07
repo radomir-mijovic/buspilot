@@ -5,7 +5,7 @@
     <td class="id">#{{ vehicle.id }}</td>
     <td class="customer_name">{{ vehicle.brand }}</td>
     <td class="product_name">{{ vehicle.model }}</td>
-    <td class="type">{{ vehicle.vehicle_type }}</td>
+    <td class="type">{{ vehicle.get_vehicle_type_display }}</td>
     <td class="amount">{{ vehicle.year_of_production }}</td>
     <td class="payment">{{ vehicle.number_of_seats }}</td>
     <td>

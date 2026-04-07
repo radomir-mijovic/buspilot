@@ -3,34 +3,43 @@ from django.db import models
 
 from common.models import CreatedUpdatedAtTimestampMixin
 
+from . import constants
+
 VALID_FILE_EXTENSIONS = ["pdf", "jpg", "jpeg", "png", "docx", "txt", "xlsx"]
 
 
-class Vehicle(models.Model):
-    VEHICLE_TYPE_CHOICES = [
-        ("Bus", "Bus"),
-        ("Van", "Van"),
-        ("Car", "Car"),
-    ]
+class VehicleTypeChoices(models.IntegerChoices):
+    CAR = constants.CAR, "Car"
+    VAN = constants.VAN, "Van"
+    MINI_BUS = constants.MINI_BUS, "Mini Bus"
+    BUS = constants.BUS, "Bus"
 
+
+class Vehicle(models.Model):
     brand = models.CharField(max_length=100)
     company = models.ForeignKey(
         "company.Company",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+        related_name="vehicles",
     )
     chassis_number = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=100, blank=True)
-    driver = models.ManyToManyField("driver.Driver", related_name="vehicles", blank=True,)
+    driver = models.ManyToManyField(
+        "driver.Driver",
+        blank=True,
+        related_name="vehicles",
+    )
     engine_number = models.CharField(max_length=100, blank=True)
     horse_power = models.CharField(max_length=100, blank=True)
     licence_number = models.CharField(max_length=100, blank=True)
     model = models.CharField(max_length=100)
     number_of_seats = models.CharField(max_length=20, blank=True)
     year_of_production = models.CharField(max_length=100, blank=True)
-    vehicle_type = models.CharField(
-        max_length=100, blank=True, choices=VEHICLE_TYPE_CHOICES
+    vehicle_type = models.PositiveIntegerField(
+        blank=True,
+        choices=VehicleTypeChoices,
     )
     weight = models.CharField(max_length=100, blank=True, help_text="weight in KG")
 

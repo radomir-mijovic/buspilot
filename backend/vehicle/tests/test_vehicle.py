@@ -1,8 +1,9 @@
 import pytest
+from django.urls import reverse
+from parameterized import parameterized
+
 from auth.models import User
 from company.tests.factories import CompanyFactory
-from parameterized import parameterized
-from django.urls import reverse
 
 from ..models import Vehicle
 from .factories import VehicleFactory
@@ -46,7 +47,7 @@ class TestVehicle:
         client.force_login(user)
         response = client.post(
             reverse("vehicle:vehicles_create"),
-            {"brand": "Mercedes", "model": "Sprinter"},
+            {"brand": "Mercedes", "model": "Sprinter", "vehicle_type": 1},
         )
         assert response.status_code == 302
         assert Vehicle.objects.filter(brand="Mercedes", company=self.company).exists()
@@ -84,7 +85,7 @@ class TestVehicle:
         client.force_login(user)
         response = client.post(
             reverse("vehicle:vehicles_update", kwargs={"pk": self.vehicle.pk}),
-            {"brand": "Volvo", "model": "9700"},
+            {"brand": "Volvo", "model": "9700", "vehicle_type": 1},
         )
         assert response.status_code == 302
         self.vehicle.refresh_from_db()

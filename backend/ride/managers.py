@@ -10,13 +10,22 @@ from . import constants
 
 class RideDateManager(models.Manager):
     def today(self):
-        return self.filter(start_date=timezone.now().date())
+        return self.filter(start_date=self.today_date())
 
     def tomorrow(self):
         return self.filter(start_date=self.tomorrow_date())
 
     def after_tomorrow(self):
         return self.filter(start_date__gt=self.tomorrow_date())
+
+    def from_today_and_on(self):
+        return self.filter(start_date__gte=self.today_date())
+
+    def past_rides(self):
+        return self.filter(start_date__lt=self.today_date())
+
+    def today_date(self):
+        return timezone.now().date()
 
     def tomorrow_date(self):
         today = timezone.now().date()

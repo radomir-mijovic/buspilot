@@ -1,0 +1,4 @@
+CAR = 1
+VAN = 2
+MINI_BUS = 3
+BUS = 4

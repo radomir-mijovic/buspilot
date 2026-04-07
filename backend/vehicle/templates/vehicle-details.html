@@ -79,7 +79,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Vrsta :</th>
-                                                                    <td class="text-muted">{{ vehicle.vehicle_type }}</td>
+                                                                    <td class="text-muted">{{ vehicle.get_vehicle_type_display }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th class="ps-0" scope="row">Godina proizvodnje :</th>
@@ -889,106 +889,47 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="brand-field" class="form-label">Marka</label>
-                                    <input value="{{ vehicle.brand }}"
-                                           type="text"
-                                           name="brand"
-                                           id="brand-field"
-                                           required
-                                           class="form-control"
-                                           placeholder="npr. Mercedes" />
+                                    {{ form.brand }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="model-field" class="form-label">Model</label>
-                                    <input value="{{ vehicle.model }}"
-                                           type="text"
-                                           name="model"
-                                           id="model-field"
-                                           required
-                                           class="form-control"
-                                           placeholder="npr. Sprinter 412" />
+                                    {{ form.model }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="vehicle-type-field" class="form-label">Vrsta</label>
-                                    <select name="vehicle_type"
-                                            id="vehicle-type-field"
-                                            class="form-control"
-                                            required>
-                                        <option value="Bus" {% if vehicle.vehicle_type == "Bus" %}selected{% endif %}>Autobus</option>
-                                        <option value="Van" {% if vehicle.vehicle_type == "Van" %}selected{% endif %}>Kombi</option>
-                                        <option value="Car" {% if vehicle.vehicle_type == "Car" %}selected{% endif %}>Malo vozilo</option>
-                                    </select>
+                                    {{ form.vehicle_type }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="year-field" class="form-label">Godina proizvodnje</label>
-                                    <input type="text"
-                                           name="year_of_production"
-                                           id="year-field"
-                                           value="{{ vehicle.year_of_production }}"
-                                           class="form-control"
-                                           placeholder="npr. 2022" />
+                                    {{ form.year_of_production }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="seats-field" class="form-label">Broj sjedišta</label>
-                                    <input type="text"
-                                           name="number_of_seats"
-                                           id="seats-field"
-                                           value="{{ vehicle.number_of_seats }}"
-                                           class="form-control"
-                                           placeholder="npr. 50 + 5" />
+                                    {{ form.number_of_seats }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="chassis_number" class="form-label">Broj šasije</label>
-                                    <input type="text"
-                                           name="chassis_number"
-                                           id="chassis_number"
-                                           value="{{ vehicle.chassis_number }}"
-                                           class="form-control"
-                                           placeholder="npr. HGCM8..." />
+                                    {{ form.chassis_number }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="engine_number" class="form-label">Broj motora</label>
-                                    <input type="text"
-                                           name="engine_number"
-                                           id="engine_number"
-                                           value="{{ vehicle.engine_number }}"
-                                           class="form-control"
-                                           placeholder="npr. ALF 123 456..." />
+                                    {{ form.engine_number }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="horse_power" class="form-label">Konjska snaga</label>
-                                    <input type="text"
-                                           name="horse_power"
-                                           id="horse_power"
-                                           value="{{ vehicle.horse_power }}"
-                                           class="form-control"
-                                           placeholder="HP" />
+                                    {{ form.horse_power }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="weight" class="form-label">Kilaža (KG)</label>
-                                    <input type="text"
-                                           name="weight"
-                                           id="weight"
-                                           value="{{ vehicle.weight }}"
-                                           class="form-control"
-                                           placeholder="npr. 3120kg" />
+                                    {{ form.weight }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="licence_number" class="form-label">Broj Tablica</label>
-                                    <input type="text"
-                                           name="licence_number"
-                                           id="licence_number"
-                                           value="{{ vehicle.licence_number }}"
-                                           class="form-control"
-                                           placeholder="npr. PG-AU352" />
+                                    {{ form.licence_number }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="color" class="form-label">Boja</label>
-                                    <input type="text"
-                                           name="color"
-                                           id="color"
-                                           value="{{ vehicle.color }}"
-                                           class="form-control"
-                                           placeholder="npr. Svijetlo plava" />
+                                    {{ form.color }}
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -1024,32 +965,19 @@
                             <div class="modal-body" id="addDocumentModalBody">
                                 <div class="mb-3">
                                     <label for="doc-title" class="form-label">Naziv dokumenta</label>
-                                    <input type="text"
-                                           name="title"
-                                           id="doc-title"
-                                           class="form-control"
-                                           required
-                                           placeholder="npr. Saobraćajna dozvola" />
+                                    {{ document_form.title }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc-type" class="form-label">Tip dokumenta</label>
-                                    <input type="text"
-                                           name="document_type"
-                                           id="doc-type"
-                                           class="form-control"
-                                           placeholder="npr. Registracija" />
+                                    {{ document_form.document_type }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc-expiry" class="form-label">Datum isteka</label>
-                                    <input type="date"
-                                           required
-                                           name="expiring_at"
-                                           id="doc-expiry"
-                                           class="form-control" />
+                                    {{ document_form.expiring_at }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc-file" class="form-label">Fajl</label>
-                                    <input type="file" name="file" id="doc-file" class="form-control" required />
+                                    {{ document_form.file }}
                                 </div>
                             </div>
                             <div class="modal-footer">
