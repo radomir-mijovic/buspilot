@@ -41,6 +41,7 @@ class RideForm(forms.ModelForm):
                     "id": "FormInputState",
                     "data-choices": "",
                     "data-choices-sorting": "true",
+                    "required": "true",
                 }
             ),
             "start_time": forms.TimeInput(

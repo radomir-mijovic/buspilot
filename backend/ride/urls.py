@@ -1,11 +1,16 @@
 from django.urls import path
 
-from .views import RideCreateView, RideUpdateView
+from .views import RideCreateView, RideListView, RideUpdateView
 
 app_name = "ride"
 
 
 urlpatterns = [
+    path(
+        "rides",
+        RideListView.as_view(),
+        name="ride_list",
+    ),
     path(
         "rides-create",
         RideCreateView.as_view(),

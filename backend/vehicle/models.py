@@ -2,6 +2,7 @@ from django.core.validators import FileExtensionValidator
 from django.db import models
 
 from common.models import CreatedUpdatedAtTimestampMixin
+from ride.models import Ride
 
 from . import constants
 
@@ -20,7 +21,6 @@ class Vehicle(models.Model):
     company = models.ForeignKey(
         "company.Company",
         on_delete=models.CASCADE,
-        null=True,
         blank=True,
         related_name="vehicles",
     )
@@ -50,6 +50,34 @@ class Vehicle(models.Model):
     def all_documents(self):
         """Using it for templates"""
         return self.documents.all()
+
+    @property
+    def today_rides(self):
+        return Ride.rides.today().filter(
+            vehicles=self,
+            company=self.company,
+        )
+
+    @property
+    def tomorrow_rides(self):
+        return Ride.rides.tomorrow().filter(
+            company=self.company,
+            vehicles=self,
+        )
+
+    @property
+    def after_tomorrow_rides(self):
+        return Ride.rides.after_tomorrow().filter(
+            company=self.company,
+            vehicles=self,
+        )
+
+    @property
+    def rides_count(self) -> int:
+        return Ride.rides.from_today_and_on().filter(
+            company=self.company,
+            vehicles=self,
+        ).count()
 
 
 class VehicleDocument(CreatedUpdatedAtTimestampMixin, models.Model):

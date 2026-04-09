@@ -55,9 +55,10 @@
                         <div class="collapse menu-dropdown" id="sidebarLayouts">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{% url 'ride:ride_create' %}"
-                                       class="nav-link"
-                                       data-key="">Dodaj vožnju</a>
+                                    <a href="{% url 'ride:ride_list' %}" class="nav-link" data-key="">Pregled vožnji</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'ride:ride_create' %}" class="nav-link" data-key="">Dodaj vožnju</a>
                                 </li>
                             </ul>
                         </div>
@@ -130,7 +131,7 @@
                         <div class="collapse menu-dropdown" id="sidebarDrives">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="" target="_blank" class="nav-link" data-key="t-invoices-list">Fakture</a>
+                                    <a href="" class="nav-link" data-key="t-invoices-list">Fakture</a>
                                 </li>
                             </ul>
                         </div>

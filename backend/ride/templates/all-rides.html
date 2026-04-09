@@ -1,0 +1,218 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}
+    Pregled vožnji
+{% endblock title %}
+{% block extra_css %}
+    <!-- Sweet Alert css-->
+    <link href="{% static 'libs/sweetalert2/dist/sweetalert2.min.css' %}"
+          rel="stylesheet"
+          type="text/css" />
+{% endblock extra_css %}
+{% block content %}
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                {% block pagetitle %}
+                    {% include "partials/page-title.html" with pagetitle="Pregled vožnji" title="Pregled vožnji" %}
+                {% endblock pagetitle %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card" id="orderList">
+                            <div class="card-header border-0">
+                                <div class="row align-items-center gy-3">
+                                    <div class="col-sm">
+                                        <h5 class="card-title mb-0">Sve vožnje</h5>
+                                    </div>
+                                    <div class="col-sm-auto">
+                                        <div class="d-flex gap-1 flex-wrap">
+                                            <a href="{% url 'ride:ride_create' %}"
+                                               class="btn btn-success add-btn"
+                                               id="create-btn">
+                                                <i class="ri-add-line align-bottom me-1"></i> Nova vožnja
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div>
+                                    <ul class="nav nav-tabs nav-tabs-custom nav-success mb-3" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active All py-3"
+                                               data-bs-toggle="tab"
+                                               id="Sve"
+                                               href="#home1"
+                                               role="tab"
+                                               aria-selected="true">
+                                                 Sve <span class="badge bg-danger align-middle ms-1">{{ count_all }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link py-3 Delivered"
+                                               data-bs-toggle="tab"
+                                               id="Transferi"
+                                               href="#delivered"
+                                               role="tab"
+                                               aria-selected="false">
+                                                 Transferi <span class="badge bg-danger align-middle ms-1">{{ transfers_count }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link py-3 Pickups"
+                                               data-bs-toggle="tab"
+                                               id="Izleti"
+                                               href="#pickups"
+                                               role="tab"
+                                               aria-selected="false">
+                                                Izleti <span class="badge bg-danger align-middle ms-1">{{ excursions_count }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link py-3 Returns"
+                                               data-bs-toggle="tab"
+                                               id="Linije"
+                                               href="#returns"
+                                               role="tab"
+                                               aria-selected="false">
+                                                Linije <span class="badge bg-danger align-middle ms-1">{{ lines_count }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link py-3 Cancelled"
+                                               data-bs-toggle="tab"
+                                               id="Kruzne ture"
+                                               href="#cancelled"
+                                               role="tab"
+                                               aria-selected="false">
+                                                Kruzne ture <span class="badge bg-danger align-middle ms-1">{{ round_tours_count }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="table-responsive table-card mb-1"
+                                         style="max-height: 850px;
+                                                overflow-y: auto">
+                                        <table class="table table-nowrap align-middle" id="orderTable">
+                                            <thead class="text-muted table-light">
+                                                <tr class="text-uppercase">
+                                                    <th class="col" data-sort="id">ID</th>
+                                                    <th class="col" data-sort="customer_name">Naziv</th>
+                                                    <th class="col" data-sort="product_name">Tip</th>
+                                                    <th class="col" data-sort="date">Polazak</th>
+                                                    <th class="col" data-sort="amount">Završava</th>
+                                                    <th class="col" data-sort="payment">Mjesto polaska</th>
+                                                    <th class="col" data-sort="city">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="list form-check-all">
+                                                {% for ride in rides %}
+                                                    <tr>
+                                                        <td class="id">
+                                                            <a href="{% url 'ride:ride_update' ride.id %}"
+                                                               class="fw-medium link-primary">#VZ{{ ride.id }}</a>
+                                                        </td>
+                                                        <td class="customer_name">{{ ride.title }}</td>
+                                                        <td class="product_name">{{ ride.get_ride_type_display }}</td>
+                                                        <td class="date">
+                                                            {{ ride.start_date|date:"d M, Y" }}, <small class="text-muted">{{ ride.start_time|date:"h:iA" }}</small>
+                                                        </td>
+                                                        <td class="date">
+                                                            {{ ride.end_date|date:"d M, Y" }}, <small class="text-muted">{{ ride.end_time|date:"h:iA" }}</small>
+                                                        </td>
+                                                        <td class="payment">{{ ride.start_location }}</td>
+                                                        <td>
+                                                            <ul class="list-inline hstack gap-2 mb-0">
+                                                                <li class="list-inline-item"
+                                                                    data-bs-toggle="tooltip"
+                                                                    data-bs-trigger="hover"
+                                                                    data-bs-placement="top"
+                                                                    title="View">
+                                                                    <a href="{% url 'ride:ride_update' ride.id %}"
+                                                                       class="text-primary d-inline-block">
+                                                                        <i class="ri-eye-fill fs-16"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="list-inline-item"
+                                                                    data-bs-toggle="tooltip"
+                                                                    data-bs-trigger="hover"
+                                                                    data-bs-placement="top"
+                                                                    title="Remove">
+                                                                    <a class="text-danger d-inline-block remove-item-btn" href="">
+                                                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <div class="noresult" style="display: none">
+                                            <div class="text-center">
+                                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
+                                                </lord-icon>
+                                                <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                <p class="text-muted">
+                                                    We've searched more than 150+ Orders We did
+                                                    not find any
+                                                    orders for you search.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end modal -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+        {% block footer %}
+            {% include "partials/footer.html" %}
+        {% endblock footer %}
+    </div>
+    <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+    <!-- list.js min js -->
+    <script src="{% static 'libs/list.js/dist/list.min.js' %}"></script>
+    <!--list pagination js-->
+    <script src="{% static 'js/pages/ecommerce-order.init.js' %}"></script>
+    <!-- Sweet Alerts js -->
+    <script src="{% static 'libs/sweetalert2/dist/sweetalert2.min.js' %}"></script>
+    {% for message in messages %}
+        {% if message.tags == 'alert-success' %}
+            <!-- sweetalert js -->
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                var m = "{{ message }}";
+                Swal.fire({
+                    icon: 'success',
+                    title: m,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+            </script>
+        {% else %}
+            <!-- sweetalert js -->
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                var m = "{{ message }}";
+                Swal.fire({
+                    icon: 'error',
+                    title: m,
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endblock extra_js %}

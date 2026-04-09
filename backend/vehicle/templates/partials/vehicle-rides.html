@@ -1,0 +1,35 @@
+{% load static %}
+<div class="tab-pane {% if time == 'today' %}active{% endif %}"
+     id="{{ time }}"
+     role="tabpanel">
+    <div class="profile-timeline">
+        <div class="accordion accordion-flush" id="todayExample">
+            {% for ride in rides %}
+                <div class="accordion-item border-0">
+                    <div class="accordion-header" id="headingOne">
+                        <a class="accordion-button p-2 shadow-none"
+                           href="{% url 'ride:ride_update' ride.id %}">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'images/small/bus.jpg' %}"
+                                         alt=""
+                                         class="avatar-xs rounded-circle" />
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-1">{{ ride.title }}</h6>
+                                    <small class="text-muted">Tip - {{ ride.get_ride_type_display }}</small>
+                                    <br>
+                                    <small class="text-muted">Start - {{ ride.start_time }}</small>
+                                    <br>
+                                    <small class="text-muted">Lokacija - {{ ride.start_location }}</small>
+                                    <br>
+                                    <small class="text-muted">{{ ride.start_date }}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

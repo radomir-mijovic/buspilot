@@ -10,9 +10,9 @@ def dashboard(request):
     user = request.user
     template = loader.get_template("dashboard.html")
 
-    lines = Ride.lines.today(company=user.company)
-    transfers = Ride.transfers.today(company=user.company)
-    excursions = Ride.excursions.today(company=user.company)
+    lines = Ride.lines.today().filter(company=user.company)
+    transfers = Ride.transfers.today().filter(company=user.company)
+    excursions = Ride.excursions.today().filter(company=user.company)
 
     context = {
         "user": user,

@@ -10,19 +10,49 @@ from . import constants
 
 class RideDateManager(models.Manager):
     def today(self):
-        return self.filter(start_date=self.today_date())
+        return (
+            self.filter(
+                start_date=self.today_date(),
+            )
+            .prefetch_related("vehicles", "drivers")
+            .order_by("start_time")
+        )
 
     def tomorrow(self):
-        return self.filter(start_date=self.tomorrow_date())
+        return (
+            self.filter(
+                start_date=self.tomorrow_date(),
+            )
+            .prefetch_related("vehicles", "drivers")
+            .order_by("start_time")
+        )
 
     def after_tomorrow(self):
-        return self.filter(start_date__gt=self.tomorrow_date())
+        return (
+            self.filter(
+                start_date__gt=self.tomorrow_date(),
+            )
+            .prefetch_related("vehicles", "drivers")
+            .order_by("start_date")
+        )
 
     def from_today_and_on(self):
-        return self.filter(start_date__gte=self.today_date())
+        return (
+            self.filter(
+                start_date__gte=self.today_date(),
+            )
+            .prefetch_related("vehicles", "drivers")
+            .order_by("start_date")
+        )
 
     def past_rides(self):
-        return self.filter(start_date__lt=self.today_date())
+        return (
+            self.filter(
+                start_date__lt=self.today_date(),
+            )
+            .prefetch_related("vehicles", "drivers")
+            .order_by("-start_date")
+        )
 
     def today_date(self):
         return timezone.now().date()
@@ -34,128 +64,153 @@ class RideDateManager(models.Manager):
 
 
 class RideLineManager(RideDateManager):
-    def today(self, company: Company):
+    def today(self):
         return (
             super()
             .today()
             .filter(
                 ride_type=constants.LINE,
-                company=company,
             )
         )
 
-    def tomorrow(self, company: Company):
+    def tomorrow(self):
         return (
             super()
             .tomorrow()
             .filter(
                 ride_type=constants.LINE,
-                company=company,
             )
         )
 
-    def after_tomorrow(self, company: Company):
+    def after_tomorrow(self):
         return (
             super()
             .after_tomorrow()
             .filter(
                 ride_type=constants.LINE,
-                company=company,
+            )
+        )
+
+    def from_today_and_on(self):
+        return (
+            super()
+            .from_today_and_on()
+            .filter(
+                ride_type=constants.LINE,
             )
         )
 
 
 class RideTransferManager(RideDateManager):
-    def today(self, company: Company):
+    def today(self):
         return (
             super()
             .today()
             .filter(
                 ride_type=constants.TRANSFER,
-                company=company,
             )
         )
 
-    def tomorrow(self, company: Company):
+    def tomorrow(self):
         return (
             super()
             .tomorrow()
             .filter(
                 ride_type=constants.TRANSFER,
-                company=company,
             )
         )
 
-    def after_tomorrow(self, company: Company):
+    def after_tomorrow(self):
         return (
             super()
             .after_tomorrow()
             .filter(
                 ride_type=constants.TRANSFER,
-                company=company,
+            )
+        )
+
+    def from_today_and_on(self):
+        return (
+            super()
+            .from_today_and_on()
+            .filter(
+                ride_type=constants.TRANSFER,
             )
         )
 
 
 class RideExcursionManager(RideDateManager):
-    def today(self, company: Company):
+    def today(self):
         return (
             super()
             .today()
             .filter(
                 ride_type=constants.EXCURSION,
-                company=company,
             )
         )
 
-    def tomorrow(self, company: Company):
+    def tomorrow(self):
         return (
             super()
             .tomorrow()
             .filter(
                 ride_type=constants.EXCURSION,
-                company=company,
             )
         )
 
-    def after_tomorrow(self, company: Company):
+    def after_tomorrow(self):
         return (
             super()
             .after_tomorrow()
             .filter(
                 ride_type=constants.EXCURSION,
-                company=company,
+            )
+        )
+
+    def from_today_and_on(self):
+        return (
+            super()
+            .from_today_and_on()
+            .filter(
+                ride_type=constants.EXCURSION,
             )
         )
 
 
 class RideRoundTourManager(RideDateManager):
-    def today(self, company: Company):
+    def today(self):
         return (
             super()
             .today()
             .filter(
                 ride_type=constants.ROUND_TOUR,
-                company=company,
             )
         )
 
-    def tomorrow(self, company: Company):
+    def tomorrow(self):
         return (
             super()
             .tomorrow()
             .filter(
                 ride_type=constants.ROUND_TOUR,
-                company=company,
             )
         )
 
-    def after_tomorrow(self, company: Company):
+    def after_tomorrow(self):
         return (
             super()
             .after_tomorrow()
             .filter(
                 ride_type=constants.ROUND_TOUR,
-                company=company,
             )
         )
+
+    def from_today_and_on(self):
+        return (
+            super()
+            .from_today_and_on()
+            .filter(
+                ride_type=constants.ROUND_TOUR,
+            )
+        )
+
