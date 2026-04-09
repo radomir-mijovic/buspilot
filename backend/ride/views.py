@@ -3,7 +3,7 @@ from typing import Any
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models
 from django.forms import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
@@ -58,3 +58,22 @@ class RideUpdateView(LoginRequiredMixin, generic.UpdateView):
         return Ride.objects.filter(
             company=self.request.user.company,
         )
+
+
+class RideDeleteView(generic.DeleteView):
+    model = Ride
+    success_url = reverse_lazy("ride:ride_list")
+
+    def get_queryset(self) -> models.query.QuerySet[Any]:
+        return Ride.objects.filter(
+            company=self.request.user.company,
+        )
+
+    def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        instance = self.get_object()
+        instance.delete()
+
+        if request.headers.get("HX-Request"):
+            return HttpResponse(status=200)
+
+        return redirect("ride:ride_list")

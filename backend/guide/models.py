@@ -1,3 +1,6 @@
-from django.db import models
+from common.models import PersonAbstract
 
-# Create your models here.
+
+class Guide(PersonAbstract):
+    pass
+

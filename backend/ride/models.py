@@ -23,7 +23,34 @@ class RideQueryManager(models.Model):
         abstract = True
 
 
-class Ride(DateSlot, LocationSlot, TimeSlot, RideQueryManager):
+class RideManyToManyManager(models.Model):
+    vehicles = models.ManyToManyField(
+        "vehicle.Vehicle",
+        blank=True,
+        related_name="rides",
+    )
+    drivers = models.ManyToManyField(
+        "driver.Driver",
+        blank=True,
+        related_name="rides",
+    )
+    guides = models.ManyToManyField(
+        "guide.Guide",
+        blank=True,
+        related_name="rides",
+    )
+
+    class Meta:
+        abstract = True
+
+
+class Ride(
+    DateSlot,
+    LocationSlot,
+    TimeSlot,
+    RideManyToManyManager,
+    RideQueryManager,
+):
     is_all_day = models.BooleanField(default=False)
     company = models.ForeignKey(
         "company.Company",
@@ -36,17 +63,6 @@ class Ride(DateSlot, LocationSlot, TimeSlot, RideQueryManager):
         blank=True,
     )
     title = models.CharField(max_length=255)
-
-    vehicles = models.ManyToManyField(
-        "vehicle.Vehicle",
-        blank=True,
-        related_name="rides",
-    )
-    drivers = models.ManyToManyField(
-        "driver.Driver",
-        blank=True,
-        related_name="rides",
-    )
 
     objects = models.Manager()
 

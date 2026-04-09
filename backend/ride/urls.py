@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import RideCreateView, RideListView, RideUpdateView
+from .views import RideCreateView, RideDeleteView, RideListView, RideUpdateView
 
 app_name = "ride"
 
@@ -20,5 +20,10 @@ urlpatterns = [
         "rides-update/<int:pk>/",
         RideUpdateView.as_view(),
         name="ride_update",
+    ),
+    path(
+        "rides-delete/<int:pk>/",
+        RideDeleteView.as_view(),
+        name="ride_delete",
     ),
 ]

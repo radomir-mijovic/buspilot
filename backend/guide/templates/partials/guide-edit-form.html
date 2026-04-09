@@ -1,0 +1,58 @@
+<form hx-post="{% url 'guide:guide_update' guide.id %}"
+      hx-swap="outerHTML"
+      hx-target="#row-{{ guide.id }}"
+      hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('editguideModal')).hide();guidesList.reIndex();htmx.process(document.body);}">
+    {% csrf_token %}
+    <div class="modal-body">
+        <div class="row g-3">
+            <div class="col-lg-12">
+                <label class="form-label">Ime</label>
+                <input type="text"
+                       name="first_name"
+                       class="form-control"
+                       value="{{ guide.first_name }}"
+                       placeholder="Unesite ime"
+                       required />
+            </div>
+            <div class="col-lg-12">
+                <label class="form-label">Prezime</label>
+                <input type="text"
+                       name="last_name"
+                       class="form-control"
+                       value="{{ guide.last_name }}"
+                       placeholder="Unesite prezime"
+                       required />
+            </div>
+            <div class="col-lg-12">
+                <label class="form-label">Broj telefona</label>
+                <input type="text"
+                       name="phone_number"
+                       class="form-control"
+                       value="{{ guide.phone_number }}"
+                       placeholder="Npr: +38269...." />
+            </div>
+            <div class="col-lg-12">
+                <label class="form-label">Email</label>
+                <input type="text"
+                       name="email"
+                       class="form-control"
+                       value="{{ guide.email }}"
+                       placeholder="Unesite email" />
+            </div>
+            <div class="col-lg-12">
+                <label class="form-label">Broj pasoša</label>
+                <input type="text"
+                       name="passport_number"
+                       class="form-control"
+                       value="{{ guide.passport_number }}"
+                       placeholder="Npr: I932J" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="hstack gap-2 justify-content-end">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Zatvori</button>
+            <button type="submit" class="btn btn-success">Sačuvaj</button>
+        </div>
+    </div>
+</form>

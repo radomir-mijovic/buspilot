@@ -26,6 +26,7 @@ LOCAL_APPS = [
     "auth.apps.UserAuthConfig",
     "company.apps.CompanyConfig",
     "dashboard.apps.DashboardConfig",
+    "guide.apps.GuideConfig",
     "driver.apps.DriverConfig",
     "ride.apps.RideConfig",
     "vehicle.apps.VehicleConfig",

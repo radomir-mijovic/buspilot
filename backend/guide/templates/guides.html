@@ -28,7 +28,7 @@
                                         <button class="btn btn-info add-btn"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#showModal">
-                                            <i class="ri-add-fill me-1 align-bottom"></i> Dodaj Vozača
+                                            <i class="ri-add-fill me-1 align-bottom"></i> Dodaj Vodiča
                                         </button>
                                     </div>
                                     <div class="flex-shrink-0">
@@ -46,7 +46,7 @@
                     </div>
                     <!--end col-->
                     <div class="col-xxl-12">
-                        <div class="card" id="drivers-list">
+                        <div class="card" id="guides-list">
                             <div class="card-header">
                                 <div class="row g-3">
                                     <div class="col-md-4">
@@ -72,15 +72,15 @@
                                                     <th scope="col">Akcija</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="driver-tbody" class="list form-check-all">
-                                                {% for driver in drivers %}
-                                                    <tr id="row-{{ driver.id }}">
+                                            <tbody id="guide-tbody" class="list form-check-all">
+                                                {% for guide in guides %}
+                                                    <tr id="row-{{ guide.id }}">
                                                         <td class="name">
-                                                            <div class="flex-grow-1 ms-2 name">{{ driver.first_name }} {{ driver.last_name }}</div>
+                                                            <div class="flex-grow-1 ms-2 name">{{ guide.first_name }} {{ guide.last_name }}</div>
                                                         </td>
-                                                        <td class="company_name">{{ driver.phone_number }}</td>
-                                                        <td class="email_id">{{ driver.email }}</td>
-                                                        <td class="phone">{{ driver.passport_number }}</td>
+                                                        <td class="company_name">{{ guide.phone_number }}</td>
+                                                        <td class="email_id">{{ guide.email }}</td>
+                                                        <td class="phone">{{ guide.passport_number }}</td>
                                                         <td>
                                                             <ul class="list-inline hstack gap-2 mb-0">
                                                                 <li class="list-inline-item edit"
@@ -112,19 +112,19 @@
                                                                         <ul class="dropdown-menu dropdown-menu-end">
                                                                             <li>
                                                                             <a class="dropdown-item edit-item-btn"
-                                                                               hx-get="{% url 'driver:driver_edit_form' driver.id %}"
-                                                                               hx-target="#editDriverModal .modal-body"
+                                                                               hx-get="{% url 'guide:guide_edit_form' guide.id %}"
+                                                                               hx-target="#editguideModal .modal-body"
                                                                                hx-swap="innerHTML"
                                                                                data-bs-toggle="modal"
-                                                                               data-bs-target="#editDriverModal"
+                                                                               data-bs-target="#editguideModal"
                                                                                href="javascript:void(0);"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                                         Izmjeni</a>
                                                                     </li>
                                                                     <li>
                                                                         <a class="dropdown-item remove-item-btn"
                                                                            data-bs-toggle="modal"
-                                                                           data-bs-target="#deleteDriverModal"
-                                                                           data-delete-url="{% url 'driver:driver_delete' pk=driver.id %}"
+                                                                           data-bs-target="#deleteguideModal"
+                                                                           data-delete-url="{% url 'guide:guide_delete' pk=guide.id %}"
                                                                            href="javascript:void(0);">
                                                                             <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
                                                                             Obriši
@@ -166,10 +166,10 @@
                                                     aria-label="Close"
                                                     id="close-modal"></button>
                                         </div>
-                                        <form hx-target="#driver-tbody"
+                                        <form hx-target="#guide-tbody"
                                               hx-swap="afterbegin"
-                                              hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('showModal')).hide();this.reset();driversList.reIndex();htmx.process(document.body);}"
-                                              hx-post="{% url 'driver:drivers_create' %}">
+                                              hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('showModal')).hide();this.reset();guidesList.reIndex();htmx.process(document.body);}"
+                                              hx-post="{% url 'guide:guides_create' %}">
                                             {% csrf_token %}
                                             <div class="modal-body">
                                                 <input type="hidden" id="id-field" />
@@ -236,7 +236,7 @@
                             <!--end add modal-->
                             <!-- shared delete modal -->
                             <div class="modal fade zoomIn"
-                                 id="deleteDriverModal"
+                                 id="deleteguideModal"
                                  tabindex="-1"
                                  aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -251,17 +251,17 @@
                                             <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#405189,secondary:#f06548" style="width: 90px; height: 90px"></lord-icon>
                                             <div class="mt-4 text-center">
                                                 <h4 class="fs-semibold">Da li ste sigurni?</h4>
-                                                <p class="text-muted fs-14 mb-4 pt-1">Vozač će biti trajno obrisan.</p>
+                                                <p class="text-muted fs-14 mb-4 pt-1">Vodič će biti trajno obrisan.</p>
                                                 <div class="hstack gap-2 justify-content-center">
                                                     <button class="btn btn-link link-success fw-medium text-decoration-none"
                                                             data-bs-dismiss="modal">
                                                         <i class="ri-close-line me-1 align-middle"></i>
                                                         Zatvori
                                                     </button>
-                                                    <button id="deleteDriverConfirm"
+                                                    <button id="deleteguideConfirm"
                                                             class="btn btn-danger"
                                                             hx-swap="outerHTML"
-                                                            hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('deleteDriverModal')).hide();driversList.reIndex();}">
+                                                            hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('deleteguideModal')).hide();guidesList.reIndex();}">
                                                         Da, Obriši!!
                                                     </button>
                                                 </div>
@@ -272,7 +272,7 @@
                             </div>
                             <!-- shared edit modal -->
                             <div class="modal fade"
-                                 id="editDriverModal"
+                                 id="editguideModal"
                                  tabindex="-1"
                                  aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -310,7 +310,7 @@
 {% block extra_js %}
     <!-- list.js min js -->
     <script src="{% static 'libs/list.js/dist/list.min.js' %}"></script>
-    <script src="{% static 'js/pages/drivers-list.js' %}"></script>
+    <script src="{% static 'js/pages/guides-list.js' %}"></script>
     <!-- Sweet Alerts js -->
     <script src="{% static 'libs/sweetalert2/dist/sweetalert2.min.js' %}"></script>
     {% for message in messages %}

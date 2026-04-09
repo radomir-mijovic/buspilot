@@ -11,6 +11,7 @@ urlpatterns = [
     path("", include("auth.urls")),
     path("", include("dashboard.urls")),
     path("", include("driver.urls")),
+    path("", include("guide.urls")),
     path("", include("vehicle.urls")),
     path("", include("ride.urls")),
 ]
