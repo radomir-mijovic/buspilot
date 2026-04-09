@@ -40,7 +40,7 @@ class TestDrivers:
         assert other_driver.first_name not in response.text
 
     def test_create_driver_ok(self, client):
-        assert self.company.drivers.count() == 1
+        assert self.company.driver_items.count() == 1
         client.post(
             self.create_url,
             {
@@ -48,12 +48,12 @@ class TestDrivers:
                 "last_name": "Doe",
             },
         )
-        assert self.company.drivers.count() == 2
+        assert self.company.driver_items.count() == 2
 
     def test_create_driver_not_ok(self, client):
-        assert self.company.drivers.count() == 1
+        assert self.company.driver_items.count() == 1
         respone = client.post(self.create_url, {})
-        assert self.company.drivers.count() == 1
+        assert self.company.driver_items.count() == 1
         assert respone.status_code == 302
 
     def test_update_driver_ok(self, client):
@@ -75,10 +75,10 @@ class TestDrivers:
 
     def test_delete_driver_ok(self, client) -> None:
         client.post(self.delete_url)
-        assert self.company.drivers.count() == 0
+        assert self.company.driver_items.count() == 0
 
     def test_cant_delete_other_company_driver(self, client) -> None:
-        assert self.company.drivers.count() == 1
+        assert self.company.driver_items.count() == 1
 
         other_company = CompanyFactory()
         other_driver = DriverFactory(company=other_company)
@@ -89,7 +89,7 @@ class TestDrivers:
             ),
         )
 
-        assert self.company.drivers.count() == 1
+        assert self.company.driver_items.count() == 1
 
     @parameterized.expand(
         (

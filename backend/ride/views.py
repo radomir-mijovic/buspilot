@@ -8,6 +8,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
+from company.mixins import SetCompanyInKwargsMixin
+
 from .forms import RideForm
 from .mixins import RidesCountMixin
 from .models import Ride
@@ -36,18 +38,26 @@ class RideListView(LoginRequiredMixin, RidesCountMixin, generic.ListView):
         return context
 
 
-class RideCreateView(LoginRequiredMixin, generic.CreateView):
+class RideCreateView(
+    LoginRequiredMixin,
+    SetCompanyInKwargsMixin,
+    generic.CreateView,
+):
     template_name = "create-ride.html"
     form_class = RideForm
     model = Ride
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        form.instance.company = self.request.user.company
+        form.instance.company = self.company
         form.save()
         return redirect("ride:ride_list")
 
 
-class RideUpdateView(LoginRequiredMixin, generic.UpdateView):
+class RideUpdateView(
+    LoginRequiredMixin,
+    SetCompanyInKwargsMixin,
+    generic.UpdateView,
+):
     template_name = "update-ride.html"
     form_class = RideForm
     model = Ride

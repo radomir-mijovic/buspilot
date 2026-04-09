@@ -1,9 +1,21 @@
 from django import forms
 
+from vehicle.models import Vehicle
+
 from .models import Ride
 
 
 class RideForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs) -> None:
+        company = kwargs.pop("company", None)
+        print(company, "Company")
+        super().__init__(*args, **kwargs)
+
+        for field in ["vehicles", "drivers", "guides"]:
+            self.fields[field].queryset = self.fields[field].queryset.filter(
+                company=company,
+            )
+
     class Meta:
         model = Ride
         fields = "__all__"
@@ -91,6 +103,11 @@ class RideForm(forms.ModelForm):
                 },
             ),
             "drivers": forms.SelectMultiple(
+                attrs={
+                    "class": "form-select",
+                },
+            ),
+            "guides": forms.SelectMultiple(
                 attrs={
                     "class": "form-select",
                 },

@@ -3,7 +3,6 @@ from datetime import timedelta
 from django.db import models
 from django.utils import timezone
 
-from company.models import Company
 
 from . import constants
 
