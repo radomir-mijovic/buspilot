@@ -70,7 +70,7 @@ class RideUpdateView(
         )
 
 
-class RideDeleteView(generic.DeleteView):
+class RideDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Ride
     success_url = reverse_lazy("ride:ride_list")
 
