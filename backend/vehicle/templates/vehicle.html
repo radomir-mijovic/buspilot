@@ -67,7 +67,7 @@
                                                href="#home1"
                                                role="tab"
                                                aria-selected="true">
-                                                <i class="ri-store-2-fill me-1 align-bottom"></i> Sva vozila
+                                                 Sva vozila
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -77,9 +77,18 @@
                                                href="#delivered"
                                                role="tab"
                                                aria-selected="false">
-                                                <i class="ri-checkbox-circle-line me-1 align-bottom"></i> Autobus
+                                                 Autobus
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link py-3"
+                                               data-bs-toggle="tab"
+                                               id="Mini Bus"
+                                               href="#delivered"
+                                               role="tab"
+                                               aria-selected="false">
+                                                 Minibus
+                                            </a>
                                         <li class="nav-item">
                                             <a class="nav-link py-3"
                                                data-bs-toggle="tab"
@@ -87,7 +96,7 @@
                                                href="#returns"
                                                role="tab"
                                                aria-selected="false">
-                                                <i class="ri-arrow-left-right-fill me-1 align-bottom"></i> Kombi
+                                                Kombi
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -97,7 +106,7 @@
                                                href="#cancelled"
                                                role="tab"
                                                aria-selected="false">
-                                                <i class="ri-close-circle-line me-1 align-bottom"></i> Mala vozila
+                                                 Mala vozila
                                             </a>
                                         </li>
                                     </ul>
@@ -144,7 +153,7 @@
                                             <div class="text-center">
                                                 <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
                                                 </lord-icon>
-                                                <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                <h5 class="mt-2">Nema rezultata</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -238,17 +247,7 @@
 {% endblock content %}
 {% block extra_js %}
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-    <!-- list.js min js -->
     <script src="{% static 'libs/list.js/dist/list.min.js' %}"></script>
     <!-- ecommerce-order init js -->
     <script src="{% static 'js/pages/ecommerce-order.init.js' %}"></script>
-    <!-- Sweet Alerts js -->
-    <script src="{% static 'libs/sweetalert2/dist/sweetalert2.min.js'%}"></script>
-    <!-- Sweet alert init js-->
-    <script src="{% static 'js/pages/sweetalerts.init.js'%}"></script>
-    {% for message in messages %}
-        {% if 'vehicle-error' in message.tags %}
-            <script>Swal.fire({ icon: 'error', title: "{{ message }}", showConfirmButton: false, timer: 2000 })</script>
-        {% endif %}
-    {% endfor %}
 {% endblock extra_js %}

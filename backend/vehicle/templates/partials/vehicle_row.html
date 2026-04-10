@@ -8,6 +8,9 @@
     <td class="type">{{ vehicle.get_vehicle_type_display }}</td>
     <td class="amount">{{ vehicle.year_of_production }}</td>
     <td class="payment">{{ vehicle.number_of_seats }}</td>
+    <td class="rides_count">
+        <span class="badge bg-success">{{ vehicle.rides_count }}</span>
+    </td>
     <td>
         <div class="hstack gap-3 flex-wrap">
             <button class="delete-vehicle-btn link-danger fs-15 border-0 bg-transparent p-0"

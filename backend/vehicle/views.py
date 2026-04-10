@@ -10,7 +10,6 @@ from django.views import generic
 from vehicle.documents.forms import VehicleDocumentUploadForm
 
 from .forms import VehicleCreateForm
-from .mixins import VehicleViewMixin
 from .models import Vehicle
 
 
@@ -51,7 +50,6 @@ class VehicleDetailView(LoginRequiredMixin, generic.DetailView):
 
 class VehicleCreateView(
     LoginRequiredMixin,
-    VehicleViewMixin,
     generic.CreateView,
 ):
     model = Vehicle
@@ -77,7 +75,6 @@ class VehicleCreateView(
 
 class VehicleUpdateView(
     LoginRequiredMixin,
-    VehicleViewMixin,
     generic.UpdateView,
 ):
     model = Vehicle
@@ -105,7 +102,6 @@ class VehicleUpdateView(
 
 class VehicleDeleteView(
     LoginRequiredMixin,
-    VehicleViewMixin,
     generic.DeleteView,
 ):
     model = Vehicle
