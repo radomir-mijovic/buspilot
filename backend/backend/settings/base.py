@@ -20,10 +20,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_countries",
 ]
 
 LOCAL_APPS = [
     "auth.apps.UserAuthConfig",
+    "agency.apps.AgencyConfig",
     "company.apps.CompanyConfig",
     "dashboard.apps.DashboardConfig",
     "guide.apps.GuideConfig",

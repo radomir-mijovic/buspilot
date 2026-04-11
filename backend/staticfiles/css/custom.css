@@ -1,0 +1,18 @@
+.bg-purple-subtle {
+  background-color: #f3e8ff;
+}
+
+.bg-pink-subtle {
+  background-color: #ffe4e6;
+}
+
+.bg-teal-subtle {
+  background-color: #e6fffa;
+}
+
+.bg-orange-subtle {
+  background-color: #fff7ed;
+}
+.auth-one-bg {
+  background-image: url("/static/images/your-image.jpg");
+}

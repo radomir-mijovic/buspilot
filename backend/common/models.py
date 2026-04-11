@@ -1,5 +1,18 @@
+import random
 from django.db import models
 
+HEADERS_COLORS: list[str] = [
+    "danger",
+    "info",
+    "warning",
+    "secondary",
+    "primary",
+    "success",
+    "purple",
+    "pink",
+    "teal",
+    "orange",
+]
 
 class CreatedUpdatedAtTimestampMixin(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -52,3 +65,23 @@ class PersonAbstract(models.Model):
 
     class Meta:
         abstract = True
+
+
+class UIStyleAbstarct(models.Model):
+    card_header_color = models.CharField(max_length=20, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def check_card_color_header(self) -> None:
+        if not self.card_header_color or not self.card_header_color_is_valid_option():
+            self.assing_card_header_color()
+
+    def card_header_color_is_valid_option(self) -> bool:
+        return self.card_header_color in HEADERS_COLORS
+
+    def assing_card_header_color(self) -> None:
+        self.card_header_color = self.get_random_color()
+
+    def get_random_color(self) -> str:
+        return random.choice(HEADERS_COLORS)

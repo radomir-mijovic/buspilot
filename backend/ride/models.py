@@ -24,11 +24,6 @@ class RideQueryManager(models.Model):
 
 
 class RideManyToManyManager(models.Model):
-    vehicles = models.ManyToManyField(
-        "vehicle.Vehicle",
-        blank=True,
-        related_name="rides",
-    )
     drivers = models.ManyToManyField(
         "driver.Driver",
         blank=True,
@@ -36,6 +31,11 @@ class RideManyToManyManager(models.Model):
     )
     guides = models.ManyToManyField(
         "guide.Guide",
+        blank=True,
+        related_name="rides",
+    )
+    vehicles = models.ManyToManyField(
+        "vehicle.Vehicle",
         blank=True,
         related_name="rides",
     )
@@ -51,6 +51,12 @@ class Ride(
     RideManyToManyManager,
     RideQueryManager,
 ):
+    agency = models.ForeignKey(
+        "agency.Agency",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
     is_all_day = models.BooleanField(default=False)
     company = models.ForeignKey(
         "company.Company",

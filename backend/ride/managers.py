@@ -32,7 +32,7 @@ class RideDateManager(models.Manager):
                 start_date__gt=self.tomorrow_date(),
             )
             .prefetch_related("vehicles", "drivers")
-            .order_by("start_date")
+            .order_by("start_date", "start_time")
         )
 
     def from_today_and_on(self):
@@ -41,7 +41,7 @@ class RideDateManager(models.Manager):
                 start_date__gte=self.today_date(),
             )
             .prefetch_related("vehicles", "drivers")
-            .order_by("start_date")
+            .order_by("start_date", "start_time")
         )
 
     def past_rides(self):
@@ -50,7 +50,7 @@ class RideDateManager(models.Manager):
                 start_date__lt=self.today_date(),
             )
             .prefetch_related("vehicles", "drivers")
-            .order_by("-start_date")
+            .order_by("-start_date", "-start_time")
         )
 
     def today_date(self):

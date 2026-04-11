@@ -4,15 +4,11 @@
     Vozila
 {% endblock title %}
 {% block extra_css %}
-    <!-- Sweet Alert css-->
     <link href="{% static 'libs/sweetalert2/dist/sweetalert2.min.css' %}"
           rel="stylesheet"
           type="text/css" />
 {% endblock extra_css %}
 {% block content %}
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
@@ -248,6 +244,5 @@
 {% block extra_js %}
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script src="{% static 'libs/list.js/dist/list.min.js' %}"></script>
-    <!-- ecommerce-order init js -->
     <script src="{% static 'js/pages/ecommerce-order.init.js' %}"></script>
 {% endblock extra_js %}

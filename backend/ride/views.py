@@ -8,32 +8,36 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from company.mixins import SetCompanyInKwargsMixin
+from company.mixins import CompanyRequestMixin, SetCompanyInKwargsMixin
 
 from .forms import RideForm
 from .mixins import RidesCountMixin
 from .models import Ride
 
 
-class RideListView(LoginRequiredMixin, RidesCountMixin, generic.ListView):
+class RideListView(
+    LoginRequiredMixin,
+    RidesCountMixin,
+    CompanyRequestMixin,
+    generic.ListView,
+):
     template_name = "all-rides.html"
     model = Ride
     context_object_name = "rides"
 
     def get_queryset(self) -> models.query.QuerySet[Any]:
         return Ride.rides.from_today_and_on().filter(
-            company=self.request.user.company,
+            company=self.company,
         )
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        company = self.request.user.company
 
-        context["count_all"] = self.count_all(company)
-        context["transfers_count"] = self.transfers_count(company)
-        context["excursions_count"] = self.excursions_count(company)
-        context["lines_count"] = self.lines_count(company)
-        context["round_tours_count"] = self.round_tours_count(company)
+        context["count_all"] = self.count_all(self.company)
+        context["transfers_count"] = self.transfers_count(self.company)
+        context["excursions_count"] = self.excursions_count(self.company)
+        context["lines_count"] = self.lines_count(self.company)
+        context["round_tours_count"] = self.round_tours_count(self.company)
 
         return context
 
@@ -66,17 +70,21 @@ class RideUpdateView(
 
     def get_queryset(self) -> models.query.QuerySet[Any]:
         return Ride.objects.filter(
-            company=self.request.user.company,
+            company=self.company,
         )
 
 
-class RideDeleteView(LoginRequiredMixin, generic.DeleteView):
+class RideDeleteView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.DeleteView,
+):
     model = Ride
     success_url = reverse_lazy("ride:ride_list")
 
     def get_queryset(self) -> models.query.QuerySet[Any]:
         return Ride.objects.filter(
-            company=self.request.user.company,
+            company=self.company,
         )
 
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:

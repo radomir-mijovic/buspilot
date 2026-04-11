@@ -1,0 +1,59 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}
+    Agencije
+{% endblock title %}
+{% block content %}
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                {% include "partials/page-title.html" with pagetitle="Agencije" title="Agencije" %}
+                <div class="row g-4 mb-3">
+                    <div class="col-sm-auto">
+                        <button data-bs-toggle="modal"
+                                data-bs-target="#createAgencyModal"
+                                class="btn btn-success">
+                            <i class="ri-add-line align-bottom me-1"></i> Dodaj Novu Agenciju
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for agency in agencies %}
+                        <div class="col-xxl-3 col-sm-6 project-card">
+                            <div class="card">
+                                <a href="{% url 'agency:agency_update' agency.id %}">
+                                    <div class="card-body">
+                                        <div class="p-3 mt-n3 mx-n3 bg-{{ agency.card_header_color }}-subtle rounded-top">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <h5 class="mb-0 fs-14">{{ agency.name }}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="py-3">
+                                            <div class="row gy-3">
+                                                <div class="col-6 text-center">
+                                                    <p class="text-muted mb-1">Zakazanih vožnji</p>
+                                                    <h5 class="fs-13">{{ agency.rides_to_come_count }}</h5>
+                                                </div>
+                                                <div class="col-6 text-center">
+                                                    <p class="text-muted mb-1">Završenih vožnji</p>
+                                                    <h5 class="fs-13">{{ agency.pass_rides_count }}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% include "partials/create-modal.html" %}
+        </div>
+        {% include "partials/footer.html" %}
+    </div>
+{% endblock content %}
+{% block extra_js %}
+    <script src="{% static 'js/pages/agencies-list.js' %}"></script>
+{% endblock extra_js %}

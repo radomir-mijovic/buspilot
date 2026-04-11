@@ -8,6 +8,7 @@ urlpatterns = [
         "admin/",
         admin.site.urls,
     ),
+    path("", include("agency.urls")),
     path("", include("auth.urls")),
     path("", include("dashboard.urls")),
     path("", include("driver.urls")),

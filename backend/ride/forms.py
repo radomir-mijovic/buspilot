@@ -43,7 +43,7 @@ class RideForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "id": "description",
-                    "rows": 5,
+                    "rows": 3,
                 }
             ),
             "ride_type": forms.Select(
@@ -107,6 +107,11 @@ class RideForm(forms.ModelForm):
                 },
             ),
             "guides": forms.SelectMultiple(
+                attrs={
+                    "class": "form-select",
+                },
+            ),
+            "agency": forms.Select(
                 attrs={
                     "class": "form-select",
                 },

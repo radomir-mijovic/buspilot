@@ -1,0 +1,72 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}
+    Izmijeni Agenciju
+{% endblock title %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block content %}
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                {% block pagetitle %}
+                    {% include "partials/page-title.html" with pagetitle="Izmijeni Agenciju" title="Izmijeni Agenciju" %}
+                {% endblock pagetitle %}
+                <div class="row">
+                    <form method="POST" action="{% url 'agency:agency_update' agency.id %}">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Naziv</label>
+                                {{ form.name }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Grad</label>
+                                {{ form.city }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Država</label>
+                                {{ form.country }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Telefon</label>
+                                {{ form.phone_number }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mobilni telefon</label>
+                                {{ form.mobile_phone_number }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Izvršni direktor</label>
+                                {{ form.ceo }}
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Kontakt osoba</label>
+                                {{ form.contact_person }}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="hstack gap-2 justify-content-end">
+                                <a href="{% url 'agency:agency_list' %}"
+                                   type="button"
+                                   class="btn btn-danger">Odustani</a>
+                                <button type="submit" class="btn btn-success">Izmijeni</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% block footer %}
+                    {% include "partials/footer.html" %}
+                {% endblock footer %}
+            </div>
+        </div>
+    </div>
+    <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+    <!-- prismjs plugin -->
+    <script src="{% static 'libs/prismjs/prism.js'%}"></script>
+{% endblock extra_js %}

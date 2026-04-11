@@ -6,9 +6,6 @@
 {% block extra_css %}
 {% endblock extra_css %}
 {% block content %}
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
@@ -31,9 +28,13 @@
                                             <label for="title" class="form-label">Naziv vožnje</label>
                                             {{ form.title }}
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <label for="ForminputState" class="form-label">Tip vožnje</label>
                                             {{ form.ride_type }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="drivers" class="form-label">Izaberite Agenciju</label>
+                                            {{ form.agency }}
                                         </div>
                                         <div class="col-md-6">
                                             <label for="start_date" class="form-label">Datum početka vožnje</label>
@@ -59,11 +60,11 @@
                                             <label for="end_location" class="form-label">Završna lokacija</label>
                                             {{ form.end_location }}
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <label for="vehicles" class="form-label">Izaberite autobuse</label>
                                             {{ form.vehicles }}
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <label for="drivers" class="form-label">Izaberite vozace</label>
                                             {{ form.drivers }}
                                         </div>
@@ -71,13 +72,13 @@
                                             <label for="drivers" class="form-label">Izaberite Vodiče</label>
                                             {{ form.guides }}
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="description" class="form-label">Opis</label>
+                                            {{ form.description }}
+                                        </div>
                                         <div class="mb-3">
                                             {{ form.is_all_day }}
                                             <label class="form-check-label" for="autoSizingCheck">Autobus zauzet cijeli dan</label>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="description" class="form-label">Opis</label>
-                                            {{ form.description }}
                                         </div>
                                         <div class="text-end">
                                             <a class="btn btn-danger"
@@ -128,12 +129,9 @@
                     </div>
                 </div>
             </div>
-            <!-- container-fluid -->
         </div>
-        <!-- End Page-content -->
         {% block footer %}
             {% include "partials/footer.html" %}
         {% endblock footer %}
     </div>
-    <!-- end main content-->
 {% endblock content %}
