@@ -47,6 +47,9 @@ class AgencyCreateView(
         form.save()
         return redirect("agency:agency_list")
 
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
+        return redirect("agency:agency_list")
+
 
 class AgencyUpdateView(
     LoginRequiredMixin,
@@ -56,6 +59,25 @@ class AgencyUpdateView(
     form_class = AgencyCreateForm
     model = Agency
     template_name = "agency-update.html"
+    success_url = reverse_lazy("agency:agency_list")
+    context_object_name = "agency"
+
+    def get_queryset(self) -> models.QuerySet[Any]:
+        return Agency.objects.filter(
+            company=self.company,
+        )
+
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
+        agency = self.get_object()
+        return redirect("agency:agency_update", pk=agency.pk)
+
+
+class AgencyDeleteView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.DeleteView,
+):
+    model = Agency
     success_url = reverse_lazy("agency:agency_list")
 
     def get_queryset(self) -> models.QuerySet[Any]:

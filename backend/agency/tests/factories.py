@@ -4,15 +4,14 @@ from factory.faker import Faker
 
 from company.tests.factories import CompanyFactory
 
-from .. import constants
-from ..models import Vehicle
+from ..models import Agency
 
 
-class VehicleFactory(DjangoModelFactory):
+class AgencyFactory(DjangoModelFactory):
     class Meta:
-        model = Vehicle
+        model = Agency
 
-    brand = Faker("company")
-    model = Faker("name")
-    vehicle_type = constants.BUS
+    ceo = Faker("name")
+    city = Faker("name")
     company = SubFactory(CompanyFactory)
+    name = Faker("name")

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import AgencyCreateView, AgencyListView, AgencyUpdateView
+from .views import AgencyCreateView, AgencyDeleteView, AgencyListView, AgencyUpdateView
 
 app_name = "agency"
 
@@ -19,5 +19,10 @@ urlpatterns = [
         "agency-update/<int:pk>/",
         AgencyUpdateView.as_view(),
         name="agency_update",
+    ),
+    path(
+        "agency-delete/<int:pk>/",
+        AgencyDeleteView.as_view(),
+        name="agency_delete",
     ),
 ]

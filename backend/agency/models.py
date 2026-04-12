@@ -45,7 +45,7 @@ class Agency(
     ceo = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=50, blank=True)
     contact_person = models.CharField(max_length=100, blank=True)
-    country = CountryField()
+    country = CountryField(blank=True)
     phone_number = models.CharField(max_length=100, blank=True)
     mobile_phone_number = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100)
