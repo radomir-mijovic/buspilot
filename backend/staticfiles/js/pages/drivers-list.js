@@ -1,8 +1,7 @@
-var options = {
+var driversList = new List("drivers-list", {
   valueNames: ["name"],
-};
-
-var driversList = new List("drivers-list", options);
+  item: '<tr><td class="name"></td></tr>',
+});
 
 document
   .getElementById("deleteDriverModal")

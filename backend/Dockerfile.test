@@ -4,6 +4,8 @@ WORKDIR /code
 
 COPY requirements requirements
 
+RUN python3 -m pip install --upgrade pip
+
 RUN pip install --no-cache-dir -r requirements/test.txt
 
 COPY . .
