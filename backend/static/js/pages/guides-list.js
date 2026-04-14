@@ -1,4 +1,7 @@
-var guidesList = new List("guides-list", { valueNames: ["name"] });
+var guidesList = new List("guides-list", {
+  valueNames: ["name"],
+  item: '<tr><td class="name"></td></tr>',
+});
 
 document
   .getElementById("deleteguideModal")

@@ -212,11 +212,6 @@ class RideCalendarVehicleForm(forms.ModelForm):
                     "role": "switch",
                 }
             ),
-            # "vehicles": forms.SelectMultiple(
-            #    attrs={
-            #        "class": "form-select",
-            #    },
-            # ),
             "drivers": forms.SelectMultiple(
                 attrs={
                     "class": "form-select",

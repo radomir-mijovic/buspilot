@@ -1,5 +1,6 @@
 var orderList = new List("orderList", {
   valueNames: ["id", "customer_name", "product_name", "type", "amount", "payment"],
+  item: '<tr><td class="id"></td><td class="customer_name"></td><td class="product_name"></td><td class="type"></td><td class="amount"></td><td class="payment"></td></tr>',
 }).on("updated", function (e) {
   var noresult = document.getElementsByClassName("noresult")[0];
   noresult.style.display = e.matchingItems.length === 0 ? "block" : "none";
