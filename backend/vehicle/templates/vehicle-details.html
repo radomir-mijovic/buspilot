@@ -158,20 +158,15 @@
                                                                 {% include "partials/vehicle-rides.html" with time="after-tomorrow" rides=vehicle.after_tomorrow_rides %}
                                                             </div>
                                                         </div>
-                                                        <!-- end card body -->
                                                     </div>
-                                                    <!-- end card -->
                                                 </div>
-                                                <!-- end col -->
                                             </div>
-                                            <!-- end row -->
                                         </div>
-                                        <!--end col-->
                                     </div>
-                                    <!--end row-->
                                 </div>
                                 <div class="tab-pane fade" id="activities" role="tabpanel">
-                                    {% include "partials/calendar.html" %}
+                                    {% include "partials/calendar.html" with vehicle=vehicle ride_form=ride_form %}
+                                    {% include "partials/calendar-update.html" with vehicle=vehicle ride_form=ride_form %}
                                     <!--end card-->
                                 </div>
                                 <!--end tab-pane-->

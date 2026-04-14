@@ -5,7 +5,7 @@ from .models import Ride
 
 @admin.register(Ride)
 class RideAdmin(admin.ModelAdmin):
-    list_display = ["title", "company", "ride_type"]
+    list_display = ["id", "title", "company", "ride_type"]
     list_filter = ["title", "company__name"]
 
     fields = [
@@ -16,6 +16,8 @@ class RideAdmin(admin.ModelAdmin):
         "company",
         "vehicles",
         "drivers",
+        "guides",
+        "agency",
         "start_time",
         "end_time",
         "start_date",

@@ -7,19 +7,25 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from company.mixins import CompanyRequestMixin
+from ride.forms import RideCalendarVehicleForm
 from vehicle.documents.forms import VehicleDocumentUploadForm
 
 from .forms import VehicleCreateForm
 from .models import Vehicle
 
 
-class VehicleView(LoginRequiredMixin, generic.ListView):
+class VehicleView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.ListView,
+):
     template_name = "vehicle.html"
     context_object_name = "vehicles"
 
     def get_queryset(self):
         return Vehicle.objects.filter(
-            company=self.request.user.company,
+            company=self.company,
         ).select_related("company")
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -28,14 +34,18 @@ class VehicleView(LoginRequiredMixin, generic.ListView):
         return context
 
 
-class VehicleDetailView(LoginRequiredMixin, generic.DetailView):
+class VehicleDetailView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.DetailView,
+):
     template_name = "vehicle-details.html"
     context_object_name = "vehicle"
 
     def get_queryset(self):
         return (
             Vehicle.objects.filter(
-                company=self.request.user.company,
+                company=self.company,
             )
             .select_related("company")
             .prefetch_related("documents")
@@ -44,12 +54,16 @@ class VehicleDetailView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["form"] = VehicleCreateForm(instance=self.object)
+        context["ride_form"] = RideCalendarVehicleForm(
+            company=self.company,
+        )
         context["document_form"] = VehicleDocumentUploadForm()
         return context
 
 
 class VehicleCreateView(
     LoginRequiredMixin,
+    CompanyRequestMixin,
     generic.CreateView,
 ):
     model = Vehicle
@@ -57,7 +71,7 @@ class VehicleCreateView(
     success_url = reverse_lazy("vehicle:vehicles")
 
     def form_valid(self, form):
-        form.instance.company = self.request.user.company
+        form.instance.company = self.company
         vehicle = form.save()
 
         if self.request.headers.get("HX-Request"):
@@ -102,13 +116,14 @@ class VehicleUpdateView(
 
 class VehicleDeleteView(
     LoginRequiredMixin,
+    CompanyRequestMixin,
     generic.DeleteView,
 ):
     model = Vehicle
     success_url = reverse_lazy("vehicle:vehicles")
 
     def get_queryset(self):
-        return Vehicle.objects.filter(company=self.request.user.company)
+        return Vehicle.objects.filter(company=self.company)
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()

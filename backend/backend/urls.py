@@ -15,6 +15,8 @@ urlpatterns = [
     path("", include("guide.urls")),
     path("", include("vehicle.urls")),
     path("", include("ride.urls")),
+    path("api/", include("vehicle.api.urls")),
+    path("api/", include("ride.api.urls")),
 ]
 
 if settings.DEBUG:

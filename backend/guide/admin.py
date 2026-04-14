@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Guide
+
+@admin.register(Guide)
+class GuideAdmin(admin.ModelAdmin):
+    list_display = ["id", "last_name", "company"]

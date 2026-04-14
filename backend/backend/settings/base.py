@@ -12,6 +12,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
+USE_L10N = False
+DATE_FORMAT = "d/m/Y"
+DATETIME_FORMAT = "d/m/Y H:i"
+SHORT_DATE_FORMAT = "d/m/Y"
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -21,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_countries",
+    "rest_framework",
 ]
 
 LOCAL_APPS = [
