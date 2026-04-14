@@ -26,6 +26,10 @@ function SearchData() {
   if (s) orderList.search(s.value);
 }
 
+function _t(key, fallback) {
+  return (window.appTranslations && window.appTranslations[key]) || fallback;
+}
+
 document.addEventListener("click", function (e) {
   var btn = e.target.closest(".delete-vehicle-btn");
   if (!btn) return;
@@ -34,14 +38,17 @@ document.addEventListener("click", function (e) {
   var vehicleId = btn.dataset.vehicleId;
   var deleteUrl = btn.dataset.deleteUrl;
   Swal.fire({
-    html: '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon><div class="mt-4 pt-2 fs-15 mx-5"><h4>Da li ste sigurni?</h4><p class="text-muted mx-4 mb-0">Da li ste sigurni da želite obrisati ovo vozilo?</p></div></div>',
+    html:
+      '<div class="mt-3"><lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>' +
+      '<div class="mt-4 pt-2 fs-15 mx-5"><h4>' + _t("t-are-you-sure", "Da li ste sigurni?") + "</h4>" +
+      '<p class="text-muted mx-4 mb-0">' + _t("t-vehicle-delete-confirm", "Vozilo će biti trajno obrisano.") + "</p></div></div>",
     showCancelButton: true,
     customClass: {
       confirmButton: "btn btn-danger w-xs me-2 mb-1",
       cancelButton: "btn btn-primary w-xs mb-1",
     },
-    confirmButtonText: "Da, obriši!",
-    cancelButtonText: "Otkaži",
+    confirmButtonText: _t("t-yes-delete", "Da, Obriši!!"),
+    cancelButtonText: _t("t-cancel", "Otkaži"),
     buttonsStyling: false,
     showCloseButton: true,
   }).then(function (result) {

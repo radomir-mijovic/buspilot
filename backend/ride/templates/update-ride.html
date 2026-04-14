@@ -4,6 +4,7 @@
     Izmijeni Vožnju
 {% endblock title %}
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'libs/flatpickr/dist/flatpickr.min.css' %}">
 {% endblock extra_css %}
 {% block content %}
     <div class="main-content">
@@ -135,3 +136,10 @@
         {% endblock footer %}
     </div>
 {% endblock content %}
+{% block extra_js %}
+    <script src="{% static 'libs/flatpickr/dist/flatpickr.min.js' %}"></script>
+    <script>
+        flatpickr("#start_date", { dateFormat: "d/m/Y", allowInput: true });
+        flatpickr("#end_date", { dateFormat: "d/m/Y", allowInput: true });
+    </script>
+{% endblock extra_js %}

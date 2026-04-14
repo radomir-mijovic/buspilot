@@ -23,18 +23,21 @@ class RideForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "id": "title",
+                    "placeholder": "Unesite naziv vožnje",
                 }
             ),
             "start_location": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "id": "start_location",
+                    "placeholder": "Npr: Podgorica",
                 }
             ),
             "end_location": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "id": "end_location",
+                    "placeholder": "Npr: Budva",
                 }
             ),
             "description": forms.Textarea(
@@ -42,6 +45,7 @@ class RideForm(forms.ModelForm):
                     "class": "form-control",
                     "id": "description",
                     "rows": 3,
+                    "placeholder": "Unesite opis vožnje...",
                 }
             ),
             "ride_type": forms.Select(
@@ -72,21 +76,23 @@ class RideForm(forms.ModelForm):
                 }
             ),
             "start_date": forms.DateInput(
+                format="%d/%m/%Y",
                 attrs={
                     "class": "form-control",
-                    "type": "date",
                     "id": "start_date",
-                    "placeholder": "DD-MM-YYYY",
+                    "placeholder": "DD/MM/YYYY",
                     "required": "true",
+                    "autocomplete": "off",
                 }
             ),
             "end_date": forms.DateInput(
+                format="%d/%m/%Y",
                 attrs={
                     "class": "form-control",
-                    "type": "date",
                     "id": "end_date",
-                    "placeholder": "DD-MM-YYYY",
+                    "placeholder": "DD/MM/YYYY",
                     "required": "true",
+                    "autocomplete": "off",
                 }
             ),
             "is_all_day": forms.CheckboxInput(
@@ -139,18 +145,21 @@ class RideCalendarVehicleForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "id": "title",
+                    "placeholder": "Unesite naziv vožnje",
                 }
             ),
             "start_location": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "id": "start_location",
+                    "placeholder": "Npr: Podgorica",
                 }
             ),
             "end_location": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "id": "end_location",
+                    "placeholder": "Npr: Budva",
                 }
             ),
             "description": forms.Textarea(
@@ -158,6 +167,7 @@ class RideCalendarVehicleForm(forms.ModelForm):
                     "class": "form-control",
                     "id": "description",
                     "rows": 3,
+                    "placeholder": "Unesite opis vožnje...",
                 }
             ),
             "ride_type": forms.Select(
@@ -188,21 +198,23 @@ class RideCalendarVehicleForm(forms.ModelForm):
                 }
             ),
             "start_date": forms.DateInput(
+                format="%d/%m/%Y",
                 attrs={
                     "class": "form-control",
-                    "type": "date",
                     "id": "start_date",
-                    "placeholder": "YYYY-MM-DD",
+                    "placeholder": "DD/MM/YYYY",
                     "required": "true",
+                    "autocomplete": "off",
                 }
             ),
             "end_date": forms.DateInput(
+                format="%d/%m/%Y",
                 attrs={
                     "class": "form-control",
-                    "type": "date",
                     "id": "end_date",
-                    "placeholder": "YYYY-MM-DD",
+                    "placeholder": "DD/MM/YYYY",
                     "required": "true",
+                    "autocomplete": "off",
                 }
             ),
             "is_all_day": forms.CheckboxInput(

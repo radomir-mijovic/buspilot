@@ -37,7 +37,7 @@
                                            data-bs-toggle="tab"
                                            href="#overview-tab"
                                            role="tab">
-                                            <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Pregled</span>
+                                            <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-overview">Pregled</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -45,7 +45,7 @@
                                            data-bs-toggle="tab"
                                            href="#activities"
                                            role="tab">
-                                            <i class="ri-list-unordered d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Kalendar</span>
+                                            <i class="ri-list-unordered d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-calendar">Kalendar</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -53,7 +53,7 @@
                                            data-bs-toggle="tab"
                                            href="#documents"
                                            role="tab">
-                                            <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Documenti</span>
+                                            <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-documents-tab">Dokumenti</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -65,52 +65,52 @@
                                         <div class="col-xxl-3">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title mb-3">Podaci</h5>
+                                                    <h5 class="card-title mb-3" data-key="t-vehicle-data">Podaci</h5>
                                                     <div class="table-responsive">
                                                         <table class="table table-borderless mb-0">
                                                             <tbody id="vehicle-details-tbody">
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Marka :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-brand">Marka</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.brand }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Model :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-model">Model</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.model }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Vrsta :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-vehicle-type">Vrsta</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.get_vehicle_type_display }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Godina proizvodnje :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-year-of-production">Godina proizvodnje</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.year_of_production }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Broj sjedišta :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-num-seats">Broj sjedišta</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.number_of_seats }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Broj šasije :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-chassis-number">Broj šasije</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.chassis_number }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Broj motora :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-engine-number">Broj motora</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.engine_number }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Konjska snaga :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-horse-power">Konjska snaga</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.horse_power }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Kilaža (KG) :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-weight">Kilaža (KG)</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.weight }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Broj tablica :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-licence-number">Broj tablica</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.licence_number }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row">Boja :</th>
+                                                                    <th class="ps-0" scope="row"><span data-key="t-color">Boja</span> :</th>
                                                                     <td class="text-muted">{{ vehicle.color }}</td>
                                                                 </tr>
                                                             </tbody>
@@ -119,7 +119,7 @@
                                                            data-bs-target="#showUpdateModal-{{ vehicle.id }}"
                                                            type="button"
                                                            class="btn btn-small btn-primary"
-                                                           onclick="event.stopPropagation();">Izmjeni podatke</a>
+                                                           onclick="event.stopPropagation();" data-key="t-edit-vehicle-data">Izmjeni podatke</a>
                                                     </div>
                                                 </div>
                                                 <!-- end card body -->
@@ -132,21 +132,22 @@
                                                 <div class="col-lg-12">
                                                     <div class="card">
                                                         <div class="card-header align-items-center d-flex">
-                                                            <h4 class="card-title mb-0  me-2">Zakazane Vožnje</h4>
+                                                            <h4 class="card-title mb-0  me-2" data-key="t-vehicle-rides-title">Zakazane Vožnje</h4>
                                                             <div class="flex-shrink-0 ms-auto">
                                                                 <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs border-bottom-0"
                                                                     role="tablist">
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link active" data-bs-toggle="tab" href="#today" role="tab">Danas</a>
+                                                                        <a class="nav-link active" data-bs-toggle="tab" href="#today" role="tab" data-key="t-today">Danas</a>
                                                                     </li>
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link" data-bs-toggle="tab" href="#tomorrow" role="tab">Sjutra</a>
+                                                                        <a class="nav-link" data-bs-toggle="tab" href="#tomorrow" role="tab" data-key="t-tomorrow">Sjutra</a>
                                                                     </li>
                                                                     <li class="nav-item">
                                                                         <a class="nav-link"
                                                                            data-bs-toggle="tab"
                                                                            href="#after-tomorrow"
-                                                                           role="tab">Sledeće</a>
+                                                                           role="tab"
+                                                                           data-key="t-upcoming">Sledeće</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -174,13 +175,13 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center mb-4">
-                                                <h5 class="card-title flex-grow-1 mb-0">Documents</h5>
+                                                <h5 class="card-title flex-grow-1 mb-0" data-key="t-documents-tab">Dokumenti</h5>
                                                 <div class="flex-shrink-0">
                                                     <button type="button"
                                                             class="btn btn-danger"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#addDocumentModal">
-                                                        <i class="ri-upload-2-fill me-1 align-bottom"></i> Dodaj Dokument
+                                                        <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add-document">Dodaj Dokument</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -190,11 +191,11 @@
                                                         <table class="table table-borderless align-middle mb-0">
                                                             <thead class="table-light">
                                                                 <tr>
-                                                                    <th scope="col">Ime Dokumenta</th>
-                                                                    <th scope="col">Tip</th>
-                                                                    <th scope="col">Veličina</th>
-                                                                    <th scope="col">Važi do</th>
-                                                                    <th scope="col">Action</th>
+                                                                    <th scope="col" data-key="t-doc-name">Ime Dokumenta</th>
+                                                                    <th scope="col" data-key="t-ride-type">Tip</th>
+                                                                    <th scope="col" data-key="t-doc-size">Veličina</th>
+                                                                    <th scope="col" data-key="t-doc-expires">Važi do</th>
+                                                                    <th scope="col" data-key="t-action">Action</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="documents-t-body">
@@ -229,7 +230,7 @@
                                                                                 <ul class="dropdown-menu dropdown-menu-end"
                                                                                     aria-labelledby="dropdownMenuLink15">
                                                                                     <li>
-                                                                                        <a class="dropdown-item" href="{{ document.file.url }}" target="_blank"><i class="ri-eye-fill me-2 align-middle text-muted"></i>Pregled</a>
+                                                                                        <a class="dropdown-item" href="{{ document.file.url }}" target="_blank"><i class="ri-eye-fill me-2 align-middle text-muted"></i><span data-key="t-preview">Pregled</span></a>
                                                                                     </li>
                                                                                     <li>
                                                                                         <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
@@ -241,7 +242,7 @@
                                                                                            hx-swap="delete"
                                                                                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                                                                                            hx-post="{% url 'vehicle:document_delete' pk=document.pk %}">
-                                                                                            <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i>Delete</a>
+                                                                                            <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i><span data-key="t-delete">Obriši</span></a>
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
@@ -274,7 +275,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title" id="addVehicleModalLabel">Izmjeni Vozilo</h5>
+                            <h5 class="modal-title" id="addVehicleModalLabel" data-key="t-update-vehicle-title">Izmjeni Vozilo</h5>
                         </div>
                         <form hx-post="{% url 'vehicle:vehicles_update' vehicle.id %}"
                               hx-target="#vehicle-details-tbody"
@@ -284,54 +285,54 @@
                             <input type="hidden" name="source" value="details" />
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="brand-field" class="form-label">Marka</label>
+                                    <label for="brand-field" class="form-label" data-key="t-brand">Marka</label>
                                     {{ form.brand }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="model-field" class="form-label">Model</label>
+                                    <label for="model-field" class="form-label" data-key="t-model">Model</label>
                                     {{ form.model }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="vehicle-type-field" class="form-label">Vrsta</label>
+                                    <label for="vehicle-type-field" class="form-label" data-key="t-vehicle-type">Vrsta</label>
                                     {{ form.vehicle_type }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="year-field" class="form-label">Godina proizvodnje</label>
+                                    <label for="year-field" class="form-label" data-key="t-year-of-production">Godina proizvodnje</label>
                                     {{ form.year_of_production }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="seats-field" class="form-label">Broj sjedišta</label>
+                                    <label for="seats-field" class="form-label" data-key="t-num-seats">Broj sjedišta</label>
                                     {{ form.number_of_seats }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="chassis_number" class="form-label">Broj šasije</label>
+                                    <label for="chassis_number" class="form-label" data-key="t-chassis-number">Broj šasije</label>
                                     {{ form.chassis_number }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="engine_number" class="form-label">Broj motora</label>
+                                    <label for="engine_number" class="form-label" data-key="t-engine-number">Broj motora</label>
                                     {{ form.engine_number }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="horse_power" class="form-label">Konjska snaga</label>
+                                    <label for="horse_power" class="form-label" data-key="t-horse-power">Konjska snaga</label>
                                     {{ form.horse_power }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="weight" class="form-label">Kilaža (KG)</label>
+                                    <label for="weight" class="form-label" data-key="t-weight">Kilaža (KG)</label>
                                     {{ form.weight }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="licence_number" class="form-label">Broj Tablica</label>
+                                    <label for="licence_number" class="form-label" data-key="t-licence-number">Broj Tablica</label>
                                     {{ form.licence_number }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="color" class="form-label">Boja</label>
+                                    <label for="color" class="form-label" data-key="t-color">Boja</label>
                                     {{ form.color }}
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <div class="hstack gap-2 justify-content-end">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Zatvori</button>
-                                    <button type="submit" class="btn btn-success">Izmjeni vozilo</button>
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
+                                    <button type="submit" class="btn btn-success" data-key="t-update-vehicle-btn">Izmjeni vozilo</button>
                                 </div>
                             </div>
                         </form>
@@ -346,7 +347,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title" id="addDocumentModalLabel">Dodaj Dokument</h5>
+                            <h5 class="modal-title" id="addDocumentModalLabel" data-key="t-add-document">Dodaj Dokument</h5>
                             <button type="button"
                                     class="btn-close"
                                     data-bs-dismiss="modal"
@@ -360,27 +361,27 @@
                             {% csrf_token %}
                             <div class="modal-body" id="addDocumentModalBody">
                                 <div class="mb-3">
-                                    <label for="doc-title" class="form-label">Naziv dokumenta</label>
+                                    <label for="doc-title" class="form-label" data-key="t-doc-title-label">Naziv dokumenta</label>
                                     {{ document_form.title }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="doc-type" class="form-label">Tip dokumenta</label>
+                                    <label for="doc-type" class="form-label" data-key="t-doc-type-label">Tip dokumenta</label>
                                     {{ document_form.document_type }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="doc-expiry" class="form-label">Datum isteka</label>
+                                    <label for="doc-expiry" class="form-label" data-key="t-doc-expiry-label">Datum isteka</label>
                                     {{ document_form.expiring_at }}
                                 </div>
                                 <div class="mb-3">
-                                    <label for="doc-file" class="form-label">Fajl</label>
+                                    <label for="doc-file" class="form-label" data-key="t-doc-file-label">Fajl</label>
                                     {{ document_form.file }}
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <div class="hstack gap-2 justify-content-end">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Zatvori</button>
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
                                     <button type="submit" class="btn btn-danger">
-                                        <i class="ri-upload-2-fill me-1 align-bottom"></i> Dodaj
+                                        <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add">Dodaj</span>
                                     </button>
                                 </div>
                             </div>

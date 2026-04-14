@@ -50,15 +50,15 @@
                            role="button"
                            aria-expanded="false"
                            aria-controls="sidebarLayouts">
-                            <span data-key="">Vožnje</span>
+                            <span data-key="t-rides">Vožnje</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarLayouts">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{% url 'ride:ride_list' %}" class="nav-link" data-key="">Pregled vožnji</a>
+                                    <a href="{% url 'ride:ride_list' %}" class="nav-link" data-key="t-rides-list">Pregled vožnji</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{% url 'ride:ride_create' %}" class="nav-link" data-key="">Dodaj vožnju</a>
+                                    <a href="{% url 'ride:ride_create' %}" class="nav-link" data-key="t-rides-create">Dodaj vožnju</a>
                                 </li>
                             </ul>
                         </div>

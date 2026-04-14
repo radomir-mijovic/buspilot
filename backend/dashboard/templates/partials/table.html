@@ -1,7 +1,7 @@
 <div class="col-xxl-12">
     <div class="card card-height-100">
         <div class="card-header align-items-center d-flex">
-            <h4 class="card-title mb-0 flex-grow-1">{{ table_title }}</h4>
+            <h4 class="card-title mb-0 flex-grow-1" data-key="{{ table_title_key }}">{{ table_title }}</h4>
         </div>
         <!-- end card header -->
         <div class="card-body">
@@ -10,15 +10,16 @@
                        style="min-width: 1400px">
                     <thead>
                         <tr>
-                            <th scope="col">Vožnja</th>
-                            <th scope="col">Vodiči</th>
-                            <th scope="col">Vozilo</th>
-                            <th scope="col">Vozači</th>
-                            <th scope="col">Polazak</th>
-                            <th scope="col">Završava</th>
-                            <th scope="col">Mjesto polaska</th>
-                            <th scope="col">Agencija</th>
+                            <th scope="col" data-key="t-ride">Vožnja</th>
+                            <th scope="col" data-key="t-guides">Vodiči</th>
+                            <th scope="col" data-key="t-vehicle">Vozilo</th>
+                            <th scope="col" data-key="t-drivers">Vozači</th>
+                            <th scope="col" data-key="t-departure">Polazak</th>
+                            <th scope="col" data-key="t-arrival">Završava</th>
+                            <th scope="col" data-key="t-departure-location">Mjesto polaska</th>
+                            <th scope="col" data-key="t-agency">Agencija</th>
                             <th scope="col"
+                                data-key="t-note"
                                 style="width: 400px;
                                        white-space:normal;
                                        word-break:break-word">Napomena</th>

@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   var currentRideId = null;
 
+  var fpOpts = { dateFormat: "Y-m-d", altInput: true, altFormat: "d/m/Y", allowInput: true };
+  var fpCreateStart = flatpickr(document.querySelector("#form-event [name='start_date']"), fpOpts);
+  var fpCreateEnd = flatpickr(document.querySelector("#form-event [name='end_date']"), fpOpts);
+  var fpUpdateStart = flatpickr(document.querySelector("#form-update-event [name='start_date']"), fpOpts);
+  var fpUpdateEnd = flatpickr(document.querySelector("#form-update-event [name='end_date']"), fpOpts);
+
   window.buspilotCalendar = new FullCalendar.Calendar(calendarEl, {
     timeZone: "local",
     initialView: "dayGridMonth",
@@ -21,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     customButtons: {
       newRide: {
-        text: "+ Nova vožnja",
+        text: "+ " + (window.appTranslations && window.appTranslations["t-new-ride"] || "Nova vožnja"),
         click: function () {
           modal.show();
         },
@@ -40,8 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     },
     dateClick: function (info) {
-      var startDate = document.getElementById("start_date");
-      if (startDate) startDate.value = info.dateStr;
+      fpCreateStart.setDate(info.dateStr);
       modal.show();
     },
     eventClick: function (info) {
@@ -58,9 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
           var rideTypeSelect = form.querySelector("[name='ride_type']");
           rideTypeSelect.value = String(ride.ride_type || "");
           rideTypeSelect.dispatchEvent(new Event("change"));
-          form.querySelector("[name='start_date']").value =
-            ride.start_date || "";
-          form.querySelector("[name='end_date']").value = ride.end_date || "";
+          fpUpdateStart.setDate(ride.start_date || "");
+          fpUpdateEnd.setDate(ride.end_date || "");
           form.querySelector("[name='start_time']").value =
             ride.start_time || "";
           form.querySelector("[name='end_time']").value = ride.end_time || "";
@@ -88,6 +92,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   window.buspilotCalendar.render();
+
+  window.addEventListener("translationsLoaded", function (e) {
+    var btn = document.querySelector(".fc-newRide-button");
+    if (btn) btn.textContent = "+ " + (e.detail["t-new-ride"] || "Nova vožnja");
+  });
 
   document
     .getElementById("form-event")

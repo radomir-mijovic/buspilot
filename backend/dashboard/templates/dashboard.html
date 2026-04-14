@@ -13,12 +13,12 @@
         <div class="page-content">
             <div class="container-fluid">
                 {% block pagetitle %}
-                    {% include "partials/page-title.html" with title="Pregled Dana" %}
+                    {% include "partials/page-title.html" with title="Pregled Dana" title_key="t-daily-overview" %}
                 {% endblock pagetitle %}
                 <div class="row">
-                    {% include "partials/table.html" with rides=transfers table_title="Transferi" %}
-                    {% include "partials/table.html" with rides=excursions table_title="Izleti" %}
-                    {% include "partials/table.html" with rides=lines table_title="Linije" %}
+                    {% include "partials/table.html" with rides=transfers table_title="Transferi" table_title_key="t-transfers" %}
+                    {% include "partials/table.html" with rides=excursions table_title="Izleti" table_title_key="t-excursions" %}
+                    {% include "partials/table.html" with rides=lines table_title="Linije" table_title_key="t-lines" %}
                 </div>
             </div>
         </div>

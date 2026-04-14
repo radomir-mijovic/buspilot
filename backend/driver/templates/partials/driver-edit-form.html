@@ -6,7 +6,7 @@
     <div class="modal-body">
         <div class="row g-3">
             <div class="col-lg-12">
-                <label class="form-label">Ime</label>
+                <label class="form-label" data-key="t-first-name">Ime</label>
                 <input type="text"
                        name="first_name"
                        class="form-control"
@@ -15,7 +15,7 @@
                        required />
             </div>
             <div class="col-lg-12">
-                <label class="form-label">Prezime</label>
+                <label class="form-label" data-key="t-last-name">Prezime</label>
                 <input type="text"
                        name="last_name"
                        class="form-control"
@@ -24,7 +24,7 @@
                        required />
             </div>
             <div class="col-lg-12">
-                <label class="form-label">Broj telefona</label>
+                <label class="form-label" data-key="t-phone-number">Broj telefona</label>
                 <input type="text"
                        name="phone_number"
                        class="form-control"
@@ -40,7 +40,7 @@
                        placeholder="Unesite email" />
             </div>
             <div class="col-lg-12">
-                <label class="form-label">Broj pasoša</label>
+                <label class="form-label" data-key="t-passport-number">Broj pasoša</label>
                 <input type="text"
                        name="passport_number"
                        class="form-control"
@@ -51,8 +51,8 @@
     </div>
     <div class="modal-footer">
         <div class="hstack gap-2 justify-content-end">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Zatvori</button>
-            <button type="submit" class="btn btn-success">Sačuvaj</button>
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
+            <button type="submit" class="btn btn-success" data-key="t-save">Sačuvaj</button>
         </div>
     </div>
 </form>

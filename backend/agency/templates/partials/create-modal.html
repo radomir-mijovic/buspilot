@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-light p-3">
-                <h5 class="modal-title">Dodaj Novu Agenciju</h5>
+                <h5 class="modal-title" data-key="t-add-agency">Dodaj Novu Agenciju</h5>
                 <button type="button"
                         class="btn-close"
                         data-bs-dismiss="modal"
@@ -15,38 +15,38 @@
                 {% csrf_token %}
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Naziv</label>
+                        <label class="form-label" data-key="t-agency-name">Naziv</label>
                         {{ form.name }}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Grad</label>
+                        <label class="form-label" data-key="t-city">Grad</label>
                         {{ form.city }}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Država</label>
+                        <label class="form-label" data-key="t-country">Država</label>
                         {{ form.country }}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Telefon</label>
+                        <label class="form-label" data-key="t-phone">Telefon</label>
                         {{ form.phone_number }}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Mobilni telefon</label>
+                        <label class="form-label" data-key="t-mobile-phone">Mobilni telefon</label>
                         {{ form.mobile_phone_number }}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Izvršni direktor</label>
+                        <label class="form-label" data-key="t-ceo">Izvršni direktor</label>
                         {{ form.ceo }}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Kontakt osoba</label>
+                        <label class="form-label" data-key="t-contact-person">Kontakt osoba</label>
                         {{ form.contact_person }}
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="hstack gap-2 justify-content-end">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Zatvori</button>
-                        <button type="submit" class="btn btn-success">Dodaj</button>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
+                        <button type="submit" class="btn btn-success" data-key="t-add">Dodaj</button>
                     </div>
                 </div>
             </form>

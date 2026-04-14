@@ -4,6 +4,7 @@
     Kreiraj Vožnju
 {% endblock title %}
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'libs/flatpickr/dist/flatpickr.min.css' %}">
 {% endblock extra_css %}
 {% block content %}
     <div class="main-content">
@@ -16,70 +17,70 @@
                     <div class="col-xxl-9">
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Forma</h4>
+                                <h4 class="card-title mb-0 flex-grow-1" data-key="t-ride-form">Forma</h4>
                             </div>
                             <div class="card-body">
                                 <div class="live-preview">
                                     <form method="POST" action="{% url 'ride:ride_create' %}" class="row g-3">
                                         {% csrf_token %}
                                         <div class="col-md-12">
-                                            <label for="title" class="form-label">Naziv vožnje</label>
+                                            <label for="title" class="form-label" data-key="t-ride-title">Naziv vožnje</label>
                                             {{ form.title }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="ForminputState" class="form-label">Tip vožnje</label>
+                                            <label for="ForminputState" class="form-label" data-key="t-ride-type-label">Tip vožnje</label>
                                             {{ form.ride_type }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="drivers" class="form-label">Izaberite Agenciju</label>
+                                            <label for="agency" class="form-label" data-key="t-select-agency">Izaberite Agenciju</label>
                                             {{ form.agency }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="start_date" class="form-label">Datum početka vožnje</label>
+                                            <label for="start_date" class="form-label" data-key="t-start-date">Datum početka vožnje</label>
                                             {{ form.start_date }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="end_date" class="form-label">Datum završetka vožnje</label>
+                                            <label for="end_date" class="form-label" data-key="t-end-date">Datum završetka vožnje</label>
                                             {{ form.end_date }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="start_time" class="form-label">Vrijeme početka vožnje</label>
+                                            <label for="start_time" class="form-label" data-key="t-start-time">Vrijeme početka vožnje</label>
                                             {{ form.start_time }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="end_time" class="form-label">Vrijeme završetka vožnje</label>
+                                            <label for="end_time" class="form-label" data-key="t-end-time">Vrijeme završetka vožnje</label>
                                             {{ form.end_time }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="start_location" class="form-label">Početna lokacija</label>
+                                            <label for="start_location" class="form-label" data-key="t-start-location">Početna lokacija</label>
                                             {{ form.start_location }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="end_location" class="form-label">Završna lokacija</label>
+                                            <label for="end_location" class="form-label" data-key="t-end-location">Završna lokacija</label>
                                             {{ form.end_location }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="vehicles" class="form-label">Izaberite autobuse</label>
+                                            <label for="vehicles" class="form-label" data-key="t-select-vehicles">Izaberite autobuse</label>
                                             {{ form.vehicles }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="drivers" class="form-label">Izaberite  Vozače</label>
+                                            <label for="drivers" class="form-label" data-key="t-select-drivers">Izaberite Vozače</label>
                                             {{ form.drivers }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="drivers" class="form-label">Izaberite Vodiče</label>
+                                            <label for="guides" class="form-label" data-key="t-select-guides">Izaberite Vodiče</label>
                                             {{ form.guides }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="description" class="form-label">Opis</label>
+                                            <label for="description" class="form-label" data-key="t-description">Opis</label>
                                             {{ form.description }}
                                         </div>
                                         <div class="mb-3">
                                             {{ form.is_all_day }}
-                                            <label class="form-check-label" for="autoSizingCheck">Autobus zauzet cijeli dan</label>
+                                            <label class="form-check-label" for="autoSizingCheck" data-key="t-all-day">Autobus zauzet cijeli dan</label>
                                         </div>
                                         <div class="text-end">
-                                            <button type="submit" class="btn btn-primary">Dodaj vožnju</button>
+                                            <button type="submit" class="btn btn-primary" data-key="t-add-ride">Dodaj vožnju</button>
                                         </div>
                                     </form>
                                 </div>
@@ -94,3 +95,10 @@
         {% endblock footer %}
     </div>
 {% endblock content %}
+{% block extra_js %}
+    <script src="{% static 'libs/flatpickr/dist/flatpickr.min.js' %}"></script>
+    <script>
+        flatpickr("#start_date", { dateFormat: "d/m/Y", allowInput: true });
+        flatpickr("#end_date", { dateFormat: "d/m/Y", allowInput: true });
+    </script>
+{% endblock extra_js %}
