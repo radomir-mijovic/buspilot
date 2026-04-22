@@ -335,5 +335,6 @@
     "t-ride": "Ride",
     "t-vehicle": "Vehicle",
     "t-agency": "Agency",
-    "t-note": "Note"
+    "t-note": "Note",
+    "t-days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 }

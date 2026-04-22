@@ -9,12 +9,18 @@ from ..models import Ride
 RIDE_TYPE_CLASS = {
     constants.LINE: "bg-danger-subtle",
     constants.EXCURSION: "bg-success-subtle",
-    constants.EXCURSION: "bg-info-subtle",
+    constants.TRANSFER: "bg-info-subtle",
     constants.ROUND_TOUR: "bg-warning-subtle",
 }
 
 
 class RideRetrieveSerializer(serializers.ModelSerializer):
+    agency = serializers.SlugRelatedField(
+        slug_field="name",
+        read_only=True,
+    )
+    class_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Ride
         fields = [
@@ -31,9 +37,10 @@ class RideRetrieveSerializer(serializers.ModelSerializer):
             "drivers",
             "guides",
             "vehicles",
+            "class_name",
         ]
 
-    def get_className(self, obj):
+    def get_class_name(self, obj):
         return RIDE_TYPE_CLASS.get(
             obj.ride_type,
             "bg-primary-subtle",

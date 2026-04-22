@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       const formData = new FormData(e.target);
 
-      fetch("/api/rides-update/" + currentRideId + "/", {
+      fetch("/api/rides/" + currentRideId + "/", {
         method: "PATCH",
         body: formData,
         credentials: "include",

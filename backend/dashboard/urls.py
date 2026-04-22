@@ -1,13 +1,18 @@
 from django.urls import path
 
-from .views import dashboard
+from .views import calendar, dashboard
 
 app_name = "dashboard"
 
 urlpatterns = [
     path(
-        r"",
+        r"dashboard",
         dashboard,
         name="dashboard",
+    ),
+    path(
+        r"calendar",
+        calendar,
+        name="calendar",
     ),
 ]

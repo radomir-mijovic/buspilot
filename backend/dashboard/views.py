@@ -21,3 +21,9 @@ def dashboard(request):
         "excursions": excursions,
     }
     return HttpResponse(template.render(context, request))
+
+
+@login_required
+def calendar(request):
+    template = loader.get_template("calendar.html")
+    return HttpResponse(template.render({}, request))

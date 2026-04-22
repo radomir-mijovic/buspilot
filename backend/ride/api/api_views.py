@@ -7,8 +7,11 @@ from ..models import Ride
 from .serializers import RideCreateSerializer, RideRetrieveSerializer
 
 
-class RideRetrieveViewSet(
+class RideViewSet(
+    generics.ListAPIView,
     generics.RetrieveAPIView,
+    generics.CreateAPIView,
+    generics.UpdateAPIView,
     CompanyRequestMixin,
     viewsets.GenericViewSet,
 ):
@@ -16,31 +19,26 @@ class RideRetrieveViewSet(
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Ride.objects.filter(company=self.company)
+        qs = Ride.objects.filter(company=self.company).select_related("agency")
+        month = self.request.query_params.get("month")
+        year = self.request.query_params.get("year")
+        ride_type = self.request.query_params.get("type")
 
+        if month or year:
+            qs = qs.filter(
+                start_date__month=month,
+                start_date__year=year,
+            )
 
-class RideCreateViewSet(
-    generics.CreateAPIView,
-    CompanyRequestMixin,
-    viewsets.GenericViewSet,
-):
-    serializer_class = RideCreateSerializer
-    queryset = Ride.objects.all()
-    permission_classes = [IsAuthenticated]
+        if ride_type:
+            qs = qs.filter(ride_type=ride_type)
+
+        return qs
 
     def perform_create(self, serializer):
         serializer.save(company=self.company)
 
-
-class RideUpdateViewSet(
-    generics.UpdateAPIView,
-    CompanyRequestMixin,
-    viewsets.GenericViewSet,
-):
-    serializer_class = RideCreateSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return Ride.objects.filter(
-            company=self.company,
-        )
+    def get_serializer_class(self):
+        if self.action in ["create", "update", "partial_update"]:
+            return RideCreateSerializer
+        return self.serializer_class

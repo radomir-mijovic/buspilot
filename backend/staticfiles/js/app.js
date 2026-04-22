@@ -50,12 +50,14 @@
         4 === this.readyState &&
           200 === this.status &&
           ((a = JSON.parse(this.responseText)),
+          (window.appTranslations = a),
           Object.keys(a).forEach(function (t) {
             var e = document.querySelectorAll("[data-key='" + t + "']");
             Array.from(e).forEach(function (e) {
               e.textContent = a[t];
             });
-          }));
+          }),
+          window.dispatchEvent(new CustomEvent("translationsLoaded", { detail: a })));
       }),
       e.send());
   }

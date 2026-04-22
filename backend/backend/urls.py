@@ -4,10 +4,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path(
-        "admin/",
-        admin.site.urls,
-    ),
+    path("admin/", admin.site.urls),
     path("", include("agency.urls")),
     path("", include("auth.urls")),
     path("", include("dashboard.urls")),
@@ -15,8 +12,8 @@ urlpatterns = [
     path("", include("guide.urls")),
     path("", include("vehicle.urls")),
     path("", include("ride.urls")),
-    path("api/", include("vehicle.api.urls")),
     path("api/", include("ride.api.urls")),
+    path("api/", include("vehicle.api.urls")),
 ]
 
 if settings.DEBUG:

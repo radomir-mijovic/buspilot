@@ -66,9 +66,15 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th class="sort" data-sort="name" scope="col" data-key="t-full-name">Ime i Prezime</th>
-                                                    <th class="col" data-sort="company_name" scope="col" data-key="t-phone-number">Broj Telefona</th>
+                                                    <th class="col"
+                                                        data-sort="company_name"
+                                                        scope="col"
+                                                        data-key="t-phone-number">Broj Telefona</th>
                                                     <th class="col" data-sort="email_id" scope="col">Email</th>
-                                                    <th class="col" data-sort="phone" scope="col" data-key="t-passport-number">Broj Pasoša</th>
+                                                    <th class="col"
+                                                        data-sort="phone"
+                                                        scope="col"
+                                                        data-key="t-passport-number">Broj Pasoša</th>
                                                     <th scope="col" data-key="t-action">Akcija</th>
                                                 </tr>
                                             </thead>
@@ -88,7 +94,7 @@
                                                                     data-bs-trigger="hover"
                                                                     data-bs-placement="top"
                                                                     title="Call">
-                                                                    <a href="tel:{{guide.phone_number}}" class="text-muted d-inline-block">
+                                                                    <a href="tel:{{ guide.phone_number }}" class="text-muted d-inline-block">
                                                                         <i class="ri-phone-line fs-16"></i>
                                                                     </a>
                                                                 </li>
@@ -97,7 +103,7 @@
                                                                     data-bs-trigger="hover"
                                                                     data-bs-placement="top"
                                                                     title="Message">
-                                                                    <a href="sms:{{guide.phone_number}}" class="text-muted d-inline-block">
+                                                                    <a href="sms:{{ guide.phone_number }}" class="text-muted d-inline-block">
                                                                         <i class="ri-question-answer-line fs-16"></i>
                                                                     </a>
                                                                 </li>
@@ -118,7 +124,7 @@
                                                                                data-bs-toggle="modal"
                                                                                data-bs-target="#editguideModal"
                                                                                href="javascript:void(0);"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                                        <span data-key="t-edit">Izmjeni</span></a>
+                                                                            <span data-key="t-edit">Izmjeni</span></a>
                                                                     </li>
                                                                     <li>
                                                                         <a class="dropdown-item remove-item-btn"
@@ -221,7 +227,10 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="hstack gap-2 justify-content-end">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
+                                                    <button type="button"
+                                                            class="btn btn-light"
+                                                            data-bs-dismiss="modal"
+                                                            data-key="t-close">Zatvori</button>
                                                     <button type="submit" class="btn btn-success" id="add-btn" data-key="t-add">Dodaj</button>
                                                 </div>
                                             </div>
@@ -300,8 +309,8 @@
     {% block footer %}
         {% include "partials/footer.html" %}
     {% endblock footer %}
-</div>
-<!-- end main content-->
+    <!-- end main content-->
+    <div />
 {% endblock content %}
 {% block extra_js %}
     <!-- list.js min js -->
@@ -337,4 +346,3 @@
         {% endif %}
     {% endfor %}
 {% endblock extra_js %}
-</div>

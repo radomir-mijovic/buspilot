@@ -37,9 +37,16 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link menu-link"
+                           href="{% url 'dashboard:calendar' %}"
+                           aria-expanded="false">
+                            <span data-key="t-calendar">Kalendar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link"
                            href="{% url 'dashboard:dashboard' %}"
                            aria-expanded="false">
-                            <span data-key="t-dashboards">Dashboard</span>
+                            <span data-key="t-daily-overview">Pregled Dana</span>
                         </a>
                     </li>
                     <!-- end Dashboard Menu -->

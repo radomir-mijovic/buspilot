@@ -1,13 +1,13 @@
 from rest_framework.routers import DefaultRouter
 
-from .api_views import RideCreateViewSet, RideUpdateViewSet, RideRetrieveViewSet
+from .api_views import (
+    RideViewSet
+)
 
 app_name = "ride_api"
 
 router = DefaultRouter(trailing_slash=True)
 
-router.register(r"rides", RideRetrieveViewSet, basename="ride_retrieve")
-router.register(r"rides", RideCreateViewSet, basename="ride_create")
-router.register(r"rides-update", RideUpdateViewSet, basename="ride_update")
+router.register(r"rides", RideViewSet, basename="ride")
 
 urlpatterns = router.urls

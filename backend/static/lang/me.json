@@ -124,5 +124,6 @@
     "t-ride": "Vožnja",
     "t-vehicle": "Vozilo",
     "t-agency": "Agencija",
-    "t-note": "Napomena"
+    "t-note": "Napomena",
+    "t-days": ["Pon", "Uto", "Sri", "Čet", "Pet", "Sub", "Ned"]
 }
