@@ -11,7 +11,7 @@ urlpatterns = [
         name="dashboard",
     ),
     path(
-        r"calendar",
+        r"",
         calendar,
         name="calendar",
     ),
