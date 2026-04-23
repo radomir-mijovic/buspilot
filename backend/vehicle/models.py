@@ -6,13 +6,22 @@ from ride.models import Ride
 
 from . import constants
 
-VALID_FILE_EXTENSIONS = ["pdf", "jpg", "jpeg", "png", "docx", "txt", "xlsx"]
+VALID_FILE_EXTENSIONS = [
+    "pdf",
+    "jpg",
+    "jpeg",
+    "png",
+    "docx",
+    "txt",
+    "xlsx",
+]
 
 
 class VehicleTypeChoices(models.IntegerChoices):
     CAR = constants.CAR, "Car"
     VAN = constants.VAN, "Van"
     MINI_BUS = constants.MINI_BUS, "Mini Bus"
+    MIDI_BUS = constants.MIDI_BUS, "Midi Bus"
     BUS = constants.BUS, "Bus"
 
 
@@ -74,10 +83,14 @@ class Vehicle(models.Model):
 
     @property
     def rides_count(self) -> int:
-        return Ride.rides.from_today_and_on().filter(
-            company=self.company,
-            vehicles=self,
-        ).count()
+        return (
+            Ride.rides.from_today_and_on()
+            .filter(
+                company=self.company,
+                vehicles=self,
+            )
+            .count()
+        )
 
 
 class VehicleDocument(CreatedUpdatedAtTimestampMixin, models.Model):
