@@ -19,3 +19,9 @@
 .fc-event {
   cursor: pointer;
 }
+.header-item {
+  background-color: #e9cf8f;
+}
+#page-topbar{
+  background-color: #e9cf8f;
+}

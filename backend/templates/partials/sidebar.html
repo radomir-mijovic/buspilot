@@ -5,7 +5,7 @@
         <!-- LOGO -->
         <div class="navbar-brand-box">
             <!-- Dark Logo-->
-            <a href="{% url 'dashboard:dashboard' %}" class="logo logo-dark">
+            <a href="{% url 'dashboard:calendar' %}" class="logo logo-dark">
                 <span class="logo-sm">
                     <img src="{% static 'images/logo-sm.png' %}" alt="" height="22">
                 </span>
@@ -14,7 +14,7 @@
                 </span>
             </a>
             <!-- Light Logo-->
-            <a href="{% url 'dashboard:dashboard' %}" class="logo logo-light">
+            <a href="{% url 'dashboard:calendar' %}" class="logo logo-light">
                 <span class="logo-sm">
                     <img src="{% static 'images/logo-sm.png' %}" alt="" height="22">
                 </span>
@@ -122,11 +122,6 @@
                     </li>
                 </ul>
             </div>
-            <!-- Sidebar -->
         </div>
-        <div class="sidebar-background"></div>
     </div>
-    <!-- Left Sidebar End -->
-    <!-- Vertical Overlay-->
-    <div class="vertical-overlay"></div>
 {% endblock sidebar %}

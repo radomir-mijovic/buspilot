@@ -1,5 +1,6 @@
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth() + 1;
+let rideType = "";
 
 function buildHeader(year, month) {
   const daysInMonth = new Date(year, month, 0).getDate();
@@ -36,6 +37,11 @@ function buildHeader(year, month) {
   return tr;
 }
 
+function parseDate(str) {
+  const [y, m, d] = str.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
 function buildRideRow(ride, year, month) {
   const daysInMonth = new Date(year, month, 0).getDate();
   const tr = document.createElement("tr");
@@ -45,10 +51,11 @@ function buildRideRow(ride, year, month) {
   label.textContent = ride.title;
   label.style.whiteSpace = "nowrap";
   label.style.paddingRight = "8px";
+  label.className = ride.class_name;
   tr.appendChild(label);
 
-  const startDate = new Date(ride.start_date);
-  const endDate = new Date(ride.end_date);
+  const startDate = parseDate(ride.start_date);
+  const endDate = parseDate(ride.end_date || ride.start_date);
 
   const startDay =
     startDate.getFullYear() === year && startDate.getMonth() + 1 === month
@@ -82,7 +89,7 @@ function buildRideRow(ride, year, month) {
   return tr;
 }
 
-async function render(year, month) {
+async function render(year, month, type) {
   document.getElementById("month-label").textContent = new Date(
     year,
     month - 1,
@@ -98,9 +105,23 @@ async function render(year, month) {
   const tbody = document.createElement("tbody");
 
   try {
-    const response = await fetch("/api/rides/");
+    const response = await fetch(
+      `/api/rides/?month=${month}&year=${year}&type=${type}`,
+    );
     const rides = await response.json();
-    rides.forEach((ride) => tbody.appendChild(buildRideRow(ride, year, month)));
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const firstOfMonth = new Date(year, month - 1, 1);
+    const lastOfMonth = new Date(year, month - 1, daysInMonth);
+
+    const filtered = rides.filter((ride) => {
+      const start = parseDate(ride.start_date);
+      const end = parseDate(ride.end_date || ride.start_date);
+      return start <= lastOfMonth && end >= firstOfMonth;
+    });
+
+    filtered.forEach((ride) =>
+      tbody.appendChild(buildRideRow(ride, year, month)),
+    );
   } catch (e) {
     console.error(e);
   }
@@ -108,13 +129,30 @@ async function render(year, month) {
   table.appendChild(tbody);
 }
 
+document
+  .getElementById("filter-buttons")
+  .addEventListener("click", async (event) => {
+    let type = "";
+    if (event.target.id === "lines") {
+      type = 1;
+    } else if (event.target.id === "transfers") {
+      type = 2;
+    } else if (event.target.id === "excursions") {
+      type = 3;
+    } else if (event.target.id === "round") {
+      type = 4;
+    }
+
+    render(currentYear, currentMonth, type);
+  });
+
 document.getElementById("prev").addEventListener("click", () => {
   currentMonth--;
   if (currentMonth === 0) {
     currentMonth = 12;
     currentYear--;
   }
-  render(currentYear, currentMonth);
+  render(currentYear, currentMonth, rideType);
 });
 
 document.getElementById("next").addEventListener("click", () => {
@@ -123,7 +161,7 @@ document.getElementById("next").addEventListener("click", () => {
     currentMonth = 1;
     currentYear++;
   }
-  render(currentYear, currentMonth);
+  render(currentYear, currentMonth, rideType);
 });
 
-render(currentYear, currentMonth);
+render(currentYear, currentMonth, rideType);

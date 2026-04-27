@@ -37,6 +37,11 @@ function buildHeader(year, month) {
   return tr;
 }
 
+function parseDate(str) {
+  const [y, m, d] = str.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
 function buildRideRow(ride, year, month) {
   const daysInMonth = new Date(year, month, 0).getDate();
   const tr = document.createElement("tr");
@@ -49,8 +54,8 @@ function buildRideRow(ride, year, month) {
   label.className = ride.class_name;
   tr.appendChild(label);
 
-  const startDate = new Date(ride.start_date);
-  const endDate = new Date(ride.end_date);
+  const startDate = parseDate(ride.start_date);
+  const endDate = parseDate(ride.end_date || ride.start_date);
 
   const startDay =
     startDate.getFullYear() === year && startDate.getMonth() + 1 === month
@@ -104,7 +109,19 @@ async function render(year, month, type) {
       `/api/rides/?month=${month}&year=${year}&type=${type}`,
     );
     const rides = await response.json();
-    rides.forEach((ride) => tbody.appendChild(buildRideRow(ride, year, month)));
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const firstOfMonth = new Date(year, month - 1, 1);
+    const lastOfMonth = new Date(year, month - 1, daysInMonth);
+
+    const filtered = rides.filter((ride) => {
+      const start = parseDate(ride.start_date);
+      const end = parseDate(ride.end_date || ride.start_date);
+      return start <= lastOfMonth && end >= firstOfMonth;
+    });
+
+    filtered.forEach((ride) =>
+      tbody.appendChild(buildRideRow(ride, year, month)),
+    );
   } catch (e) {
     console.error(e);
   }
