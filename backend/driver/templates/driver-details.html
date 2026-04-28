@@ -1,0 +1,281 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}
+    Detalji
+{% endblock title %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block content %}
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card mt-n4 mx-n4">
+                            <div class="bg-warning-subtle">
+                                <div class="card-body pb-0 px-4">
+                                    <div class="row mb-3">
+                                        <div class="col-md">
+                                            <div class="row align-items-center g-3">
+                                                <div class="col-md">
+                                                    <div>
+                                                        <h4 class="fw-bold">{{ driver.first_name }} {{ driver.last_name }}</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tab-content text-muted">
+                            <div class="tab-pane fade show active"
+                                 id="project-overview"
+                                 role="tabpanel">
+                                <div class="row align-items-stretch">
+                                    <div class="col-xxl-6 col-xl-6">
+                                        <div class="card h-100">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h4 class="card-title mb-0 flex-grow-1">Izmijeni podatke</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="live-preview">
+                                                    <form method="POST" action="{% url 'driver:driver_update' driver.id %}"}>
+                                                        {% csrf_token %}
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="first_name" class="form-label">Ime</label>
+                                                                    {{ form.first_name }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="last_name" class="form-label">Prezime</label>
+                                                                    {{ form.last_name }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="phone_number" class="form-label">Broj telefona</label>
+                                                                    {{ form.phone_number }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="passport_number" class="form-label">Broj pasoša</label>
+                                                                    {{ form.passport_number }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <label for="email" class="form-label">Email</label>
+                                                                {{ form.email }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="text-end hstack gap-2 justify-content-end">
+                                                                <a data-bs-toggle="modal"
+                                                                   class="btn btn-danger"
+                                                                   data-bs-target="#deleteDriverModal"
+                                                                   href="javascript:void(0);"
+                                                                   data-key="t-delete">Obriši</a>
+                                                                <button type="submit" class="btn btn-primary">Izmijeni</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade zoomIn"
+                                                 id="deleteDriverModal"
+                                                 tabindex="-1"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button"
+                                                                    class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body p-5 text-center">
+                                                            <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#405189,secondary:#f06548" style="width: 90px; height: 90px"></lord-icon>
+                                                            <div class="mt-4 text-center">
+                                                                <h4 class="fs-semibold" data-key="t-are-you-sure">Da li ste sigurni?</h4>
+                                                                <p class="text-muted fs-14 mb-4 pt-1" data-key="t-driver-delete-confirm">Vozac će biti trajno obrisan.</p>
+                                                                <div class="hstack gap-2 justify-content-center">
+                                                                    <button class="btn btn-link link-success fw-medium text-decoration-none"
+                                                                            data-bs-dismiss="modal">
+                                                                        <i class="ri-close-line me-1 align-middle"></i>
+                                                                        <span data-key="t-close">Zatvori</span>
+                                                                    </button>
+                                                                    <form id="deleteDriverConfirm"
+                                                                          method="POST"
+                                                                          action="{% url 'driver:driver_delete' driver.id %}">
+                                                                        {% csrf_token %}
+                                                                        <button class="btn btn-danger" type="submit" data-key="t-yes-delete">Da, Obriši!!</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-4 mt-4 mt-xl-0">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center mb-4">
+                                                    <h5 class="card-title flex-grow-1 mb-0" data-key="t-documents-tab">Dokumenti</h5>
+                                                    <div class="flex-shrink-0">
+                                                        <button type="button"
+                                                                class="btn btn-danger"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#addDocumentModal">
+                                                            <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add-document">Dodaj Dokument</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="table-responsive "  style="min-height: 400px;">
+                                                            <table class="table table-borderless align-middle mb-0">
+                                                                <thead class="table-light">
+                                                                    <tr>
+                                                                        <th scope="col" data-key="t-doc-name">Ime Dokumenta</th>
+                                                                        <th scope="col" data-key="t-ride-type">Tip</th>
+                                                                        <th scope="col" data-key="t-doc-size">Veličina</th>
+                                                                        <th scope="col" data-key="t-doc-expires">Važi do</th>
+                                                                        <th scope="col" data-key="t-action">Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="documents-t-body">
+                                                                    {% for document in driver.documents.all %}
+                                                                        <tr id="row-{{ document.id }}">
+                                                                            <td>
+                                                                                <div class="d-flex align-items-center">
+                                                                                    <div class="avatar-sm">
+                                                                                        <div class="avatar-title bg-primary-subtle text-primary rounded fs-20">
+                                                                                            <i class="ri-file-zip-fill"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="ms-3 flex-grow-1">
+                                                                                        <h6 class="fs-14 mb-0">
+                                                                                            <a href="{{ document.file.url }}" target="_blank" class="text-body">{{ document.title }}</a>
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>{{ document.document_type }}</td>
+                                                                            <td>{{ document.file_size_mb|floatformat:2 }} MB</td>
+                                                                            <td>{{ document.expiring_at }}</td>
+                                                                            <td>
+                                                                                <div class="dropdown">
+                                                                                    <a href=""
+                                                                                       class="btn btn-light btn-icon"
+                                                                                       id="dropdownMenuLink15"
+                                                                                       data-bs-toggle="dropdown"
+                                                                                       aria-expanded="true">
+                                                                                        <i class="ri-equalizer-fill"></i>
+                                                                                    </a>
+                                                                                    <ul class="dropdown-menu dropdown-menu-end"
+                                                                                        aria-labelledby="dropdownMenuLink15">
+                                                                                        <li>
+                                                                                            <a class="dropdown-item" href="{{ document.file.url }}" target="_blank"><i class="ri-eye-fill me-2 align-middle text-muted"></i><span data-key="t-preview">Pregled</span></a>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
+                                                                                        </li>
+                                                                                        <li class="dropdown-divider"></li>
+                                                                                        <li>
+                                                                                            <a class="dropdown-item"
+                                                                                               href="{% url 'driver:document_delete' pk=document.pk driver_pk=driver.pk %}">
+                                                                                                <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i><span data-key="t-delete">Obriši</span></a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade"
+                 id="addDocumentModal"
+                 tabindex="-1"
+                 aria-labelledby="addDocumentModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-light p-3">
+                            <h5 class="modal-title"
+                                id="addDocumentModalLabel"
+                                data-key="t-add-document">Dodaj Dokument</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <form method="POST"
+                              action="{% url 'driver:document_upload' driver.pk %}"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="modal-body" id="addDocumentModalBody">
+                                <div class="mb-3">
+                                    <label for="doc-title" class="form-label" data-key="t-doc-title-label">Naziv dokumenta</label>
+                                    {{ document_form.title }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="doc-type" class="form-label" data-key="t-doc-type-label">Tip dokumenta</label>
+                                    {{ document_form.document_type }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="doc-expiry" class="form-label" data-key="t-doc-expiry-label">Datum isteka</label>
+                                    {{ document_form.expiring_at }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="doc-file" class="form-label" data-key="t-doc-file-label">Fajl</label>
+                                    {{ document_form.file }}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="hstack gap-2 justify-content-end">
+                                    <button type="button"
+                                            class="btn btn-light"
+                                            data-bs-dismiss="modal"
+                                            data-key="t-close">Zatvori</button>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add">Dodaj</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% block footer %}
+                {% include "partials/footer.html" %}
+            {% endblock footer %}
+        {% endblock content %}
+        {% block extra_content %}
+        {% endblock extra_content %}
+        {% block extra_js %}
+            <script src="{% static 'js/pages/project-overview.init.js'%}"></script>
+        {% endblock extra_js %}

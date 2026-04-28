@@ -1,20 +1,11 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.models import CreatedUpdatedAtTimestampMixin
+from common.models import DocumentAbstract, VALID_FILE_EXTENSIONS
 from ride.models import Ride
 
 from . import constants
 
-VALID_FILE_EXTENSIONS = [
-    "pdf",
-    "jpg",
-    "jpeg",
-    "png",
-    "docx",
-    "txt",
-    "xlsx",
-]
 
 
 class VehicleTypeChoices(models.IntegerChoices):
@@ -93,10 +84,7 @@ class Vehicle(models.Model):
         )
 
 
-class VehicleDocument(CreatedUpdatedAtTimestampMixin, models.Model):
-    title = models.CharField(max_length=255, blank=True)
-    document_type = models.CharField(max_length=255, blank=True)
-    expiring_at = models.DateField(blank=True, null=True)
+class VehicleDocument(DocumentAbstract):
     file = models.FileField(
         upload_to="vehicle/documents/",
         validators=[
@@ -111,17 +99,3 @@ class VehicleDocument(CreatedUpdatedAtTimestampMixin, models.Model):
         blank=True,
         related_name="documents",
     )
-
-    def __str__(self):
-        return self.title
-
-    def get_file_size(self) -> float:
-        if self.file:
-            return self.file.size
-        return 0
-
-    def file_size_kb(self) -> float:
-        return self.get_file_size() / 1024
-
-    def file_size_mb(self) -> float:
-        return self.file_size_kb() / 1024

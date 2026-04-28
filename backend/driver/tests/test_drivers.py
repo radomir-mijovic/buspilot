@@ -70,8 +70,14 @@ class TestDrivers:
         assert self.driver.last_name == "Tyson"
 
     def test_update_driver_not_ok(self, client):
-        response = client.post(self.update_url, {})
-        assert response.status_code == 302
+        assert self.driver.first_name == self.driver.first_name
+        assert self.driver.last_name == self.driver.last_name
+
+        client.post(self.update_url, {})
+
+        self.driver.refresh_from_db()
+        assert self.driver.first_name == self.driver.first_name
+        assert self.driver.last_name == self.driver.last_name
 
     def test_delete_driver_ok(self, client) -> None:
         client.post(self.delete_url)

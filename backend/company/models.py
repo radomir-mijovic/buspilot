@@ -44,3 +44,6 @@ class CompanyAddress(models.Model):
 
     def __str__(self):
         return self.company.name + self.city
+
+    class Meta:
+        verbose_name_plural = "Company Address"

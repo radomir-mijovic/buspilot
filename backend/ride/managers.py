@@ -47,7 +47,7 @@ class RideDateManager(models.Manager):
     def past_rides(self):
         return (
             self.filter(
-                start_date__lt=self.today_date(),
+                end_date__lt=self.today_date(),
             )
             .prefetch_related("vehicles", "drivers")
             .order_by("-start_date", "-start_time")
