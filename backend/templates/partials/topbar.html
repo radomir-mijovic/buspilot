@@ -26,6 +26,124 @@
                     </button>
                 </div>
                 <div class="d-flex align-items-center">
+                    <div class="dropdown topbar-head-dropdown ms-1 header-item"
+                         id="notificationDropdown">
+                        <button type="button"
+                                class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                                id="page-header-notifications-dropdown"
+                                data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                            <i class='bx bx-bell fs-22'></i>
+                            <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">{{ total_in_danger_documents }}<span class="visually-hidden">unread messages</span></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                             aria-labelledby="page-header-notifications-dropdown">
+                            <div class="dropdown-head bg-danger rounded-top">
+                                <div class="p-3">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h6 class="m-0 fs-16 fw-semibold text-white">Dokumenti koji brzo ističu !</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-2 pt-2">
+                                    <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom"
+                                        data-dropdown-tabs="true"
+                                        id="notificationItemsTab"
+                                        role="tablist">
+                                        <li class="nav-item waves-effect waves-light">
+                                            <div class="nav-link active"
+                                                 data-bs-toggle="tab"
+                                                 href="#all-noti-tab"
+                                                 role="tab"
+                                                 text=""
+                                                 data-key="t-vehicles"
+                                                 aria-selected="true">Vozila</div>
+                                        </li>
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link"
+                                               data-bs-toggle="tab"
+                                               href="#messages-tab"
+                                               role="tab"
+                                               data-key="t-drivers"
+                                               aria-selected="false">Vozači</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-content position-relative"
+                                 id="notificationItemsTabContent">
+                                <div class="tab-pane fade show active py-2 ps-2"
+                                     id="all-noti-tab"
+                                     role="tabpanel">
+                                    <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                        {% for expiring_doc in in_danger_vehicle_documents|slice:":4" %}
+                                            <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                                <div class="d-flex">
+                                                    <div class="avatar-xs me-3 flex-shrink-0">
+                                                        <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
+                                                            <i class="bx bx-error"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <a href="#!" class="stretched-link">
+                                                            <h6 class="mt-0 mb-2 lh-base">
+                                                                {{ expiring_doc.document_type }} za {{ expiring_doc.vehicle.model }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
+                                                            </h6>
+                                                        </a>
+                                                        <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                            <span><i class="mdi mdi-alert"></i> Ističe za {{ expiring_doc.days_to_expire }} dana</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        {% if in_danger_vehicle_documents|length > 0 %}
+                                            <div class="my-3 text-center view-all">
+                                                <button type="button" class="btn btn-soft-danger waves-effect waves-light">
+                                                    Pregledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
+                                                </button>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel">
+                                    <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                        {% for expiring_doc in in_danger_driver_documents|slice:":4" %}
+                                            <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                                <div class="d-flex">
+                                                    <div class="avatar-xs me-3 flex-shrink-0">
+                                                        <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
+                                                            <i class="bx bx-error"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <a href="#!" class="stretched-link">
+                                                            <h6 class="mt-0 mb-2 lh-base">
+                                                                {{ expiring_doc.document_type }} za {{ expiring_doc.driver.first_name }} {{ expiring_doc.driver.last_name }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
+                                                            </h6>
+                                                        </a>
+                                                        <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                            <span><i class="mdi mdi-alert"></i> Ističe za {{ expiring_doc.days_to_expire }} dana</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        {% if in_danger_driver_documents|length > 0 %}
+                                            <div class="my-3 text-center view-all">
+                                                <button type="button" class="btn btn-soft-danger waves-effect waves-light">
+                                                    Pogledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
+                                                </button>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="dropdown ms-1 topbar-head-dropdown header-item">
                         <button type="button"
                                 class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"

@@ -26,6 +26,7 @@ class DriverDocumentUploadView(
 
     def form_valid(self, form):
         form.instance.driver = self.driver
+        form.instance.company = self.company
         form.save()
         messages.success(self.request, "File successfully added.")
         return redirect("driver:driver_details", pk=self.driver_pk)

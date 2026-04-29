@@ -22,6 +22,13 @@
 .header-item {
   background-color: #e9cf8f;
 }
-#page-topbar{
+#page-topbar {
   background-color: #e9cf8f;
+}
+#page-header-notifications-dropdown.show,
+#page-header-notifications-dropdown:active,
+#page-header-notifications-dropdown:focus {
+  background-color: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
 }

@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.utils import timezone
 
 from ..models import VehicleDocument
 
@@ -46,3 +47,10 @@ class VehicleDocumentUploadForm(ModelForm):
                 }
             ),
         }
+
+    def clean_expiring_at(self):
+        if expiring_at := self.cleaned_data["expiring_at"]:
+            if expiring_at < timezone.now().date():
+                raise forms.ValidationError("Date must be in the future.")
+
+        return expiring_at

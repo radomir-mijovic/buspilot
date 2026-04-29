@@ -1,9 +1,10 @@
 from typing import Any
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models
 from django.forms import BaseModelForm
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, request
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -103,15 +104,24 @@ class DriverUpdateView(
             kwargs={"pk": self.get_object().pk},
         )
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        messages.success(
+            self.request,
+            "Data successfully updated",
+        )
+        return super().form_valid(form)
 
-class DriverDeleteView(LoginRequiredMixin, generic.DeleteView):
+
+class DriverDeleteView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.DeleteView,
+):
     success_url = reverse_lazy("driver:drivers")
     template_name = "drivers.html"
 
     def get_queryset(self) -> models.query.QuerySet[Any]:
-        return Driver.objects.filter(
-            company=self.request.user.company,
-        )
+        return Driver.objects.filter(company=self.company)
 
     def get(
         self,

@@ -1,5 +1,6 @@
 from typing import Any
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models
 from django.forms import BaseModelForm
@@ -45,6 +46,7 @@ class AgencyCreateView(
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.instance.company = self.company
         form.save()
+        messages.success(self.request, "Agency successfully created")
         return redirect("agency:agency_list")
 
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:
@@ -84,3 +86,11 @@ class AgencyDeleteView(
         return Agency.objects.filter(
             company=self.company,
         )
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        agency = self.get_object()
+        messages.info(
+            self.request,
+            f"{agency.name} successfully deleted",
+        )
+        return super().form_valid(form)

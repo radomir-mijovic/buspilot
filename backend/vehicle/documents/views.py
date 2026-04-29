@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
+from company.mixins import CompanyRequestMixin
+
 from ..models import Vehicle, VehicleDocument
 from .forms import VehicleDocumentUploadForm
 
@@ -33,6 +35,7 @@ class VehicleHtmxFormsViewHandlers(generic.CreateView):
 
 class VehicleDocumentUploadView(
     VehicleHtmxFormsViewHandlers,
+    CompanyRequestMixin,
     LoginRequiredMixin,
 ):
     form_class = VehicleDocumentUploadForm
@@ -41,6 +44,7 @@ class VehicleDocumentUploadView(
 
     def form_valid(self, form):
         form.instance.vehicle = self.vehicle
+        form.instance.company = self.company
         document = form.save()
 
         if self.request.headers.get("HX-Request"):

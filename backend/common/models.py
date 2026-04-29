@@ -1,7 +1,10 @@
 import random
+from datetime import timedelta
 
 from django.db import models
 from django.utils import timezone
+
+from company.models import Company
 
 HEADERS_COLORS: list[str] = [
     "danger",
@@ -100,10 +103,37 @@ class UIStyleAbstarct(models.Model):
         abstract = True
 
 
-class DocumentAbstract(CreatedUpdatedAtTimestampMixin, models.Model):
+class DocumentManager(models.Manager):
+    def close_to_expire(self):
+        return self.filter(
+            expiring_at__gte=self.today_date(),
+            expiring_at__lte=self.one_month_ahead(),
+        ).order_by("expiring_at")
+
+    def one_month_ahead(self):
+        one_month_ahead_date = self.today_date() + timedelta(days=30)
+        return one_month_ahead_date
+
+    def today_date(self):
+        return timezone.now().date()
+
+
+class DocumentAbstract(
+    CreatedUpdatedAtTimestampMixin,
+    DocumentManager,
+):
+    company = models.ForeignKey(
+        "company.Company",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="%(class)s_documents",
+    )
     title = models.CharField(max_length=255, blank=True)
     document_type = models.CharField(max_length=255, blank=True)
     expiring_at = models.DateField(blank=True, null=True)
+
+    expiring = DocumentManager()
 
     def __str__(self):
         return self.title
@@ -117,8 +147,15 @@ class DocumentAbstract(CreatedUpdatedAtTimestampMixin, models.Model):
     def file_size_mb(self) -> float:
         return self.file_size_kb() / 1024
 
+    @property
     def has_expired(self) -> bool:
-        return self.expiring_at < timezone.now()
+        return self.expiring_at < timezone.now().date()
+
+    @property
+    def days_to_expire(self) -> int | None:
+        if not self.expiring_at:
+            return None
+        return (self.expiring_at - timezone.now().date()).days
 
     class Meta:
         abstract = True
