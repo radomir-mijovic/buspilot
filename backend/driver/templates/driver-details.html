@@ -152,7 +152,8 @@
                                                                         <th scope="col" data-key="t-ride-type">Tip</th>
                                                                         <th scope="col" data-key="t-doc-size">Veličina</th>
                                                                         <th scope="col" data-key="t-doc-expires">Važi do</th>
-                                                                        <th scope="col" data-key="t-action">Action</th>
+                                                                        <th scope="col" data-key="t-status">Status</th>
+                                                                        <th scope="col" data-key="t-action">Akcija</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody id="documents-t-body">
@@ -175,6 +176,19 @@
                                                                             <td>{{ document.document_type }}</td>
                                                                             <td>{{ document.file_size_mb|floatformat:2 }} MB</td>
                                                                             <td>{{ document.expiring_at }}</td>
+                                                                            {% if document.has_expired %}
+                                                                                <td>
+                                                                                    <span class="badge bg-danger">Istekao</span>
+                                                                                </td>
+                                                                            {% elif document.expiring_soon %}
+                                                                                <td>
+                                                                                    <span class="badge bg-warning">Opasnost</span>
+                                                                                </td>
+                                                                            {% else %}
+                                                                                <td>
+                                                                                    <span class="badge bg-success">Aktivan</span>
+                                                                                </td>
+                                                                            {% endif %}
                                                                             <td>
                                                                                 <div class="dropdown">
                                                                                     <a href=""

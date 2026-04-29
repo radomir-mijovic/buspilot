@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 LOCAL_APPS = [
     "auth.apps.UserAuthConfig",
     "agency.apps.AgencyConfig",
+    "common.apps.CommonConfig",
     "company.apps.CompanyConfig",
     "dashboard.apps.DashboardConfig",
     "guide.apps.GuideConfig",

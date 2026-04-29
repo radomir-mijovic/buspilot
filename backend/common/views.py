@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def expired_documents(request):
+    template = "expiring-documents.html"
+    return render(request, template, {})

@@ -20,14 +20,14 @@ class DriverDocumentUploadForm(ModelForm):
                     "class": "form-control",
                     "id": "doc-title",
                     "required": "true",
-                    "placeholder": "npr. Saobraćajna dozvola",
+                    "placeholder": "npr. Ugovor o radu na određeno vrijeme",
                 }
             ),
             "document_type": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "id": "doc-type",
-                    "placeholder": "npr. Registracija",
+                    "placeholder": "npr. Ugovor o radu",
                 }
             ),
             "expiring_at": forms.DateInput(
@@ -35,7 +35,6 @@ class DriverDocumentUploadForm(ModelForm):
                     "class": "form-control",
                     "id": "doc-expiry",
                     "type": "date",
-                    "placeholder": "npr. Registracija",
                 }
             ),
             "file": forms.FileInput(

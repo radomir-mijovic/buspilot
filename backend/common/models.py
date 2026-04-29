@@ -134,6 +134,7 @@ class DocumentAbstract(
     expiring_at = models.DateField(blank=True, null=True)
 
     expiring = DocumentManager()
+    objects = models.Manager()
 
     def __str__(self):
         return self.title
@@ -150,6 +151,11 @@ class DocumentAbstract(
     @property
     def has_expired(self) -> bool:
         return self.expiring_at < timezone.now().date()
+
+    @property
+    def expiring_soon(self) -> bool:
+        today = timezone.now().date()
+        return today <= self.expiring_at <= today + timedelta(days=30)
 
     @property
     def days_to_expire(self) -> int | None:

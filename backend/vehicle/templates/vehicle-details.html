@@ -70,47 +70,69 @@
                                                         <table class="table table-borderless mb-0">
                                                             <tbody id="vehicle-details-tbody">
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-brand">Marka</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-brand">Marka</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.brand }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-model">Model</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-model">Model</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.model }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-vehicle-type">Vrsta</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-vehicle-type">Vrsta</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.get_vehicle_type_display }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-year-of-production">Godina proizvodnje</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-year-of-production">Godina proizvodnje</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.year_of_production }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-num-seats">Broj sjedišta</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-num-seats">Broj sjedišta</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.number_of_seats }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-chassis-number">Broj šasije</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-chassis-number">Broj šasije</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.chassis_number }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-engine-number">Broj motora</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-engine-number">Broj motora</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.engine_number }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-horse-power">Konjska snaga</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-horse-power">Konjska snaga</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.horse_power }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-weight">Kilaža (KG)</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-weight">Kilaža (KG)</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.weight }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-licence-number">Broj tablica</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-licence-number">Broj tablica</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.licence_number }}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th class="ps-0" scope="row"><span data-key="t-color">Boja</span> :</th>
+                                                                    <th class="ps-0" scope="row">
+                                                                        <span data-key="t-color">Boja</span> :
+                                                                    </th>
                                                                     <td class="text-muted">{{ vehicle.color }}</td>
                                                                 </tr>
                                                             </tbody>
@@ -119,7 +141,8 @@
                                                            data-bs-target="#showUpdateModal-{{ vehicle.id }}"
                                                            type="button"
                                                            class="btn btn-small btn-primary"
-                                                           onclick="event.stopPropagation();" data-key="t-edit-vehicle-data">Izmjeni podatke</a>
+                                                           onclick="event.stopPropagation();"
+                                                           data-key="t-edit-vehicle-data">Izmjeni podatke</a>
                                                     </div>
                                                 </div>
                                                 <!-- end card body -->
@@ -137,10 +160,18 @@
                                                                 <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs border-bottom-0"
                                                                     role="tablist">
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link active" data-bs-toggle="tab" href="#today" role="tab" data-key="t-today">Danas</a>
+                                                                        <a class="nav-link active"
+                                                                           data-bs-toggle="tab"
+                                                                           href="#today"
+                                                                           role="tab"
+                                                                           data-key="t-today">Danas</a>
                                                                     </li>
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link" data-bs-toggle="tab" href="#tomorrow" role="tab" data-key="t-tomorrow">Sjutra</a>
+                                                                        <a class="nav-link"
+                                                                           data-bs-toggle="tab"
+                                                                           href="#tomorrow"
+                                                                           role="tab"
+                                                                           data-key="t-tomorrow">Sjutra</a>
                                                                     </li>
                                                                     <li class="nav-item">
                                                                         <a class="nav-link"
@@ -195,6 +226,7 @@
                                                                     <th scope="col" data-key="t-ride-type">Tip</th>
                                                                     <th scope="col" data-key="t-doc-size">Veličina</th>
                                                                     <th scope="col" data-key="t-doc-expires">Važi do</th>
+                                                                    <th scope="col" data-key="t-status">Status</th>
                                                                     <th scope="col" data-key="t-action">Action</th>
                                                                 </tr>
                                                             </thead>
@@ -218,6 +250,19 @@
                                                                         <td>{{ document.document_type }}</td>
                                                                         <td>{{ document.file_size_mb|floatformat:2 }} MB</td>
                                                                         <td>{{ document.expiring_at }}</td>
+                                                                        {% if document.has_expired %}
+                                                                            <td>
+                                                                                <span class="badge bg-danger">Istekao</span>
+                                                                            </td>
+                                                                        {% elif document.expiring_soon %}
+                                                                            <td>
+                                                                                <span class="badge bg-warning">Opasnost</span>
+                                                                            </td>
+                                                                        {% else %}
+                                                                            <td>
+                                                                                <span class="badge bg-success">Aktivan</span>
+                                                                            </td>
+                                                                        {% endif %}
                                                                         <td>
                                                                             <div class="dropdown">
                                                                                 <a href=""
@@ -275,7 +320,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title" id="addVehicleModalLabel" data-key="t-update-vehicle-title">Izmjeni Vozilo</h5>
+                            <h5 class="modal-title"
+                                id="addVehicleModalLabel"
+                                data-key="t-update-vehicle-title">Izmjeni Vozilo</h5>
                         </div>
                         <form hx-post="{% url 'vehicle:vehicles_update' vehicle.id %}"
                               hx-target="#vehicle-details-tbody"
@@ -331,7 +378,10 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="hstack gap-2 justify-content-end">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
+                                    <button type="button"
+                                            class="btn btn-light"
+                                            data-bs-dismiss="modal"
+                                            data-key="t-close">Zatvori</button>
                                     <button type="submit" class="btn btn-success" data-key="t-update-vehicle-btn">Izmjeni vozilo</button>
                                 </div>
                             </div>
@@ -347,7 +397,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title" id="addDocumentModalLabel" data-key="t-add-document">Dodaj Dokument</h5>
+                            <h5 class="modal-title"
+                                id="addDocumentModalLabel"
+                                data-key="t-add-document">Dodaj Dokument</h5>
                             <button type="button"
                                     class="btn-close"
                                     data-bs-dismiss="modal"
@@ -379,7 +431,10 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="hstack gap-2 justify-content-end">
-                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
+                                    <button type="button"
+                                            class="btn btn-light"
+                                            data-bs-dismiss="modal"
+                                            data-key="t-close">Zatvori</button>
                                     <button type="submit" class="btn btn-danger">
                                         <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add">Dodaj</span>
                                     </button>

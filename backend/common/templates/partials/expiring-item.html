@@ -1,0 +1,27 @@
+<a href={{ href }}>
+    <div class="d-flex">
+        <div class="flex-shrink-0">
+            <div class="avatar-sm">
+                <div class="avatar-title bg-primary-subtle text-primary rounded fs-20">
+                    {% with ext=expiring_doc.file.name|lower %}
+                        {% if ".pdf" in ext %}
+                            <i class="ri-file-pdf-line"></i>
+                        {% elif ".jpg" in ext or ".jpeg" in ext or ".png" in ext %}
+                            <i class="ri-image-line"></i>
+                        {% elif ".docx" in ext or ".doc" in ext %}
+                            <i class="ri-file-word-line"></i>
+                        {% elif ".xlsx" in ext %}
+                            <i class="ri-file-excel-line"></i>
+                        {% else %}
+                            <i class="ri-file-line"></i>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+        <div class="flex-grow-1 ms-3">
+            <h6 class="mb-1 fs-14">{{ expiring_doc.document_type }} | {{ expiring_doc.title }}</h6>
+            <p class="mb-0">Ističe za {{ expiring_doc.days_to_expire }} dana</p>
+        </div>
+    </div>
+</a>

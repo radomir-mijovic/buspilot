@@ -12,6 +12,7 @@ urlpatterns = [
     path("", include("guide.urls")),
     path("", include("vehicle.urls")),
     path("", include("ride.urls")),
+    path("", include("common.urls")),
     path("api/", include("ride.api.urls")),
     path("api/", include("vehicle.api.urls")),
 ]

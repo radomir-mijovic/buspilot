@@ -1,0 +1,76 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}
+    Dokumenti
+{% endblock title %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block content %}
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                {% block pagetitle %}
+                    {% include "partials/page-title.html" with pagetitle="Dokumenti" title="Dokumenti blizu isteka" %}
+                {% endblock pagetitle %}
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="card">
+                            <div class="card-header align-items-xl-center d-xl-flex">
+                                <div class="flex-shrink-0">
+                                    <ul class="nav nav-pills card-header-pills" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active"
+                                               data-bs-toggle="tab"
+                                               href="#vehicles"
+                                               data-key="t-vehicles"
+                                               role="tab">Vozila</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"
+                                               data-bs-toggle="tab"
+                                               href="#drivers"
+                                               data-key="t-drivers"
+                                               role="tab">Vozači</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content text-muted">
+                                    <div class="tab-pane active" id="vehicles" role="tabpanel">
+                                        <div class="row">
+                                            {% for expiring_doc in in_danger_vehicle_documents %}
+                                                {% url 'vehicle:vehicles_details' expiring_doc.vehicle.pk as vehicle_url %}
+                                                <div class="col-lg-4 col-sm-6 mb-3">
+                                                    {% include "partials/expiring-item.html" with expiring_doc=expiring_doc href=vehicle_url %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="drivers" role="tabpanel">
+                                        <div class="row">
+                                            {% for expiring_doc in in_danger_driver_documents %}
+                                                {% url 'driver:driver_details' expiring_doc.driver.pk as driver_url %}
+                                                <div class="col-lg-4 col-sm-6 mb-3">
+                                                    {% include "partials/expiring-item.html" with expiring_doc=expiring_doc href=driver_url %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block footer %}
+            {% include "partials/footer.html" %}
+        {% endblock footer %}
+    </div>
+{% endblock content %}
+{% block extra_js %}
+{% endblock extra_js %}

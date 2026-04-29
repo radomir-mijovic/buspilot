@@ -88,7 +88,9 @@
                                                         </span>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <a href="#!" class="stretched-link">
+                                                        <a href="{{ expiring_doc.file.url }}"
+                                                           target="_blank"
+                                                           class="stretched-link">
                                                             <h6 class="mt-0 mb-2 lh-base">
                                                                 {{ expiring_doc.document_type }} za {{ expiring_doc.vehicle.model }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
                                                             </h6>
@@ -102,9 +104,11 @@
                                         {% endfor %}
                                         {% if in_danger_vehicle_documents|length > 0 %}
                                             <div class="my-3 text-center view-all">
-                                                <button type="button" class="btn btn-soft-danger waves-effect waves-light">
+                                                <a href="{% url 'common:expiring_documents' %}"
+                                                   type="button"
+                                                   class="btn btn-soft-danger waves-effect waves-light">
                                                     Pregledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
-                                                </button>
+                                                </a>
                                             </div>
                                         {% endif %}
                                     </div>
@@ -120,7 +124,9 @@
                                                         </span>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <a href="#!" class="stretched-link">
+                                                        <a href="{{ expiring_doc.file.url }}"
+                                                           target="_blank"
+                                                           class="stretched-link">
                                                             <h6 class="mt-0 mb-2 lh-base">
                                                                 {{ expiring_doc.document_type }} za {{ expiring_doc.driver.first_name }} {{ expiring_doc.driver.last_name }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
                                                             </h6>
@@ -134,9 +140,11 @@
                                         {% endfor %}
                                         {% if in_danger_driver_documents|length > 0 %}
                                             <div class="my-3 text-center view-all">
-                                                <button type="button" class="btn btn-soft-danger waves-effect waves-light">
-                                                    Pogledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
-                                                </button>
+                                                <a href="{% url 'common:expiring_documents' %}"
+                                                   type="button"
+                                                   class="btn btn-soft-danger waves-effect waves-light">
+                                                    Pregledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
+                                                </a>
                                             </div>
                                         {% endif %}
                                     </div>
