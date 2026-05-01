@@ -12,13 +12,13 @@
         <div class="page-content">
             <div class="container-fluid">
                 {% block pagetitle %}
-                    {% include "partials/page-title.html" with  title="Izmijeni Vožnju" %}
+                    {% include "partials/page-title.html" with title="Izmijeni Vožnju" title_key="t-update-ride-title" %}
                 {% endblock pagetitle %}
                 <div class="row">
                     <div class="col-xxl-9">
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Forma</h4>
+                                <h4 class="card-title mb-0 flex-grow-1" data-key="t-ride-form">Forma</h4>
                             </div>
                             <div class="card-body">
                                 <div class="live-preview">
@@ -27,67 +27,68 @@
                                           class="row g-3">
                                         {% csrf_token %}
                                         <div class="col-md-12">
-                                            <label for="title" class="form-label">Naziv vožnje</label>
+                                            <label for="title" class="form-label" data-key="t-ride-title">Naziv vožnje</label>
                                             {{ form.title }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="ForminputState" class="form-label">Tip vožnje</label>
+                                            <label for="ForminputState" class="form-label" data-key="t-ride-type-label">Tip vožnje</label>
                                             {{ form.ride_type }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="drivers" class="form-label">Izaberite Agenciju</label>
+                                            <label for="agency" class="form-label" data-key="t-select-agency">Izaberite Agenciju</label>
                                             {{ form.agency }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="start_date" class="form-label">Datum početka vožnje</label>
+                                            <label for="start_date" class="form-label" data-key="t-start-date">Datum početka vožnje</label>
                                             {{ form.start_date }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="end_date" class="form-label">Datum završetka vožnje</label>
+                                            <label for="end_date" class="form-label" data-key="t-end-date">Datum završetka vožnje</label>
                                             {{ form.end_date }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="start_time" class="form-label">Vrijeme početka vožnje</label>
+                                            <label for="start_time" class="form-label" data-key="t-start-time">Vrijeme početka vožnje</label>
                                             {{ form.start_time }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="end_time" class="form-label">Vrijeme završetka vožnje</label>
+                                            <label for="end_time" class="form-label" data-key="t-end-time">Vrijeme završetka vožnje</label>
                                             {{ form.end_time }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="start_location" class="form-label">Početna lokacija</label>
+                                            <label for="start_location" class="form-label" data-key="t-start-location">Početna lokacija</label>
                                             {{ form.start_location }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="end_location" class="form-label">Završna lokacija</label>
+                                            <label for="end_location" class="form-label" data-key="t-end-location">Završna lokacija</label>
                                             {{ form.end_location }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="vehicles" class="form-label">Izaberite autobuse</label>
+                                            <label for="vehicles" class="form-label" data-key="t-select-vehicles">Izaberite autobuse</label>
                                             {{ form.vehicles }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="drivers" class="form-label">Izaberite vozace</label>
+                                            <label for="drivers" class="form-label" data-key="t-select-drivers">Izaberite vozace</label>
                                             {{ form.drivers }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="drivers" class="form-label">Izaberite Vodiče</label>
+                                            <label for="guides" class="form-label" data-key="t-select-guides">Izaberite Vodiče</label>
                                             {{ form.guides }}
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="description" class="form-label">Opis</label>
+                                            <label for="description" class="form-label" data-key="t-description">Opis</label>
                                             {{ form.description }}
                                         </div>
                                         <div class="mb-3">
                                             {{ form.is_all_day }}
-                                            <label class="form-check-label" for="autoSizingCheck">Autobus zauzet cijeli dan</label>
+                                            <label class="form-check-label" for="autoSizingCheck" data-key="t-all-day">Autobus zauzet cijeli dan</label>
                                         </div>
                                         <div class="text-end">
                                             <a class="btn btn-danger"
                                                data-bs-toggle="modal"
                                                data-bs-target="#deleteRideModal"
-                                               href="javascript:void(0);">Obriši vožnju</a>
-                                            <button type="submit" class="btn btn-primary">Izmijeni vožnju</button>
+                                               href="javascript:void(0);"
+                                               data-key="t-delete-ride-btn">Obriši vožnju</a>
+                                            <button type="submit" class="btn btn-primary" data-key="t-update-ride-btn">Izmijeni vožnju</button>
                                         </div>
                                     </form>
                                 </div>
@@ -110,14 +111,16 @@
                             <div class="modal-body p-5 text-center">
                                 <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
                                 <div class="mt-4 text-center">
-                                    <h4>Da li ste sigurni?</h4>
-                                    <p class="text-muted fs-14 mb-4">Vožnja će biti trajno obrisana.</p>
+                                    <h4 data-key="t-are-you-sure">Da li ste sigurni?</h4>
+                                    <p class="text-muted fs-14 mb-4" data-key="t-ride-delete-confirm">Vožnja će biti trajno obrisana.</p>
                                     <div class="hstack gap-2 justify-content-center">
                                         <button class="btn btn-link link-success fw-medium text-decoration-none"
+                                                data-key="t-close"
                                                 data-bs-dismiss="modal">
                                             <i class="ri-close-line me-1 align-middle"></i> Zatvori
                                         </button>
                                         <button id="deleteRideConfirm"
+                                                data-key="t-yes-delete"
                                                 class="btn btn-danger"
                                                 hx-post="{% url 'ride:ride_delete' ride.id %}"
                                                 hx-swap="none"
