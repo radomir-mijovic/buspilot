@@ -1,3 +1,8 @@
+from typing import Type
+
+from django.db import models
+
+from company.mixins import FilterByCompanyMixin
 from company.models import Company
 
 from .models import Ride
@@ -48,3 +53,9 @@ class RidesCountMixin:
             )
             .count()
         )
+
+
+class RideQueryFilterMixin(FilterByCompanyMixin):
+    @property
+    def filter_model(self) -> Type[models.Model]:
+        return Ride

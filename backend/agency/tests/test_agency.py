@@ -3,6 +3,7 @@ from django.urls import reverse
 from parameterized import parameterized
 
 from auth.models import User
+from auth.tests.factories import UserFactory
 from common.tests.fixtures import user  # noqa: F401, F811
 from company.tests.factories import CompanyFactory
 
@@ -103,3 +104,16 @@ class TestAgency:
         self.client.logout()
         response = self.client.get(reverse(url, kwargs=kwargs))
         assert response.status_code == 302
+
+    def test_update_other_company_agency_is_blocked(self, client):
+        other_user = UserFactory()
+        other_user.company = CompanyFactory()
+        other_user.save()
+
+        client.force_login(other_user)
+        client.post(
+            reverse("agency:agency_update", kwargs={"pk": self.agency.pk}),
+            {"name": "Galileo", "ceo": "Joh Doe"},
+        )
+        self.agency.refresh_from_db()
+        assert not self.agency.name == "Galileo"

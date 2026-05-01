@@ -2,32 +2,27 @@ from typing import Any
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import models
 from django.forms import BaseModelForm
-from django.http import HttpRequest, HttpResponse, request
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from company.mixins import CompanyRequestMixin
 from driver.documents.forms import DriverDocumentUploadForm
 
 from .forms import DriverForm
+from .mixins import DriverQueryFilterMixin
 from .models import Driver
 
 
 class DriverListView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    DriverQueryFilterMixin,
     generic.ListView,
 ):
     template_name = "drivers.html"
     context_object_name = "drivers"
-
-    def get_queryset(self):
-        return Driver.objects.filter(
-            company=self.company,
-        ).order_by("-id")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,16 +32,11 @@ class DriverListView(
 
 class DriverDetailView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    DriverQueryFilterMixin,
     generic.DetailView,
 ):
     template_name = "driver-details.html"
     context_object_name = "driver"
-
-    def get_queryset(self):
-        return Driver.objects.filter(
-            company=self.company,
-        ).order_by("-id")
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         instance = self.get_object()
@@ -58,7 +48,7 @@ class DriverDetailView(
 
 class DriverCreateView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    DriverQueryFilterMixin,
     generic.CreateView,
 ):
     form_class = DriverForm
@@ -85,18 +75,13 @@ class DriverCreateView(
 
 class DriverUpdateView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    DriverQueryFilterMixin,
     generic.UpdateView,
 ):
     form_class = DriverForm
     model = Driver
     template_name = "driver-details.html"
     context_object_name = "driver"
-
-    def get_queryset(self):
-        return Driver.objects.filter(
-            company=self.company,
-        )
 
     def get_success_url(self) -> str:
         return reverse(
@@ -107,21 +92,18 @@ class DriverUpdateView(
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         messages.success(
             self.request,
-            "Data successfully updated",
+            _("Data successfully updated"),
         )
         return super().form_valid(form)
 
 
 class DriverDeleteView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    DriverQueryFilterMixin,
     generic.DeleteView,
 ):
     success_url = reverse_lazy("driver:drivers")
     template_name = "drivers.html"
-
-    def get_queryset(self) -> models.query.QuerySet[Any]:
-        return Driver.objects.filter(company=self.company)
 
     def get(
         self,

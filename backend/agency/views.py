@@ -10,24 +10,21 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from company.mixins import CompanyRequestMixin
 from ride.mixins import RidesCountMixin
 
 from .forms import AgencyCreateForm
+from .mixins import AgencyQueryFilterMixin
 from .models import Agency
 
 
 class AgencyListView(
     LoginRequiredMixin,
     RidesCountMixin,
-    CompanyRequestMixin,
+    AgencyQueryFilterMixin,
     generic.ListView,
 ):
     template_name = "agencies.html"
     context_object_name = "agencies"
-
-    def get_queryset(self) -> models.QuerySet[Any]:
-        return Agency.objects.filter(company=self.company)
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -37,7 +34,7 @@ class AgencyListView(
 
 class AgencyCreateView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    AgencyQueryFilterMixin,
     generic.CreateView,
 ):
     form_class = AgencyCreateForm
@@ -47,7 +44,7 @@ class AgencyCreateView(
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.instance.company = self.company
         form.save()
-        messages.success(self.request, "Agency successfully created")
+        messages.success(self.request, _("Agency successfully created"))
         return redirect("agency:agency_list")
 
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:
@@ -56,7 +53,7 @@ class AgencyCreateView(
 
 class AgencyUpdateView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    AgencyQueryFilterMixin,
     generic.UpdateView,
 ):
     form_class = AgencyCreateForm
@@ -65,11 +62,6 @@ class AgencyUpdateView(
     success_url = reverse_lazy("agency:agency_list")
     context_object_name = "agency"
 
-    def get_queryset(self) -> models.QuerySet[Any]:
-        return Agency.objects.filter(
-            company=self.company,
-        )
-
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:
         agency = self.get_object()
         return redirect("agency:agency_update", pk=agency.pk)
@@ -77,7 +69,7 @@ class AgencyUpdateView(
 
 class AgencyDeleteView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    AgencyQueryFilterMixin,
     generic.DeleteView,
 ):
     model = Agency

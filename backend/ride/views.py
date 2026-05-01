@@ -1,6 +1,4 @@
 from typing import Any
-from django.utils import translation
-
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models
@@ -13,10 +11,9 @@ from django.views import generic
 from company.mixins import CompanyRequestMixin, SetCompanyInKwargsMixin
 
 from .forms import RideForm
-from .mixins import RidesCountMixin
+from .mixins import RideQueryFilterMixin, RidesCountMixin
 from .models import Ride
 
-print(translation.get_language())
 
 class RideListView(
     LoginRequiredMixin,
@@ -62,6 +59,7 @@ class RideCreateView(
 
 class RideUpdateView(
     LoginRequiredMixin,
+    RideQueryFilterMixin,
     SetCompanyInKwargsMixin,
     generic.UpdateView,
 ):
@@ -71,24 +69,14 @@ class RideUpdateView(
     context_object_name = "ride"
     success_url = reverse_lazy("ride:ride_list")
 
-    def get_queryset(self) -> models.query.QuerySet[Any]:
-        return Ride.objects.filter(
-            company=self.company,
-        )
-
 
 class RideDeleteView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    RideQueryFilterMixin,
     generic.DeleteView,
 ):
     model = Ride
     success_url = reverse_lazy("ride:ride_list")
-
-    def get_queryset(self) -> models.query.QuerySet[Any]:
-        return Ride.objects.filter(
-            company=self.company,
-        )
 
     def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         instance = self.get_object()

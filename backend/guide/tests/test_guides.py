@@ -2,6 +2,7 @@ import pytest
 from django.urls import reverse
 from parameterized import parameterized
 
+from auth.tests.factories import UserFactory
 from common.tests.fixtures import user  # noqa: F401, F811
 from company.tests.factories import CompanyFactory
 
@@ -90,6 +91,19 @@ class TestGuides:
         )
 
         assert self.company.guide_items.count() == 1
+
+    def test_update_other_company_guide_is_blocked(self, client):
+        other_user = UserFactory()
+        other_user.company = CompanyFactory()
+        other_user.save()
+
+        client.force_login(other_user)
+        client.post(
+            reverse("guide:guide_update", kwargs={"pk": self.guide.pk}),
+            {"first_name": "John"},
+        )
+        self.guide.refresh_from_db()
+        assert not self.guide.first_name == "John"
 
     @parameterized.expand(
         (

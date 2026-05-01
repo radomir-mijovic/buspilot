@@ -10,6 +10,7 @@ from django.views import generic
 from company.mixins import CompanyRequestMixin
 from ride.forms import RideCalendarVehicleForm
 from vehicle.documents.forms import VehicleDocumentUploadForm
+from vehicle.mixins import VehicleQueryFilterMixin
 
 from .forms import VehicleCreateForm
 from .models import Vehicle
@@ -17,16 +18,11 @@ from .models import Vehicle
 
 class VehicleView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    VehicleQueryFilterMixin,
     generic.ListView,
 ):
     template_name = "vehicle.html"
     context_object_name = "vehicles"
-
-    def get_queryset(self):
-        return Vehicle.objects.filter(
-            company=self.company,
-        ).select_related("company")
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -36,20 +32,11 @@ class VehicleView(
 
 class VehicleDetailView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    VehicleQueryFilterMixin,
     generic.DetailView,
 ):
     template_name = "vehicle-details.html"
     context_object_name = "vehicle"
-
-    def get_queryset(self):
-        return (
-            Vehicle.objects.filter(
-                company=self.company,
-            )
-            .select_related("company")
-            .prefetch_related("documents")
-        )
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -89,6 +76,7 @@ class VehicleCreateView(
 
 class VehicleUpdateView(
     LoginRequiredMixin,
+    VehicleQueryFilterMixin,
     generic.UpdateView,
 ):
     model = Vehicle
@@ -116,14 +104,11 @@ class VehicleUpdateView(
 
 class VehicleDeleteView(
     LoginRequiredMixin,
-    CompanyRequestMixin,
+    VehicleQueryFilterMixin,
     generic.DeleteView,
 ):
     model = Vehicle
     success_url = reverse_lazy("vehicle:vehicles")
-
-    def get_queryset(self):
-        return Vehicle.objects.filter(company=self.company)
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
