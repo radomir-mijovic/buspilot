@@ -7,6 +7,7 @@ from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from company.mixins import CompanyRequestMixin
@@ -91,6 +92,6 @@ class AgencyDeleteView(
         agency = self.get_object()
         messages.info(
             self.request,
-            f"{agency.name} successfully deleted",
+            _(f"{agency.name} successfully deleted"),
         )
         return super().form_valid(form)

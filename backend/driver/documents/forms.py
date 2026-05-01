@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from ..models import DriverDocument
 
@@ -50,6 +51,6 @@ class DriverDocumentUploadForm(ModelForm):
     def clean_expiring_at(self):
         if expiring_at := self.cleaned_data["expiring_at"]:
             if expiring_at < timezone.now().date():
-                raise forms.ValidationError("Date must be in the future.")
+                raise forms.ValidationError(_("Date must be in the future."))
 
         return expiring_at

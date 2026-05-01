@@ -28,6 +28,7 @@ ENV/
 
 /media
 backend/media
+backend/staticfiles
 backend/backend/staticfiles
 backend/backend/media
 

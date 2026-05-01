@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from common.models import DateSlot, LocationSlot, TimeSlot
 
@@ -6,10 +7,10 @@ from . import constants, managers
 
 
 class RideTypeChoices(models.IntegerChoices):
-    LINE = constants.LINE, "Line"
-    TRANSFER = constants.TRANSFER, "Transfer"
-    EXCURSION = constants.EXCURSION, "Excursion"
-    ROUND_TOUR = constants.ROUND_TOUR, "Round Tour"
+    LINE = constants.LINE, _("Line")
+    TRANSFER = constants.TRANSFER, _("Transfer")
+    EXCURSION = constants.EXCURSION, _("Excursion")
+    ROUND_TOUR = constants.ROUND_TOUR, _("Round Tour")
 
 
 class RideQueryManager(models.Model):

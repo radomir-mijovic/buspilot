@@ -44,7 +44,8 @@
                                 <div class="p-3">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h6 class="m-0 fs-16 fw-semibold text-white" data-key="t-documents-expiring-soon">Dokumenti koji brzo ističu !</h6>
+                                            <h6 class="m-0 fs-16 fw-semibold text-white"
+                                                data-key="t-documents-expiring-soon">Dokumenti koji brzo ističu !</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +214,9 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <h6 class="dropdown-header">Dobrodošli {{ user.username|title }}!</h6>
+                            <h6 class="dropdown-header">
+                                <span data-key="t-welcome">Dobrodošli</span> {{ user.username|title }}!
+                            </h6>
                             <button type="button"
                                     class="dropdown-item"
                                     data-bs-toggle="modal"

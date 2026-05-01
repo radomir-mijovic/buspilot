@@ -1,4 +1,5 @@
 {% extends "partials/base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}
     Vozila
@@ -13,7 +14,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 {% block pagetitle %}
-                    {% include "partials/page-title.html" with title="Vozila" %}
+                    {% include "partials/page-title.html" with title="Vozila" title_key="t-vehicles" %}
                 {% endblock pagetitle %}
                 <div class="row">
                     <div class="col-lg-12">
@@ -44,7 +45,7 @@
                                             <div class="search-box">
                                                 <input type="text"
                                                        class="form-control search"
-                                                       placeholder="Model ili marka...">
+                                                       placeholder="{% trans 'Brand or type...' %}" />
                                                 <i class="ri-search-line search-icon"></i>
                                             </div>
                                         </div>
@@ -63,9 +64,7 @@
                                                href="#home1"
                                                role="tab"
                                                aria-selected="true"
-                                               data-key="t-all-vehicles">
-                                                 Sva vozila
-                                            </a>
+                                               data-key="t-all-vehicles">Sva vozila</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link py-3"
@@ -74,9 +73,7 @@
                                                href="#delivered"
                                                role="tab"
                                                aria-selected="false"
-                                               data-key="t-bus">
-                                                 Autobus
-                                            </a>
+                                               data-key="t-bus">Autobus</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link py-3"
@@ -85,9 +82,7 @@
                                                href="#delivered"
                                                role="tab"
                                                aria-selected="false"
-                                               data-key="t-midibus">
-                                                 Midi Bus
-                                            </a>
+                                               data-key="t-midibus">Midi Bus</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link py-3"
@@ -96,170 +91,173 @@
                                                href="#delivered"
                                                role="tab"
                                                aria-selected="false"
-                                               data-key="t-minibus">
-                                                 Minibus
-                                            </a>
-                                        <li class="nav-item">
-                                            <a class="nav-link py-3"
-                                               data-bs-toggle="tab"
-                                               id="Van"
-                                               href="#returns"
-                                               role="tab"
-                                               aria-selected="false"
-                                               data-key="t-van">
-                                                Kombi
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link py-3"
-                                               data-bs-toggle="tab"
-                                               id="Car"
-                                               href="#cancelled"
-                                               role="tab"
-                                               aria-selected="false"
-                                               data-key="t-small-vehicles">
-                                                 Mala vozila
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="table-responsive table-card mb-1">
-                                        <table class="table table-nowrap align-middle" id="orderTable">
-                                            <thead class="text-muted table-light">
-                                                <tr class="text-uppercase">
-                                                    <th scope="col" style="width: 25px;">ID</th>
-                                                    <th class="col" data-key="t-brand">Marka</th>
-                                                    <th class="col" data-key="t-model">Model</th>
-                                                    <th class="col" data-key="t-vehicle-type">Vrsta</th>
-                                                    <th class="col" data-key="t-year-of-production">Godina proizvodnje</th>
-                                                    <th class="col" data-key="t-seats">Broj sjedista</th>
-                                                    <th class="col" data-key="t-rides-count">Vožnji</th>
-                                                    <th scope="col" style="width: 150px;" data-key="t-action">Akcija</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="vehicle-tbody" class="list form-check-all">
-                                                {% for vehicle in vehicles %}
-                                                    <tr id="row-{{ vehicle.id }}"
-                                                        style="cursor:pointer"
-                                                        onclick="window.location='{% url 'vehicle:vehicles_details' vehicle.id %}'">
-                                                        <td class="id">#{{ vehicle.id }}</td>
-                                                        <td class="customer_name">{{ vehicle.brand }}</td>
-                                                        <td class="product_name">{{ vehicle.model }}</td>
-                                                        <td class="type">{{ vehicle.get_vehicle_type_display }}</td>
-                                                        <td class="amount">{{ vehicle.year_of_production }}</td>
-                                                        <td class="payment">{{ vehicle.number_of_seats }}</td>
-                                                        <td class="rides_count"> <span class="badge bg-success">{{ vehicle.rides_count }}</span></td>
-                                                        <td>
-                                                            <div class="hstack gap-3 flex-wrap">
-                                                                <button class="delete-vehicle-btn link-danger fs-15 border-0 bg-transparent p-0"
-                                                                        data-vehicle-id="{{ vehicle.id }}"
-                                                                        data-delete-url="{% url 'vehicle:vehicles_delete' vehicle.id %}">
-                                                                    <i class="ri-delete-bin-line"></i>
-                                                                </button>
-                                                            </div>
-                                                        </td>
+                                               data-key="t-minibus">Minibus</a>
+                                            <li class="nav-item">
+                                                <a class="nav-link py-3"
+                                                   data-bs-toggle="tab"
+                                                   id="Van"
+                                                   href="#returns"
+                                                   role="tab"
+                                                   aria-selected="false"
+                                                   data-key="t-van">Kombi</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link py-3"
+                                                   data-bs-toggle="tab"
+                                                   id="Car"
+                                                   href="#cancelled"
+                                                   role="tab"
+                                                   aria-selected="false"
+                                                   data-key="t-small-vehicles">Mala vozila</a>
+                                            </li>
+                                        </ul>
+                                        <div class="table-responsive table-card mb-1">
+                                            <table class="table table-nowrap align-middle" id="orderTable">
+                                                <thead class="text-muted table-light">
+                                                    <tr class="text-uppercase">
+                                                        <th scope="col" style="width: 25px;">ID</th>
+                                                        <th class="col" data-key="t-brand">Marka</th>
+                                                        <th class="col" data-key="t-model">Model</th>
+                                                        <th class="col" data-key="t-vehicle-type">Vrsta</th>
+                                                        <th class="col" data-key="t-year-of-production">Godina proizvodnje</th>
+                                                        <th class="col" data-key="t-seats">Broj sjedista</th>
+                                                        <th class="col" data-key="t-rides-count">Vožnji</th>
+                                                        <th scope="col" style="width: 150px;" data-key="t-action">Akcija</th>
                                                     </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                        <div class="noresult" style="display: none">
-                                            <div class="text-center">
-                                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
-                                                </lord-icon>
-                                                <h5 class="mt-2" data-key="t-no-result">Nema rezultata</h5>
+                                                </thead>
+                                                <tbody id="vehicle-tbody" class="list form-check-all">
+                                                    {% for vehicle in vehicles %}
+                                                        <tr id="row-{{ vehicle.id }}"
+                                                            style="cursor:pointer"
+                                                            onclick="window.location='{% url 'vehicle:vehicles_details' vehicle.id %}'">
+                                                            <td class="id">#{{ vehicle.id }}</td>
+                                                            <td class="customer_name">{{ vehicle.brand }}</td>
+                                                            <td class="product_name">{{ vehicle.model }}</td>
+                                                            <td class="type">{{ vehicle.get_vehicle_type_display }}</td>
+                                                            <td class="amount">{{ vehicle.year_of_production }}</td>
+                                                            <td class="payment">{{ vehicle.number_of_seats }}</td>
+                                                            <td class="rides_count">
+                                                                <span class="badge bg-success">{{ vehicle.rides_count }}</span>
+                                                            </td>
+                                                            <td>
+                                                                <div class="hstack gap-3 flex-wrap">
+                                                                    <button class="delete-vehicle-btn link-danger fs-15 border-0 bg-transparent p-0"
+                                                                            data-vehicle-id="{{ vehicle.id }}"
+                                                                            data-delete-url="{% url 'vehicle:vehicles_delete' vehicle.id %}">
+                                                                        <i class="ri-delete-bin-line"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            <div class="noresult" style="display: none">
+                                                <div class="text-center">
+                                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:75px;height:75px">
+                                                    </lord-icon>
+                                                    <h5 class="mt-2" data-key="t-no-result">Nema rezultata</h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal fade"
-                                     id="showModal"
-                                     tabindex="-1"
-                                     aria-labelledby="addVehicleModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-light p-3">
-                                                <h5 class="modal-title" id="addVehicleModalLabel" data-key="t-add-vehicle">Dodaj Novo Vozilo</h5>
+                                    <div class="modal fade"
+                                         id="showModal"
+                                         tabindex="-1"
+                                         aria-labelledby="addVehicleModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-light p-3">
+                                                    <h5 class="modal-title"
+                                                        id="addVehicleModalLabel"
+                                                        data-key="t-add-vehicle">Dodaj Novo Vozilo</h5>
+                                                </div>
+                                                <form hx-post="{% url 'vehicle:vehicles_create' %}"
+                                                      hx-target="#vehicle-tbody"
+                                                      hx-swap="beforeend"
+                                                      hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('showModal')).hide();this.reset();orderList.reIndex();htmx.process(document.body);}">
+                                                    {% csrf_token %}
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="brand-field" class="form-label" data-key="t-brand">Marka</label>
+                                                            {{ form.brand }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="model-field" class="form-label" data-key="t-model">Model</label>
+                                                            {{ form.model }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="vehicle-type-field"
+                                                                   class="form-label"
+                                                                   data-key="t-vehicle-type-label">Tip vozila</label>
+                                                            {{ form.vehicle_type }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="year-field" class="form-label" data-key="t-year-of-production">Godina proizvodnje</label>
+                                                            {{ form.year_of_production }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="seats-field" class="form-label" data-key="t-num-seats">Broj sjedišta</label>
+                                                            {{ form.number_of_seats }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="chassis_number" class="form-label" data-key="t-chassis-number">Broj šasije</label>
+                                                            {{ form.chassis_number }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="engine_number" class="form-label" data-key="t-engine-number">Broj motora</label>
+                                                            {{ form.engine_number }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="horse_power" class="form-label" data-key="t-horse-power">Konjska snaga</label>
+                                                            {{ form.horse_power }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="weight" class="form-label" data-key="t-weight">Kilaža (KG)</label>
+                                                            {{ form.weight }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="licence_number" class="form-label" data-key="t-licence-number">Broj Tablica</label>
+                                                            {{ form.licence_number }}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="color" class="form-label" data-key="t-color">Boja</label>
+                                                            {{ form.color }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="hstack gap-2 justify-content-end">
+                                                            <button type="button"
+                                                                    class="btn btn-light"
+                                                                    data-bs-dismiss="modal"
+                                                                    data-key="t-close">Zatvori</button>
+                                                            <button type="submit" class="btn btn-success" data-key="t-add-vehicle">Dodaj vozilo</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <form hx-post="{% url 'vehicle:vehicles_create' %}"
-                                                  hx-target="#vehicle-tbody"
-                                                  hx-swap="beforeend"
-                                                  hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('showModal')).hide();this.reset();orderList.reIndex();htmx.process(document.body);}">
-                                                {% csrf_token %}
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                        <label for="brand-field" class="form-label" data-key="t-brand">Marka</label>
-                                                        {{ form.brand }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="model-field" class="form-label" data-key="t-model">Model</label>
-                                                        {{ form.model }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="vehicle-type-field" class="form-label" data-key="t-vehicle-type-label">Tip vozila</label>
-                                                        {{ form.vehicle_type }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="year-field" class="form-label" data-key="t-year-of-production">Godina proizvodnje</label>
-                                                        {{ form.year_of_production }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="seats-field" class="form-label" data-key="t-num-seats">Broj sjedišta</label>
-                                                        {{ form.number_of_seats }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="chassis_number" class="form-label" data-key="t-chassis-number">Broj šasije</label>
-                                                        {{ form.chassis_number }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="engine_number" class="form-label" data-key="t-engine-number">Broj motora</label>
-                                                        {{ form.engine_number }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="horse_power" class="form-label" data-key="t-horse-power">Konjska snaga</label>
-                                                        {{ form.horse_power }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="weight" class="form-label" data-key="t-weight">Kilaža (KG)</label>
-                                                        {{ form.weight }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="licence_number" class="form-label" data-key="t-licence-number">Broj Tablica</label>
-                                                        {{ form.licence_number }}
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="color" class="form-label" data-key="t-color">Boja</label>
-                                                        {{ form.color }}
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <div class="hstack gap-2 justify-content-end">
-                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
-                                                        <button type="submit" class="btn btn-success" data-key="t-add-vehicle">Dodaj vozilo</button>
-                                                    </div>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!--end col-->
                     </div>
-                    <!--end col-->
+                    <!--end row-->
                 </div>
-                <!--end row-->
+                <!-- container-fluid -->
             </div>
-            <!-- container-fluid -->
+            <!-- End Page-content -->
+            {% block footer %}
+                {% include "partials/footer.html" %}
+            {% endblock footer %}
         </div>
-        <!-- End Page-content -->
-        {% block footer %}
-            {% include "partials/footer.html" %}
-        {% endblock footer %}
-    </div>
-    <!-- end main content-->
-{% endblock content %}
-{% block extra_js %}
-    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-    <script src="{% static 'libs/list.js/dist/list.min.js' %}"></script>
-    <script src="{% static 'libs/sweetalert2/dist/sweetalert2.min.js' %}"></script>
-    <script src="{% static 'js/pages/ecommerce-order.init.js' %}"></script>
-{% endblock extra_js %}
+        <!-- end main content-->
+    {% endblock content %}
+    {% block extra_js %}
+        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+        <script src="{% static 'libs/list.js/dist/list.min.js' %}"></script>
+        <script src="{% static 'libs/sweetalert2/dist/sweetalert2.min.js' %}"></script>
+        <script src="{% static 'js/pages/ecommerce-order.init.js' %}"></script>
+    {% endblock extra_js %}

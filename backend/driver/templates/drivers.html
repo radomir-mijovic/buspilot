@@ -1,4 +1,5 @@
 {% extends "partials/base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}
     Vozaci
@@ -53,7 +54,7 @@
                                         <div class="search-box">
                                             <input type="text"
                                                    class="form-control search"
-                                                   placeholder="Brza pretraga..." />
+                                                   placeholder="{% trans 'Quick search...' %}" />
                                             <i class="ri-search-line search-icon"></i>
                                         </div>
                                     </div>

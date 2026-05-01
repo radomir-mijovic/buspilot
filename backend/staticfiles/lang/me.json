@@ -127,5 +127,8 @@
   "t-agency": "Agencija",
   "t-note": "Napomena",
   "t-days": ["Pon", "Uto", "Sri", "Čet", "Pet", "Sub", "Ned"],
+  "t-update-ride-title": "Izmijeni Vožnju",
+  "t-update-ride-btn": "Izmijeni vožnju",
+  "t-delete-ride-btn": "Obriši vožnju",
   "t-documents-expiring-soon": "Dokumenti koji brzo ističu !"
 }

@@ -7,6 +7,7 @@ from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from company.mixins import CompanyRequestMixin
@@ -28,7 +29,7 @@ class DriverDocumentUploadView(
         form.instance.driver = self.driver
         form.instance.company = self.company
         form.save()
-        messages.success(self.request, "File successfully added.")
+        messages.success(self.request, _("File successfully added."))
         return redirect("driver:driver_details", pk=self.driver_pk)
 
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:

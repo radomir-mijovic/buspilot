@@ -130,5 +130,6 @@
   "t-update-ride-title": "Izmijeni Vožnju",
   "t-update-ride-btn": "Izmijeni vožnju",
   "t-delete-ride-btn": "Obriši vožnju",
-  "t-documents-expiring-soon": "Dokumenti koji brzo ističu !"
+  "t-documents-expiring-soon": "Dokumenti koji brzo ističu !",
+  "t-welcome": "Dobrodošli"
 }

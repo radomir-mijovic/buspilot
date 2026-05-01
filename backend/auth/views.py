@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import redirect, render
+from django.utils.translation import gettext_lazy as _
 
 from .forms import LoginForm
 
@@ -16,14 +17,14 @@ def login_user(request):
             login(request, user)
             return redirect("dashboard:dashboard")
         else:
-            messages.error(request, "Invalid username or password.")
+            messages.error(request, _("Invalid username or password."))
 
     return render(request, "login.html", {"form": form})
 
 
 def logout_user(request):
     logout(request)
-    messages.success(request, "You have logged out.")
+    messages.success(request, _("You have logged out."))
     return redirect("auth:login")
 
 
@@ -34,9 +35,9 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, "Lozinka uspjesno promijenjena.")
+            messages.success(request, _("Password successfully changed"))
         else:
-            messages.error(request, "Provjerite lozinke.")
+            messages.error(request, _("Please check password"))
             if form.errors:
                 for error in form.errors.values():
                     messages.error(request, error.as_text())

@@ -1,4 +1,6 @@
 from typing import Any
+from django.utils import translation
+
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models
@@ -14,6 +16,7 @@ from .forms import RideForm
 from .mixins import RidesCountMixin
 from .models import Ride
 
+print(translation.get_language())
 
 class RideListView(
     LoginRequiredMixin,

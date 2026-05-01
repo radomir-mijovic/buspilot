@@ -6,7 +6,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
             <div class="modal-header bg-info-subtle p-3">
-                <h5 class="modal-title" id="exampleModalLabel">Izmjeni Podatke</h5>
+                <h5 class="modal-title" id="exampleModalLabel" data-key="t-edit-data">Izmjeni Podatke</h5>
                 <button type="button"
                         class="btn-close"
                         data-bs-dismiss="modal"
@@ -21,7 +21,7 @@
                     <div class="row g-3">
                         <div class="col-lg-12">
                             <div>
-                                <label for="first_name-field" class="form-label">Ime</label>
+                                <label for="first_name-field" class="form-label" data-key="t-first-name">Ime</label>
                                 <input type="text"
                                        name="first_name"
                                        class="form-control"
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div>
-                                <label for="last_name-field" class="form-label">Prezime</label>
+                                <label for="last_name-field" class="form-label" data-key="t-last-name">Prezime</label>
                                 <input type="text"
                                        name="last_name"
                                        value="{{ guide.last_name }}"
@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div>
-                                <label class="form-label">Broj telefona</label>
+                                <label class="form-label" data-key="t-phone-number">Broj telefona</label>
                                 <input type="text"
                                        name="phone_number"
                                        value="{{ guide.phone_number }}"
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div>
-                                <label class="form-label">Broj pasoša</label>
+                                <label class="form-label" data-key="t-passport-number">Broj pasoša</label>
                                 <input type="text"
                                        name="passport_number"
                                        value="{{ guide.passport_number }}"
@@ -75,8 +75,8 @@
                 </div>
                 <div class="modal-footer">
                     <div class="hstack gap-2 justify-content-end">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Zatvori</button>
-                        <button type="submit" class="btn btn-success">Sačuvaj</button>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
+                        <button type="submit" class="btn btn-success" data-key="t-save">Sačuvaj</button>
                     </div>
                 </div>
             </form>
@@ -101,15 +101,17 @@
                            colors="primary:#405189,secondary:#f06548"
                            style="width: 90px; height: 90px"></lord-icon>
                 <div class="mt-4 text-center">
-                    <h4 class="fs-semibold">Da li ste sigurni?</h4>
-                    <p class="text-muted fs-14 mb-4 pt-1">Vozač će biti trajno obrisan.</p>
+                    <h4 class="fs-semibold" data-key="t-are-you-sure">Da li ste sigurni?</h4>
+                    <p class="text-muted fs-14 mb-4 pt-1" data-key="t-guide-delete-confirm">Vodič će biti trajno obrisan.</p>
                     <div class="hstack gap-2 justify-content-center remove">
                         <button class="btn btn-link link-success fw-medium text-decoration-none"
-                                data-bs-dismiss="modal">
+                                data-bs-dismiss="modal"
+                                data-key="t-close">
                             <i class="ri-close-line me-1 align-middle"></i>
                             Zatvori
                         </button>
                         <a class="btn btn-danger"
+                           data-key="t-yes-delete"
                            href="{% url 'guide:guide_delete' pk=guide.id %}">Da, Obriši!!</a>
                     </div>
                 </div>

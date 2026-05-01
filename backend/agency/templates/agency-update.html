@@ -13,7 +13,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 {% block pagetitle %}
-                    {% include "partials/page-title.html" with pagetitle="Izmijeni Agenciju" title="Izmijeni Agenciju" %}
+                    {% include "partials/page-title.html" with pagetitle="Izmijeni Agenciju" title="Izmijeni Agenciju"  title_key="t-update-agency" %}
                 {% endblock pagetitle %}
                 <div class="row">
                     <form method="POST" action="{% url 'agency:agency_update' agency.id %}">

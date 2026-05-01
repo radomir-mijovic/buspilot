@@ -9,7 +9,12 @@
     e &&
       Array.from(e).forEach(function (t) {
         t.addEventListener("click", function (e) {
-          n(t.getAttribute("data-lang"));
+          var selectedLang = t.getAttribute("data-lang");
+          var currentLang = localStorage.getItem("language") || "en";
+          n(selectedLang);
+          if (selectedLang !== currentLang) {
+            window.location.reload();
+          }
         });
       });
   }
@@ -43,6 +48,7 @@
                         (document.getElementById("header-lang-img").src =
                           "/static/images/flags/me.svg"),
       localStorage.setItem("language", e),
+      document.cookie = "django_language=" + e + "; path=/",
       null == (a = localStorage.getItem("language")) && n(t),
       (e = new XMLHttpRequest()).open("GET", "/static/lang/" + a + ".json"),
       (e.onreadystatechange = function () {
