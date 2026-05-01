@@ -27,17 +27,17 @@ def list_in_danger_driver_documents(request):
     if not request.user.is_authenticated:
         return {}
 
-    four_in_danger = DriverDocument.expiring.close_to_expire().filter(
+    in_danger_documents = DriverDocument.expiring.close_to_expire().filter(
         company=request.user.company,
     )
-    return {"in_danger_driver_documents": four_in_danger}
+    return {"in_danger_driver_documents": in_danger_documents}
 
 
 def list_in_danger_vehicle_documents(request):
     if not request.user.is_authenticated:
         return {}
 
-    four_in_danger = VehicleDocument.expiring.close_to_expire().filter(
+    in_danger_documents = VehicleDocument.expiring.close_to_expire().filter(
         company=request.user.company,
     )
-    return {"in_danger_vehicle_documents": four_in_danger}
+    return {"in_danger_vehicle_documents": in_danger_documents}

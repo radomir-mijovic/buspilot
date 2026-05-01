@@ -126,5 +126,6 @@
   "t-vehicle": "Vozilo",
   "t-agency": "Agencija",
   "t-note": "Napomena",
-  "t-days": ["Pon", "Uto", "Sri", "Čet", "Pet", "Sub", "Ned"]
+  "t-days": ["Pon", "Uto", "Sri", "Čet", "Pet", "Sub", "Ned"],
+  "t-documents-expiring-soon": "Dokumenti koji brzo ističu !"
 }

@@ -4,7 +4,8 @@
     Kreiraj Vožnju
 {% endblock title %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'libs/flatpickr/dist/flatpickr.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'libs/flatpickr/dist/flatpickr.min.css' %}">
 {% endblock extra_css %}
 {% block content %}
     <div class="main-content">
@@ -98,7 +99,7 @@
 {% block extra_js %}
     <script src="{% static 'libs/flatpickr/dist/flatpickr.min.js' %}"></script>
     <script>
-        flatpickr("#start_date", { dateFormat: "d/m/Y", allowInput: true });
-        flatpickr("#end_date", { dateFormat: "d/m/Y", allowInput: true });
+      flatpickr("#start_date", { dateFormat: "Y-m-d", altInput: true, altFormat: "d/m/Y", allowInput: true });
+      flatpickr("#end_date",   { dateFormat: "Y-m-d", altInput: true, altFormat: "d/m/Y", allowInput: true });
     </script>
 {% endblock extra_js %}

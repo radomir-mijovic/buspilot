@@ -76,24 +76,24 @@ class RideForm(forms.ModelForm):
                 }
             ),
             "start_date": forms.DateInput(
-                format="%d/%m/%Y",
+                format="%Y-%m-%d",
                 attrs={
                     "class": "form-control",
                     "id": "start_date",
                     "placeholder": "DD/MM/YYYY",
                     "required": "true",
                     "autocomplete": "off",
-                }
+                },
             ),
             "end_date": forms.DateInput(
-                format="%d/%m/%Y",
+                format="%Y-%m-%d",
                 attrs={
                     "class": "form-control",
                     "id": "end_date",
                     "placeholder": "DD/MM/YYYY",
                     "required": "true",
                     "autocomplete": "off",
-                }
+                },
             ),
             "is_all_day": forms.CheckboxInput(
                 attrs={
@@ -205,7 +205,7 @@ class RideCalendarVehicleForm(forms.ModelForm):
                     "placeholder": "DD/MM/YYYY",
                     "required": "true",
                     "autocomplete": "off",
-                }
+                },
             ),
             "end_date": forms.DateInput(
                 format="%d/%m/%Y",
@@ -215,7 +215,7 @@ class RideCalendarVehicleForm(forms.ModelForm):
                     "placeholder": "DD/MM/YYYY",
                     "required": "true",
                     "autocomplete": "off",
-                }
+                },
             ),
             "is_all_day": forms.CheckboxInput(
                 attrs={

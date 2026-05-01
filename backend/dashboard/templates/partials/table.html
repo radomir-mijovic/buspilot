@@ -30,7 +30,11 @@
                             <tr style="cursor:pointer"
                                 onclick="window.location='{% url 'ride:ride_update' ride.id %}'">
                                 <td>{{ ride.title }}</td>
-                                <td>Katarina Bulatovic</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        {% for guide in ride.guides.all %}<li>{{ guide }}</li>{% endfor %}
+                                    </ul>
+                                </td>
                                 <td>
                                     <ul class="list-unstyled">
                                         {% for vehicle in ride.vehicles.all %}<li>{{ vehicle }}</li>{% endfor %}
@@ -45,7 +49,10 @@
                                 <td>{{ ride.end_time }}</td>
                                 <td>{{ ride.start_location }}</td>
                                 <td>
-                                    <span style="color: black; font-size: 13px; font-weigth: 400;" class="badge bg-{{ ride.agency.card_header_color }}-subtle">{{ ride.agency }}</span>
+                                    <span style="color: black;
+                                                 font-size: 13px;
+                                                 font-weigth: 400"
+                                          class="badge bg-{{ ride.agency.card_header_color }}-subtle">{{ ride.agency }}</span>
                                 </td>
                                 <td>{{ ride.description }}</td>
                             </tr>

@@ -337,6 +337,7 @@
   "t-vehicle": "Vehicle",
   "t-agency": "Agency",
   "t-note": "Note",
-  "t-days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+  "t-days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  "t-documents-expiring-soon": "Douments that are expiring soon !"
 }
 
