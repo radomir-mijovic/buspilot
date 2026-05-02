@@ -1,0 +1,59 @@
+<table class="table table-nowrap align-middle" id="orderTable">
+    <thead class="text-muted table-light">
+        <tr class="text-uppercase">
+            <th class="col" data-sort="id">ID</th>
+            <th class="col" data-sort="customer_name" data-key="t-ride-name">Naziv</th>
+            <th class="col" data-sort="product_name" data-key="t-ride-type">Tip</th>
+            <th class="col" data-sort="date" data-key="t-departure">Polazak</th>
+            <th class="col" data-sort="amount" data-key="t-arrival">Završava</th>
+            <th class="col" data-sort="payment" data-key="t-departure-location">Mjesto polaska</th>
+            <th class="col" data-sort="city" data-key="t-action">Action</th>
+        </tr>
+    </thead>
+    <tbody class="list form-check-all">
+        {% for ride in rides %}
+            <tr id="row-{{ ride.id }}" data-ride-type="{{ ride.ride_type }}">
+                <td class="id">
+                    <a href="{% url 'ride:ride_update' ride.id %}"
+                       class="fw-medium link-primary">#VZ{{ ride.id }}</a>
+                </td>
+                <td class="customer_name">{{ ride.title }}</td>
+                <td class="product_name">{{ ride.get_ride_type_display }}</td>
+                <td class="date">
+                    {{ ride.start_date|date:"d M, Y" }}, <small class="text-muted">{{ ride.start_time|date:"h:iA" }}</small>
+                </td>
+                <td class="date">
+                    {{ ride.end_date|date:"d M, Y" }}, <small class="text-muted">{{ ride.end_time|date:"h:iA" }}</small>
+                </td>
+                <td class="payment">{{ ride.start_location }}</td>
+                <td>
+                    <ul class="list-inline hstack gap-2 mb-0">
+                        <li class="list-inline-item"
+                            data-bs-toggle="tooltip"
+                            data-bs-trigger="hover"
+                            data-bs-placement="top"
+                            title="View">
+                            <a href="{% url 'ride:ride_update' ride.id %}"
+                               class="text-primary d-inline-block">
+                                <i class="ri-eye-fill fs-16"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item"
+                            data-bs-toggle="tooltip"
+                            data-bs-trigger="hover"
+                            data-bs-placement="top"
+                            title="Remove">
+                            <a class="text-danger d-inline-block remove-item-btn"
+                               data-bs-toggle="modal"
+                               data-bs-target="#deleteRideModal"
+                               data-delete-url="{% url 'ride:ride_delete' ride.id %}"
+                               href="javascript:void(0);">
+                                <i class="ri-delete-bin-5-fill fs-16"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -4,15 +4,11 @@
     Pregled vožnji
 {% endblock title %}
 {% block extra_css %}
-    <!-- Sweet Alert css-->
     <link href="{% static 'libs/sweetalert2/dist/sweetalert2.min.css' %}"
           rel="stylesheet"
           type="text/css" />
 {% endblock extra_css %}
 {% block content %}
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
@@ -94,122 +90,21 @@
                                     </ul>
                                     <div class="table-responsive table-card mb-1"
                                          style="max-height: 850px;
-                                                overflow-y: auto">
-                                        <table class="table table-nowrap align-middle" id="orderTable">
-                                            <thead class="text-muted table-light">
-                                                <tr class="text-uppercase">
-                                                    <th class="col" data-sort="id">ID</th>
-                                                    <th class="col" data-sort="customer_name" data-key="t-ride-name">Naziv</th>
-                                                    <th class="col" data-sort="product_name" data-key="t-ride-type">Tip</th>
-                                                    <th class="col" data-sort="date" data-key="t-departure">Polazak</th>
-                                                    <th class="col" data-sort="amount" data-key="t-arrival">Završava</th>
-                                                    <th class="col" data-sort="payment" data-key="t-departure-location">Mjesto polaska</th>
-                                                    <th class="col" data-sort="city" data-key="t-action">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="list form-check-all">
-                                                {% for ride in rides %}
-                                                    <tr id="row-{{ ride.id }}" data-ride-type="{{ ride.ride_type }}">
-                                                        <td class="id">
-                                                            <a href="{% url 'ride:ride_update' ride.id %}"
-                                                               class="fw-medium link-primary">#VZ{{ ride.id }}</a>
-                                                        </td>
-                                                        <td class="customer_name">{{ ride.title }}</td>
-                                                        <td class="product_name">{{ ride.get_ride_type_display }}</td>
-                                                        <td class="date">
-                                                            {{ ride.start_date|date:"d M, Y" }}, <small class="text-muted">{{ ride.start_time|date:"h:iA" }}</small>
-                                                        </td>
-                                                        <td class="date">
-                                                            {{ ride.end_date|date:"d M, Y" }}, <small class="text-muted">{{ ride.end_time|date:"h:iA" }}</small>
-                                                        </td>
-                                                        <td class="payment">{{ ride.start_location }}</td>
-                                                        <td>
-                                                            <ul class="list-inline hstack gap-2 mb-0">
-                                                                <li class="list-inline-item"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-trigger="hover"
-                                                                    data-bs-placement="top"
-                                                                    title="View">
-                                                                    <a href="{% url 'ride:ride_update' ride.id %}"
-                                                                       class="text-primary d-inline-block">
-                                                                        <i class="ri-eye-fill fs-16"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="list-inline-item"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-trigger="hover"
-                                                                    data-bs-placement="top"
-                                                                    title="Remove">
-                                                                    <a class="text-danger d-inline-block remove-item-btn"
-                                                                       data-bs-toggle="modal"
-                                                                       data-bs-target="#deleteRideModal"
-                                                                       data-delete-url="{% url 'ride:ride_delete' ride.id %}"
-                                                                       href="javascript:void(0);">
-                                                                        <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!--end modal -->
-                            </div>
-                        </div>
-                    </div>
-                    <!--end col-->
-                </div>
-                <!--end row-->
-                <div class="modal fade zoomIn"
-                     id="deleteRideModal"
-                     tabindex="-1"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body p-5 text-center">
-                                <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
-                                <div class="mt-4 text-center">
-                                    <h4 data-key="t-are-you-sure">Da li ste sigurni?</h4>
-                                    <p class="text-muted fs-14 mb-4" data-key="t-ride-delete-confirm">Vožnja će biti trajno obrisana.</p>
-                                    <div class="hstack gap-2 justify-content-center">
-                                        <button class="btn btn-link link-success fw-medium text-decoration-none"
-                                                data-bs-dismiss="modal">
-                                            <i class="ri-close-line me-1 align-middle"></i> <span data-key="t-close">Zatvori</span>
-                                        </button>
-                                        <button id="deleteRideConfirm"
-                                                class="btn btn-danger"
-                                                hx-swap="delete"
-                                                hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('deleteRideModal')).hide();}">
-                                            <span data-key="t-yes-delete">Da, Obriši!!</span>
-                                        </button>
-                                    </div>
+                                                overflow-y: auto">{% include "partials/rides-table.html" %}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% include "partials/delete-ride-modal.html" %}
             </div>
-            <!-- container-fluid -->
         </div>
-        <!-- End Page-content -->
         {% block footer %}
             {% include "partials/footer.html" %}
         {% endblock footer %}
     </div>
-    <!-- end main content-->
 {% endblock content %}
 {% block extra_js %}
-    <!--list pagination js-->
     <script src="{% static 'js/pages/rides-list.js' %}"></script>
-    <!-- Sweet Alerts js -->
     <script src="{% static 'libs/sweetalert2/dist/sweetalert2.min.js' %}"></script>
 {% endblock extra_js %}

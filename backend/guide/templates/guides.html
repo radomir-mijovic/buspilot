@@ -5,15 +5,11 @@
     Vozaci
 {% endblock title %}
 {% block extra_css %}
-    <!-- Sweet Alert css-->
     <link href="{% static 'libs/sweetalert2/dist/sweetalert2.min.css' %}"
           rel="stylesheet"
           type="text/css" />
 {% endblock extra_css %}
 {% block content %}
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
@@ -66,7 +62,7 @@
                                         <table class="table align-middle table-nowrap mb-0" id="customerTable">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th class="sort" data-sort="name" scope="col" data-key="t-full-name">Ime i Prezime</th>
+                                                    <th data-sort="name" scope="col" data-key="t-full-name">Ime i Prezime</th>
                                                     <th class="col"
                                                         data-sort="company_name"
                                                         scope="col"
