@@ -6,10 +6,11 @@ from django.db import models
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
+from agency.documents.forms import AgencyDocumentUploadForm
 from ride.mixins import RidesCountMixin
 
 from .forms import AgencyCreateForm
@@ -29,6 +30,23 @@ class AgencyListView(
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["form"] = AgencyCreateForm
+        return context
+
+
+class AgencyDetailView(
+    LoginRequiredMixin,
+    RidesCountMixin,
+    AgencyQueryFilterMixin,
+    generic.DetailView,
+):
+    template_name = "agency-details.html"
+    context_object_name = "agency"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        instance = self.get_object()
+        context = super().get_context_data(**kwargs)
+        context["form"] = AgencyCreateForm(instance=instance)
+        context["document_form"] = AgencyDocumentUploadForm()
         return context
 
 
@@ -62,9 +80,23 @@ class AgencyUpdateView(
     success_url = reverse_lazy("agency:agency_list")
     context_object_name = "agency"
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        messages.success(
+            self.request,
+            _("Agency successfully updated"),
+        )
+        return super().form_valid(form)
+
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:
         agency = self.get_object()
         return redirect("agency:agency_update", pk=agency.pk)
+
+    def get_success_url(self) -> str:
+        agency = self.get_object()
+        return reverse(
+            "agency:agency_details",
+            kwargs={"pk": agency.pk},
+        )
 
 
 class AgencyDeleteView(

@@ -1,0 +1,97 @@
+<div class="col-xxl-9 col-lg-4 mt-4 mt-xl-0">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-4">
+                <h5 class="card-title flex-grow-1 mb-0" data-key="t-documents-tab">Dokumenti</h5>
+                <div class="flex-shrink-0">
+                    <button type="button"
+                            class="btn btn-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#addAgencyDocumentModal">
+                        <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add-document">Dodaj Dokument</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive "  style="min-height: 400px;">
+                        <table class="table table-borderless align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" data-key="t-doc-name">Ime Dokumenta</th>
+                                    <th scope="col" data-key="t-ride-type">Tip</th>
+                                    <th scope="col" data-key="t-doc-size">Veličina</th>
+                                    <th scope="col" data-key="t-doc-expires">Važi do</th>
+                                    <th scope="col" data-key="t-status">Status</th>
+                                    <th scope="col" data-key="t-action">Akcija</th>
+                                </tr>
+                            </thead>
+                            <tbody id="documents-t-body">
+                                {% for document in agency.documents.all %}
+                                    <tr id="row-{{ document.id }}">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm">
+                                                    <div class="avatar-title bg-primary-subtle text-primary rounded fs-20">
+                                                        <i class="ri-file-zip-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="ms-3 flex-grow-1">
+                                                    <h6 class="fs-14 mb-0">
+                                                        <a href="{{ document.file.url }}" target="_blank" class="text-body">{{ document.title }}</a>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ document.document_type }}</td>
+                                        <td>{{ document.file_size_mb|floatformat:2 }} MB</td>
+                                        <td>{{ document.expiring_at }}</td>
+                                        {% if document.has_expired %}
+                                            <td>
+                                                <span class="badge bg-danger">Istekao</span>
+                                            </td>
+                                        {% elif document.expiring_soon %}
+                                            <td>
+                                                <span class="badge bg-warning">Opasnost</span>
+                                            </td>
+                                        {% else %}
+                                            <td>
+                                                <span class="badge bg-success">Aktivan</span>
+                                            </td>
+                                        {% endif %}
+                                        <td>
+                                            <div class="dropdown">
+                                                <a href=""
+                                                   class="btn btn-light btn-icon"
+                                                   id="dropdownMenuLink15"
+                                                   data-bs-toggle="dropdown"
+                                                   aria-expanded="true">
+                                                    <i class="ri-equalizer-fill"></i>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-end"
+                                                    aria-labelledby="dropdownMenuLink15">
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ document.file.url }}" target="_blank"><i class="ri-eye-fill me-2 align-middle text-muted"></i><span data-key="t-preview">Pregled</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
+                                                    </li>
+                                                    <li class="dropdown-divider"></li>
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                           href="{% url 'agency:document_delete' pk=document.pk agency_pk=agency.pk %}">
+                                                            <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i><span data-key="t-delete">Obriši</span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

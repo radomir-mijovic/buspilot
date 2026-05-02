@@ -19,6 +19,10 @@
                         {{ form.name }}
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" data-key="t-city">Grad</label>
                         {{ form.city }}
                     </div>
@@ -42,10 +46,17 @@
                         <label class="form-label" data-key="t-contact-person">Kontakt osoba</label>
                         {{ form.contact_person }}
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Website</label>
+                        {{ form.website }}
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="hstack gap-2 justify-content-end">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-key="t-close">Zatvori</button>
+                        <button type="button"
+                                class="btn btn-light"
+                                data-bs-dismiss="modal"
+                                data-key="t-close">Zatvori</button>
                         <button type="submit" class="btn btn-success" data-key="t-add">Dodaj</button>
                     </div>
                 </div>

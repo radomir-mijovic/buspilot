@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 14:53+0000\n"
+"POT-Creation-Date: 2026-05-02 13:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: agency/views.py:63
+#, fuzzy
+#| msgid "File successfully added."
+msgid "Agency successfully created"
+msgstr "File successfully added."
+
+#: agency/views.py:84
+#, fuzzy
+#| msgid "File successfully added."
+msgid "Agency successfully updated"
+msgstr "File successfully added."
 
 #: auth/views.py:20
 msgid "Invalid username or password."
@@ -50,9 +62,15 @@ msgstr "Date must be in the future."
 msgid "File successfully added."
 msgstr "File successfully added."
 
-#: driver/templates/drivers.html:57
+#: driver/templates/drivers.html:57 guide/templates/guides.html:57
 msgid "Quick search..."
 msgstr ""
+
+#: driver/views.py:95
+#, fuzzy
+#| msgid "File successfully added."
+msgid "Data successfully updated"
+msgstr "File successfully added."
 
 #: ride/models.py:10
 msgid "Line"

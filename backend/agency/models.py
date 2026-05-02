@@ -1,7 +1,8 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django_countries.fields import CountryField
 
-from common.models import UIStyleAbstarct
+from common.models import VALID_FILE_EXTENSIONS, DocumentAbstract, UIStyleAbstarct
 from ride.models import Ride
 
 
@@ -46,9 +47,11 @@ class Agency(
     city = models.CharField(max_length=50, blank=True)
     contact_person = models.CharField(max_length=100, blank=True)
     country = CountryField(blank=True)
+    email = models.EmailField(blank=True)
     phone_number = models.CharField(max_length=100, blank=True)
     mobile_phone_number = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100)
+    website = models.URLField(blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name
@@ -60,3 +63,21 @@ class Agency(
     def save(self, *args, **kwargs) -> None:
         self.check_card_color_header()
         super().save(*args, **kwargs)
+
+
+class AgencyDocument(DocumentAbstract):
+    file = models.FileField(
+        upload_to="agency/documents",
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=VALID_FILE_EXTENSIONS,
+            ),
+        ],
+    )
+
+    agency = models.ForeignKey(
+        Agency,
+        on_delete=models.CASCADE,
+        blank=True,
+        related_name="documents",
+    )

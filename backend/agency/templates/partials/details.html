@@ -1,0 +1,83 @@
+<div class="col-xxl-3">
+    <div class="card h-100">
+        <div class="card-body p-4">
+            <div>
+                <div class="mt-4 text-center">
+                    <h5 class="mb-1">{{ agency.name }}</h5>
+                    <p class="text-muted">{{ agency.city }}</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="table mb-0 table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <span class="fw-medium" data-key="t-ceo">Owner Name</span>
+                                </th>
+                                <td>{{ agency.ceo }}</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <span class="fw-medium" data-key="t-contact-person">Contact Person</span>
+                                </th>
+                                <td>{{ agency.contact_person }}</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <span class="fw-medium">Email</span>
+                                </th>
+                                <td>{{ agency.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <span class="fw-medium">Website</span>
+                                </th>
+                                <td>
+                                    {% if agency.website %}
+                                        <a href="{{ agency.website }}" class="link-primary">{{ agency.website }}</a>
+                                    {% else %}
+                                        <a href="" class="link-primary"></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <span class="fw-medium" data-key="t-mobile-phone">Mobile number</span>
+                                </th>
+                                <td>{{ agency.mobile_phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <span class="fw-medium" data-key="t-phone-number">Phone number</span>
+                                </th>
+                                <td>{{ agency.phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <span class="fw-medium" data-key="t-city">Grad</span>
+                                </th>
+                                <td>{{ agency.city }}</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <span class="fw-medium" data-key="t-country"></span>
+                                </th>
+                                <td>{{ agency.country.name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-end" style="margin-top: 20px">
+                <a data-bs-toggle="modal"
+                   class="btn btn-danger"
+                   data-bs-target="#deleteAgencyModal"
+                   href="javascript:void(0);"
+                   data-key="t-delete">Obriši</a>
+                <a data-bs-toggle="modal"
+                   data-bs-target="#editAgencyModal"
+                   class="btn btn-primary"
+                   data-key="t-update-agency">Izmijeni Agenciju</a>
+            </div>
+        </div>
+    </div>
+</div>

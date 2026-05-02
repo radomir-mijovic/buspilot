@@ -47,4 +47,14 @@ class AgencyCreateForm(forms.ModelForm):
                     "class": "form-control",
                 },
             ),
+            "email": forms.EmailInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
+            "website": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                }
+            ),
         }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 14:53+0000\n"
+"POT-Creation-Date: 2026-05-02 13:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: agency/views.py:63
+msgid "Agency successfully created"
+msgstr "Dokument uspješno sačuvan."
+
+#: agency/views.py:84
+msgid "Agency successfully updated"
+msgstr "Agencija uspješno promijenjena"
 
 #: auth/views.py:20
 msgid "Invalid username or password."
@@ -49,9 +57,13 @@ msgstr "Datum ne može biti u prošlosti."
 msgid "File successfully added."
 msgstr "Dokument uspješno sačuvan."
 
-#: driver/templates/drivers.html:57
+#: driver/templates/drivers.html:57 guide/templates/guides.html:57
 msgid "Quick search..."
 msgstr "Brza pretraga..."
+
+#: driver/views.py:95
+msgid "Data successfully updated"
+msgstr "Dokument uspješno sačuvan."
 
 #: ride/models.py:10
 msgid "Line"
