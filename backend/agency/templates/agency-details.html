@@ -5,8 +5,6 @@
 {% endblock title %}
 {% block extra_css %}
     <link rel="stylesheet"
-          href="{% static 'libs/gridjs/dist/theme/mermaid.min.css' %}">
-    <!--Swiper slider css-->
     <link href="{% static 'libs/swiper/swiper-bundle.min.css' %}"
           rel="stylesheet"
           type="text/css" />
@@ -22,6 +20,7 @@
                     {% include "partials/details.html" with agency=agency %}
                     {% include "partials/documents.html" with agency=agency %}
                 </div>
+                {% include "partials/rides.html" %}
             </div>
             {% include "partials/delete-agency-modal.html" with agency=agency %}
             {% include "partials/edit-agency-modal.html" with agency=agency form=form %}
@@ -32,12 +31,3 @@
         {% endblock footer %}
     </div>
 {% endblock content %}
-{% block extra_js %}
-    <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js'%}"></script>
-    <script src="{% static 'libs/gridjs/dist/gridjs.umd.js'%}"></script>
-    <script src="https://unpkg.com/gridjs/plugins/selection/dist/selection.umd.js"></script>
-    <!--Swiper slider js-->
-    <script src="{% static 'libs/swiper/swiper-bundle.min.js'%}"></script>
-    <!--seller-details init js -->
-    <script src="{% static 'js/pages/seller-details.init.js'%}"></script>
-{% endblock extra_js %}

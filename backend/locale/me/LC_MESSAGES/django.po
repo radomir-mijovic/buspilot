@@ -19,11 +19,11 @@ msgstr ""
 
 #: agency/views.py:63
 msgid "Agency successfully created"
-msgstr "Dokument uspješno sačuvan."
+msgstr "Agencija uspješno sačuvana."
 
 #: agency/views.py:84
 msgid "Agency successfully updated"
-msgstr "Agencija uspješno promijenjena"
+msgstr "Agencija uspješno promijenjena."
 
 #: auth/views.py:20
 msgid "Invalid username or password."

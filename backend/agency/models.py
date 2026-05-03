@@ -32,6 +32,13 @@ class RidePropertyManager(models.Model):
             .count()
         )
 
+    @property
+    def rides_to_come(self) -> models.QuerySet[Ride]:
+        return Ride.rides.from_today_and_on().filter(
+            agency=self,
+            company=self.company,
+        )
+
 
 class Agency(
     UIStyleAbstarct,

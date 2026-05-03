@@ -1,0 +1,35 @@
+<div class="table-responsive table-card mb-2 mt-5 bg-white"
+     style="max-height: 850px;
+            overflow-y: auto">
+    <table class="table table-nowrap align-middle" id="orderTable">
+        <thead class="text-muted table-light">
+            <tr class="text-uppercase">
+                <th class="col" data-sort="id">ID</th>
+                <th class="col" data-sort="customer_name" data-key="t-ride-name">Naziv</th>
+                <th class="col" data-sort="product_name" data-key="t-ride-type">Tip</th>
+                <th class="col" data-sort="date" data-key="t-departure">Polazak</th>
+                <th class="col" data-sort="amount" data-key="t-arrival">Završava</th>
+                <th class="col" data-sort="payment" data-key="t-departure-location">Mjesto polaska</th>
+            </tr>
+        </thead>
+        <tbody class="list form-check-all">
+            {% for ride in agency.rides_to_come %}
+                <tr id="row-{{ ride.id }}" data-ride-type="{{ ride.ride_type }}">
+                    <td class="id">
+                        <a href="{% url 'ride:ride_update' ride.id %}"
+                           class="fw-medium link-primary">#VZ{{ ride.id }}</a>
+                    </td>
+                    <td class="customer_name">{{ ride.title }}</td>
+                    <td class="product_name">{{ ride.get_ride_type_display }}</td>
+                    <td class="date">
+                        {{ ride.start_date|date:"d M, Y" }}, <small class="text-muted">{{ ride.start_time|date:"h:iA" }}</small>
+                    </td>
+                    <td class="date">
+                        {{ ride.end_date|date:"d M, Y" }}, <small class="text-muted">{{ ride.end_time|date:"h:iA" }}</small>
+                    </td>
+                    <td class="payment">{{ ride.start_location }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

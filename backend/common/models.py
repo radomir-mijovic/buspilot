@@ -94,10 +94,7 @@ class UIStyleAbstarct(models.Model):
         return self.card_header_color in HEADERS_COLORS
 
     def assing_card_header_color(self) -> None:
-        self.card_header_color = self.get_random_color()
-
-    def get_random_color(self) -> str:
-        return random.choice(HEADERS_COLORS)
+        self.card_header_color = random.choice(HEADERS_COLORS)
 
     class Meta:
         abstract = True

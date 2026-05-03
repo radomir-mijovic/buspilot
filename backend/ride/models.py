@@ -57,6 +57,7 @@ class Ride(
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
+        related_name="rides"
     )
     is_all_day = models.BooleanField(default=False)
     company = models.ForeignKey(
