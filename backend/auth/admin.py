@@ -10,8 +10,12 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ["company"]
     search_fields = ["username", "company__name"]
 
-    fieldsets = BaseUserAdmin.fieldsets + (("Company Info", {"fields": ("company",)}),)
+    fieldsets = BaseUserAdmin.fieldsets + (
+        ("Company Info", {"fields": ("company",)}),
+        ("User Type", {"fields": ("user_type",)}),
+    )
 
     add_fieldsets = BaseUserAdmin.add_fieldsets + (
         ("Company Info", {"fields": ("company",)}),
+        ("User Type", {"fields": ("user_type",)}),
     )

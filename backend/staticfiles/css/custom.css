@@ -32,3 +32,7 @@
   color: inherit !important;
   box-shadow: none !important;
 }
+
+.timeline-item {
+    padding: 30px 50px 0 0;
+}

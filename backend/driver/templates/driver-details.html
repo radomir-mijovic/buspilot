@@ -4,6 +4,7 @@
     Detalji
 {% endblock title %}
 {% block extra_css %}
+    <link href="{% static 'libs/sweetalert2/dist/sweetalert2.min.css' %}" rel="stylesheet" type="text/css" />
 {% endblock extra_css %}
 {% block content %}
     <div class="main-content">
@@ -80,6 +81,11 @@
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="text-end hstack gap-2 justify-content-end">
+                                                                <a data-bs-toggle="modal"
+                                                                   class="btn btn-success"
+                                                                   data-bs-target="#createAccountModal"
+                                                                   href="javascript:void(0);"
+                                                                   data-key="t-create-account">Napravi nalog</a>
                                                                 <a data-bs-toggle="modal"
                                                                    class="btn btn-danger"
                                                                    data-bs-target="#deleteDriverModal"
@@ -231,59 +237,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade"
-                 id="addDocumentModal"
-                 tabindex="-1"
-                 aria-labelledby="addDocumentModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title"
-                                id="addDocumentModalLabel"
-                                data-key="t-add-document">Dodaj Dokument</h5>
-                            <button type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                        </div>
-                        <form method="POST"
-                              action="{% url 'driver:document_upload' driver.pk %}"
-                              enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="modal-body" id="addDocumentModalBody">
-                                <div class="mb-3">
-                                    <label for="doc-title" class="form-label" data-key="t-doc-title-label">Naziv dokumenta</label>
-                                    {{ document_form.title }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="doc-type" class="form-label" data-key="t-doc-type-label">Tip dokumenta</label>
-                                    {{ document_form.document_type }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="doc-expiry" class="form-label" data-key="t-doc-expiry-label">Datum isteka</label>
-                                    {{ document_form.expiring_at }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="doc-file" class="form-label" data-key="t-doc-file-label">Fajl</label>
-                                    {{ document_form.file }}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="hstack gap-2 justify-content-end">
-                                    <button type="button"
-                                            class="btn btn-light"
-                                            data-bs-dismiss="modal"
-                                            data-key="t-close">Zatvori</button>
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add">Dodaj</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            {% include "partials/create-account-modal.html" %}
+            {% include "partials/add-document-modal.html" %}
             {% block footer %}
                 {% include "partials/footer.html" %}
             {% endblock footer %}
@@ -291,4 +246,6 @@
         {% block extra_content %}
         {% endblock extra_content %}
         {% block extra_js %}
+            <script src="{% static 'libs/sweetalert2/dist/sweetalert2.min.js' %}"></script>
+            <script src="{% static 'js/pages/driver-create-account.js' %}"></script>
         {% endblock extra_js %}

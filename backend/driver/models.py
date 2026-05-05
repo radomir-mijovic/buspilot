@@ -1,11 +1,18 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
+from auth.models import User
 from common.models import VALID_FILE_EXTENSIONS, DocumentAbstract, PersonAbstract
 
 
 class Driver(PersonAbstract):
-    pass
+    user = models.OneToOneField(
+        User,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="driver",
+    )
 
 
 class DriverDocument(DocumentAbstract):
