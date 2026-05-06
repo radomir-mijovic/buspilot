@@ -28,17 +28,17 @@ class RideManyToManyManager(models.Model):
     drivers = models.ManyToManyField(
         "driver.Driver",
         blank=True,
-        related_name="rides",
+        related_name="drivers_rides",
     )
     guides = models.ManyToManyField(
         "guide.Guide",
         blank=True,
-        related_name="rides",
+        related_name="guides_rides",
     )
     vehicles = models.ManyToManyField(
         "vehicle.Vehicle",
         blank=True,
-        related_name="rides",
+        related_name="vehicles_rides",
     )
 
     class Meta:

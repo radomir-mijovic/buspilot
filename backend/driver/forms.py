@@ -5,6 +5,25 @@ from .models import Driver
 
 
 class DriverForm(ModelForm):
+    first_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Unesite ime",
+            }
+        ),
+    )
+    last_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Unesite prezime",
+            }
+        ),
+    )
+
     class Meta:
         model = Driver
         fields = [
@@ -20,20 +39,6 @@ class DriverForm(ModelForm):
                 attrs={
                     "class": "form-control",
                     "placeholder": "Unesite email",
-                    "required": "true",
-                }
-            ),
-            "first_name": forms.TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Unesite ime",
-                    "required": "true",
-                }
-            ),
-            "last_name": forms.TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "Unesite prezime",
                     "required": "true",
                 }
             ),

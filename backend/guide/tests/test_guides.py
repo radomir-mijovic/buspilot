@@ -2,6 +2,7 @@ import pytest
 from django.urls import reverse
 from parameterized import parameterized
 
+from auth.models import UserTypeChoices
 from auth.tests.factories import UserFactory
 from common.tests.fixtures import user  # noqa: F401, F811
 from company.tests.factories import CompanyFactory
@@ -41,7 +42,12 @@ class TestGuides:
         assert other_guide.first_name not in response.text
 
     def test_create_guide_ok(self, client):
-        assert self.company.guide_items.count() == 1
+        assert (
+            self.company.users.filter(
+                user_type=UserTypeChoices.GUIDE,
+            ).count()
+            == 1
+        )
         client.post(
             self.create_url,
             {
@@ -49,12 +55,27 @@ class TestGuides:
                 "last_name": "Doe",
             },
         )
-        assert self.company.guide_items.count() == 2
+        assert (
+            self.company.users.filter(
+                user_type=UserTypeChoices.GUIDE,
+            ).count()
+            == 2
+        )
 
     def test_create_guide_not_ok(self, client):
-        assert self.company.guide_items.count() == 1
+        assert (
+            self.company.users.filter(
+                user_type=UserTypeChoices.GUIDE,
+            ).count()
+            == 1
+        )
         respone = client.post(self.create_url, {})
-        assert self.company.guide_items.count() == 1
+        assert (
+            self.company.users.filter(
+                user_type=UserTypeChoices.GUIDE,
+            ).count()
+            == 1
+        )
         assert respone.status_code == 302
 
     def test_update_guide_ok(self, client):
@@ -76,10 +97,20 @@ class TestGuides:
 
     def test_delete_guide_ok(self, client) -> None:
         client.post(self.delete_url)
-        assert self.company.guide_items.count() == 0
+        assert (
+            self.company.users.filter(
+                user_type=UserTypeChoices.GUIDE,
+            ).count()
+            == 0
+        )
 
     def test_cant_delete_other_company_guide(self, client) -> None:
-        assert self.company.guide_items.count() == 1
+        assert (
+            self.company.users.filter(
+                user_type=UserTypeChoices.GUIDE,
+            ).count()
+            == 1
+        )
 
         other_company = CompanyFactory()
         other_guide = GuideFactory(company=other_company)
@@ -89,8 +120,12 @@ class TestGuides:
                 kwargs={"pk": other_guide.pk},
             ),
         )
-
-        assert self.company.guide_items.count() == 1
+        assert (
+            self.company.users.filter(
+                user_type=UserTypeChoices.GUIDE,
+            ).count()
+            == 1
+        )
 
     def test_update_other_company_guide_is_blocked(self, client):
         other_user = UserFactory()

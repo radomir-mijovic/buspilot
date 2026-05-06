@@ -15,7 +15,9 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("dashboard:dashboard")
+            if user.is_admin:
+                return redirect("dashboard:dashboard")
+            return redirect("driver:drivers")
         else:
             messages.error(request, _("Invalid username or password."))
 

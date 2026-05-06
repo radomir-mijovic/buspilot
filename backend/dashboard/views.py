@@ -2,10 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import loader
 
+from auth.decorators import admin_permission_required
 from ride.models import Ride
 
 
 @login_required
+@admin_permission_required
 def dashboard(request):
     user = request.user
     template = loader.get_template("dashboard.html")
@@ -24,6 +26,7 @@ def dashboard(request):
 
 
 @login_required
+@admin_permission_required
 def calendar(request):
     template = loader.get_template("calendar.html")
     return HttpResponse(template.render({}, request))

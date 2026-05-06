@@ -5,6 +5,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from auth.models import UserTypeChoices
+
 from .forms import GuideForm
 from .mixins import GuideQueryFilterMixin
 from .models import Guide
@@ -45,6 +47,7 @@ class GuideCreateView(
 
     def form_valid(self, form):
         form.instance.company = self.company
+        form.instance.user_type = UserTypeChoices.GUIDE
         guide = form.save()
 
         if self.request.headers.get("HX-Request"):

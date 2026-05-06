@@ -9,6 +9,9 @@ from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
+from auth.forms import CreateUserForm
+from auth.models import UserTypeChoices
+from auth.utils import generate_unique_username
 from driver.documents.forms import DriverDocumentUploadForm
 
 from .forms import DriverForm
@@ -58,6 +61,7 @@ class DriverCreateView(
 
     def form_valid(self, form):
         form.instance.company = self.company
+        form.instance.user_type = UserTypeChoices.DRIVER
         driver = form.save()
 
         if self.request.headers.get("HX-Request"):
