@@ -6,19 +6,24 @@ from django.forms import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from auth.forms import CreateUserForm
+from auth.decorators import admin_permission_required
 from auth.models import UserTypeChoices
-from auth.utils import generate_unique_username
 from driver.documents.forms import DriverDocumentUploadForm
+from ride.models import Ride
 
 from .forms import DriverForm
 from .mixins import DriverQueryFilterMixin
 from .models import Driver
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class DriverListView(
     LoginRequiredMixin,
     DriverQueryFilterMixin,
@@ -33,6 +38,10 @@ class DriverListView(
         return context
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class DriverDetailView(
     LoginRequiredMixin,
     DriverQueryFilterMixin,
@@ -49,6 +58,10 @@ class DriverDetailView(
         return context
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class DriverCreateView(
     LoginRequiredMixin,
     DriverQueryFilterMixin,
@@ -77,6 +90,10 @@ class DriverCreateView(
         return redirect("driver:drivers")
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class DriverUpdateView(
     LoginRequiredMixin,
     DriverQueryFilterMixin,
@@ -101,6 +118,10 @@ class DriverUpdateView(
         return super().form_valid(form)
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class DriverDeleteView(
     LoginRequiredMixin,
     DriverQueryFilterMixin,
@@ -116,3 +137,18 @@ class DriverDeleteView(
         **kwargs: Any,
     ) -> HttpResponse:
         return self.delete(request, *args, **kwargs)
+
+
+class DriverRidesView(
+    LoginRequiredMixin,
+    DriverQueryFilterMixin,
+    generic.ListView,
+):
+    context_object_name = "rides"
+    template_name = "driver-rides.html"
+    model = Ride
+
+    def get_queryset(self):
+        return Ride.objects.filter(
+            drivers=self.request.user,
+        ).order_by("start_date", "start_time")

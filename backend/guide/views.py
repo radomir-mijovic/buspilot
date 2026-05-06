@@ -3,8 +3,10 @@ from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views import generic
 
+from auth.decorators import admin_permission_required
 from auth.models import UserTypeChoices
 
 from .forms import GuideForm
@@ -12,6 +14,10 @@ from .mixins import GuideQueryFilterMixin
 from .models import Guide
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class GuideEditFormView(
     LoginRequiredMixin,
     GuideQueryFilterMixin,
@@ -21,6 +27,10 @@ class GuideEditFormView(
     template_name = "partials/guide-edit-form.html"
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class GuideListView(
     LoginRequiredMixin,
     GuideQueryFilterMixin,
@@ -35,6 +45,10 @@ class GuideListView(
         return context
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class GuideCreateView(
     LoginRequiredMixin,
     GuideQueryFilterMixin,
@@ -63,6 +77,10 @@ class GuideCreateView(
         return redirect("guide:guides")
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class GuideUpdateView(
     LoginRequiredMixin,
     GuideQueryFilterMixin,
@@ -89,6 +107,10 @@ class GuideUpdateView(
         return redirect("guide:guides")
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class GuideDeleteView(
     LoginRequiredMixin,
     GuideQueryFilterMixin,

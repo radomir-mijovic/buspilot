@@ -7,6 +7,7 @@ from .views import (
     DriverDeleteView,
     DriverDetailView,
     DriverListView,
+    DriverRidesView,
     DriverUpdateView,
 )
 
@@ -48,5 +49,10 @@ urlpatterns = [
         "driver-document-delete/<int:pk>/<int:driver_pk>/",
         DriverDocumentDeleteView.as_view(),
         name="document_delete",
+    ),
+    path(
+        "driver-rides",
+        DriverRidesView.as_view(),
+        name="driver_rides",
     ),
 ]

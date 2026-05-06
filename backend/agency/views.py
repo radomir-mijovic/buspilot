@@ -7,10 +7,12 @@ from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from agency.documents.forms import AgencyDocumentUploadForm
+from auth.decorators import admin_permission_required
 from ride.mixins import RidesCountMixin
 
 from .forms import AgencyCreateForm
@@ -18,6 +20,10 @@ from .mixins import AgencyQueryFilterMixin
 from .models import Agency
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class AgencyListView(
     LoginRequiredMixin,
     RidesCountMixin,
@@ -33,6 +39,10 @@ class AgencyListView(
         return context
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class AgencyDetailView(
     LoginRequiredMixin,
     RidesCountMixin,
@@ -50,6 +60,10 @@ class AgencyDetailView(
         return context
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class AgencyCreateView(
     LoginRequiredMixin,
     AgencyQueryFilterMixin,
@@ -69,6 +83,10 @@ class AgencyCreateView(
         return redirect("agency:agency_list")
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class AgencyUpdateView(
     LoginRequiredMixin,
     AgencyQueryFilterMixin,
@@ -99,6 +117,10 @@ class AgencyUpdateView(
         )
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class AgencyDeleteView(
     LoginRequiredMixin,
     AgencyQueryFilterMixin,

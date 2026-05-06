@@ -7,15 +7,21 @@ from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
+from auth.decorators import admin_permission_required
 from company.mixins import CompanyRequestMixin
 from driver.models import Driver, DriverDocument
 
 from .forms import DriverDocumentUploadForm
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class DriverDocumentUploadView(
     LoginRequiredMixin,
     CompanyRequestMixin,
@@ -52,6 +58,10 @@ class DriverDocumentUploadView(
         return get_object_or_404(Driver, pk=self.driver_pk)
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class DriverDocumentDeleteView(
     LoginRequiredMixin,
     CompanyRequestMixin,
