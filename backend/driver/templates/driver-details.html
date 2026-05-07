@@ -98,15 +98,29 @@
                                                 <div class="live-preview">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <div class="mb-3">
-                                                                <label for="first_name" class="form-label">Username</label>
-                                                                <input disabled class="form-control" value="{{ driver.username }}">
+                                                            <label for="username" class="form-label">Username</label>
+                                                            <div class="mb-3 input-group">
+                                                                <input type="text"
+                                                                       disabled
+                                                                       id="driverUsername"
+                                                                       class="form-control"
+                                                                       value="{{ driver.username }}">
+                                                                <button onclick="navigator.clipboard.writeText(document.getElementById('driverUsername').value)"
+                                                                        class="btn btn-warning"
+                                                                        type="button">Copy</button>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div class="mb-3">
-                                                                <label for="first_name" class="form-label">Password</label>
-                                                                <input disabled class="form-control" value="{{ driver.raw_password }}">
+                                                            <label for="first_name" class="form-label">Password</label>
+                                                            <div class="mb-3 input-group">
+                                                                <input type="password"
+                                                                       disabled
+                                                                       id="driverPassword"
+                                                                       class="form-control"
+                                                                       value="{{ driver.raw_password }}">
+                                                                <button onclick="navigator.clipboard.writeText(document.getElementById('driverPassword').value)"
+                                                                        class="btn btn-warning"
+                                                                        type="button">Copy</button>
                                                             </div>
                                                         </div>
                                                     </div>
