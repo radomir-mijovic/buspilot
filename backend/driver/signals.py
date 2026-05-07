@@ -3,7 +3,7 @@ import logging
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from common.utils import generate_random_password
+from common.utils import random_password, create_username
 
 from .models import Driver
 
@@ -11,16 +11,14 @@ logger = logging.getLogger(__name__)
 
 
 @receiver(post_save, sender=Driver)
-def generate_username_and_password_on_create(
-    sender, instance, created, **kwargs
+def assign_username_and_password_on_create(
+    sender,
+    instance,
+    created,
+    **kwargs,
 ) -> None:
     if created:
-        password = generate_random_password()
-        instance.username = generate_unique_username(instance)
-        instance.set_password(password)
-        instance.raw_password = password
+        instance.username = create_username(instance)
+        instance.set_password(random_password())
         instance.save()
 
-
-def generate_unique_username(instance: Driver) -> str:
-    return f"{instance.pk}_{instance.first_name.lower()}_{instance.last_name.lower()}"

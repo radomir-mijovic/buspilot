@@ -1,4 +1,5 @@
 from typing import Any
+from random import random
 
 from django.contrib.auth.models import UserManager
 from django.core.validators import FileExtensionValidator
@@ -18,6 +19,10 @@ class Driver(User):
 
     class Meta:
         proxy = True
+
+    def set_password(self, raw_password: str | None) -> None:
+        self.raw_password = raw_password
+        return super().set_password(self.raw_password)
 
 
 class DriverDocument(DocumentAbstract):
