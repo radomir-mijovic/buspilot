@@ -16,7 +16,7 @@ from .factories import RideFactory
 @pytest.mark.django_db
 class TestRides:
     @pytest.fixture(autouse=True)
-    def setup(self, client, user):
+    def setup(self, client, user):  # noqa: F811
         client.force_login(user)
         self.client = client
         self.company = CompanyFactory()

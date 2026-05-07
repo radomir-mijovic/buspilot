@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name="raw_password",
             field=models.CharField(
                 blank=True,
-                help_text="Only storing password from read only related objects that are created by admins.",
+                help_text="Only storing password from read only related objects that are created by admins.",  # noqa: E501
                 max_length=50,
             ),
         ),

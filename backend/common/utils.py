@@ -20,7 +20,6 @@ class CommonUtils:
         )
 
 
-
 utils = CommonUtils()
 
 random_password = utils._generate_random_password

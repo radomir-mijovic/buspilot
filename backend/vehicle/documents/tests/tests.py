@@ -3,7 +3,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from parameterized import parameterized
 
-from common.tests.fixtures import user
+from common.tests.fixtures import user  # noqa: F401, F811
 from vehicle.documents.tests.factories import VehicleDocumentFactory
 from vehicle.models import VehicleDocument
 from vehicle.tests.factories import VehicleFactory
@@ -12,7 +12,7 @@ from vehicle.tests.factories import VehicleFactory
 @pytest.mark.django_db
 class TestVehicleDocument:
     @pytest.fixture(autouse=True)
-    def setup(self, client, user):
+    def setup(self, client, user):  # noqa: F811
         client.force_login(user)
         self.client = client
         self.vehicle = VehicleFactory()
@@ -96,8 +96,7 @@ class TestVehicleDocument:
             vehicle=self.vehicle, title="Test document"
         ).exists()
 
-    def test_document_delete_ok(self, client, user) -> None:
-        client.force_login(user)
+    def test_document_delete_ok(self, client) -> None:
         assert self.vehicle.documents.count() == 1
 
         client.post(self.delete_url)

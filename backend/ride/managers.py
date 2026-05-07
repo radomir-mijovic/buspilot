@@ -3,7 +3,6 @@ from datetime import timedelta
 from django.db import models
 from django.utils import timezone
 
-
 from . import constants
 
 
@@ -212,4 +211,3 @@ class RideRoundTourManager(RideDateManager):
                 ride_type=constants.ROUND_TOUR,
             )
         )
-

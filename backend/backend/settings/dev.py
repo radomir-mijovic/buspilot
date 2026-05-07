@@ -1,15 +1,15 @@
-from .base import *
+from .base import *  # noqa: F403
 
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-INSTALLED_APPS += [
+INSTALLED_APPS += [  # noqa: F405
     "django_extensions",
     "debug_toolbar",
 ]
 
-MIDDLEWARE += [
+MIDDLEWARE += [  # noqa: F405
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 

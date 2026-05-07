@@ -20,8 +20,6 @@ SHORT_DATE_FORMAT = "d/m/Y"
 DATE_INPUT_FORMATS = ["%d/%m/%Y", "%Y-%m-%d"]
 
 
-
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",

@@ -6,16 +6,16 @@ from django.urls import reverse
 from django.utils import timezone
 from parameterized import parameterized
 
-from common.tests.fixtures import user
 from agency.documents.tests.factories import AgencyDocumentFactory
 from agency.models import AgencyDocument
 from agency.tests.factories import AgencyFactory
+from common.tests.fixtures import user  # noqa: F401, F811
 
 
 @pytest.mark.django_db
 class TestAgencyDocument:
     @pytest.fixture(autouse=True)
-    def setup(self, client, user):
+    def setup(self, client, user):  # noqa: F811
         client.force_login(user)
         self.client = client
         self.agency = AgencyFactory()
@@ -100,8 +100,7 @@ class TestAgencyDocument:
             agency=self.agency, title="Test document"
         ).exists()
 
-    def test_document_delete_ok(self, client, user) -> None:
-        client.force_login(user)
+    def test_document_delete_ok(self, client) -> None:
         assert self.agency.documents.count() == 1
 
         client.post(self.delete_url)

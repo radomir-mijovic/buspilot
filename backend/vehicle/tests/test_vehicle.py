@@ -99,7 +99,9 @@ class TestVehicle:
         self.vehicle.refresh_from_db()
         assert self.vehicle.brand == original_brand
 
-    def test_update_vehicle_missing_model(self,):
+    def test_update_vehicle_missing_model(
+        self,
+    ):
         original_model = self.vehicle.model
         response = self.client.post(
             reverse("vehicle:vehicles_update", kwargs={"pk": self.vehicle.pk}),
@@ -140,7 +142,6 @@ class TestVehicle:
             reverse("vehicle:vehicles_delete", kwargs={"pk": self.vehicle.pk})
         )
         assert Vehicle.objects.count() == 0
-
 
     def test_update_other_company_vehicle_is_blocked(self, client):
         other_user = UserFactory()

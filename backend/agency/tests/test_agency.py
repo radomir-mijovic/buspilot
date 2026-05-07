@@ -14,7 +14,7 @@ from .factories import AgencyFactory
 @pytest.mark.django_db
 class TestAgency:
     @pytest.fixture(autouse=True)
-    def setup(self, client, user):
+    def setup(self, client, user):  # noqa: F811
         self.company = CompanyFactory()
         user.company = self.company
         user.save()

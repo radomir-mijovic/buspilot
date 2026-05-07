@@ -4,9 +4,6 @@ from datetime import timedelta
 from django.db import models
 from django.utils import timezone
 
-from auth.models import User
-from company.models import Company
-
 HEADERS_COLORS: list[str] = [
     "danger",
     "info",

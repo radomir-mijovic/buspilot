@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 from . import constants
 
@@ -28,7 +27,7 @@ class User(AbstractUser):
     raw_password = models.CharField(
         max_length=50,
         blank=True,
-        help_text="Only storing password from read only related objects that are created by admins.",
+        help_text="Only storing password from read only related objects that are created by admins.",  # noqa: E501
     )
 
     @property

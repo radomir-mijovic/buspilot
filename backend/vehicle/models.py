@@ -1,11 +1,10 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from common.models import DocumentAbstract, VALID_FILE_EXTENSIONS
+from common.models import VALID_FILE_EXTENSIONS, DocumentAbstract
 from ride.models import Ride
 
 from . import constants
-
 
 
 class VehicleTypeChoices(models.IntegerChoices):

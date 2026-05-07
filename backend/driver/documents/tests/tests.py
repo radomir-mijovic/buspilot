@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils import timezone
 from parameterized import parameterized
 
-from common.tests.fixtures import user
+from common.tests.fixtures import user  # noqa: [ F401, F811 ]
 from driver.documents.tests.factories import DriverDocumentFactory
 from driver.models import DriverDocument
 from driver.tests.factories import DriverFactory
@@ -15,7 +15,7 @@ from driver.tests.factories import DriverFactory
 @pytest.mark.django_db
 class TestDriverDocument:
     @pytest.fixture(autouse=True)
-    def setup(self, client, user):
+    def setup(self, client, user):  # noqa: F811
         client.force_login(user)
         self.client = client
         self.driver = DriverFactory()
@@ -100,8 +100,7 @@ class TestDriverDocument:
             driver=self.driver, title="Test document"
         ).exists()
 
-    def test_document_delete_ok(self, client, user) -> None:
-        client.force_login(user)
+    def test_document_delete_ok(self, client) -> None:
         assert self.driver.documents.count() == 1
 
         client.post(self.delete_url)
