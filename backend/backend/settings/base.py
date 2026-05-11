@@ -170,5 +170,6 @@ LOCALE_PATHS = [BASE_DIR / "locale"]
 
 sentry_sdk.init(
     dsn=os.environ.get("SENTRY_DSN"),
+    environment=os.environ.get("SENTRY_ENV", "dev"),
     send_default_pii=True,
 )
