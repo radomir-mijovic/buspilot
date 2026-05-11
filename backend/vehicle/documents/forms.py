@@ -28,6 +28,7 @@ class VehicleDocumentUploadForm(ModelForm):
                     "class": "form-control",
                     "id": "doc-type",
                     "placeholder": "npr. Registracija",
+                    "required": "true",
                 }
             ),
             "expiring_at": forms.DateInput(
@@ -36,6 +37,7 @@ class VehicleDocumentUploadForm(ModelForm):
                     "id": "doc-expiry",
                     "type": "date",
                     "placeholder": "npr. Registracija",
+                    "required": "true",
                 }
             ),
             "file": forms.FileInput(

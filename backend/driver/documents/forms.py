@@ -29,6 +29,7 @@ class DriverDocumentUploadForm(ModelForm):
                     "class": "form-control",
                     "id": "doc-type",
                     "placeholder": "npr. Ugovor o radu",
+                    "required": "true",
                 }
             ),
             "expiring_at": forms.DateInput(
@@ -36,6 +37,7 @@ class DriverDocumentUploadForm(ModelForm):
                     "class": "form-control",
                     "id": "doc-expiry",
                     "type": "date",
+                    "required": "true",
                 }
             ),
             "file": forms.FileInput(
