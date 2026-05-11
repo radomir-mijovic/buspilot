@@ -17,5 +17,5 @@ class VehicleDetailViewSet(viewsets.ReadOnlyModelViewSet):
     @action(methods=["GET"], detail=True, url_path="calendar-events")
     def calendar_events(self, request, *args, **kwargs):
         vehicle = self.get_object()
-        serializer = RideCalendarSerializer(vehicle.rides.all(), many=True)
+        serializer = RideCalendarSerializer(vehicle.vehicles_rides.all(), many=True)
         return Response(serializer.data)

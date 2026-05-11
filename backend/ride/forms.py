@@ -120,6 +120,7 @@ class RideForm(forms.ModelForm):
             "agency": forms.Select(
                 attrs={
                     "class": "form-select",
+                    "required": "true",
                 },
             ),
         }

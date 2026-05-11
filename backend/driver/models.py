@@ -20,9 +20,9 @@ class Driver(User):
         proxy = True
 
     def set_password(self, raw_password: str | None) -> None:
-        print(random.__file__)
         self.raw_password = raw_password
         return super().set_password(self.raw_password)
+
 
 
 class DriverDocument(DocumentAbstract):

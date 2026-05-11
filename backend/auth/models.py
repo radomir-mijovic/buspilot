@@ -41,3 +41,6 @@ class User(AbstractUser):
     @property
     def is_guide(self) -> bool:
         return self.user_type == UserTypeChoices.GUIDE
+
+    def __str__(self) -> str:
+        return self.get_full_name()
