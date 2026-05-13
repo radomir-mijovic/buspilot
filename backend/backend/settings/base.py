@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "rest_framework",
 ]
 
+
 LOCAL_APPS = [
     "auth.apps.UserAuthConfig",
     "agency.apps.AgencyConfig",
@@ -124,16 +125,11 @@ LANGUAGES = [
 ]
 
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
 
 LOGIN_URL = "auth:login"
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 AUTH_USER_MODEL = "user_auth.User"
 
@@ -143,6 +139,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
 
 LOGGING = {
     "version": 1,
@@ -168,6 +165,7 @@ LOGGING = {
 # Translation
 LOCALE_PATHS = [BASE_DIR / "locale"]
 
+# Sentry
 sentry_sdk.init(
     dsn=os.environ.get("SENTRY_DSN"),
     environment=os.environ.get("SENTRY_ENV", "dev"),

@@ -56,3 +56,56 @@ class VehicleDocumentUploadForm(ModelForm):
                 raise forms.ValidationError("Date must be in the future.")
 
         return expiring_at
+
+
+class VehicleDocumentUpdateForm(ModelForm):
+    class Meta:
+        model = VehicleDocument
+        fields = [
+            "title",
+            "document_type",
+            "expiring_at",
+            "file",
+        ]
+        widgets = {
+            "title": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "id": "doc-title",
+                    "required": "true",
+                    "placeholder": "npr. Saobraćajna dozvola",
+                }
+            ),
+            "document_type": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "id": "doc-type",
+                    "placeholder": "npr. Registracija",
+                    "required": "true",
+                }
+            ),
+            "expiring_at": forms.DateInput(
+                format="%Y-%m-%d",
+                attrs={
+                    "class": "form-control",
+                    "id": "doc-expiry",
+                    "type": "date",
+                    "placeholder": "npr. Registracija",
+                    "required": "true",
+                }
+            ),
+            "file": forms.FileInput(
+                attrs={
+                    "class": "form-control",
+                    "id": "doc-file",
+                    "type": "file",
+                }
+            ),
+        }
+
+    def clean_expiring_at(self):
+        if expiring_at := self.cleaned_data["expiring_at"]:
+            if expiring_at < timezone.now().date():
+                raise forms.ValidationError("Date must be in the future.")
+
+        return expiring_at

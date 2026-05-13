@@ -9,7 +9,7 @@ from django.views import generic
 
 from company.mixins import CompanyRequestMixin
 from ride.forms import RideCalendarVehicleForm
-from vehicle.documents.forms import VehicleDocumentUploadForm
+from vehicle.documents.forms import VehicleDocumentUpdateForm, VehicleDocumentUploadForm
 from vehicle.mixins import VehicleQueryFilterMixin
 
 from .forms import VehicleCreateForm
@@ -45,6 +45,10 @@ class VehicleDetailView(
             company=self.company,
         )
         context["document_form"] = VehicleDocumentUploadForm()
+        context["documents_with_forms"] = [
+            (doc, VehicleDocumentUpdateForm(instance=doc))
+            for doc in self.object.all_documents
+        ]
         return context
 
 

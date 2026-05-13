@@ -51,7 +51,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link fs-14"
                                            data-bs-toggle="tab"
-                                           href="#documents"
+                                           href="#vehicle-documents"
                                            role="tab">
                                             <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-documents-tab">Dokumenti</span>
                                         </a>
@@ -202,7 +202,7 @@
                                     <!--end card-->
                                 </div>
                                 <!--end tab-pane-->
-                                <div class="tab-pane fade" id="documents" role="tabpanel">
+                                <div class="tab-pane fade" id="vehicle-documents" role="tabpanel">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center mb-4">
@@ -231,7 +231,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="documents-t-body">
-                                                                {% for document in vehicle.all_documents %}
+                                                                {% for document, document_form in documents_with_forms %}
                                                                     <tr id="row-{{ document.id }}">
                                                                         <td>
                                                                             <div class="d-flex align-items-center">
@@ -280,6 +280,12 @@
                                                                                     <li>
                                                                                         <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
                                                                                     </li>
+                                                                                    <button type="button"
+                                                                                            class="dropdown-item"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#updateVehicleDocumentModal">
+                                                                                        <i class="ri-edit-fill me-1 align-bottom"></i> <span data-key="t-update-document">Imijeni</span>
+                                                                                    </button>
                                                                                     <li class="dropdown-divider"></li>
                                                                                     <li>
                                                                                         <a class="dropdown-item"
@@ -294,6 +300,7 @@
                                                                             </div>
                                                                         </td>
                                                                     </tr>
+                                                                    {% include "partials/update-vehicle-document-modal.html" with document=document document_form=document_form %}
                                                                 {% endfor %}
                                                             </tbody>
                                                         </table>
@@ -385,61 +392,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade"
-                 id="addDocumentModal"
-                 tabindex="-1"
-                 aria-labelledby="addDocumentModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title"
-                                id="addDocumentModalLabel"
-                                data-key="t-add-document">Dodaj Dokument</h5>
-                            <button type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                        </div>
-                        <form hx-swap="beforeend"
-                              hx-post="{% url 'vehicle:document_upload' vehicle.pk %}"
-                              hx-target="#documents-t-body"
-                              hx-on::after-request="if(event.detail.xhr.status === 200){ document.querySelector('#addDocumentModalBody .alert-danger')?.remove(); bootstrap.Modal.getInstance(document.getElementById('addDocumentModal')).hide(); this.reset(); }"
-                              enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="modal-body" id="addDocumentModalBody">
-                                <div class="mb-3">
-                                    <label for="doc-title" class="form-label" data-key="t-doc-title-label">Naziv dokumenta</label>
-                                    {{ document_form.title }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="doc-type" class="form-label" data-key="t-doc-type-label">Tip dokumenta</label>
-                                    {{ document_form.document_type }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="doc-expiry" class="form-label" data-key="t-doc-expiry-label">Datum isteka</label>
-                                    {{ document_form.expiring_at }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="doc-file" class="form-label" data-key="t-doc-file-label">Fajl</label>
-                                    {{ document_form.file }}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="hstack gap-2 justify-content-end">
-                                    <button type="button"
-                                            class="btn btn-light"
-                                            data-bs-dismiss="modal"
-                                            data-key="t-close">Zatvori</button>
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add">Dodaj</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            {% include "partials/add-vehicle-document-modal.html" %}
             <!-- End Page-content -->
             {% block footer %}
                 {% include "partials/footer.html" %}

@@ -90,6 +90,33 @@
             <script src="{% static 'libs/feather-icons/dist/feather.min.js'%}"></script>
             <script src="{% static 'js/pages/plugins/lord-icon-2.1.0.js'%}"></script>
             <script src="{% static 'js/plugins.js'%}"></script>
+            <script>
+      (function () {
+          function activateFromHash() {
+              const hash = window.location.hash;
+              if (!hash || hash.length < 2) return;
+              // Activate every matching trigger in document order so nested tabs work
+              document.querySelectorAll(
+                  '[data-bs-toggle="tab"][href="' + hash + '"], ' +
+                  '[data-bs-toggle="pill"][href="' + hash + '"], ' +
+                  '[data-bs-toggle="tab"][data-bs-target="' + hash + '"], ' +
+                  '[data-bs-toggle="pill"][data-bs-target="' + hash + '"]'
+              ).forEach(function (trigger) {
+                  bootstrap.Tab.getOrCreateInstance(trigger).show();
+              });
+          }
+
+          document.addEventListener('DOMContentLoaded', activateFromHash);
+          window.addEventListener('hashchange', activateFromHash);
+
+          document.addEventListener('shown.bs.tab', function (e) {
+              const target = e.target.getAttribute('href') || e.target.getAttribute('data-bs-target');
+              if (target && target.startsWith('#')) {
+                  history.replaceState(null, '', target);
+              }
+          });
+      })();
+            </script>
             {% block extra_js %}
             {% endblock extra_js %}
             <script src="{% static 'js/app.js'%}"></script>

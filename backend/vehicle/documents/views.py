@@ -1,7 +1,13 @@
+from typing import Any
+
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import models
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from company.mixins import CompanyRequestMixin
@@ -70,13 +76,44 @@ class VehicleDocumentUploadView(
         return get_object_or_404(Vehicle, pk=self.vehicle_pk)
 
 
-class VehicleDocumentDeleteView(LoginRequiredMixin, generic.DeleteView):
+class VehicleDocumentUpdateView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.UpdateView,
+):
+    form_class = VehicleDocumentUploadForm
+    model = VehicleDocument
+    template_name = "../templates/partials/update-vehicle-document-modal.html"
+
+    def get_queryset(self) -> models.query.QuerySet[Any]:
+        return VehicleDocument.objects.filter(
+            vehicle__company=self.company,
+        )
+
+    def form_valid(self, form):
+        document = form.save()
+        messages.success(self.request, _("Document updated successfully"))
+        url = reverse("vehicle:vehicles_details", args=[document.vehicle.pk])
+        return redirect(f"{url}#vehicle-documents")
+
+    def form_invalid(self, form):
+        document = self.get_object()
+        for error in form.errors.values():
+            messages.error(self.request, error.as_text())
+
+        url = reverse("vehicle:vehicles_details", args=[document.vehicle.pk])
+        return redirect(f"{url}#vehicle-documents")
+
+
+class VehicleDocumentDeleteView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.DeleteView,
+):
     template_name = "../templates/vehicle-details.html"
 
     def get_queryset(self):
-        return VehicleDocument.objects.filter(
-            vehicle__company=self.request.user.company
-        )
+        return VehicleDocument.objects.filter(vehicle__company=self.company)
 
     def post(self, request, *args, **kwargs):
         instance = self.get_object()

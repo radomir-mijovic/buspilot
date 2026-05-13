@@ -1,0 +1,55 @@
+<div class="modal fade"
+     id="addDocumentModal"
+     tabindex="-1"
+     aria-labelledby="addDocumentModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title"
+                    id="addDocumentModalLabel"
+                    data-key="t-add-document">Dodaj Dokument</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <form hx-swap="beforeend"
+                  hx-post="{% url 'vehicle:document_upload' vehicle.pk %}"
+                  hx-target="#documents-t-body"
+                  hx-on::after-request="if(event.detail.xhr.status === 200){ document.querySelector('#addDocumentModalBody .alert-danger')?.remove(); bootstrap.Modal.getInstance(document.getElementById('addDocumentModal')).hide(); this.reset(); }"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body" id="addDocumentModalBody">
+                    <div class="mb-3">
+                        <label for="doc-title" class="form-label" data-key="t-doc-title-label">Naziv dokumenta</label>
+                        {{ document_form.title }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="doc-type" class="form-label" data-key="t-doc-type-label">Tip dokumenta</label>
+                        {{ document_form.document_type }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="doc-expiry" class="form-label" data-key="t-doc-expiry-label">Datum isteka</label>
+                        {{ document_form.expiring_at }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="doc-file" class="form-label" data-key="t-doc-file-label">Fajl</label>
+                        {{ document_form.file }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button"
+                                class="btn btn-light"
+                                data-bs-dismiss="modal"
+                                data-key="t-close">Zatvori</button>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add">Dodaj</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
