@@ -1,7 +1,7 @@
 <div class="modal fade"
-     id="updateVehicleDocumentModal"
+     id="updateVehicleDocumentModal-{{ document.pk }}"
      tabindex="-1"
-     aria-labelledby="updateVehicleDocumentModalLabel"
+     aria-labelledby="updateVehicleDocumentModalLabel-{{ document.pk }}"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -44,10 +44,10 @@
                 <div class="modal-footer">
                     <div class="hstack gap-2 justify-content-end">
                         <button type="button"
-                                class="btn btn-light"
+                                class="btn btn-warning"
                                 data-bs-dismiss="modal"
                                 data-key="t-close">Zatvori</button>
-                        <button type="submit" class="btn btn-danger">
+                        <button type="submit" class="btn btn-success">
                             <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-change">Izmijeni</span>
                         </button>
                     </div>
