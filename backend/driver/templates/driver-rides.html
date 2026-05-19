@@ -11,6 +11,13 @@
 {% block content %}
     <div class="main-content">
         <div class="page-content">
+            <div class="d-flex justify-content-end mb-3">
+                <button type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#reportDefectModal"
+                        class="btn btn-primary">Prijavi kvar</button>
+            </div>
+        {% include "partials/report-defect-modal.html" %}
             <div class="container-fluid">
                 {% block pagetitle %}
                     {% include "partials/page-title.html" with pagetitle="Pages" title="Voznje" %}

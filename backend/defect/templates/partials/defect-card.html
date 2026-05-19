@@ -1,0 +1,20 @@
+<div class="col-xxl-4">
+    <div class="card border card-border-warning">
+        <div class="card-header">
+            <h6 class="card-title mb-0">
+                {{ defect.reported_by }} <span class="badge bg-warning align-middle fs-10">{{ defect.created_at }}</span>
+            </h6>
+            <h6 class="card-title mb-0">{{ defect.vehicle.licence_number }}</h6>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ defect.description }}</p>
+            <div class="text-end">
+                <form method="POST" action="{% url 'defect:mark_as_resolved' defect.pk  %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="is_fixed" value="{{is_fixed}}">
+                    <button type="submit" class="btn btn-success">{{button_text}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

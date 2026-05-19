@@ -39,6 +39,7 @@ LOCAL_APPS = [
     "common.apps.CommonConfig",
     "company.apps.CompanyConfig",
     "dashboard.apps.DashboardConfig",
+    "defect.apps.DefectConfig",
     "guide.apps.GuideConfig",
     "driver.apps.DriverConfig",
     "ride.apps.RideConfig",

@@ -1,5 +1,6 @@
 from typing import Any
 
+from django import contrib
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import BaseModelForm
@@ -12,6 +13,8 @@ from django.views import generic
 
 from auth.decorators import admin_permission_required
 from auth.models import UserTypeChoices
+from company.mixins import CompanyRequestMixin, SetCompanyInKwargsMixin
+from defect.forms import DefectForm
 from driver.documents.forms import DriverDocumentUploadForm
 from ride.models import Ride
 
@@ -140,13 +143,18 @@ class DriverDeleteView(
 
 
 class DriverRidesView(
+    SetCompanyInKwargsMixin,
     LoginRequiredMixin,
-    DriverQueryFilterMixin,
     generic.ListView,
 ):
     context_object_name = "rides"
     template_name = "driver-rides.html"
     model = Ride
+
+    def get_context_data(self, *args, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(*args, **kwargs)
+        context["defect_form"] = DefectForm(company=self.company)
+        return context
 
     def get_queryset(self):
         return Ride.objects.filter(
