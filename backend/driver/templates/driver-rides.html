@@ -17,13 +17,14 @@
                         data-bs-target="#reportDefectModal"
                         class="btn btn-primary">Prijavi kvar</button>
             </div>
-        {% include "partials/report-defect-modal.html" %}
+            {% include "partials/report-defect-modal.html" %}
             <div class="container-fluid">
                 {% block pagetitle %}
                     {% include "partials/page-title.html" with pagetitle="Pages" title="Voznje" %}
                 {% endblock pagetitle %}
+                <div class="col-lg-6">{% include "partials/select-rides-date.html" %}</div>
                 <div class="row mt-4">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div>
                             <div class="timeline-2">
                                 {% for ride in rides %}
@@ -70,7 +71,6 @@
             {% include "partials/footer.html" %}
         {% endblock footer %}
     </div>
-    <!-- end main content-->
 {% endblock content %}
 {% block extra_js %}
     <script src="{% static 'libs/swiper/swiper-bundle.min.js'%}"></script>

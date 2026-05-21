@@ -157,6 +157,11 @@ class DriverRidesView(
         return context
 
     def get_queryset(self):
-        return Ride.objects.filter(
+        qs = Ride.objects.filter(
             drivers=self.request.user,
         ).order_by("start_date", "start_time")
+
+        if ride_date := self.request.GET.get("ride_date"):
+            qs = qs.filter(start_date=ride_date)
+
+        return qs
