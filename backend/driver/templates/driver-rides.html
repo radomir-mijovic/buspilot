@@ -25,6 +25,7 @@
                 <div class="col-lg-6">{% include "partials/select-rides-date.html" %}</div>
                 <div class="row mt-4">
                     <div class="col-lg-6">
+                    {%if rides%}
                         <div>
                             <div class="timeline-2">
                                 {% for ride in rides %}
@@ -63,6 +64,9 @@
                                 {% endfor %}
                             </div>
                         </div>
+                    {%else%}
+                    <h4 data-key="t-no-rides">Nema Voznji</h4>
+                    {%endif%}
                     </div>
                 </div>
             </div>
