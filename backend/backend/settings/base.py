@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_countries",
     "rest_framework",
+    "django_vite",
 ]
 
 
@@ -144,7 +145,10 @@ AUTH_USER_MODEL = "user_auth.User"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+#STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [
+  BASE_DIR / "assets"
+]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -180,3 +184,10 @@ sentry_sdk.init(
     environment=os.environ.get("SENTRY_ENV", "dev"),
     send_default_pii=True,
 )
+
+# Vite
+DJANGO_VITE = {
+  "default": {
+    "dev_mode": os.environ.get("DEBUG", True)
+  }
+}

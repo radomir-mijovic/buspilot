@@ -20,3 +20,4 @@ djangorestframework==3.17.1
 certifi==2026.4.22
 sentry-sdk==2.59.0
 urllib3==2.7.0
+django-vite==3.1.0
