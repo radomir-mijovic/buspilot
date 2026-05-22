@@ -1,21 +1,23 @@
 from typing import Any
 
-from django import contrib
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import models
 from django.forms import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from auth.decorators import admin_permission_required
 from auth.models import UserTypeChoices
-from company.mixins import CompanyRequestMixin, SetCompanyInKwargsMixin
+from company.mixins import SetCompanyInKwargsMixin
 from defect.forms import DefectForm
 from driver.documents.forms import DriverDocumentUploadForm
+from ride.forms import RideDateSearchForm
 from ride.models import Ride
 
 from .forms import DriverForm
@@ -148,20 +150,27 @@ class DriverRidesView(
     generic.ListView,
 ):
     context_object_name = "rides"
-    template_name = "driver-rides.html"
     model = Ride
+    template_name = "driver-rides.html"
 
     def get_context_data(self, *args, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(*args, **kwargs)
         context["defect_form"] = DefectForm(company=self.company)
+        context["form"] = RideDateSearchForm()
         return context
 
     def get_queryset(self):
-        qs = Ride.objects.filter(
-            drivers=self.request.user,
-        ).order_by("start_date", "start_time")
+        today = timezone.now().date()
+        qs = self.get_base_queryset()
 
-        if ride_date := self.request.GET.get("ride_date"):
-            qs = qs.filter(start_date=ride_date)
+        if start_date := self.request.GET.get("start_date"):
+            qs = qs.filter(start_date=start_date)
+        else:
+            qs = qs.filter(start_date__gte=today)
 
         return qs
+
+    def get_base_queryset(self):
+        return Ride.objects.filter(drivers=self.request.user).order_by(
+            "start_time", "start_date"
+        ).select_related("agency")

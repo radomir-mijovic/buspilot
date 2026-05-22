@@ -31,6 +31,7 @@ backend/media
 backend/staticfiles
 backend/backend/staticfiles
 backend/backend/media
+backend/db.buspilot
 
 # Testing
 test_db

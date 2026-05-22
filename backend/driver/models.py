@@ -6,6 +6,7 @@ from django.db import models
 
 from auth.models import User, UserTypeChoices
 from common.models import VALID_FILE_EXTENSIONS, DocumentAbstract
+from ride.models import Ride
 
 
 class DriverManager(UserManager):
@@ -22,6 +23,13 @@ class Driver(User):
     def set_password(self, raw_password: str | None) -> None:
         self.raw_password = raw_password
         return super().set_password(self.raw_password)
+
+    @property
+    def from_today_and_on_rides(self):
+        return Ride.rides.from_today_and_on().filter(
+            company=self.company,
+            drivers=self,
+        )
 
 
 class DriverDocument(DocumentAbstract):
