@@ -164,11 +164,10 @@ class DriverRidesView(
         qs = self.get_base_queryset()
 
         if start_date := self.request.GET.get("start_date"):
-            qs = qs.filter(start_date=start_date)
-        else:
-            qs = qs.filter(start_date__gte=today)
+            return qs.filter(start_date=start_date)
 
-        return qs
+        return qs.filter(start_date__gte=today)
+
 
     def get_base_queryset(self):
         return Ride.objects.filter(drivers=self.request.user).order_by(
