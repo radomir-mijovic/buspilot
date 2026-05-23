@@ -1,6 +1,7 @@
 # dev.txt
 -r base.txt
 
+black==26.5.1
 flake8==7.3.0
 isort==8.0.1
 ruff==0.15.8

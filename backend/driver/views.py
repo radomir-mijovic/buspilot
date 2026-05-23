@@ -168,8 +168,9 @@ class DriverRidesView(
 
         return qs.filter(start_date__gte=today)
 
-
     def get_base_queryset(self):
-        return Ride.objects.filter(drivers=self.request.user).order_by(
-            "start_time", "start_date"
-        ).select_related("agency")
+        return (
+            Ride.objects.filter(drivers=self.request.user)
+            .order_by("start_time", "start_date")
+            .select_related("agency")
+        )
