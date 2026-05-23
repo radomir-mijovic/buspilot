@@ -242,6 +242,7 @@ class RideCalendarVehicleForm(forms.ModelForm):
             ),
         }
 
+
 class RideDateSearchForm(forms.ModelForm):
     class Meta:
         model = Ride
@@ -258,4 +259,4 @@ class RideDateSearchForm(forms.ModelForm):
                     "autocomplete": "off",
                 },
             ),
-       }
+        }
