@@ -39,6 +39,7 @@ LOCAL_APPS = [
     "common.apps.CommonConfig",
     "company.apps.CompanyConfig",
     "dashboard.apps.DashboardConfig",
+    "defect.apps.DefectConfig",
     "guide.apps.GuideConfig",
     "driver.apps.DriverConfig",
     "ride.apps.RideConfig",
@@ -105,11 +106,6 @@ else:
             "NAME": "db.buspilot",
         }
     }
-
-
-
-# Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {

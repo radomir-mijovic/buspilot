@@ -1,0 +1,52 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block title %}
+    Defects
+{% endblock title %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block content %}
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <ul class="nav nav-tabs mb-3" id="defectsTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active"
+                                id="active-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#active-defects"
+                                type="button"
+                                role="tab">Aktivni kvarovi</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"
+                                id="resolved-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#resolved-defects"
+                                type="button"
+                                role="tab">Riješeni kvarovi</button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="active-defects" role="tabpanel">
+                        <div class="row">
+                            {% for defect in active_defects %}
+                                {% include "partials/defect-card.html" with defect=defect is_fixed=True button_text="Oznaci kao popravljeno" %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="resolved-defects" role="tabpanel">
+                        <div class="row">
+                            {% for defect in resolved_defects %}
+                                {% include "partials/defect-card.html" with defect=defect  is_fixed=False button_text="Nije popravljeno" %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block footer %}
+            {% include "partials/footer.html" %}
+        {% endblock footer %}
+    </div>
+{% endblock content %}

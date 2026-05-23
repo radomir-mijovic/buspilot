@@ -8,6 +8,7 @@ urlpatterns = [
     path("", include("agency.urls")),
     path("", include("auth.urls")),
     path("", include("dashboard.urls")),
+    path("", include("defect.urls")),
     path("", include("driver.urls")),
     path("", include("guide.urls")),
     path("", include("vehicle.urls")),

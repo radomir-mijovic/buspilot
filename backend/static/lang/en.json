@@ -342,6 +342,7 @@
   "t-update-ride-btn": "Update Ride",
   "t-delete-ride-btn": "Delete Ride",
   "t-documents-expiring-soon": "Douments that are expiring soon !",
-  "t-welcome": "Welcome"
+  "t-welcome": "Welcome",
+  "t-details-update": "Update details",
+  "t-update": "Update"
 }
-

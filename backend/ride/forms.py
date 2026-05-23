@@ -241,3 +241,22 @@ class RideCalendarVehicleForm(forms.ModelForm):
                 },
             ),
         }
+
+
+class RideDateSearchForm(forms.ModelForm):
+    class Meta:
+        model = Ride
+        fields = ["start_date"]
+
+        widgets = {
+            "start_date": forms.DateInput(
+                format="%d/%m/%Y",
+                attrs={
+                    "class": "form-control",
+                    "id": "start_date",
+                    "placeholder": "DD/MM/YYYY",
+                    "required": "true",
+                    "autocomplete": "off",
+                },
+            ),
+        }

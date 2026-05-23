@@ -1,0 +1,43 @@
+<div class="modal fade"
+     id="reportDefectModal"
+     tabindex="-1"
+     aria-labelledby="reportDefectModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light p-3">
+                <h5 class="modal-title"
+                    id="reportDefectModalLabel"
+                    data-key="t-report-defect">Prijavi kvar</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{% url 'defect:defect_create' %}">
+                {% csrf_token %}
+                <div class="modal-body" id="reportDefectModalBody">
+                    <div class="mb-3">
+                        <label for="doc-title" class="form-label" data-key="t-defect-description">Opis kvara</label>
+                        {{ defect_form.description }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="defectVehicle" class="form-label" data-key="t-defect-description">Vozilo</label>
+                        {{ defect_form.vehicle }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="hstack gap-2 justify-content-end">
+                        <button type="button"
+                                class="btn btn-light"
+                                data-bs-dismiss="modal"
+                                data-key="t-close">Zatvori</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span data-key="t-report">Prijavi</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

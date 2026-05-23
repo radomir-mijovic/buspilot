@@ -6,261 +6,265 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box horizontal-logo d-flex align-items-center">
-                        <a href="{% url 'dashboard:calendar' %}" class="logo logo-light">
-                            <span class="logo-sm">
-                                <h2 style="color: white">BusPilot</h2>
+                        {% if request.user.is_admin %}
+                            <a href="{% url 'dashboard:calendar' %}" class="logo logo-light">
+                            {% else %}
+                                <a href="{% url 'driver:driver_rides' %}" class="logo logo-light">
+                                {% endif %}
+                                <span class="logo-sm">
+                                    <h2 style="color: white">BusPilot</h2>
+                                </span>
+                                <span class="logo-lg">
+                                    <h2 style="color: white">BusPilot</h2>
+                                </span>
+                            </a>
+                        </div>
+                        <button type="button"
+                                class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+                                id="topnav-hamburger-icon">
+                            <span class="hamburger-icon">
+                                <span></span>
+                                <span></span>
+                                <span></span>
                             </span>
-                            <span class="logo-lg">
-                                <h2 style="color: white">BusPilot</h2>
-                            </span>
-                        </a>
+                        </button>
                     </div>
-                    <button type="button"
-                            class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
-                            id="topnav-hamburger-icon">
-                        <span class="hamburger-icon">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </span>
-                    </button>
-                </div>
-                <div class="d-flex align-items-center">
-                    {% if request.user.is_admin %}
-                        <div class="dropdown topbar-head-dropdown ms-1 header-item"
-                             id="notificationDropdown">
-                            <button type="button"
-                                    class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
-                                    id="page-header-notifications-dropdown"
-                                    data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside"
-                                    aria-haspopup="true"
-                                    aria-expanded="false">
-                                <i class='bx bx-bell fs-22'></i>
-                                <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">{{ total_in_danger_documents }}<span class="visually-hidden">unread messages</span></span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                                 aria-labelledby="page-header-notifications-dropdown">
-                                <div class="dropdown-head bg-danger rounded-top">
-                                    <div class="p-3">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <h6 class="m-0 fs-16 fw-semibold text-white"
-                                                    data-key="t-documents-expiring-soon">
-                                                    Dokumenti koji brzo ističu !
-                                                </h6>
+                    <div class="d-flex align-items-center">
+                        {% if request.user.is_admin %}
+                            <div class="dropdown topbar-head-dropdown ms-1 header-item"
+                                 id="notificationDropdown">
+                                <button type="button"
+                                        class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                                        id="page-header-notifications-dropdown"
+                                        data-bs-toggle="dropdown"
+                                        data-bs-auto-close="outside"
+                                        aria-haspopup="true"
+                                        aria-expanded="false">
+                                    <i class='bx bx-bell fs-22'></i>
+                                    <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">{{ total_in_danger_documents }}<span class="visually-hidden">unread messages</span></span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                                     aria-labelledby="page-header-notifications-dropdown">
+                                    <div class="dropdown-head bg-danger rounded-top">
+                                        <div class="p-3">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <h6 class="m-0 fs-16 fw-semibold text-white"
+                                                        data-key="t-documents-expiring-soon">
+                                                        Dokumenti koji brzo ističu !
+                                                    </h6>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="px-2 pt-2">
-                                        <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom"
-                                            data-dropdown-tabs="true"
-                                            id="notificationItemsTab"
-                                            role="tablist">
-                                            <li class="nav-item waves-effect waves-light">
-                                                <div class="nav-link active"
-                                                     data-bs-toggle="tab"
-                                                     href="#all-noti-tab"
-                                                     role="tab"
-                                                     text=""
-                                                     data-key="t-vehicles"
-                                                     aria-selected="true">Vozila</div>
-                                            </li>
-                                            <li class="nav-item waves-effect waves-light">
-                                                <a class="nav-link"
-                                                   data-bs-toggle="tab"
-                                                   href="#messages-tab"
-                                                   role="tab"
-                                                   data-key="t-drivers"
-                                                   aria-selected="false">Vozači</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="tab-content position-relative"
-                                     id="notificationItemsTabContent">
-                                    <div class="tab-pane fade show active py-2 ps-2"
-                                         id="all-noti-tab"
-                                         role="tabpanel">
-                                        <div data-simplebar style="max-height: 300px;" class="pe-2">
-                                            {% for expiring_doc in in_danger_vehicle_documents|slice:":4" %}
-                                                <div class="text-reset notification-item d-block dropdown-item position-relative">
-                                                    <div class="d-flex">
-                                                        <div class="avatar-xs me-3 flex-shrink-0">
-                                                            <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
-                                                                <i class="bx bx-error"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <a href="{{ expiring_doc.file.url }}"
-                                                               target="_blank"
-                                                               class="stretched-link">
-                                                                <h6 class="mt-0 mb-2 lh-base">
-                                                                    {{ expiring_doc.document_type }} za {{ expiring_doc.vehicle.model }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
-                                                                </h6>
-                                                            </a>
-                                                            <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                                <span><i class="mdi mdi-alert"></i> Ističe za {{ expiring_doc.days_to_expire }} dana</span>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                            {% if in_danger_vehicle_documents|length > 0 %}
-                                                <div class="my-3 text-center view-all">
-                                                    <a href="{% url 'common:expiring_documents' %}"
-                                                       type="button"
-                                                       class="btn btn-soft-danger waves-effect waves-light">
-                                                        Pregledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
-                                                    </a>
-                                                </div>
-                                            {% endif %}
+                                        <div class="px-2 pt-2">
+                                            <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom"
+                                                data-dropdown-tabs="true"
+                                                id="notificationItemsTab"
+                                                role="tablist">
+                                                <li class="nav-item waves-effect waves-light">
+                                                    <div class="nav-link active"
+                                                         data-bs-toggle="tab"
+                                                         href="#all-noti-tab"
+                                                         role="tab"
+                                                         text=""
+                                                         data-key="t-vehicles"
+                                                         aria-selected="true">Vozila</div>
+                                                </li>
+                                                <li class="nav-item waves-effect waves-light">
+                                                    <a class="nav-link"
+                                                       data-bs-toggle="tab"
+                                                       href="#messages-tab"
+                                                       role="tab"
+                                                       data-key="t-drivers"
+                                                       aria-selected="false">Vozači</a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel">
-                                        <div data-simplebar style="max-height: 300px;" class="pe-2">
-                                            {% for expiring_doc in in_danger_driver_documents|slice:":4" %}
-                                                <div class="text-reset notification-item d-block dropdown-item position-relative">
-                                                    <div class="d-flex">
-                                                        <div class="avatar-xs me-3 flex-shrink-0">
-                                                            <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
-                                                                <i class="bx bx-error"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <a href="{{ expiring_doc.file.url }}"
-                                                               target="_blank"
-                                                               class="stretched-link">
-                                                                <h6 class="mt-0 mb-2 lh-base">
-                                                                    {{ expiring_doc.document_type }} za {{ expiring_doc.driver.first_name }} {{ expiring_doc.driver.last_name }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
-                                                                </h6>
-                                                            </a>
-                                                            <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                                <span><i class="mdi mdi-alert"></i> Ističe za {{ expiring_doc.days_to_expire }} dana</span>
-                                                            </p>
+                                    <div class="tab-content position-relative"
+                                         id="notificationItemsTabContent">
+                                        <div class="tab-pane fade show active py-2 ps-2"
+                                             id="all-noti-tab"
+                                             role="tabpanel">
+                                            <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                                {% for expiring_doc in in_danger_vehicle_documents|slice:":4" %}
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                                        <div class="d-flex">
+                                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                                <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
+                                                                    <i class="bx bx-error"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                <a href="{{ expiring_doc.file.url }}"
+                                                                   target="_blank"
+                                                                   class="stretched-link">
+                                                                    <h6 class="mt-0 mb-2 lh-base">
+                                                                        {{ expiring_doc.document_type }} za {{ expiring_doc.vehicle.model }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
+                                                                    </h6>
+                                                                </a>
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                    <span><i class="mdi mdi-alert"></i> Ističe za {{ expiring_doc.days_to_expire }} dana</span>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            {% endfor %}
-                                            {% if in_danger_driver_documents|length > 0 %}
-                                                <div class="my-3 text-center view-all">
-                                                    <a href="{% url 'common:expiring_documents' %}"
-                                                       type="button"
-                                                       class="btn btn-soft-danger waves-effect waves-light">
-                                                        Pregledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
-                                                    </a>
-                                                </div>
-                                            {% endif %}
+                                                {% endfor %}
+                                                {% if in_danger_vehicle_documents|length > 0 %}
+                                                    <div class="my-3 text-center view-all">
+                                                        <a href="{% url 'common:expiring_documents' %}"
+                                                           type="button"
+                                                           class="btn btn-soft-danger waves-effect waves-light">
+                                                            Pregledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel">
+                                            <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                                {% for expiring_doc in in_danger_driver_documents|slice:":4" %}
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                                        <div class="d-flex">
+                                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                                <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
+                                                                    <i class="bx bx-error"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                <a href="{{ expiring_doc.file.url }}"
+                                                                   target="_blank"
+                                                                   class="stretched-link">
+                                                                    <h6 class="mt-0 mb-2 lh-base">
+                                                                        {{ expiring_doc.document_type }} za {{ expiring_doc.driver.first_name }} {{ expiring_doc.driver.last_name }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
+                                                                    </h6>
+                                                                </a>
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                    <span><i class="mdi mdi-alert"></i> Ističe za {{ expiring_doc.days_to_expire }} dana</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                {% if in_danger_driver_documents|length > 0 %}
+                                                    <div class="my-3 text-center view-all">
+                                                        <a href="{% url 'common:expiring_documents' %}"
+                                                           type="button"
+                                                           class="btn btn-soft-danger waves-effect waves-light">
+                                                            Pregledaj dokumente<i class="ri-arrow-right-line align-middle"></i>
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endif %}
-                    <div class="dropdown ms-1 topbar-head-dropdown header-item">
-                        <button type="button"
-                                class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                            <img id="header-lang-img"
-                                 src="{% static 'images/flags/us.svg' %}"
-                                 alt="Header Language"
-                                 height="20"
-                                 class="rounded">
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a href="javascript:void(0);"
-                               class="dropdown-item notify-item language py-2"
-                               data-lang="en"
-                               title="English">
-                                <img src="{% static 'images/flags/us.svg' %}"
-                                     alt="English"
-                                     class="me-2 rounded"
-                                     height="18">
-                                <span class="align-middle">English</span>
-                            </a>
-                            <a href="javascript:void(0);"
-                               class="dropdown-item notify-item language"
-                               data-lang="me"
-                               title="Crnogorski">
-                                <img src="{% static 'images/flags/me.svg' %}"
-                                     alt="Crnogorski"
-                                     class="me-2 rounded"
-                                     height="18">
-                                <span class="align-middle">Crnogorski</span>
-                            </a>
-                        </div>
-                    </div>
-                    {% if request.user.is_admin %}
-                        <div class="ms-1 header-item d-none d-sm-flex">
+                        {% endif %}
+                        <div class="dropdown ms-1 topbar-head-dropdown header-item">
                             <button type="button"
-                                    class="btn btn-icon btn-ghost-secondary rounded-circle light-dark-mode">
-                                <i class='bx bx-moon fs-22'></i>
+                                    class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                <img id="header-lang-img"
+                                     src="{% static 'images/flags/us.svg' %}"
+                                     alt="Header Language"
+                                     height="20"
+                                     class="rounded">
                             </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="javascript:void(0);"
+                                   class="dropdown-item notify-item language py-2"
+                                   data-lang="en"
+                                   title="English">
+                                    <img src="{% static 'images/flags/us.svg' %}"
+                                         alt="English"
+                                         class="me-2 rounded"
+                                         height="18">
+                                    <span class="align-middle">English</span>
+                                </a>
+                                <a href="javascript:void(0);"
+                                   class="dropdown-item notify-item language"
+                                   data-lang="me"
+                                   title="Crnogorski">
+                                    <img src="{% static 'images/flags/me.svg' %}"
+                                         alt="Crnogorski"
+                                         class="me-2 rounded"
+                                         height="18">
+                                    <span class="align-middle">Crnogorski</span>
+                                </a>
+                            </div>
                         </div>
-                    {% endif %}
-                    <div class="dropdown ms-sm-3 header-item topbar-user">
-                        <button type="button"
-                                class="btn"
-                                id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                            <span class="d-flex align-items-center">
-                                <img class="rounded-circle header-profile-user"
-                                     src="{% static 'images/users/bus-avatar.jpg' %}"
-                                     alt="Header Avatar">
-                                <span class="text-start ms-xl-2">
-                                    <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ user.username|title }}</span>
-                                    <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text"
-                                          data-key="t-user-role">Korisnik</span>
-                                </span>
-                            </span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item-->
-                            <h6 class="dropdown-header">
-                                <span data-key="t-welcome">Dobrodošli</span> {{ user.username|title }}!
-                            </h6>
-                            {% if request.user.is_admin %}
+                        {% if request.user.is_admin %}
+                            <div class="ms-1 header-item d-none d-sm-flex">
                                 <button type="button"
-                                        class="dropdown-item"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#signupModals">
-                                    <i class="mdi mdi-key text-muted fs-16 align-middle me-1"></i>
-                                    <span class="align-middle" data-key="t-change-password">Promijeni lozinku</span>
+                                        class="btn btn-icon btn-ghost-secondary rounded-circle light-dark-mode">
+                                    <i class='bx bx-moon fs-22'></i>
                                 </button>
-                            {% endif %}
-                            <a class="dropdown-item" href="{% url 'auth:logout' %}">
-                                <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
-                                <span class="align-middle" data-key="t-logout">Odjava</span>
-                            </a>
+                            </div>
+                        {% endif %}
+                        <div class="dropdown ms-sm-3 header-item topbar-user">
+                            <button type="button"
+                                    class="btn"
+                                    id="page-header-user-dropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                <span class="d-flex align-items-center">
+                                    <img class="rounded-circle header-profile-user"
+                                         src="{% static 'images/users/bus-avatar.jpg' %}"
+                                         alt="Header Avatar">
+                                    <span class="text-start ms-xl-2">
+                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ user.username|title }}</span>
+                                        <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text"
+                                              data-key="t-user-role">Korisnik</span>
+                                    </span>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <h6 class="dropdown-header">
+                                    <span data-key="t-welcome">Dobrodošli</span> {{ user.username|title }}!
+                                </h6>
+                                {% if request.user.is_admin %}
+                                    <button type="button"
+                                            class="dropdown-item"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#signupModals">
+                                        <i class="mdi mdi-key text-muted fs-16 align-middle me-1"></i>
+                                        <span class="align-middle" data-key="t-change-password">Promijeni lozinku</span>
+                                    </button>
+                                {% endif %}
+                                <a class="dropdown-item" href="{% url 'auth:logout' %}">
+                                    <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                                    <span class="align-middle" data-key="t-logout">Odjava</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-    <div id="toast-container"
-         class="position-fixed top-0 end-0 p-3"
-         style="z-index: 1100">
-        {% for message in messages %}
-            <div class="toast align-items-center text-white border-0 mb-2 {% if 'error' in message.tags %}bg-danger{% else %}bg-success{% endif %}"
-                 role="alert"
-                 aria-live="assertive"
-                 aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body">{{ message }}</div>
-                    <button type="button"
-                            class="btn-close btn-close-white me-2 m-auto"
-                            data-bs-dismiss="toast"
-                            aria-label="Close"></button>
+        </header>
+        <div id="toast-container"
+             class="position-fixed top-0 end-0 p-3"
+             style="z-index: 1100">
+            {% for message in messages %}
+                <div class="toast align-items-center text-white border-0 mb-2 {% if 'error' in message.tags %}bg-danger{% else %}bg-success{% endif %}"
+                     role="alert"
+                     aria-live="assertive"
+                     aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">{{ message }}</div>
+                        <button type="button"
+                                class="btn-close btn-close-white me-2 m-auto"
+                                data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-    <script>
+            {% endfor %}
+        </div>
+        <script>
             function initToasts() {
                 document.querySelectorAll("#toast-container .toast:not(.showing):not(.show)").forEach(function (el) {
                     new bootstrap.Toast(el, { delay: 4000 }).show();
@@ -268,54 +272,54 @@
             }
             document.addEventListener("DOMContentLoaded", initToasts);
             document.addEventListener("htmx:afterSettle", initToasts);
-    </script>
-    <!-- signupModals - must be outside header to avoid z-index/overflow issues -->
-    <div id="signupModals" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 overflow-hidden">
-                <div class="modal-header p-3">
-                    <h4 class="card-title mb-0">Promjeni lozinku</h4>
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+        </script>
+        <!-- signupModals - must be outside header to avoid z-index/overflow issues -->
+        <div id="signupModals" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 overflow-hidden">
+                    <div class="modal-header p-3">
+                        <h4 class="card-title mb-0">Promjeni lozinku</h4>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{% url 'auth:change_password' %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="OldPassword" class="form-label">Nova lozinka</label>
+                                <input type="password"
+                                       name="old_password"
+                                       class="form-control"
+                                       id="OldPassword"
+                                       placeholder="Unesite staru lozinku">
+                            </div>
+                            <div class="mb-3">
+                                <label for="Password1" class="form-label">Nova lozinka</label>
+                                <input type="password"
+                                       name="new_password1"
+                                       class="form-control"
+                                       id="Password1"
+                                       placeholder="Upisite novu lozinku">
+                            </div>
+                            <div class="mb-3">
+                                <label for="Password2" class="form-label">Ponovite lozinku</label>
+                                <input type="password"
+                                       name="new_password2"
+                                       class="form-control"
+                                       id="Password2"
+                                       placeholder="Ponovite lozinku">
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">Sign Up Now</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form method="POST" action="{% url 'auth:change_password' %}">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="OldPassword" class="form-label">Nova lozinka</label>
-                            <input type="password"
-                                   name="old_password"
-                                   class="form-control"
-                                   id="OldPassword"
-                                   placeholder="Unesite staru lozinku">
-                        </div>
-                        <div class="mb-3">
-                            <label for="Password1" class="form-label">Nova lozinka</label>
-                            <input type="password"
-                                   name="new_password1"
-                                   class="form-control"
-                                   id="Password1"
-                                   placeholder="Upisite novu lozinku">
-                        </div>
-                        <div class="mb-3">
-                            <label for="Password2" class="form-label">Ponovite lozinku</label>
-                            <input type="password"
-                                   name="new_password2"
-                                   class="form-control"
-                                   id="Password2"
-                                   placeholder="Ponovite lozinku">
-                        </div>
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Sign Up Now</button>
-                        </div>
-                    </form>
-                </div>
+                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-content -->
+            <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-{% endblock header %}
+        <!-- /.modal -->
+    {% endblock header %}
