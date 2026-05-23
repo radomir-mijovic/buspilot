@@ -26,6 +26,7 @@
   "t-are-you-sure": "Da li ste sigurni?",
   "t-yes-delete": "Da, Obriši!!",
   "t-no-result": "Nema rezultata",
+  "t-search-results": "Pretraži",
   "t-full-name": "Ime i Prezime",
   "t-first-name": "Ime",
   "t-last-name": "Prezime",
@@ -132,5 +133,6 @@
   "t-delete-ride-btn": "Obriši vožnju",
   "t-documents-expiring-soon": "Dokumenti koji brzo ističu !",
   "t-welcome": "Dobrodošli",
-  "t-details": "Detalji"
+  "t-details": "Detalji",
+  "t-details-update": "Izmijeni podatke"
 }

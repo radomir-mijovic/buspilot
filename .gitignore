@@ -32,6 +32,7 @@ backend/staticfiles
 backend/backend/staticfiles
 backend/backend/media
 backend/db.buspilot
+db.buspilot
 
 # Testing
 test_db
@@ -84,3 +85,6 @@ htmlcov/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# JS
+backend/node_modules
