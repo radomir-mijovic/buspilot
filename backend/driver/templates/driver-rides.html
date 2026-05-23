@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="row timeline-right">
                                                 <div class="col-12">
-                                                    <p class="timeline-date">Polazak u {{ ride.start_time }}</p>
+                                                    <p class="timeline-date" data-key="t-departure">Polazak{{ ride.start_time }}</p>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="timeline-box">
@@ -49,13 +49,13 @@
                                                             <h5 class="fs-15">{{ ride.title }}</h5>
                                                             <ul class="mb-0 text-muted vstack gap-2">
                                                                 <li>
-                                                                    <strong >Mjesto polaska:</strong> {{ ride.start_location }}
+                                                                    <strong data-key="t-departure-location">Mjesto polaska:</strong> {{ ride.start_location }}
                                                                 </li>
                                                                 <li>
-                                                                    <strong>Agencija:</strong> {{ ride.agency }}
+                                                                    <strong data-key="t-agency">Agencija:</strong> {{ ride.agency }}
                                                                 </li>
                                                                 <li>
-                                                                    <strong>Tip:</strong> {{ ride.get_ride_type_display }}
+                                                                    <strong data-key="t-ride-type">Tip:</strong> {{ ride.get_ride_type_display }}
                                                                 </li>
                                                             </ul>
                                                         </div>
