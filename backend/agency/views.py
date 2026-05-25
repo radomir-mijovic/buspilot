@@ -2,7 +2,6 @@ from typing import Any
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import models
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -128,11 +127,6 @@ class AgencyDeleteView(
 ):
     model = Agency
     success_url = reverse_lazy("agency:agency_list")
-
-    def get_queryset(self) -> models.QuerySet[Any]:
-        return Agency.objects.filter(
-            company=self.company,
-        )
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         agency = self.get_object()

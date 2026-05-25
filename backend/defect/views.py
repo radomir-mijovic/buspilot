@@ -2,22 +2,22 @@ from typing import Any
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import View, generic
 
 from company.mixins import CompanyRequestMixin
 
 from .forms import DefectForm
+from .mixins import DefectQueryFilterMixin
 from .models import Defect
 
 
 class DefectListView(
-    CompanyRequestMixin,
+    DefectQueryFilterMixin,
     LoginRequiredMixin,
     generic.ListView,
 ):
@@ -41,7 +41,7 @@ class DefectListView(
 
 
 class DefectMarkAsResolved(
-    CompanyRequestMixin,
+    DefectQueryFilterMixin,
     LoginRequiredMixin,
     View,
 ):
@@ -84,3 +84,17 @@ class DefectCreateView(
         form.save()
         messages.success(self.request, _("Defect successfully reported."))
         return redirect("driver:driver_rides")
+
+
+class DefectDeleteView(
+    DefectQueryFilterMixin,
+    LoginRequiredMixin,
+    generic.DeleteView,
+):
+    model = Defect
+    success_url = reverse_lazy("defect:defects")
+
+    def post(self, request, *args, **kwargs):
+        super().post(request, *args, **kwargs)
+        messages.success(request, _("Defect successfully deleted."))
+        return redirect("defect:defects")

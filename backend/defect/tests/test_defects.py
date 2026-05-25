@@ -1,6 +1,7 @@
 import pytest
 from django.urls import reverse
 
+from auth.tests.factories import UserFactory
 from common.tests.fixtures import user
 from company.tests.factories import CompanyFactory
 from defect.models import Defect
@@ -82,3 +83,26 @@ class TestDefect:
         )
         self.defect.refresh_from_db()
         assert not self.defect.is_fixed
+
+    def test_delete_defect_ok(self):
+        assert Defect.objects.count() == 1
+        self.client.post(
+            reverse(
+                "defect:defect_delete",
+                kwargs={"pk": self.defect.pk},
+            )
+        )
+        assert Defect.objects.count() == 0
+
+    def test_cant_delete_other_company_defect(self):
+        other_user = UserFactory()
+        other_user.company = CompanyFactory()
+        other_user.save()
+
+        self.client.force_login(other_user)
+
+        assert Defect.objects.count() == 1
+        self.client.delete(
+            reverse("defect:defect_delete", kwargs={"pk": self.defect.pk})
+        )
+        assert Defect.objects.count() == 1

@@ -85,7 +85,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
-if os.environ.get("DATABASE_ENGINE") == "django.db.backends.postgresql":
+if os.environ.get("DATABASE_ENGINE") == "django.db.backends.postgresql_psycopg2":
     DATABASES = {
         "default": {
             "ENGINE": os.environ.get(
