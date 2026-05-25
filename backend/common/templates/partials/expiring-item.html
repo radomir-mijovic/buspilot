@@ -20,8 +20,12 @@
             </div>
         </div>
         <div class="flex-grow-1 ms-3">
-            <h6 class="mb-1 fs-14">{{ expiring_doc.document_type }} | {{ expiring_doc.title }}</h6>
-            <p class="mb-0">Ističe za {{ expiring_doc.days_to_expire }} dana</p>
+            <h6 class="mb-1 fs-14">{{ expiring_doc.document_type }} | {{ expiring_doc.title }} | {{ owner }}</h6>
+            {% if has_expired %}
+                <p class="badge bg-danger" data-key="t-expired">Istekao - {{ expiring_doc.expiring_at }}</p>
+            {% else %}
+                <p class="mb-0">Ističe za {{ expiring_doc.days_to_expire }} dana</p>
+            {% endif %}
         </div>
     </div>
 </a>

@@ -84,6 +84,11 @@ class DocumentManager(models.Manager):
             expiring_at__lte=self.one_month_ahead(),
         ).order_by("expiring_at")
 
+    def expired(self):
+        return self.filter(
+            expiring_at__lt=self.today_date()
+        ).order_by("expiring_at")
+
     def one_month_ahead(self):
         one_month_ahead_date = self.today_date() + timedelta(days=30)
         return one_month_ahead_date

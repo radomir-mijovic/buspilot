@@ -10,7 +10,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 {% block pagetitle %}
-                    {% include "partials/page-title.html" with pagetitle="Dokumenti" title="Dokumenti blizu isteka" %}
+                    {% include "partials/page-title.html" with pagetitle="Dokumenti" title="Istekli dokumenti" %}
                 {% endblock pagetitle %}
                 <div class="row">
                     <div class="col-xxl-12">
@@ -39,20 +39,20 @@
                                 <div class="tab-content text-muted">
                                     <div class="tab-pane active" id="vehicles" role="tabpanel">
                                         <div class="row">
-                                            {% for expiring_doc in in_danger_vehicle_documents %}
-                                                {% url 'vehicle:vehicles_details' expiring_doc.vehicle.pk as vehicle_url %}
+                                            {% for expired_doc in expired_vehicle_documents %}
+                                                {% url 'vehicle:vehicles_details' expired_doc.vehicle.pk as vehicle_url %}
                                                 <div class="col-lg-4 col-sm-6 mb-3">
-                                                    {% include "partials/expiring-item.html" with expiring_doc=expiring_doc href=vehicle_url owner=expiring_doc.vehicle.licence_number %}
+                                                    {% include "partials/expiring-item.html" with expiring_doc=expired_doc href=vehicle_url has_expired=True owner=expired_doc.vehicle.licence_number %}
                                                 </div>
                                             {% endfor %}
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="drivers" role="tabpanel">
                                         <div class="row">
-                                            {% for expiring_doc in in_danger_driver_documents %}
-                                                {% url 'driver:driver_details' expiring_doc.driver.pk as driver_url %}
+                                            {% for expired_doc in expired_driver_documents %}
+                                                {% url 'driver:driver_details' expired_doc.driver.pk as driver_url %}
                                                 <div class="col-lg-4 col-sm-6 mb-3">
-                                                    {% include "partials/expiring-item.html" with expiring_doc=expiring_doc href=driver_url owner=expiring_doc.driver.get_full_name %}
+                                                    {% include "partials/expiring-item.html" with expiring_doc=expired_doc href=driver_url has_expired=True  owner=expired_doc.driver.get_full_name %}
                                                 </div>
                                             {% endfor %}
                                         </div>

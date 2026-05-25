@@ -78,6 +78,8 @@ TEMPLATES = [
                 "common.context_processors.count_all_in_danger_documents",
                 "common.context_processors.list_in_danger_driver_documents",
                 "common.context_processors.list_in_danger_vehicle_documents",
+                "common.context_processors.list_all_driver_expired_documents",
+                "common.context_processors.list_all_vehicle_expired_documents",
             ],
         },
     },
