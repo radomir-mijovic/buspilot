@@ -3,7 +3,9 @@
         <div class="card-header">
             <h6 class="card-title mb-0">{{ defect.reported_by }}</h6>
             <h6 class="card-title mb-0">{{ defect.created_at }}</h6>
-            <h6 class="card-title mb-0">{{ defect.vehicle.licence_number }}</h6>
+            <h6 class="card-title mb-0">
+                {{ defect.vehicle.brand }} - {{ defect.vehicle.model }} - {{ defect.vehicle.licence_number }}
+            </h6>
         </div>
         <div class="card-body">
             <p class="card-text">{{ defect.description }}</p>
