@@ -58,6 +58,19 @@
                                                                     <strong data-key="t-ride-type">Tip:</strong> {{ ride.get_ride_type_display }}
                                                                 </li>
                                                             </ul>
+                                                            <form class="mt-4"
+                                                                  method="POST"
+                                                                  action="{% url 'ride:ride_confirm'  ride.pk %}">
+                                                                {% csrf_token %}
+                                                                <input type="hidden"
+                                                                       name="is_confirmed"
+                                                                       value="{% if request.user in ride.confirmed_by.all %}False{% else %}True{% endif %}">
+                                                                {% if request.user in ride.confirmed_by.all %}
+                                                                    <button type="submit" class="btn btn-warning" data-key="t-cancel-ride">Otkaži Vožnju</button>
+                                                                {% else %}
+                                                                    <button type="submit" class="btn btn-success" data-key="t-confirm-ride">Potvrdi Vožnju</button>
+                                                                {% endif %}
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>

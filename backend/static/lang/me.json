@@ -137,5 +137,6 @@
   "t-welcome": "Dobrodošli",
   "t-details": "Detalji",
   "t-details-update": "Izmijeni podatke",
-  "t-update": "Izmijeni"
+  "t-update": "Izmijeni",
+  "t-confirm-ride": "Potvrdi Vožnju",
 }
