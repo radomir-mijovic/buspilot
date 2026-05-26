@@ -22,7 +22,6 @@ services:
   db_backup:
     image: prodrigestivill/postgres-backup-local
     restart: always
-    user: postgres:postgres
     volumes:
       - /opt/pgbackups/postgres:/backups
     environment:
