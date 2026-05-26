@@ -24,7 +24,7 @@ services:
     restart: always
     user: postgres:postgres
     volumes:
-      - /var/opt/pgbackups:/backups
+      - /opt/pgbackups/postgres:/backups
     environment:
       - POSTGRES_DB=${DATABASE_NAME}
       - POSTGRES_USER=${DATABASE_USER}
