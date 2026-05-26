@@ -2,6 +2,7 @@ from typing import Any
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import models
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
@@ -10,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import View, generic
 
 from company.mixins import CompanyRequestMixin
+from vehicle.models import Vehicle
 
 from .forms import DefectForm
 from .mixins import DefectQueryFilterMixin
@@ -23,21 +25,35 @@ class DefectListView(
 ):
     template_name = "defects.html"
     context_object_name = "defects"
+    model = Defect
 
     def get_context_data(self, *args, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(*args, **kwargs)
-        context["active_defects"] = Defect.objects.filter(
-            is_fixed=False, company=self.company
-        )
-        context["resolved_defects"] = Defect.objects.filter(
-            is_fixed=True, company=self.company
-        )
+        context["vehicles"] = Vehicle.objects.filter(
+            defects__isnull=False,
+            company=self.company,
+        ).distinct()
+        context["active_defects"] = self.get_defects(self.request, is_fixed=False)
+        context["resolved_defects"] = self.get_defects(self.request, is_fixed=True)
         return context
 
-    def get_queryset(self) -> QuerySet[Defect]:
+    def get_queryset(self) -> models.QuerySet[Defect]:
         return Defect.objects.filter(
             company=self.company,
         ).select_related("vehicle", "reported_by")
+
+    def get_defects(
+        self,
+        request,
+        *,
+        is_fixed: bool | None = None,
+    ) -> models.QuerySet[Defect]:
+        defects = Defect.objects.filter(is_fixed=is_fixed, company=self.company)
+
+        if vehicle_pk := request.GET.get("vehicle"):
+            return defects.filter(vehicle__pk=vehicle_pk)
+
+        return defects
 
 
 class DefectMarkAsResolved(
