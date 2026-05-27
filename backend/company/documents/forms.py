@@ -1,14 +1,27 @@
 from django import forms
 from django.forms import ModelForm
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from ..models import AgencyDocument
+from common.validators import validate_expiring_at_must_be_in_the_future
+
+from ..models import CompanyDocument
 
 
-class AgencyDocumentUploadForm(ModelForm):
+class CompanyDocumentUploadForm(ModelForm):
+    expiring_at = forms.DateField(
+        validators=[validate_expiring_at_must_be_in_the_future],
+        widget=forms.DateInput(
+            attrs={
+                "class": "form-control",
+                "id": "doc-expiry",
+                "type": "date",
+                "required": True,
+            }
+        ),
+    )
+
     class Meta:
-        model = AgencyDocument
+        model = CompanyDocument
         fields = [
             "title",
             "document_type",
@@ -21,21 +34,15 @@ class AgencyDocumentUploadForm(ModelForm):
                     "class": "form-control",
                     "id": "doc-title",
                     "required": "true",
-                    "placeholder": _("npr. Ugovor o prevozu"),
+                    "placeholder": _("Naziv dokumenta"),
                 }
             ),
             "document_type": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "id": "doc-type",
-                    "placeholder": _("npr. Ugovor"),
-                }
-            ),
-            "expiring_at": forms.DateInput(
-                attrs={
-                    "class": "form-control",
-                    "id": "doc-expiry",
-                    "type": "date",
+                    "placeholder": _("Tip dokumenta"),
+                    "required": "true",
                 }
             ),
             "file": forms.FileInput(
@@ -47,10 +54,3 @@ class AgencyDocumentUploadForm(ModelForm):
                 }
             ),
         }
-
-    def clean_expiring_at(self):
-        if expiring_at := self.cleaned_data["expiring_at"]:
-            if expiring_at < timezone.now().date():
-                raise forms.ValidationError(_("Date must be in the future."))
-
-        return expiring_at

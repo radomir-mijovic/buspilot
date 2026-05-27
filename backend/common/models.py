@@ -144,3 +144,4 @@ class DocumentAbstract(
 
     class Meta:
         abstract = True
+        ordering = ["expiring_at"]

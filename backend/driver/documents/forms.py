@@ -21,14 +21,14 @@ class DriverDocumentUploadForm(ModelForm):
                     "class": "form-control",
                     "id": "doc-title",
                     "required": "true",
-                    "placeholder": "npr. Ugovor o radu na određeno vrijeme",
+                    "placeholder": _("npr. Ugovor o radu na određeno vrijeme"),
                 }
             ),
             "document_type": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "id": "doc-type",
-                    "placeholder": "npr. Ugovor o radu",
+                    "placeholder": _("npr. Ugovor o radu"),
                     "required": "true",
                 }
             ),

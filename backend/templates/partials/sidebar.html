@@ -137,6 +137,11 @@
                         <div class="collapse menu-dropdown" id="sidebarDocuments">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
+                                    <a href="{% url 'company:company_documents' %}"
+                                       class="nav-link"
+                                       data-key="t-all-documents">Svi Dokumenti</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{% url 'common:expiring_documents' %}"
                                        class="nav-link"
                                        data-key="t-in-danger">U Opasnosti</a>

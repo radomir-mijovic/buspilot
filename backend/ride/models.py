@@ -61,7 +61,6 @@ class Ride(
     )
     confirmed_by = models.ManyToManyField(
         "driver.Driver",
-        null=True,
         blank=True,
         related_name="confirmed_rides",
     )
