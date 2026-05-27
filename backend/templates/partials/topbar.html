@@ -88,27 +88,29 @@
                                              role="tabpanel">
                                             <div data-simplebar style="max-height: 300px;" class="pe-2">
                                                 {% for expiring_doc in in_danger_vehicle_documents|slice:":4" %}
-                                                    <div class="text-reset notification-item d-block dropdown-item position-relative">
-                                                        <div class="d-flex">
-                                                            <div class="avatar-xs me-3 flex-shrink-0">
-                                                                <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
-                                                                    <i class="bx bx-error"></i>
-                                                                </span>
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                <a href="{{ expiring_doc.file.url }}"
-                                                                   target="_blank"
-                                                                   class="stretched-link">
-                                                                    <h6 class="mt-0 mb-2 lh-base">
-                                                                        {{ expiring_doc.document_type }} za {{ expiring_doc.vehicle.model }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
-                                                                    </h6>
-                                                                </a>
-                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                                    <span><i class="mdi mdi-alert"></i> Ističe za {{ expiring_doc.days_to_expire }} dana</span>
-                                                                </p>
+                                                    {% if expiring_doc.file %}
+                                                        <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                                            <div class="d-flex">
+                                                                <div class="avatar-xs me-3 flex-shrink-0">
+                                                                    <span class="avatar-title bg-danger-subtle text-danger rounded-circle fs-16">
+                                                                        <i class="bx bx-error"></i>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="flex-grow-1">
+                                                                    <a href="{{ expiring_doc.file.url }}"
+                                                                       target="_blank"
+                                                                       class="stretched-link">
+                                                                        <h6 class="mt-0 mb-2 lh-base">
+                                                                            {{ expiring_doc.document_type }} za {{ expiring_doc.vehicle.model }} <span class="text-secondary">ističe</span> u narednih mjesec dana!
+                                                                        </h6>
+                                                                    </a>
+                                                                    <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                        <span><i class="mdi mdi-alert"></i> Ističe za {{ expiring_doc.days_to_expire }} dana</span>
+                                                                    </p>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    {% endif %}
                                                 {% endfor %}
                                                 {% if in_danger_vehicle_documents|length > 0 %}
                                                     <div class="my-3 text-center view-all">
