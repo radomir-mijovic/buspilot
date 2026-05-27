@@ -20,6 +20,7 @@
                             </div>
                             <form method="GET" action="{% url 'company:company_documents' %}">
                                 <input type="hidden" name="owner" value="{{ owner }}">
+                                <input type="hidden" name="page" value="{{ page_obj.number }}">
                                 <div class="search-box">
                                     <input type="text"
                                            name="search_param"
@@ -80,7 +81,7 @@
                                                         <td>{{ document.driver.get_full_name }}</td>
                                                     {% elif document.agency %}
                                                         <td>{{ document.agency.name }}</td>
-                                                    {% elif document.vehicle%}
+                                                    {% elif document.vehicle %}
                                                         <td>{{ document.vehicle }}</td>
                                                     {% else %}
                                                         <td>{{ document.company.name }}</td>
@@ -142,10 +143,11 @@
                                         <ul class="pagination pagination-separated pagination-sm justify-content-center justify-content-sm-start mb-0">
                                             {% if page_obj.has_previous %}
                                                 <li class="page-item">
-                                                    <a href="?owner={{owner}}&page=1" class="page-link">First</a>
+                                                    <a href="?owner={{ owner }}&page=1&search_param={{search_param}}" class="page-link">First</a>
                                                 </li>
                                                 <li class="page-item">
-                                                    <a href="?owner={{owner}}&page={{ page_obj.previous_page_number }}" class="page-link">←</a>
+                                                    <a href="?owner={{ owner }}&page={{ page_obj.previous_page_number }}&search_param={{search_param}}"
+                                                       class="page-link">←</a>
                                                 </li>
                                             {% endif %}
                                             <li class="page-item active">
@@ -153,10 +155,12 @@
                                             </li>
                                             {% if page_obj.has_next %}
                                                 <li class="page-item">
-                                            <a href="?owner={{owner}}&page={{ page_obj.next_page_number }}" class="page-link">→</a>
+                                                    <a href="?owner={{ owner }}&page={{ page_obj.next_page_number }}&search_param={{search_param}}"
+                                                       class="page-link">→</a>
                                                 </li>
                                                 <li class="page-item">
-                                                    <a href="?owner={{owner}}&page={{ page_obj.paginator.num_pages }}" class="page-link">Last</a>
+                                            <a href="?owner={{ owner }}&page={{ page_obj.paginator.num_pages }}&search_param={{search_param}}"
+                                                       class="page-link">Last</a>
                                                 </li>
                                             {% endif %}
                                         </ul>

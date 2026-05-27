@@ -80,9 +80,11 @@ class CompanyDocumentView(
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         owner = self.request.GET.get("owner", "")
+        search_param = self.request.GET.get("search_param", "")
         context = super().get_context_data(**kwargs)
         context["document_form"] = CompanyDocumentUploadForm()
         context["owner"] = owner
+        context["search_param"] = search_param
         return context
 
 
