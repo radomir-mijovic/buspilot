@@ -11,6 +11,7 @@ urlpatterns = [
     path("", include("company.urls")),
     path("", include("dashboard.urls")),
     path("", include("defect.urls")),
+    path("", include("finance.urls")),
     path("", include("driver.urls")),
     path("", include("guide.urls")),
     path("", include("vehicle.urls")),

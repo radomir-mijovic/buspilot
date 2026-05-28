@@ -1,0 +1,1 @@
+import{a as e,i as t,n,o as r,t as i}from"../assets/jsx-runtime-KGTJF3PQ.js";var a,o,s=e((()=>{a=i(),o=()=>(0,a.jsx)(`h1`,{children:`Inovices Header`})})),c=t((()=>{var e=r(n());s();var t=i(),a=document.getElementById(`finance-page`);a&&e.createRoot(a).render((0,t.jsx)(o,{}))}));export default c();

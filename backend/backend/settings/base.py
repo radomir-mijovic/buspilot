@@ -41,6 +41,7 @@ LOCAL_APPS = [
     "company.apps.CompanyConfig",
     "dashboard.apps.DashboardConfig",
     "defect.apps.DefectConfig",
+    "finance.apps.FinanceConfig",
     "guide.apps.GuideConfig",
     "driver.apps.DriverConfig",
     "ride.apps.RideConfig",
@@ -143,10 +144,10 @@ AUTH_USER_MODEL = "user_auth.User"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-#STATICFILES_DIRS = [BASE_DIR / "static"]
-STATICFILES_DIRS = [
-  BASE_DIR / "assets"
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
+# STATICFILES_DIRS = [
+#  BASE_DIR / "assets"
+# ]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -184,8 +185,4 @@ sentry_sdk.init(
 )
 
 # Vite
-DJANGO_VITE = {
-  "default": {
-    "dev_mode": os.environ.get("DEBUG", True)
-  }
-}
+DJANGO_VITE = {"default": {"dev_mode": os.environ.get("DEBUG", True)}}

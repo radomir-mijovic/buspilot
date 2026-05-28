@@ -1,0 +1,21 @@
+{% extends "partials/base.html" %}
+{% load django_vite %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    Vozaci
+{% endblock title %}
+{% block content %}
+    {% vite_asset 'assets/pages/finance.jsx' %}
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div id="finance-page" />
+                <!-- End Page-content -->
+                {% block footer %}
+                    {% include "partials/footer.html" %}
+                {% endblock footer %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
