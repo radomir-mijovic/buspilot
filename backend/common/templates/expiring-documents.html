@@ -6,9 +6,6 @@
 {% block extra_css %}
 {% endblock extra_css %}
 {% block content %}
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
@@ -45,7 +42,7 @@
                                             {% for expiring_doc in in_danger_vehicle_documents %}
                                                 {% url 'vehicle:vehicles_details' expiring_doc.vehicle.pk as vehicle_url %}
                                                 <div class="col-lg-4 col-sm-6 mb-3">
-                                                    {% include "partials/expiring-item.html" with expiring_doc=expiring_doc href=vehicle_url %}
+                                                    {% include "partials/expiring-item.html" with expiring_doc=expiring_doc href=vehicle_url owner=expiring_doc.vehicle.licence_number %}
                                                 </div>
                                             {% endfor %}
                                         </div>
@@ -55,7 +52,7 @@
                                             {% for expiring_doc in in_danger_driver_documents %}
                                                 {% url 'driver:driver_details' expiring_doc.driver.pk as driver_url %}
                                                 <div class="col-lg-4 col-sm-6 mb-3">
-                                                    {% include "partials/expiring-item.html" with expiring_doc=expiring_doc href=driver_url %}
+                                                    {% include "partials/expiring-item.html" with expiring_doc=expiring_doc href=driver_url owner=expiring_doc.driver.get_full_name %}
                                                 </div>
                                             {% endfor %}
                                         </div>

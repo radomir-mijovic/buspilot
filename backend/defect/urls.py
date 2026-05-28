@@ -1,6 +1,11 @@
 from django.urls import path
 
-from .views import DefectCreateView, DefectListView, DefectMarkAsResolved
+from .views import (
+    DefectCreateView,
+    DefectDeleteView,
+    DefectListView,
+    DefectMarkAsResolved,
+)
 
 app_name = "defect"
 
@@ -20,5 +25,10 @@ urlpatterns = [
         "mark-as-resolved/<int:pk>/",
         DefectMarkAsResolved.as_view(),
         name="mark_as_resolved",
+    ),
+    path(
+        "defect-delete/<int:pk>/",
+        DefectDeleteView.as_view(),
+        name="defect_delete",
     ),
 ]

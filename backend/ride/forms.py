@@ -260,3 +260,9 @@ class RideDateSearchForm(forms.ModelForm):
                 },
             ),
         }
+
+
+class RideConfirmForm(forms.ModelForm):
+    class Meta:
+        model = Ride
+        fields = ["is_confirmed"]

@@ -3,16 +3,26 @@
         <div class="card-header">
             <h6 class="card-title mb-0">{{ defect.reported_by }}</h6>
             <h6 class="card-title mb-0">{{ defect.created_at }}</h6>
-            <h6 class="card-title mb-0">{{ defect.vehicle.licence_number }}</h6>
+            <h6 class="card-title mb-0">
+                {{ defect.vehicle.brand }} - {{ defect.vehicle.model }} - {{ defect.vehicle.licence_number }}
+            </h6>
         </div>
         <div class="card-body">
             <p class="card-text">{{ defect.description }}</p>
-            <div class="text-end">
-                <form method="POST" action="{% url 'defect:mark_as_resolved' defect.pk %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="is_fixed" value="{{ is_fixed }}">
-                    <button type="submit" class="btn btn-success">{{ button_text }}</button>
-                </form>
+            <div class="d-flex gap-2 justify-content-end">
+                <div class="text-end">
+                    <form method="POST" action="{% url 'defect:defect_delete' defect.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" data-key="t-delete" class="btn btn-danger">Obriši</button>
+                    </form>
+                </div>
+                <div class="text-end">
+                    <form method="POST" action="{% url 'defect:mark_as_resolved' defect.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="is_fixed" value="{{ is_fixed }}">
+                        <button type="submit" class="btn btn-success">{{ button_text }}</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -42,7 +42,12 @@
                                 </td>
                                 <td>
                                     <ul class="list-unstyled">
-                                        {% for driver in ride.drivers.all %}<li>{{ driver }}</li>{% endfor %}
+                                        {% for driver in ride.drivers.all %}
+                                            <li>
+                                                {{ driver }}
+                                                {% if driver in ride.confirmed_by.all %}<span class="badge bg-success"> Confirmed</span>{% endif %}
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                 </td>
                                 <td>{{ ride.start_time }}</td>

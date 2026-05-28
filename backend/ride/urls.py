@@ -1,6 +1,12 @@
 from django.urls import path
 
-from .views import RideCreateView, RideDeleteView, RideListView, RideUpdateView
+from .views import (
+    RideConfirmView,
+    RideCreateView,
+    RideDeleteView,
+    RideListView,
+    RideUpdateView,
+)
 
 app_name = "ride"
 
@@ -25,5 +31,10 @@ urlpatterns = [
         "rides-delete/<int:pk>/",
         RideDeleteView.as_view(),
         name="ride_delete",
+    ),
+    path(
+        "rides-confirm/<int:pk>/",
+        RideConfirmView.as_view(),
+        name="ride_confirm",
     ),
 ]

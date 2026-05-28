@@ -21,14 +21,14 @@ class AgencyDocumentUploadForm(ModelForm):
                     "class": "form-control",
                     "id": "doc-title",
                     "required": "true",
-                    "placeholder": "npr. Ugovor o prevozu",
+                    "placeholder": _("npr. Ugovor o prevozu"),
                 }
             ),
             "document_type": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "id": "doc-type",
-                    "placeholder": "npr. Ugovor",
+                    "placeholder": _("npr. Ugovor"),
                 }
             ),
             "expiring_at": forms.DateInput(

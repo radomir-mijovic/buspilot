@@ -24,4 +24,5 @@ class RideAdmin(admin.ModelAdmin):
         "end_date",
         "start_location",
         "end_location",
+        "confirmed_by",
     ]

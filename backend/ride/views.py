@@ -1,5 +1,6 @@
 from typing import Any
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models
 from django.forms import BaseModelForm
@@ -7,12 +8,13 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
 from auth.decorators import admin_permission_required
 from company.mixins import CompanyRequestMixin, SetCompanyInKwargsMixin
 
-from .forms import RideForm
+from .forms import RideConfirmForm, RideForm
 from .mixins import RideQueryFilterMixin, RidesCountMixin
 from .models import Ride
 
@@ -96,7 +98,12 @@ class RideDeleteView(
     model = Ride
     success_url = reverse_lazy("ride:ride_list")
 
-    def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+    def post(
+        self,
+        request: HttpRequest,
+        *args: Any,
+        **kwargs: Any,
+    ) -> HttpResponse:
         instance = self.get_object()
         instance.delete()
 
@@ -104,3 +111,24 @@ class RideDeleteView(
             return HttpResponse(status=200)
 
         return redirect("ride:ride_list")
+
+
+class RideConfirmView(
+    LoginRequiredMixin,
+    RideQueryFilterMixin,
+    generic.UpdateView,
+):
+    form_class = RideConfirmForm
+    model = Ride
+    success_url = reverse_lazy("driver:driver_rides")
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        if self.request.POST.get("is_confirmed") == "True":
+            form.instance.confirmed_by.add(self.request.user.pk)
+            messages.success(self.request, _("Ride confirmed successfully"))
+        else:
+            form.instance.confirmed_by.remove(self.request.user.pk)
+            messages.warning(self.request, _("Ride canceled successfully"))
+
+        form.save()
+        return redirect("driver:driver_rides")

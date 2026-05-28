@@ -1,4 +1,7 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
+
+from common.models import VALID_FILE_EXTENSIONS, DocumentAbstract
 
 
 # TODO: add logo when you setup claud service
@@ -47,3 +50,14 @@ class CompanyAddress(models.Model):
 
     class Meta:
         verbose_name_plural = "Company Address"
+
+
+class CompanyDocument(DocumentAbstract):
+    file = models.FileField(
+        upload_to="company/documents",
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=VALID_FILE_EXTENSIONS,
+            ),
+        ],
+    )

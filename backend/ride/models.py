@@ -59,7 +59,13 @@ class Ride(
         on_delete=models.SET_NULL,
         related_name="rides"
     )
+    confirmed_by = models.ManyToManyField(
+        "driver.Driver",
+        blank=True,
+        related_name="confirmed_rides",
+    )
     is_all_day = models.BooleanField(default=False)
+    is_confirmed = models.BooleanField(default=False)
     company = models.ForeignKey(
         "company.Company",
         on_delete=models.CASCADE,

@@ -1,0 +1,54 @@
+<div class="modal fade zoomIn"
+     id="createFileModal"
+     tabindex="-1"
+     aria-labelledby="createFileModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header p-3 bg-success-subtle">
+                <h5 class="modal-title" data-key="t-company-document" id="createFileModalLabel">Dokument Firme</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        id="addFileBtn-close"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST"
+                      action="{% url 'company:company_documents' %}"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="modal-body" id="addDocumentModalBody">
+                        <div class="mb-3">
+                            <label for="doc-title" class="form-label" data-key="t-doc-title-label">Naziv dokumenta</label>
+                            {{ document_form.title }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="doc-type" class="form-label" data-key="t-doc-type-label">Tip dokumenta</label>
+                            {{ document_form.document_type }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="doc-expiry" class="form-label" data-key="t-doc-expiry-label">Datum isteka</label>
+                            {{ document_form.expiring_at }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="doc-file" class="form-label" data-key="t-doc-file-label">Fajl</label>
+                            {{ document_form.file }}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button"
+                                    class="btn btn-light"
+                                    data-bs-dismiss="modal"
+                                    data-key="t-close">Zatvori</button>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add">Dodaj</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

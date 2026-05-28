@@ -5,7 +5,7 @@ from .models import Vehicle, VehicleDocument
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = ["id", "brand"]
+    list_display = ["id", "brand", "company"]
 
 
 @admin.register(VehicleDocument)

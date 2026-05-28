@@ -132,8 +132,11 @@
   "t-update-ride-btn": "Izmijeni vožnju",
   "t-delete-ride-btn": "Obriši vožnju",
   "t-documents-expiring-soon": "Dokumenti koji brzo ističu !",
+  "t-documents-in-danger": "U Opasnosti",
+  "t-documents-expired": "Istekli Dokumenti",
   "t-welcome": "Dobrodošli",
   "t-details": "Detalji",
   "t-details-update": "Izmijeni podatke",
-  "t-update": "Izmijeni"
+  "t-update": "Izmijeni",
+  "t-confirm-ride": "Potvrdi Vožnju",
 }

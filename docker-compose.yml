@@ -19,6 +19,21 @@ services:
       timeout: 5s
       retries: 5
 
+  db_backup:
+    image: prodrigestivill/postgres-backup-local
+    restart: always
+    volumes:
+      - /opt/pgbackups/postgres:/backups
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_HOST=postgres
+      - SCHEDULE=@daily # Cron expression (e.g., '@hourly' or '0 2 * * *')
+      - BACKUP_KEEP_DAYS=7
+    depends_on:
+      - postgres
+
   backend:
     build:
       context: ./backend
