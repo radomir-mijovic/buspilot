@@ -86,4 +86,11 @@ htmlcov/
 dmypy.json
 
 # JS
-backend/node_modules
+node_modules/
+
+# Vite build output
+backend/.vite/
+backend/static/.vite/
+backend/static/assets/
+backend/static/js/*-bundle.js
+backend/static/manifest.json
