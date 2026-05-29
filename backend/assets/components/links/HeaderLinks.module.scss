@@ -1,0 +1,21 @@
+.headerLinkWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  @media (max-width: 756px) {
+    display: none;
+  }
+}
+
+.headerLinkH5 {
+  font-size: 1rem;
+  color: #5b6170;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    color: #363b47;
+  }
+}

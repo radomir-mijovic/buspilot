@@ -1,0 +1,22 @@
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/hanken-grotesk";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+:root {
+  --font-display: "Space Grotesk Variable", system-ui, sans-serif;
+  --font-body: "Hanken Grotesk Variable", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --accent-bg: oklch(0.92 0.06 254); /* lighter brand tint */
+  --bg: oklch(0.99 0.005 256); /* near-white page bg */
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}

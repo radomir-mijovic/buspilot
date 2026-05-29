@@ -1,0 +1,31 @@
+.main {
+  display: flex;
+  padding: 2rem 25rem;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 1600px) {
+    padding: 2rem 5rem;
+  }
+
+  @media (max-width: 1000px) {
+    padding: 2rem;
+  }
+
+  @media (max-width: 765px) {
+    padding: 1rem;
+  }
+}
+
+.headerLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+
+.buttonWrapper {
+    display: flex;
+    gap: .5rem;
+}

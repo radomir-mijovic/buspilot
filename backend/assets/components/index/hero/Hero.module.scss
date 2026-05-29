@@ -1,0 +1,94 @@
+.heroWrapper {
+  background: radial-gradient(120% 70% at 50% -8%, var(--accent-bg), transparent 52%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-display);
+  text-align: center;
+  padding-bottom: 2rem;
+
+  &>div>h1 {
+    font-size: 4rem;
+    margin-top: 1.4rem;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 3rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  &>div>h6 {
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    color: #4D535D;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 1.2rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  &>div>p {
+    font-weight: 400;
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: #838890;
+
+    @media screen and (max-width: 1200px) {
+      font-size: .9rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: .8rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    background: radial-gradient(130% 50% at 50% 0%, var(--accent-bg), transparent 60%);
+
+  }
+}
+
+.textWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 5vw, 3rem);
+  padding-block: 4rem;
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+
+.lowerP {
+  padding: 0 2rem;
+  font-size: .8rem;
+  color: #838890;
+  margin-top: 1rem;
+}
+
+.imageWrapper {
+  width: 100%;
+  max-width: 60rem;
+  margin: 2rem auto 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+  }
+}

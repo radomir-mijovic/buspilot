@@ -16,3 +16,12 @@ MIDDLEWARE += [  # noqa: F405
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG,
 }
+
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": True,
+        "dev_server_host": "localhost",
+        "dev_server_port": 5173,
+        "static_url_prefix": "",   # don't double-prefix
+    },
+}

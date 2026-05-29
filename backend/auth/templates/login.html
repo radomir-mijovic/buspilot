@@ -1,144 +1,156 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" {% block html %}data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"{% endblock html %}>
-    <head>
-        <meta charset="utf-8" />
-        <title>Prijava | Bus Pilot</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesbrand" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="{% static 'images/favicon.ico'%}">
+<html lang="hr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BusPilot — Prijava</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:oklch(0.992 0.003 250); --surface:oklch(1 0 0); --surface-2:oklch(0.972 0.004 250);
+    --line:oklch(0.915 0.006 255); --ink:oklch(0.255 0.022 264); --ink-2:oklch(0.44 0.018 262);
+    --ink-3:oklch(0.60 0.014 260); --accent:oklch(0.55 0.155 256); --accent-ink:oklch(0.43 0.16 256);
+    --accent-bg:oklch(0.955 0.028 256); --danger:oklch(0.55 0.2 25); --danger-bg:oklch(0.96 0.04 25);
+    --display:'Space Grotesk',system-ui,sans-serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --r:11px; --shadow-sm:0 1px 2px oklch(0.4 0.03 264/0.05),0 1px 1px oklch(0.4 0.03 264/0.04);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--body);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
+  .eyebrow{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-ink);margin:0;}
+  h1{font-family:var(--display);font-weight:600;letter-spacing:-0.02em;margin:0;}
 
+  .btn{font-family:var(--display);font-weight:500;font-size:15px;letter-spacing:-0.01em;border-radius:var(--r);padding:13px 22px;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;transition:transform .15s,box-shadow .2s,background .2s;}
+  .btn:active{transform:translateY(1px);}
+  .btn svg{width:18px;height:18px;flex:none;}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:var(--shadow-sm),inset 0 1px 0 oklch(1 0 0/0.25);}
+  .btn-primary:hover{box-shadow:0 4px 12px oklch(0.4 0.03 264/0.12);}
 
-        <!-- Layout config Js -->
-        <script src="{% static 'js/layout.js'%}"></script>
-        <!-- Bootstrap Css -->
-        <link href="{% static 'css/bootstrap.min.css'%}" id="bootstrap-style" rel="stylesheet" type="text/css" />
-        <!-- Icons Css -->
-        <link href="{% static 'css/icons.min.css'%}" rel="stylesheet" type="text/css" />
-        <!-- App Css-->
-        <link href="{% static 'css/app.min.css'%}" id="app-style" rel="stylesheet" type="text/css" />
-        <!-- custom Css-->
-        <link href="{% static 'css/custom.min.css'%}" id="app-style" rel="stylesheet" type="text/css" />
-    </head>
+  .wordmark{display:inline-flex;align-items:center;gap:10px;text-decoration:none;}
+  .wordmark__name{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-0.03em;color:var(--ink);}
 
-    <body>
+  .login{min-height:100vh;display:block;background:var(--bg);}
+  .login__form{min-height:100vh;display:flex;flex-direction:column;padding:40px 48px;position:relative;}
+  .login__body{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:380px;margin:0 auto;width:100%;padding:24px 0;}
+  .login__eyebrow{margin:0 0 12px;}
+  .login__h{font-size:34px;line-height:1.08;}
+  .login__sub{font-size:15.5px;color:var(--ink-2);margin:12px 0 0;line-height:1.5;}
+  .login__foot{flex:none;font-size:13.5px;color:var(--ink-3);text-align:center;}
+  .login__foot a{color:var(--accent-ink);font-weight:600;text-decoration:none;}
+  .login__foot a:hover{text-decoration:underline;}
 
-        <!-- auth-page wrapper -->
-        <div class="auth-page-wrapper auth-bg-cover py-5 d-flex justify-content-center align-items-center min-vh-100">
-            <div class="bg-overlay"></div>
-            <!-- auth-page content -->
-            <div class="auth-page-content overflow-hidden pt-lg-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card overflow-hidden">
-                                <div class="row g-0">
-                                    <div class="col-lg-6">
-                                        <div class="p-lg-5 p-4 auth-one-bg h-100">
-                                            <div class="bg-overlay"></div>
-                                            <div class="position-relative h-100 d-flex flex-column">
-                                                <div class="mb-4">
-                                                    <h4 style="color: white">Bus Pilot</h4>
-                                                </div>
-                                                <div class="mt-auto">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
+  form.login__fields{margin-top:30px;display:flex;flex-direction:column;gap:18px;}
+  .field{display:flex;flex-direction:column;gap:8px;}
+  .form-label,.field label{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-2);}
+  .field__wrap{position:relative;display:flex;align-items:center;}
+  .field__ic{position:absolute;left:14px;color:var(--ink-3);display:grid;place-items:center;pointer-events:none;z-index:2;}
+  .field__ic svg{width:18px;height:18px;}
 
-                                    <div class="col-lg-6">
-                                        <div class="p-lg-5 p-4">
-                                            <div>
-                                                <h5 class="text-primary">Dobrodošli nazad !</h5>
-                                                <p class="text-muted">Prijavite se da bi nastavili.</p>
-                                            </div>
-            
-                                            <div class="mt-4">
-                                                <form method="POST" action="{% url 'auth:login'%}">
-                                                    {% csrf_token %}
-                    
-                                                    <div class="mb-3">
-                                                        {% if form.username.errors %}
-                                                            <div class="text-danger small">
-                                                                {{form.username.errors}}
-                                                            </div>
-                                                        {% endif %}
-                                                        {% if messages %}
-                                                        {% for message in messages %}
-                                                            <div class="alert alert-danger mb-3">
-                                                                {{ message }}
-                                                                </div>
-                                                                    {% endfor %}
-                                                            {% endif %}
-                                                        <label for="username" class="form-label">Username</label>
-                                                        {{form.username}}
-                                                    </div>
-                            
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="password-input">Password</label>
-                                                        {% if form.password.errors %}
-                                                            <div class="text-danger small">
-                                                                {{form.password.errors}}
-                                                            </div>
-                                                        {% endif %}
-                                                        <div class="position-relative auth-pass-inputgroup mb-3">
-                                                            {{form.password}}
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="mt-4">
-                                                        <button class="btn btn-success w-100" type="submit">Prijavi se</button>
-                                                    </div>
-                                                                    
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
-                            </div>
-                            <!-- end card -->
-                        </div>
-                        <!-- end col -->
-    
-                    </div>
-                    <!-- end row -->
-                </div>
-                <!-- end container -->
+  /* Style whatever <input> Django renders inside a field wrapper */
+  .field__wrap input,.field input{width:100%;box-sizing:border-box;font-family:var(--body);font-size:15px;color:var(--ink);padding:13px 14px 13px 42px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);transition:border-color .15s,box-shadow .15s;}
+  .field__wrap input::placeholder{color:var(--ink-3);}
+  .field__wrap input:focus,.field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg);}
+
+  .field__toggle,.password-addon{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:var(--ink-3);padding:8px;border-radius:8px;display:grid;place-items:center;z-index:3;}
+  .field__toggle:hover,.password-addon:hover{color:var(--ink-2);background:var(--surface-2);}
+  .field__toggle svg,.password-addon svg{width:18px;height:18px;}
+
+  .login__submit{width:100%;margin-top:6px;padding:14px;font-size:15.5px;}
+
+  /* Django error + message styling */
+  .text-danger{color:var(--danger);}
+  .small{font-size:13px;}
+  .alert-danger{background:var(--danger-bg);border:1px solid oklch(0.85 0.08 25);color:oklch(0.45 0.18 25);border-radius:var(--r);padding:11px 14px;font-size:14px;}
+  .mb-3{margin-bottom:0;}
+  .mt-4{margin-top:6px;}
+
+  @media (max-width:480px){.login__form{padding:32px 24px;}.login__h{font-size:28px;}}
+</style>
+</head>
+<body>
+  <div class="login">
+    <div class="login__form">
+      <div class="login__brand">
+        <a class="wordmark" href="/">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect x="1.4" y="1.4" width="29.2" height="29.2" rx="8.5" fill="#3568D4"/>
+            <path d="M9 22V10.5A1.5 1.5 0 0 1 10.5 9h8.2a3.4 3.4 0 0 1 0 6.8h-5.1m0 0h5.9a3.4 3.4 0 0 1 0 6.8H10.5A1.5 1.5 0 0 1 9 21V13" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="13.4" cy="24.4" r="1.5" fill="#3568D4" stroke="#fff" stroke-width="1.4"/>
+            <circle cx="22" cy="24.4" r="1.5" fill="#3568D4" stroke="#fff" stroke-width="1.4"/>
+          </svg>
+          <span class="wordmark__name">BusPilot</span>
+        </a>
+      </div>
+
+      <div class="login__body">
+        <p class="eyebrow login__eyebrow">Dobrodošli nazad</p>
+        <h1 class="login__h">Prijavite se na svoj nalog</h1>
+        <p class="login__sub">Upravljajte voznim parkom, vožnjama, vozačima i dokumentima — sve na jednom mjestu.</p>
+
+        <form class="login__fields" method="POST" action="{% url 'auth:login' %}">
+          {% csrf_token %}
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <div class="field mb-3">
+            <label for="username" class="form-label">Username</label>
+            {% if form.username.errors %}
+              <div class="text-danger small">{{ form.username.errors }}</div>
+            {% endif %}
+            <div class="field__wrap">
+              <span class="field__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-5.5 7-5.5s7 1.9 7 5.5"/></svg></span>
+              {{ form.username }}
             </div>
-            <!-- end auth page content -->
+          </div>
 
-            <!-- footer -->
-            <footer class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="text-center">
-                                <p class="mb-0">&copy; <script>document.write(new Date().getFullYear())</script> Bus Pilot. Napravljeno za prevoznike <i class="mdi mdi-heart text-danger"></i> od prevoznika.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- end Footer -->
-        </div>
-        <!-- end auth-page-wrapper -->
+          <div class="field mb-3">
+            <label class="form-label" for="password-input">Password</label>
+            {% if form.password.errors %}
+              <div class="text-danger small">{{ form.password.errors }}</div>
+            {% endif %}
+            <div class="field__wrap auth-pass-inputgroup">
+              <span class="field__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg></span>
+              {{ form.password }}
+              <button class="password-addon" type="button" id="password-addon" aria-label="Prikaži lozinku">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg>
+              </button>
+            </div>
+          </div>
 
-        <!-- JAVASCRIPT -->
-        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-        <script src="{% static 'libs/simplebar/dist/simplebar.min.js'%}"></script>
-        <script src="{% static 'libs/node-waves/dist/waves.min.js'%}"></script>
-        <script src="{% static 'libs/feather-icons/dist/feather.min.js'%}"></script>
-        <script src="{% static 'js/pages/plugins/lord-icon-2.1.0.js'%}"></script>
-        <script src="{% static 'js/plugins.js'%}"></script>
+          <div class="mt-4">
+            <button class="btn btn-primary login__submit" type="submit">Prijavi se
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
 
-        <!-- password-addon init -->
-        <script src="{% static 'js/pages/password-addon.init.js'%}"></script>
-    </body>
+      <div class="login__foot">Nemate nalog? <a href="#">Zatražite demo</a></div>
+    </div>
+  </div>
 
+  <script>
+    (function(){
+      var btn = document.getElementById('password-addon');
+      if(!btn) return;
+      // find the password input inside the same field wrapper (Django sets its own id/name)
+      var input = btn.closest('.field__wrap').querySelector('input');
+      var eye = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg>';
+      var eyeOff = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4l16 16"/><path d="M9.5 9.6A2.6 2.6 0 0 0 12 14.6M6.3 6.4C3.9 7.9 2.5 12 2.5 12s3.5 6.5 9.5 6.5c1.6 0 3-.4 4.2-1M15 5.9C14.1 5.6 13.1 5.5 12 5.5"/><path d="M19 8.3c1.6 1.4 2.5 3.7 2.5 3.7s-.6 1.1-1.7 2.3"/></svg>';
+      btn.addEventListener('click', function(){
+        if(!input) return;
+        var show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        btn.innerHTML = show ? eyeOff : eye;
+        btn.setAttribute('aria-label', show ? 'Sakrij lozinku' : 'Prikaži lozinku');
+      });
+    })();
+  </script>
+</body>
 </html>

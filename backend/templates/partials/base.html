@@ -21,9 +21,9 @@
         <meta content="Organizujte prevoz na pravi način." name="description" />
         <meta content="BusPilot" name="author" />
         <!-- App favicon -->
+        <link rel="icon" type="image/svg+xml" href="{% static 'images/buspilot-favicon.svg' %}">
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
         {% vite_hmr_client %}
-        {% vite_asset 'assets/main.jsx' %}
         {% block css %}
             {% block extra_css %}
             {% endblock extra_css %}
