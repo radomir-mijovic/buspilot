@@ -1,3 +1,4 @@
+import Capabilities from "./capabilities/Capabilities";
 import Header from "./header/Header";
 import Hero from "./hero/Hero";
 import style from "./PageWrapper.module.css";
@@ -9,6 +10,7 @@ const PageWrapper = () => {
       <Header />
       <Hero />
       <Platform />
+      <Capabilities />
     </div>
   );
 };
