@@ -58,6 +58,7 @@
   padding: 1rem 2rem 3rem;
   border-radius: 15px;
   position: relative;
+  box-sizing: border-box;
 
   ::before {
     content: "";
@@ -89,7 +90,6 @@
   }
 
   &>p {
-
     @media screen and (max-width: 768px) {
       font-size: .8rem;
     }

@@ -1,5 +1,6 @@
 import Built from "./built/Built";
 import Capabilities from "./capabilities/Capabilities";
+import Footer from "./footer/Footer";
 import Header from "./header/Header";
 import Hero from "./hero/Hero";
 import HowItWorks from "./howItWorks/HowItWorks";
@@ -19,6 +20,7 @@ const PageWrapper = () => {
       <HowItWorks />
       <Built />
       <Modernize />
+      <Footer />
     </div>
   );
 };
