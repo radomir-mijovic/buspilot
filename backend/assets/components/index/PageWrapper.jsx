@@ -1,3 +1,4 @@
+import Built from "./built/Built";
 import Capabilities from "./capabilities/Capabilities";
 import Header from "./header/Header";
 import Hero from "./hero/Hero";
@@ -15,6 +16,7 @@ const PageWrapper = () => {
       <Capabilities />
       <Switch />
       <HowItWorks />
+      <Built />
     </div>
   );
 };
