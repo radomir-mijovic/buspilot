@@ -17,7 +17,6 @@ const Capabilities = () => {
                 <div className={styles.iconWrapper}>
                   <img src={item.icon} alt="" />
                 </div>
-
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </div>
