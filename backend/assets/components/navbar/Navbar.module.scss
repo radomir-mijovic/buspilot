@@ -1,0 +1,66 @@
+.nav {
+  width: 100%;
+  background: #FFFFFF;
+  height: 5rem;
+  box-sizing: border-box;
+  font-family: var(--font-display);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+
+  &>h3 {
+    text-align: center;
+    font-family: var(--font-display);
+    margin: 0;
+  }
+}
+
+.iconbtn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--ink-2);
+  transition: background .15s, color .15s;
+
+  &:hover {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+
+  &>svg {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 99px;
+  background: oklch(0.58 0.2 25);
+  color: #FFFFFF;
+  font-family: var(--mono);
+  font-size: 10px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--surface);
+
+}
