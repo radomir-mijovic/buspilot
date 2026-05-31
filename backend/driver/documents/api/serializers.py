@@ -4,11 +4,18 @@ from driver.models import DriverDocument
 
 
 class ExpiringDocumentsSerializer(serializers.ModelSerializer):
-    vehicle = serializers.SlugRelatedField(
-        slug_field="model",
+    related_object = serializers.SlugRelatedField(
+        slug_field="last_name",
         read_only=True,
+        source="driver",
     )
 
     class Meta:
         model = DriverDocument
-        fields = ["id", "document_type", "days_to_expire", "vehicle"]
+        fields = [
+            "id",
+            "document_type",
+            "days_to_expire",
+            "title",
+            "related_object",
+        ]

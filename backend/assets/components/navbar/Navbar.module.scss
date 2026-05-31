@@ -8,6 +8,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 1rem;
+  }
 }
 
 .logoWrapper {
@@ -21,6 +25,12 @@
     font-family: var(--font-display);
     margin: 0;
   }
+}
+
+.utilsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .iconbtn {
@@ -62,5 +72,55 @@
   display: grid;
   place-items: center;
   border: 2px solid var(--surface);
+}
 
+.languageWrapper {
+  border: 1px solid #E0E3E7;
+  border-radius: 20px;
+  padding: .3rem .7rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.line {
+  width: 1px;
+  height: 24px;
+  background-color: #ccc;
+}
+
+.adminWrapper {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+
+  &>svg {
+    margin: 0;
+  }
+
+  &>h4 {
+    font-size: .8rem;
+    font-weight: 800;
+    margin: 0;
+    font-family: var(--font-display);
+
+    &>span {
+      font-weight: 400;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+
+    }
+  }
+}
+
+.letter {
+  background: #E4F1FF;
+  padding: .4rem .6rem;
+  border-radius: 50px;
+
+  &>h5 {
+    font-size: .9rem;
+    margin: 0;
+  }
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./Expiring.module.scss";
 import alertRedIcon from "../../../icons/alert-circle-red.svg";
 import alertGreyIcon from "../../../icons/alert-triangle-grey.svg";
+import { MdClose } from "react-icons/md";
 
 const tabs = [
   { id: 1, title: "Vozila" },
@@ -12,6 +13,7 @@ const Expiring = ({
   expiringVehiclesDocs,
   expiringDriversDocs,
   setExpiring,
+  setAdminDropdown,
 }) => {
   const [isActive, setIsActive] = useState(1);
   const [expiringDocs, setExpiringDocs] = useState(expiringVehiclesDocs);
@@ -29,7 +31,7 @@ const Expiring = ({
     <div className={styles.cardWrapper}>
       <div className={styles.cardTop}>
         <div onClick={() => setExpiring(false)} className={styles.closeIcon}>
-          X
+          <MdClose />
         </div>
         <h4>Dokumenti koji brzo ističu!</h4>
         <div className={styles.tabs}>
@@ -49,14 +51,14 @@ const Expiring = ({
         </div>
       </div>
       <div className={styles.cardBottom}>
-        {expiringDocs.map((doc) => {
+        {expiringDocs.slice(0, 3).map((doc) => {
           return (
             <div key={doc.id} className={styles.textWrapper}>
               <img src={alertRedIcon} alt="" />
               <div className={styles.textInnerWrapper}>
                 <h5>
-                  {doc.document_type.toUpperCase()} za {doc.vehicle}{" "}
-                  <span>ističe </span> u narednih mjesec dana!
+                  {doc.title.toUpperCase()} za {doc.related_object}
+                  <span> ističe </span> u narednih mjesec dana!
                 </h5>
                 <div className={styles.smallTextWrapper}>
                   <img src={alertGreyIcon} alt="" width={15} height={15} />
@@ -68,7 +70,12 @@ const Expiring = ({
         })}
         <div className={styles.buttonWrapper}>
           <button type="button">
-            <a href="/expiring-documents">Pregledaj dokumente</a>
+            <a
+              onClick={() => setAdminDropdown(false)}
+              href="/expiring-documents"
+            >
+              Pregledaj dokumente
+            </a>
           </button>
         </div>
       </div>

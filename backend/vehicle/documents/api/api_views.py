@@ -18,4 +18,4 @@ class ExpiringDocumentsViewSet(
     def get_queryset(self):
         return self.queryset.filter(
             company=self.company,
-        )
+        ).select_related("vehicle")
