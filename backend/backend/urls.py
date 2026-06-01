@@ -16,9 +16,9 @@ urlpatterns = [
     path("", include("guide.urls")),
     path("", include("vehicle.urls")),
     path("", include("ride.urls")),
-    path("api/drivers/", include("driver.documents.api.urls")),
+    path("api/auth/", include("auth.api.urls")),
+    path("api/", include("driver.api.urls")),
     path("api/", include("ride.api.urls")),
-    path("api/vehicles/", include("vehicle.documents.api.urls")),
     path("api/", include("vehicle.api.urls")),
 ]
 

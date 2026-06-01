@@ -5,8 +5,8 @@ from rest_framework.response import Response
 
 from ride.api.serializers import RideCalendarSerializer
 
-from ..models import Vehicle
-from .serializers import VehicleDetailSerializer
+from ..models import Vehicle, VehicleDocument
+from .serializers import ExpiringDocumentsSerializer, VehicleDetailSerializer
 
 
 class VehicleDetailViewSet(viewsets.ReadOnlyModelViewSet):
@@ -18,4 +18,10 @@ class VehicleDetailViewSet(viewsets.ReadOnlyModelViewSet):
     def calendar_events(self, request, *args, **kwargs):
         vehicle = self.get_object()
         serializer = RideCalendarSerializer(vehicle.vehicles_rides.all(), many=True)
+        return Response(serializer.data)
+
+    @action(methods=["GET"], detail=False, url_path="expiring-documents")
+    def expiring_documents(self, request, *args, **kwargs):
+        data = VehicleDocument.expiring.close_to_expire().select_related("vehicle")
+        serializer = ExpiringDocumentsSerializer(data, many=True)
         return Response(serializer.data)

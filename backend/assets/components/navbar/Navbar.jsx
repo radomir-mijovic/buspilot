@@ -39,10 +39,12 @@ const Navbar = () => {
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.logoWrapper}>
-        <img src={brandLogo} alt="" width={30} height={30} />
-        {isBrowser && <h3>BusPilot</h3>}
-      </div>
+      <a href="/calendar">
+        <div className={styles.logoWrapper}>
+          <img src={brandLogo} alt="" width={30} height={30} />
+          {isBrowser && <h3>BusPilot</h3>}
+        </div>
+      </a>
 
       <div className={styles.utilsWrapper}>
         <div>

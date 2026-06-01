@@ -32,6 +32,7 @@ backend/staticfiles
 backend/backend/staticfiles
 backend/backend/media
 backend/db.buspilot
+backend/__pycache__/
 
 # Testing
 test_db

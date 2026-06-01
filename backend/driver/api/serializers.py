@@ -1,15 +1,25 @@
 from rest_framework import serializers
 
-from vehicle.models import VehicleDocument
+from ..models import Driver, DriverDocument
+
+
+class DriverDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Driver
+        fields = [
+            "id",
+            "first_name",
+            "last_name",
+        ]
 
 
 class ExpiringDocumentsSerializer(serializers.ModelSerializer):
     related_object = serializers.SlugRelatedField(
-        slug_field="model", read_only=True, source="vehicle"
+        slug_field="last_name", read_only=True, source="driver"
     )
 
     class Meta:
-        model = VehicleDocument
+        model = DriverDocument
         fields = [
             "id",
             "document_type",
