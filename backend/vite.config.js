@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => {
           finance: path.resolve(__dirname, "./assets/pages/finance.jsx"),
           index: path.resolve(__dirname, "./assets/pages/index.jsx"),
           navbar: path.resolve(__dirname, "./assets/pages/navbar.jsx"),
+          navlinks: path.resolve(__dirname, "./assets/pages/navlinks.jsx"),
         },
         output: {
           entryFileNames: `js/[name]-bundle.js`,

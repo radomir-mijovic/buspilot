@@ -1,0 +1,91 @@
+.navlinksWrapper {
+  height: 3rem;
+  background: #FFFFFF;
+  border-top: 1px solid #DFE2E6;
+  display: grid;
+  place-items: center;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1rem;
+  color: #4D535D;
+  position: relative;
+
+  &>a {
+    color: #4D535D;
+    cursor: pointer;
+  }
+
+  &>img {
+    color: #4D535D;
+    cursor: pointer;
+  }
+}
+
+.sublinks {
+  position: absolute;
+  z-index: 200;
+  background: #FFFFFF;
+  top: 2.5rem;
+  width: 17rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style-type: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 12px;
+  padding: 1rem 1rem;
+
+  &>a {
+    color: #4D535D;
+    text-decoration: none;
+  }
+}
+
+.innerDiv {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 12px;
+  padding: .3rem;
+
+  &>p {
+    margin: 0;
+    font-size: .9rem;
+  }
+
+  &:hover {
+    background:  #E4F1FF;
+  }
+
+}
+
+.icon {
+  fill: #4D535D;
+}
+
+.iconWrapper {
+  background: #F3F6F8;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+}
