@@ -1,0 +1,103 @@
+$brand: #2970C9;
+$text: #4D535D;
+$muted: #9098A4;
+$border: #E9ECEF;
+
+.navWrapper {
+  background: #fff;
+  padding: 0.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 5rem;
+  width: 100%;
+  left: 0;
+  z-index: 250;
+}
+
+.section {
+  border-bottom: 1px solid $border;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.85rem 0;
+  background: none;
+  border: 0;
+  color: $text;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+
+  .section & {
+    border-bottom: 0;
+  }
+
+  &.active {
+    color: $brand;
+
+    .icon {
+      color: $brand;
+    }
+  }
+}
+
+.icon {
+  color: $text;
+  flex-shrink: 0;
+}
+
+.title {
+  flex: 1;
+}
+
+.chevron {
+  color: $muted;
+  font-size: 1.1rem;
+}
+
+.sublinks {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.5rem 2.5rem;
+}
+
+.subitem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  color: $text;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  &.active {
+    color: $brand;
+
+    .dot {
+      background: $brand;
+    }
+  }
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $muted;
+  flex-shrink: 0;
+}
+
+.active {
+  color: $brand;
+}

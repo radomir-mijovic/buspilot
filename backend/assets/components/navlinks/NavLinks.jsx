@@ -1,9 +1,14 @@
 import { useState } from "react";
 import nav_links from "../../utils/nav_links";
 import styles from "./NavLinks.module.scss";
+import { isMobile } from "react-device-detect";
 
 const NavLinks = () => {
   const [activeSublink, setActiveSublink] = useState(0);
+
+  if (isMobile) {
+    return
+  }
 
   return (
     <div className={styles.navlinksWrapper}>

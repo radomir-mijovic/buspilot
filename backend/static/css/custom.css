@@ -1,6 +1,19 @@
 @import url("https://fonts.bunny.net/css?family=space-grotesk:400,500,600,700");
 :root {
   --accent-bg: oklch(0.78 0.16 254);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+}
+
+body,
+.btn,
+.form-control,
+.form-select,
+.dropdown-menu,
+.modal,
+.card,
+.nav,
+table {
+  font-family: var(--font-display);
 }
 .bg-purple-subtle {
   background-color: #f3e8ff;

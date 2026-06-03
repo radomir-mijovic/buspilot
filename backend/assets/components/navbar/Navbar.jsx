@@ -6,12 +6,16 @@ import { useState, useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { isMobile, isBrowser } from "react-device-detect";
 import AdminDropdown from "./admin/AdminDropdown";
+import { TbMenu4 } from "react-icons/tb";
+import MobileNavbar from "./MobileNavbar";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const [isExpiring, setExpiring] = useState(false);
   const [isAdminDropdown, setIsAdminDropdown] = useState(false);
   const [expiringVehiclesDocs, setExpiringVehiclesDocs] = useState([]);
   const [expiringDriversDocs, setExpiringDriversDocs] = useState([]);
+  const [isMobileMenu, setIsMobileMenu] = useState(false);
   const totalInDanger =
     expiringDriversDocs.length + expiringVehiclesDocs.length;
 
@@ -96,7 +100,15 @@ const Navbar = () => {
         {isAdminDropdown && (
           <AdminDropdown setIsAdminDropdown={setIsAdminDropdown} />
         )}
+        {isMobile && !isMobileMenu ? (
+          <TbMenu4 onClick={() => setIsMobileMenu(true)} size={25} />
+        ) : (
+          <IoCloseOutline onClick={() => setIsMobileMenu(false)} size={25} />
+        )}
       </div>
+      {isMobile && isMobileMenu && (
+        <MobileNavbar setIsMobileMenu={setIsMobileMenu} />
+      )}
     </nav>
   );
 };

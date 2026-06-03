@@ -78,13 +78,13 @@ const nav_links = [
       { id: 63, subtitle: "Istekli dokumenti", href: "/expired-documents" , icon: MdOutlineDangerous},
     ],
   },
-  {
-    id: 7,
-    title: "Financije",
-    icon: CiMoneyCheck1,
-    has_sublinks: false,
-    href: "/finance",
-  },
+  //{
+  //  id: 7,
+  //  title: "Financije",
+  //  icon: CiMoneyCheck1,
+  //  has_sublinks: false,
+  //  href: "/finance",
+  //},
 ];
 
 export default nav_links;
