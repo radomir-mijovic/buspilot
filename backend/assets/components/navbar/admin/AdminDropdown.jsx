@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 
 const AdminDropdown = ({ setIsAdminDropdown }) => {
   return (
-    <div className={styles.dropdown}>
+    <div onMouseLeave={() => setIsAdminDropdown(false)} className={styles.dropdown}>
       <div
         onClick={() => setIsAdminDropdown(false)}
         className={styles.closeIcon}

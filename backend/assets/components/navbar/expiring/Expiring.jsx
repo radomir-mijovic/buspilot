@@ -28,7 +28,7 @@ const Expiring = ({
   };
 
   return (
-    <div className={styles.cardWrapper}>
+    <div onMouseLeave={() => setExpiring(false)} className={styles.cardWrapper}>
       <div className={styles.cardTop}>
         <div onClick={() => setExpiring(false)} className={styles.closeIcon}>
           <MdClose />

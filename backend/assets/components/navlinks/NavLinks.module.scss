@@ -1,3 +1,5 @@
+$brand: #2970C9;
+
 .navlinksWrapper {
   height: 3rem;
   background: #FFFFFF;
@@ -72,7 +74,7 @@
   }
 
   &:hover {
-    background:  #E4F1FF;
+    background: #E4F1FF;
   }
 
 }
@@ -88,4 +90,8 @@
   display: grid;
   place-items: center;
   border-radius: 10px;
+}
+
+.active {
+  color: $brand;
 }

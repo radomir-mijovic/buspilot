@@ -102,9 +102,9 @@ const Navbar = () => {
         )}
         {isMobile && !isMobileMenu ? (
           <TbMenu4 onClick={() => setIsMobileMenu(true)} size={25} />
-        ) : (
+        ) : isMobile ? (
           <IoCloseOutline onClick={() => setIsMobileMenu(false)} size={25} />
-        )}
+        ) : null}
       </div>
       {isMobile && isMobileMenu && (
         <MobileNavbar setIsMobileMenu={setIsMobileMenu} />
