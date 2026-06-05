@@ -1,7 +1,25 @@
 @import url("https://fonts.bunny.net/css?family=space-grotesk:400,500,600,700");
 :root {
   --accent-bg: oklch(0.78 0.16 254);
+  --ink-bg: oklch(0.255 0.022 264);
   --font-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-ok: oklch(0.62 0.13 162);
+  --bp-ok-bg: oklch(0.955 0.04 162);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264 / 0.05), 0 1px 1px oklch(0.4 0.03 264 / 0.04);
 }
 
 body,
@@ -103,4 +121,210 @@ table {
   width: 32px;
   height: 32px;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.main-page-wrapper {
+  display: grid;
+  gap: 2rem;
+  place-items: center;
+  padding: 4rem 5rem;
+  overflow-y: hidden;
+
+    @media screen and (max-width: 800px) {
+        padding: 1rem;
+        gap: .5rem;
+    }
+}
+
+/* ============================================================ (A) CARD */
+.card2 {
+  background: var(--bp-surface);
+  border: 1px solid var(--bp-line);
+  border-radius: var(--bp-r-lg);
+  box-shadow: var(--bp-shadow-sm);
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+.card2__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--bp-line-soft);
+}
+.card2__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+}
+.card2__title {
+  font-family: var(--bp-display);
+  font-weight: 600;
+  font-size: 16.5px;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink);
+}
+.card2__count {
+  margin-left: auto;
+  font-family: var(--bp-mono);
+  font-size: 11px;
+  color: var(--bp-ink-3);
+  background: var(--bp-surface-2);
+  border: 1px solid var(--bp-line);
+  border-radius: 99px;
+  padding: 3px 10px;
+}
+.dot--transfer {
+  background: oklch(0.55 0.155 256);
+}
+.dot--izlet {
+  background: oklch(0.62 0.13 162);
+}
+.dot--linija {
+  background: oklch(0.64 0.15 50);
+}
+
+/* =========================================================== (A) TABLE */
+.tw {
+  overflow-x: auto;
+} /* horizontal scroll on small screens */
+
+table.t2 {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1280px;
+}
+
+table.t2 thead th {
+  font-family: var(--bp-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-3);
+  font-weight: 500;
+  text-align: left;
+  padding: 13px 18px;
+  background: var(--bp-surface-2);
+  border-bottom: 1px solid var(--bp-line);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+table.t2 tbody td {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--bp-line-soft);
+  font-size: 14px;
+  color: var(--bp-ink-2);
+  vertical-align: top;
+}
+table.t2 tbody tr {
+  cursor: pointer;
+  transition: background 0.12s;
+}
+table.t2 tbody tr:hover {
+  background: var(--bp-accent-bg);
+}
+table.t2 tbody tr:hover td:first-child {
+  box-shadow: inset 3px 0 0 var(--bp-accent);
+}
+table.t2 tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* cell content */
+.t2 .ride {
+  font-family: var(--bp-display);
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--bp-ink);
+  letter-spacing: -0.01em;
+}
+.t2 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.t2 li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.muted {
+  color: var(--bp-ink-3);
+}
+.none {
+  color: oklch(0.72 0.01 260);
+  font-style: italic;
+  font-size: 13px;
+}
+
+.time {
+  font-family: var(--bp-mono);
+  font-size: 13px;
+  color: var(--bp-ink);
+  white-space: nowrap;
+}
+.loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.loc svg {
+  width: 14px;
+  height: 14px;
+  color: var(--bp-ink-3);
+  flex: none;
+}
+
+.note-cell {
+  max-width: 360px;
+  white-space: normal;
+  color: var(--bp-ink-3);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.avatar-mini {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bp-accent-bg);
+  color: var(--bp-accent-ink);
+  display: grid;
+  place-items: center;
+  font-family: var(--bp-display);
+  font-weight: 600;
+  font-size: 10px;
+  flex: none;
+}
+
+/* badges / pills */
+.badge2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--bp-display);
+  font-weight: 500;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+.badge2--agency {
+  background: oklch(0.96 0.04 50);
+  color: oklch(0.48 0.12 50);
+}
+.badge2--ok {
+  background: var(--bp-ok-bg);
+  color: var(--bp-ok);
+  font-family: var(--bp-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+}
+.badge2--ok svg {
+  width: 11px;
+  height: 11px;
 }

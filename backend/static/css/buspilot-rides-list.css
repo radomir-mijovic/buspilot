@@ -1,0 +1,138 @@
+/* ============================================================================
+   buspilot-rides-list.css
+   "Pregled vožnji" list page — BusPilot look.
+   Self-contained: defines the --bp-* tokens it needs.
+   Load LAST, after Velzon's app.min.css.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --bp-surface:#fff;
+  --bp-surface-2:oklch(0.972 0.004 250);
+  --bp-line:oklch(0.915 0.006 255);
+  --bp-line-soft:oklch(0.945 0.005 255);
+  --bp-ink:oklch(0.255 0.022 264);
+  --bp-ink-2:oklch(0.44 0.018 262);
+  --bp-ink-3:oklch(0.60 0.014 260);
+  --bp-accent:oklch(0.55 0.155 256);
+  --bp-accent-ink:oklch(0.43 0.16 256);
+  --bp-accent-bg:oklch(0.955 0.028 256);
+  --bp-accent-line:oklch(0.86 0.05 256);
+  --bp-ok:oklch(0.62 0.13 162);
+  --bp-ok-bg:oklch(0.955 0.04 162);
+  --bp-danger:oklch(0.58 0.2 25);
+  --bp-display:'Space Grotesk',system-ui,sans-serif;
+  --bp-body:'Hanken Grotesk',system-ui,sans-serif;
+  --bp-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --bp-r:11px;
+  --bp-r-lg:16px;
+  --bp-shadow-sm:0 1px 2px oklch(0.4 0.03 264/0.05),0 1px 1px oklch(0.4 0.03 264/0.04);
+  --bp-shadow:0 4px 12px oklch(0.4 0.03 264/0.06),0 1px 3px oklch(0.4 0.03 264/0.05);
+}
+
+/* page title eyebrow */
+.bp-ptitle{
+  font-family:var(--bp-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--bp-ink-3); margin-bottom:18px;
+}
+
+/* ------------------------------------------------------------------ CARD */
+.bp-card{
+  background:var(--bp-surface);
+  border:1px solid var(--bp-line);
+  border-radius:var(--bp-r-lg);
+  box-shadow:var(--bp-shadow-sm);
+  overflow:hidden;
+  max-width:100%;
+}
+.bp-card__head{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:20px 24px 0;
+}
+.bp-card__title{ font-family:var(--bp-display); font-weight:600; font-size:18px; letter-spacing:-0.02em; color:var(--bp-ink); margin:0; }
+
+/* ------------------------------------------------------------- NEW BUTTON */
+.bp-btn{
+  font-family:var(--bp-display); font-weight:500; font-size:14px;
+  border-radius:var(--bp-r); padding:11px 18px; border:1px solid transparent; cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px; text-decoration:none; white-space:nowrap;
+}
+.bp-btn svg{ width:16px; height:16px; }
+.bp-btn--primary{ background:var(--bp-accent); color:#fff; box-shadow:var(--bp-shadow-sm),inset 0 1px 0 oklch(1 0 0/0.25); }
+.bp-btn--primary:hover{ box-shadow:var(--bp-shadow); color:#fff; }
+
+/* ------------------------------------------------------------------ TABS */
+.bp-tabs{
+  display:flex; gap:4px; padding:0 24px; margin-top:18px;
+  border-bottom:1px solid var(--bp-line);
+  overflow-x:auto;            /* tabs scroll on tiny screens too */
+}
+.bp-tab{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:13px 16px;
+  font-family:var(--bp-display); font-weight:500; font-size:14.5px;
+  color:var(--bp-ink-2); text-decoration:none;
+  border-bottom:2px solid transparent; margin-bottom:-1px; cursor:pointer;
+  white-space:nowrap; transition:color .15s;
+}
+.bp-tab:hover{ color:var(--bp-ink); }
+.bp-tab.active,
+.bp-tab--on{ color:var(--bp-accent-ink); border-bottom-color:var(--bp-accent); }
+.bp-tab__n{
+  font-family:var(--bp-mono); font-size:11px; font-weight:500;
+  min-width:20px; height:20px; padding:0 6px; border-radius:99px;
+  background:var(--bp-surface-2); color:var(--bp-ink-3);
+  display:inline-grid; place-items:center;
+}
+.bp-tab.active .bp-tab__n,
+.bp-tab--on .bp-tab__n{ background:var(--bp-accent-bg); color:var(--bp-accent-ink); }
+
+/* ----------------------------------------------------------------- TABLE */
+.bp-tw{ overflow-x:auto; max-width:100%; -webkit-overflow-scrolling:touch; }
+table.bp-t{ width:100%; border-collapse:collapse; min-width:1300px; }   /* ← 1300px scroll threshold */
+
+table.bp-t thead th{
+  font-family:var(--bp-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--bp-ink-3); font-weight:500; text-align:left;
+  padding:14px 24px; background:var(--bp-surface-2);
+  border-bottom:1px solid var(--bp-line); white-space:nowrap;
+}
+table.bp-t tbody td{
+  padding:16px 24px; border-bottom:1px solid var(--bp-line-soft);
+  font-size:14px; color:var(--bp-ink-2); white-space:nowrap;
+}
+table.bp-t tbody tr{ transition:background .12s; }
+table.bp-t tbody tr:hover{ background:var(--bp-accent-bg); }
+table.bp-t tbody tr:last-child td{ border-bottom:none; }
+
+.bp-rid{ font-family:var(--bp-mono); font-size:13px; color:var(--bp-accent-ink); font-weight:500; text-decoration:none; }
+.bp-rid:hover{ text-decoration:underline; }
+.bp-rname{ font-family:var(--bp-display); font-weight:600; font-size:14.5px; color:var(--bp-ink); letter-spacing:-0.01em; }
+.bp-dt{ color:var(--bp-ink); }
+.bp-dt .clock{ font-family:var(--bp-mono); font-size:12px; color:var(--bp-ink-3); margin-left:4px; }
+.bp-none{ color:oklch(0.72 0.01 260); font-style:italic; font-size:13px; }
+
+/* type badges */
+.bp-type{ display:inline-flex; align-items:center; gap:6px; font-family:var(--bp-display); font-weight:500; font-size:12.5px; padding:4px 11px; border-radius:99px; }
+.bp-type::before{ content:''; width:6px; height:6px; border-radius:50%; }
+.bp-type--transfer{ background:var(--bp-accent-bg); color:var(--bp-accent-ink); }
+.bp-type--transfer::before{ background:var(--bp-accent); }
+.bp-type--excursion{ background:var(--bp-ok-bg); color:var(--bp-ok); }
+.bp-type--excursion::before{ background:var(--bp-ok); }
+.bp-type--line{ background:oklch(0.96 0.04 50); color:oklch(0.48 0.12 50); }
+.bp-type--line::before{ background:oklch(0.64 0.15 50); }
+.bp-type--round{ background:oklch(0.95 0.04 300); color:oklch(0.5 0.16 300); }
+.bp-type--round::before{ background:oklch(0.6 0.18 300); }
+
+/* row actions */
+.bp-acts{ display:flex; gap:6px; }
+.bp-iact{ width:32px; height:32px; border-radius:8px; border:1px solid var(--bp-line); background:var(--bp-surface); display:grid; place-items:center; cursor:pointer; transition:all .12s; padding:0; }
+.bp-iact svg{ width:16px; height:16px; }
+.bp-iact--view{ color:var(--bp-accent); }
+.bp-iact--view:hover{ background:var(--bp-accent-bg); border-color:var(--bp-accent-line); }
+.bp-iact--del{ color:var(--bp-danger); }
+.bp-iact--del:hover{ background:oklch(0.96 0.04 28); border-color:oklch(0.85 0.08 25); }
+
+/* keep the whole page from scrolling sideways on mobile */
+.page-content{ overflow-x:hidden; }

@@ -9,25 +9,14 @@
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
-    <div class="main-content">
-        <div class="page-content">
-            <div class="container-fluid">
-                {% block pagetitle %}
-                    {% include "partials/page-title.html" with title="Pregled Dana" title_key="t-daily-overview" %}
-                {% endblock pagetitle %}
-                <div class="row">
-                    {% include "partials/table.html" with rides=transfers table_title="Transferi" table_title_key="t-transfers" %}
-                    {% include "partials/table.html" with rides=excursions table_title="Izleti" table_title_key="t-excursions" %}
-                    {% include "partials/table.html" with rides=lines table_title="Linije" table_title_key="t-lines" %}
-                </div>
-            </div>
-        </div>
-        <!-- End Page-content -->
+    <div class="main-page-wrapper">
+        {% include "partials/table.html" with rides=transfers table_title="Transferi" table_title_key="t-transfers" %}
+        {% include "partials/table.html" with rides=excursions table_title="Eksurzije" table_title_key="t-excursions" %}
+        {% include "partials/table.html" with rides=lines rides_count=lines.count table_title="Linije" table_title_key="t-lines" %}
         {% block footer %}
             {% include "partials/footer.html" %}
         {% endblock footer %}
     </div>
-    <!-- end main content-->
 {% endblock content %}
 {% block extra_js %}
     <!-- apexcharts -->

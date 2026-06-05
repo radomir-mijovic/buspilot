@@ -4,100 +4,74 @@
     Pregled vožnji
 {% endblock title %}
 {% block extra_css %}
-    <link href="{% static 'libs/sweetalert2/dist/sweetalert2.min.css' %}"
-          rel="stylesheet"
-          type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/buspilot-rides-list.css' %}">
 {% endblock extra_css %}
 {% block content %}
-    <div class="main-content">
-        <div class="page-content">
-            <div class="container-fluid">
-                {% block pagetitle %}
-                    {% include "partials/page-title.html" with pagetitle="Pregled vožnji" title="Pregled vožnji" title_key="t-rides-list" %}
-                {% endblock pagetitle %}
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card" id="orderList">
-                            <div class="card-header border-0">
-                                <div class="row align-items-center gy-3">
-                                    <div class="col-sm">
-                                        <h5 class="card-title mb-0" data-key="t-all-rides">Sve vožnje</h5>
-                                    </div>
-                                    <div class="col-sm-auto">
-                                        <div class="d-flex gap-1 flex-wrap">
-                                            <a href="{% url 'ride:ride_create' %}"
-                                               class="btn btn-success add-btn"
-                                               id="create-btn">
-                                                <i class="ri-add-line align-bottom me-1"></i> <span data-key="t-new-ride">Nova vožnja</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div>
-                                    <ul class="nav nav-tabs nav-tabs-custom nav-success mb-3" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active All py-3"
-                                               data-filter="all"
-                                               id="Sve"
-                                               href="javascript:void(0);"
-                                               role="tab"
-                                               aria-selected="true">
-                                                <span data-key="t-all">Sve</span> <span class="badge bg-success align-middle ms-1">{{ count_all }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link py-3"
-                                               data-filter="2"
-                                               id="Transferi"
-                                               href="javascript:void(0);"
-                                               role="tab"
-                                               aria-selected="false">
-                                                <span data-key="t-transfers">Transferi</span> <span class="badge bg-success align-middle ms-1">{{ transfers_count }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link py-3"
-                                               data-filter="3"
-                                               id="Izleti"
-                                               href="javascript:void(0);"
-                                               role="tab"
-                                               aria-selected="false">
-                                                <span data-key="t-excursions">Izleti</span> <span class="badge bg-success align-middle ms-1">{{ excursions_count }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link py-3"
-                                               data-filter="1"
-                                               id="Linije"
-                                               href="javascript:void(0);"
-                                               role="tab"
-                                               aria-selected="false">
-                                                <span data-key="t-lines">Linije</span> <span class="badge bg-success align-middle ms-1">{{ lines_count }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link py-3"
-                                               data-filter="4"
-                                               id="Kruzne ture"
-                                               href="javascript:void(0);"
-                                               role="tab"
-                                               aria-selected="false">
-                                                <span data-key="t-round-tours">Kružne ture</span> <span class="badge bg-success align-middle ms-1">{{ round_tours_count }}</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="table-responsive table-card mb-1"
-                                         style="max-height: 850px;
-                                                overflow-y: auto">{% include "partials/rides-table.html" %}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="main-page-wrapper">
+        <div class="container-fluid">
+            <p class="bp-ptitle" data-key="t-rides-list">Pregled vožnji</p>
+            <div class="bp-card" id="orderList">
+                <div class="bp-card__head">
+                    <h5 class="bp-card__title" data-key="t-all-rides">Sve vožnje</h5>
+                    <a href="{% url 'ride:ride_create' %}"
+                       class="bp-btn bp-btn--primary add-btn"
+                       id="create-btn">
+                        <svg viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2">
+                            <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+                        </svg>
+                        <span data-key="t-new-ride">Nova vožnja</span>
+                    </a>
                 </div>
-                {% include "partials/delete-ride-modal.html" %}
+                {# ---- filter tabs (data-filter kept for rides-list.js) ---- #}
+                <ul class="bp-tabs nav nav-tabs nav-tabs-custom" role="tablist">
+                    <li class="nav-item">
+                        <a class="bp-tab nav-link active All"
+                           data-filter="all"
+                           id="Sve"
+                           href="javascript:void(0);"
+                           role="tab"
+                           aria-selected="true"><span data-key="t-all">Sve</span> <span class="bp-tab__n">{{ count_all }}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="bp-tab nav-link"
+                           data-filter="2"
+                           id="Transferi"
+                           href="javascript:void(0);"
+                           role="tab"
+                           aria-selected="false"><span data-key="t-transfers">Transferi</span> <span class="bp-tab__n">{{ transfers_count }}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="bp-tab nav-link"
+                           data-filter="3"
+                           id="Izleti"
+                           href="javascript:void(0);"
+                           role="tab"
+                           aria-selected="false"><span data-key="t-excursions">Izleti</span> <span class="bp-tab__n">{{ excursions_count }}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="bp-tab nav-link"
+                           data-filter="1"
+                           id="Linije"
+                           href="javascript:void(0);"
+                           role="tab"
+                           aria-selected="false"><span data-key="t-lines">Linije</span> <span class="bp-tab__n">{{ lines_count }}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="bp-tab nav-link"
+                           data-filter="4"
+                           id="Kruzne ture"
+                           href="javascript:void(0);"
+                           role="tab"
+                           aria-selected="false"><span data-key="t-round-tours">Kružne ture</span> <span class="bp-tab__n">{{ round_tours_count }}</span></a>
+                    </li>
+                </ul>
+                {# ---- table ---- #}
+                <div class="bp-tw">{% include "partials/rides-tables.html" %}</div>
             </div>
+            {% include "partials/delete-ride-modal.html" %}
         </div>
         {% block footer %}
             {% include "partials/footer.html" %}

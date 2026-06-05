@@ -8,7 +8,7 @@ class RideForm(forms.ModelForm):
         company = kwargs.pop("company", None)
         super().__init__(*args, **kwargs)
 
-        for field in ["vehicles", "drivers", "guides"]:
+        for field in ["vehicles", "drivers", "guides", "agency"]:
             self.fields[field].queryset = self.fields[field].queryset.filter(
                 company=company,
             )
@@ -131,7 +131,7 @@ class RideCalendarVehicleForm(forms.ModelForm):
         company = kwargs.pop("company", None)
         super().__init__(*args, **kwargs)
 
-        for field in ["drivers", "guides"]:
+        for field in ["drivers", "guides", "agency"]:
             self.fields[field].queryset = self.fields[field].queryset.filter(
                 company=company,
             )

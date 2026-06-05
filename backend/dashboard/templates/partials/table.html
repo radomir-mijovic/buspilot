@@ -1,70 +1,152 @@
-<div class="col-xxl-12">
-    <div class="card card-height-100">
-        <div class="card-header align-items-center d-flex">
-            <h4 class="card-title mb-0 flex-grow-1" data-key="{{ table_title_key }}">{{ table_title }}</h4>
+<div class="col-12">
+    <div class="card2">
+        <div class="card2__head">
+            <span class="card2__dot {% if table_title_key == 't-transfers' %}dot--transfer {% elif table_title_key == 't-excursions' %}dot--izlet {% else %}dot--linija{% endif %}"></span>
+            <span class="card2__title" data-key="{{ table_title_key }}">{{ table_title }}</span>
+            <span class="card2__count">
+                {{ rides|length }}
+                {% if rides|length == 1 %}
+                    vožnja
+                {% else %}
+                    vožnje
+                {% endif %}
+            </span>
         </div>
-        <!-- end card header -->
-        <div class="card-body">
-            <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
-                <table class="table table-bordered align-middle mb-0"
-                       style="min-width: 1400px">
-                    <thead>
-                        <tr>
-                            <th scope="col" data-key="t-ride">Vožnja</th>
-                            <th scope="col" data-key="t-guides">Vodiči</th>
-                            <th scope="col" data-key="t-vehicle">Vozilo</th>
-                            <th scope="col" data-key="t-drivers">Vozači</th>
-                            <th scope="col" data-key="t-departure">Polazak</th>
-                            <th scope="col" data-key="t-arrival">Završava</th>
-                            <th scope="col" data-key="t-departure-location">Mjesto polaska</th>
-                            <th scope="col" data-key="t-agency">Agencija</th>
-                            <th scope="col"
-                                data-key="t-note"
-                                style="width: 400px;
-                                       white-space:normal;
-                                       word-break:break-word">Napomena</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for ride in rides %}
-                            <tr style="cursor:pointer"
-                                onclick="window.location='{% url 'ride:ride_update' ride.id %}'">
-                                <td>{{ ride.title }}</td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        {% for guide in ride.guides.all %}<li>{{ guide }}</li>{% endfor %}
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        {% for vehicle in ride.vehicles.all %}<li>{{ vehicle }}</li>{% endfor %}
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul class="list-unstyled">
-                                        {% for driver in ride.drivers.all %}
+        <div class="tw">
+            <table class="t2">
+                <thead>
+                    <tr>
+                        <th data-key="t-ride">Vožnja</th>
+                        <th data-key="t-guides">Vodiči</th>
+                        <th data-key="t-vehicle">Vozilo</th>
+                        <th data-key="t-drivers">Vozači</th>
+                        <th data-key="t-departure">Polazak</th>
+                        <th data-key="t-ends">Završava</th>
+                        <th data-key="t-start-place">Mjesto polaska</th>
+                        <th data-key="t-agency">Agencija</th>
+                        <th data-key="t-note">Napomena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ride in rides %}
+                        <tr onclick="window.location='{% url 'ride:ride_update' ride.id %}';">
+                            <td>
+                                <span class="ride">{{ ride.title }}</span>
+                            </td>
+                            {# --- Vozilo (vehicle) --- ⚠ADJUST field names #}
+                            <td>
+                                {% if ride.vehicles.all %}
+                                    <ul>
+                                        {% for vehicle in ride.vehicles.all %}
                                             <li>
-                                                {{ driver }}
-                                                {% if driver in ride.confirmed_by.all %}<span class="badge bg-success"> Confirmed</span>{% endif %}
+                                                {{ vehicle }}
                                             </li>
                                         {% endfor %}
                                     </ul>
-                                </td>
-                                <td>{{ ride.start_time }}</td>
-                                <td>{{ ride.end_time }}</td>
-                                <td>{{ ride.start_location }}</td>
-                                <td>
-                                    <span style="color: black;
-                                                 font-size: 13px;
-                                                 font-weigth: 400"
-                                          class="badge bg-{{ ride.agency.card_header_color }}-subtle">{{ ride.agency }}</span>
-                                </td>
-                                <td>{{ ride.description }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                                {% else %}
+                                    <span class="none">—</span>
+                                {% endif %}
+                            </td>
+                            {# --- Vozači (drivers) --- ⚠ADJUST relation name + confirmed flag #}
+                            <td>
+                                {% if ride.drivers.all %}
+                                    <ul>
+                                        {% for driver in ride.drivers.all %}
+                                            <li>
+                                                <span class="avatar-mini">{{ driver.first_name|first }}{{ driver.last_name|first }}</span>
+                                                {{ driver.first_name }} {{ driver.last_name }}
+                                                {% if driver in ride.confirmed_by.all %}
+                                                    <span class="badge2 badge2--ok">
+                                                        <svg viewBox="0 0 24 24"
+                                                             fill="none"
+                                                             stroke="currentColor"
+                                                             stroke-width="3">
+                                                            <path d="M5 12l4.5 4.5L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                        Potvrđeno
+                                                    </span>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <span class="none">—</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if ride.guides.all %}
+                                    <ul>
+                                        {% for guide in ride.guides.all %}
+                                            <li>
+                                                <span class="avatar-mini">{{ guide.first_name|first }}{{ guide.last_name|first }}</span>
+                                                {{ guide }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <span class="none">—</span>
+                                {% endif %}
+                            </td>
+                            {# --- Polazak (departure time) --- #}
+                            <td>
+                                {% if ride.start_time %}
+                                    <span class="time">{{ ride.start_time|time:"H:i" }}</span>
+                                {% else %}
+                                    <span class="none">—</span>
+                                {% endif %}
+                            </td>
+                            {# --- Završava (end time) --- #}
+                            <td>
+                                {% if ride.end_time %}
+                                    <span class="time">{{ ride.end_time|time:"H:i" }}</span>
+                                {% else %}
+                                    <span class="none">—</span>
+                                {% endif %}
+                            </td>
+                            {# --- Mjesto polaska (start location) --- ⚠ADJUST field #}
+                            <td>
+                                {% if ride.start_location %}
+                                    <span class="loc">
+                                        <svg viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="1.7">
+                                            <path d="M12 21s-7-5.7-7-11a7 7 0 0 1 14 0c0 5.3-7 11-7 11z" />
+                                            <circle cx="12" cy="10" r="2.4" />
+                                        </svg>
+                                        {{ ride.start_location }}
+                                    </span>
+                                {% else %}
+                                    <span class="none">—</span>
+                                {% endif %}
+                            </td>
+                            {# --- Agencija --- ⚠ADJUST field #}
+                            <td>
+                                {% if ride.agency %}
+                                    <span class="badge2 badge2--agency">{{ ride.agency.name }}</span>
+                                {% else %}
+                                    <span class="none">—</span>
+                                {% endif %}
+                            </td>
+                            {# --- Napomena (note) --- #}
+                            <td class="note-cell">
+                                {% if ride.description %}
+                                    {{ ride.description }}
+                                {% else %}
+                                    <span class="none">—</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="9"
+                                style="text-align:center;
+                                       padding:34px;
+                                       color:var(--bp-ink-3)">Nema vožnji za prikaz.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

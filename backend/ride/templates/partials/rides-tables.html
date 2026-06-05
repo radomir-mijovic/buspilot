@@ -1,0 +1,101 @@
+<table class="bp-t" id="orderTable">
+    <thead>
+        <tr>
+            <th data-key="t-id">ID</th>
+            <th data-key="t-name">Naziv</th>
+            <th data-key="t-type">Tip</th>
+            <th data-key="t-departure">Polazak</th>
+            <th data-key="t-ends">Završava</th>
+            <th data-key="t-start-place">Mjesto polaska</th>
+            <th data-key="t-action">Akcija</th>
+        </tr>
+    </thead>
+    <tbody class="list">
+        {% for ride in rides %}
+            <tr id="row-{{ ride.id }}"
+                data-ride-type="{{ ride.ride_type }}"
+                >
+                <td class="id">
+                    <a class="bp-rid" href="{% url 'ride:ride_update' ride.id %}">#VZ{{ ride.id }}</a>
+                </td>
+                <td>
+                    <span class="bp-rname">{{ ride.title }}</span>
+                </td>
+                <td>
+                    {% if ride.ride_type == 2 %}
+                        <span class="bp-type bp-type--transfer" data-key="t-transfer">Transfer</span>
+                    {% elif ride.ride_type == 3 %}
+                        <span class="bp-type bp-type--excursion" data-key="t-excursion">Izlet</span>
+                    {% elif ride.ride_type == 1 %}
+                        <span class="bp-type bp-type--line" data-key="t-line">Linija</span>
+                    {% elif ride.ride_type == 4 %}
+                        <span class="bp-type bp-type--round" data-key="t-round">Kružna tura</span>
+                    {% else %}
+                        <span class="bp-none">—</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if ride.start_date %}
+                        <span class="bp-dt">{{ ride.start_date|date:"d M, Y" }}
+                            {% if ride.start_time %}<span class="clock">{{ ride.start_time|time:"H:i" }}</span>{% endif %}
+                        </span>
+                    {% else %}
+                        <span class="bp-none">—</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if ride.end_date %}
+                        <span class="bp-dt">{{ ride.end_date|date:"d M, Y" }}
+                            {% if ride.end_time %}<span class="clock">{{ ride.end_time|time:"H:i" }}</span>{% endif %}
+                        </span>
+                    {% else %}
+                        <span class="bp-none">—</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if ride.start_location %}
+                        {{ ride.start_location }}
+                    {% else %}
+                        <span class="bp-none">—</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="bp-acts">
+                        <a class="bp-iact bp-iact--view"
+                           href="{% url 'ride:ride_update' ride.id %}"
+                           aria-label="Prikaži">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.7">
+                                <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" />
+                                <circle cx="12" cy="12" r="2.6" />
+                            </svg>
+                        </a>
+                        <button type="button"
+                                class="bp-iact bp-iact--del remove-item-btn"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteRideModal"
+                                data-id="{{ ride.id }}"
+                                data-delete-url="{% url 'ride:ride_delete' ride.id %}"
+                                aria-label="Obriši">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.7">
+                                <path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" />
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7"
+                    style="text-align:center;
+                           padding:34px;
+                           color:var(--bp-ink-3)">Nema vožnji za prikaz.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
