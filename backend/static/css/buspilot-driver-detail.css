@@ -1,0 +1,299 @@
+/* ============================================================================
+   buspilot-driver-detail.css  —  cosmetic restyle of the Vozač detalji page.
+   PURE CSS. No markup changes. Load LAST, after Velzon app.min.css + sweetalert2.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-accent-line: oklch(0.86 0.05 256);
+  --bp-ok: oklch(0.62 0.13 162);
+  --bp-ok-bg: oklch(0.955 0.04 162);
+  --bp-ok-ink: oklch(0.43 0.12 162);
+  --bp-warn: oklch(0.74 0.13 75);
+  --bp-warn-bg: oklch(0.96 0.05 80);
+  --bp-warn-ink: oklch(0.52 0.12 70);
+  --bp-danger: oklch(0.58 0.2 25);
+  --bp-danger-bg: oklch(0.96 0.04 28);
+  --bp-danger-ink: oklch(0.52 0.2 25);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-body: "Hanken Grotesk", system-ui, sans-serif;
+  --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --bp-r: 11px;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264/0.05), 0 1px 1px oklch(0.4 0.03 264/0.04);
+  --bp-shadow:
+    0 4px 12px oklch(0.4 0.03 264/0.06), 0 1px 3px oklch(0.4 0.03 264/0.05);
+}
+
+/* cards */
+.page-content .card {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+.page-content .card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 16px 20px !important;
+}
+.page-content .card-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink) !important;
+}
+
+/* ---- name banner (bg-warning-subtle) -> brand gradient ---- */
+.card .bg-warning-subtle {
+  background: linear-gradient(
+    120deg,
+    var(--bp-accent-ink),
+    var(--bp-accent)
+  ) !important;
+  border-radius: var(--bp-r-lg) var(--bp-r-lg) 0 0;
+}
+.card .bg-warning-subtle h4.fw-bold {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 24px !important;
+  letter-spacing: -0.02em;
+  color: #fff !important;
+}
+
+/* ---- edit form ---- */
+.page-content .form-label {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-2) !important;
+}
+.page-content .form-control,
+.page-content .form-select {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 13px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+}
+.page-content .form-control:focus,
+.page-content .form-select:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+
+/* edit form buttons: keep delete red(soft), update blue */
+.page-content .btn-primary {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+.page-content .btn-danger[data-bs-target="#deleteDriverModal"] {
+  background: var(--bp-danger-bg) !important;
+  border-color: transparent !important;
+  color: var(--bp-danger-ink) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+.page-content .btn-danger[data-bs-target="#deleteDriverModal"]:hover {
+  background: oklch(0.93 0.06 28) !important;
+}
+
+/* ---- credentials block (username / password + Copy) ---- */
+.input-group .form-control[disabled] {
+  background: var(--bp-surface-2) !important;
+  color: var(--bp-ink-2) !important;
+  font-family: var(--bp-mono) !important;
+  font-size: 13px;
+}
+.input-group .btn-warning {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  color: #fff !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+}
+
+/* ---- documents card ---- */
+.btn-danger[data-bs-target="#addDocumentModal"] {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  color: #fff !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+.page-content .table thead.table-light th {
+  font-family: var(--bp-mono) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-3) !important;
+  font-weight: 500 !important;
+  background: var(--bp-surface-2) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line) !important;
+  padding: 13px 16px !important;
+  white-space: nowrap;
+}
+.page-content .table tbody td {
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 13px 16px !important;
+  font-size: 14px;
+  color: var(--bp-ink-2);
+  vertical-align: middle;
+}
+.page-content .table tbody tr:hover td {
+  background: var(--bp-accent-bg) !important;
+}
+.avatar-title.bg-primary-subtle {
+  background: var(--bp-accent-bg) !important;
+  color: var(--bp-accent-ink) !important;
+  border-radius: 10px !important;
+}
+h6.fs-14 a.text-body {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  color: var(--bp-ink) !important;
+  text-decoration: none;
+}
+
+/* status badges */
+.page-content .badge.bg-success {
+  background: var(--bp-ok-bg) !important;
+  color: var(--bp-ok-ink) !important;
+}
+.page-content .badge.bg-warning {
+  background: var(--bp-warn-bg) !important;
+  color: var(--bp-warn-ink) !important;
+}
+.page-content .badge.bg-danger {
+  background: var(--bp-danger-bg) !important;
+  color: var(--bp-danger-ink) !important;
+}
+.page-content .badge {
+  font-family: var(--bp-mono) !important;
+  font-weight: 500 !important;
+  font-size: 10.5px !important;
+  border-radius: 99px !important;
+  padding: 5px 11px !important;
+}
+
+/* action dropdown */
+.btn-light.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px !important;
+  border: 1px solid var(--bp-line) !important;
+  background: var(--bp-surface) !important;
+  color: var(--bp-ink-2) !important;
+}
+.btn-light.btn-icon:hover {
+  background: var(--bp-surface-2) !important;
+  border-color: var(--bp-accent-line) !important;
+  color: var(--bp-accent) !important;
+}
+.dropdown-menu {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--bp-shadow) !important;
+  padding: 6px !important;
+}
+.dropdown-item {
+  font-family: var(--bp-body) !important;
+  font-size: 14px !important;
+  color: var(--bp-ink-2) !important;
+  border-radius: 9px !important;
+  padding: 9px 12px !important;
+}
+.dropdown-item:hover {
+  background: var(--bp-surface-2) !important;
+  color: var(--bp-ink) !important;
+}
+
+/* ============================== MODALS ============================== */
+#deleteDriverModal .modal-content,
+#addDocumentModal .modal-content {
+  border-radius: var(--bp-r-lg) !important;
+  border: 1px solid var(--bp-line) !important;
+  overflow: hidden;
+}
+#addDocumentModal .modal-header.bg-light {
+  background: var(--bp-surface-2) !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 18px 22px !important;
+}
+.modal-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16.5px !important;
+  color: var(--bp-ink) !important;
+}
+.modal .form-label {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-2) !important;
+}
+.modal .form-control,
+.modal .form-select {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 13px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+}
+.modal .form-control:focus,
+.modal .form-select:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+/* add-document submit (btn-danger -> brand blue, it's an upload) */
+#addDocumentModal .btn-danger {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  color: #fff !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+.modal .btn-light {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  color: var(--bp-ink-2) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+/* delete-confirm stays red */
+#deleteDriverModal .btn-danger {
+  background: var(--bp-danger) !important;
+  border-color: var(--bp-danger) !important;
+  color: #fff !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+#deleteDriverModal h4 {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  color: var(--bp-ink) !important;
+}

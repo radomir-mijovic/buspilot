@@ -1,0 +1,312 @@
+/* ============================================================================
+   buspilot-documents.css  —  cosmetic restyle of the Dokumenti (file-manager) page.
+   PURE CSS. No markup changes. Load LAST, after Velzon app.min.css + glightbox css.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-accent-line: oklch(0.86 0.05 256);
+  --bp-ok: oklch(0.62 0.13 162);
+  --bp-ok-bg: oklch(0.955 0.04 162);
+  --bp-ok-ink: oklch(0.43 0.12 162);
+  --bp-warn: oklch(0.74 0.13 75);
+  --bp-warn-bg: oklch(0.96 0.05 80);
+  --bp-warn-ink: oklch(0.52 0.12 70);
+  --bp-danger: oklch(0.58 0.2 25);
+  --bp-danger-bg: oklch(0.96 0.04 28);
+  --bp-danger-ink: oklch(0.52 0.2 25);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-body: "Hanken Grotesk", system-ui, sans-serif;
+  --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --bp-r: 11px;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264/0.05), 0 1px 1px oklch(0.4 0.03 264/0.04);
+  --bp-shadow:
+    0 4px 12px oklch(0.4 0.03 264/0.06), 0 1px 3px oklch(0.4 0.03 264/0.05);
+}
+
+/* ---- shell ---- */
+.chat-wrapper {
+  font-family: var(--bp-body);
+}
+.file-manager-sidebar {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+}
+.file-manager-content {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+}
+
+/* ---- sidebar header + search ---- */
+.file-manager-sidebar h5 {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink) !important;
+}
+.file-manager-sidebar .search-box .form-control {
+  border: 1px solid var(--bp-line) !important;
+  background: var(--bp-surface-2) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 14px 11px 36px !important;
+  font-size: 14px;
+}
+.file-manager-sidebar .search-box .form-control:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+  background: var(--bp-surface) !important;
+}
+.file-manager-sidebar .search-box .search-icon {
+  color: var(--bp-ink-3) !important;
+}
+
+/* ---- owner menu (Firma / Vozači / …) ---- */
+.file-manager-menu li a {
+  display: flex !important;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px !important;
+  border-radius: 9px;
+  margin-bottom: 2px;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  color: var(--bp-ink-2) !important;
+  text-decoration: none;
+  transition:
+    background 0.12s,
+    color 0.12s;
+}
+.file-manager-menu li a:hover {
+  background: var(--bp-surface-2) !important;
+  color: var(--bp-ink) !important;
+}
+.file-manager-menu li a i {
+  color: var(--bp-ink-3) !important;
+  font-size: 16px;
+}
+.file-manager-menu li a:hover i {
+  color: var(--bp-accent) !important;
+}
+/* active owner (Velzon adds .active on the selected) */
+.file-manager-menu li a.active {
+  background: var(--bp-accent-bg) !important;
+  color: var(--bp-accent-ink) !important;
+}
+.file-manager-menu li a.active i {
+  color: var(--bp-accent) !important;
+}
+
+/* ---- content header + add button ---- */
+#filetype-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink) !important;
+}
+.createFile-modal.btn-success {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+  padding: 10px 18px !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+.createFile-modal.btn-success:hover {
+  box-shadow: var(--bp-shadow) !important;
+}
+
+/* ---- table ---- */
+.file-manager-content .table > thead.table-active > tr > th,
+.file-manager-content .table thead th {
+  font-family: var(--bp-mono) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-3) !important;
+  font-weight: 500 !important;
+  background: var(--bp-surface-2) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line) !important;
+  padding: 14px 18px !important;
+  white-space: nowrap;
+}
+.file-manager-content .table tbody td {
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 14px 18px !important;
+  font-size: 14px;
+  color: var(--bp-ink-2);
+  vertical-align: middle;
+}
+.file-manager-content .table tbody tr {
+  transition: background 0.12s;
+}
+.file-manager-content .table tbody tr:hover {
+  background: var(--bp-accent-bg) !important;
+}
+.file-manager-content .table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+/* owner col anchors row; doc name in display */
+.file-manager-content .table tbody td:nth-child(2) {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  color: var(--bp-ink) !important;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+.file-manager-content .table tbody td:nth-child(4) {
+  font-family: var(--bp-mono) !important;
+  font-size: 12.5px;
+  color: var(--bp-ink-3) !important;
+}
+
+/* ---- status badges -> soft pills (keep meaning) ---- */
+.file-manager-content .badge.bg-success {
+  background: var(--bp-ok-bg) !important;
+  color: var(--bp-ok-ink) !important;
+}
+.file-manager-content .badge.bg-warning {
+  background: var(--bp-warn-bg) !important;
+  color: var(--bp-warn-ink) !important;
+}
+.file-manager-content .badge.bg-danger {
+  background: var(--bp-danger-bg) !important;
+  color: var(--bp-danger-ink) !important;
+}
+.file-manager-content .badge {
+  font-family: var(--bp-mono) !important;
+  font-weight: 500 !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.04em;
+  border-radius: 99px !important;
+  padding: 5px 11px !important;
+}
+
+/* ---- action dropdown trigger ---- */
+.file-manager-content .btn-light.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px !important;
+  border: 1px solid var(--bp-line) !important;
+  background: var(--bp-surface) !important;
+  color: var(--bp-ink-2) !important;
+  display: inline-grid;
+  place-items: center;
+}
+.file-manager-content .btn-light.btn-icon:hover {
+  background: var(--bp-surface-2) !important;
+  border-color: var(--bp-accent-line) !important;
+  color: var(--bp-accent) !important;
+}
+.dropdown-menu {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--bp-shadow) !important;
+  padding: 6px !important;
+}
+.dropdown-item {
+  font-family: var(--bp-body) !important;
+  font-size: 14px !important;
+  color: var(--bp-ink-2) !important;
+  border-radius: 9px !important;
+  padding: 9px 12px !important;
+}
+.dropdown-item:hover {
+  background: var(--bp-surface-2) !important;
+  color: var(--bp-ink) !important;
+}
+
+/* ---- pagination ---- */
+.file-manager-content .pagination .page-link {
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  color: var(--bp-ink-2) !important;
+  border: 1px solid var(--bp-line) !important;
+  border-radius: 9px !important;
+  margin: 0 2px;
+  padding: 7px 13px;
+}
+.file-manager-content .pagination .page-link:hover {
+  background: var(--bp-surface-2) !important;
+  color: var(--bp-ink) !important;
+}
+.file-manager-content .pagination .page-item.active .page-link {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  color: #fff !important;
+}
+
+/* ============================== MODALS ============================== */
+#createFileModal .modal-content,
+#deleteRecordModal .modal-content,
+.delete-document-modal .modal-content {
+  border-radius: var(--bp-r-lg) !important;
+  border: 1px solid var(--bp-line) !important;
+  overflow: hidden;
+}
+#createFileModal .modal-header {
+  background: var(--bp-surface-2) !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 18px 22px !important;
+}
+#createFileModal .modal-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16.5px !important;
+  color: var(--bp-ink) !important;
+}
+#createFileModal .form-label {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-2) !important;
+}
+#createFileModal .form-control,
+#createFileModal .form-select {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 13px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+}
+#createFileModal .form-control:focus,
+#createFileModal .form-select:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+#createFileModal .btn-success {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+#createFileModal .btn-light {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  color: var(--bp-ink-2) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}

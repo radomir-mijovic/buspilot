@@ -1,0 +1,234 @@
+/* ============================================================================
+   buspilot-calendar.css  —  cosmetic restyle of the Kalendar (gantt) page.
+   PURE CSS. No markup/JS changes — targets the existing template + the table
+   that dashboard-calendar.js generates. Load LAST, after Velzon app.min.css.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-ok: oklch(0.62 0.13 162);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-body: "Hanken Grotesk", system-ui, sans-serif;
+  --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --bp-r: 11px;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264/0.05), 0 1px 1px oklch(0.4 0.03 264/0.04);
+}
+
+/* ---- card shell ---- */
+.page-content .card {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+.page-content .card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 18px 22px !important;
+}
+.page-content .card-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16.5px !important;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink) !important;
+}
+
+/* ---- filter buttons (Tip Vožnje) -> brand pills, keep colour coding ---- */
+#filter-buttons .btn {
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  font-size: 13.5px !important;
+  border-radius: 99px !important;
+  padding: 8px 16px !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  transition:
+    transform 0.12s,
+    box-shadow 0.15s;
+}
+#filter-buttons .btn:hover {
+  transform: translateY(-1px);
+}
+#filter-buttons .btn.active {
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+#filter-buttons #all {
+  background: var(--bp-accent-bg) !important;
+  color: var(--bp-accent-ink) !important;
+}
+#filter-buttons #lines {
+  background: oklch(0.96 0.04 28) !important;
+  color: oklch(0.55 0.2 25) !important;
+}
+#filter-buttons #excursions {
+  background: oklch(0.955 0.04 162) !important;
+  color: var(--bp-ok) !important;
+}
+#filter-buttons #transfers {
+  background: var(--bp-accent-bg) !important;
+  color: var(--bp-accent-ink) !important;
+}
+#filter-buttons #round {
+  background: oklch(0.96 0.05 80) !important;
+  color: oklch(0.55 0.13 70) !important;
+}
+
+/* ---- month navigation: green -> brand, clean ---- */
+#prev,
+#next {
+  background: var(--bp-surface) !important;
+  color: var(--bp-ink-2) !important;
+  border: 1px solid var(--bp-line) !important;
+  border-radius: 10px !important;
+  width: 38px;
+  height: 38px;
+  padding: 0 !important;
+  font-size: 15px;
+  line-height: 1;
+  box-shadow: var(--bp-shadow-sm) !important;
+  transition: all 0.12s;
+}
+#prev:hover,
+#next:hover {
+  border-color: var(--bp-accent) !important;
+  color: var(--bp-accent) !important;
+  background: var(--bp-accent-bg) !important;
+}
+#month-label {
+  font-family: var(--bp-display) !important;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink);
+  vertical-align: middle;
+}
+
+/* ---- scroll container ---- */
+.table-responsive {
+  border: 1px solid var(--bp-line);
+  border-radius: var(--bp-r-lg);
+  background: var(--bp-surface);
+}
+
+/* ============================ THE GANTT TABLE ============================ */
+#calendar-table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+
+/* kill heavy bordered grid -> soft hairlines */
+#calendar-table.table-bordered > :not(caption) > * > * {
+  border-width: 0 !important;
+}
+#calendar-table td,
+#calendar-table th {
+  border-right: 1px solid var(--bp-line-soft) !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+}
+
+/* header row: day numbers + weekday */
+#calendar-table thead th,
+#calendar-table tr:first-child th {
+  background: var(--bp-surface-2) !important;
+  font-family: var(--bp-mono) !important;
+  font-weight: 500 !important;
+  font-size: 11px !important;
+  color: var(--bp-ink-3) !important;
+  letter-spacing: 0.04em;
+  padding: 11px 10px !important;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* first column = ride name (sticky so it stays visible while scrolling) */
+#calendar-table td:first-child,
+#calendar-table th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 240px;
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  letter-spacing: -0.01em;
+  color: var(--bp-ink) !important;
+  padding: 13px 16px !important;
+  box-shadow: 1px 0 0 var(--bp-line);
+}
+#calendar-table thead th:first-child {
+  z-index: 3;
+}
+
+/* body cells */
+#calendar-table td {
+  padding: 11px 10px !important;
+  font-family: var(--bp-mono);
+  font-size: 11px;
+  color: var(--bp-ink-2);
+}
+
+/* hover whole row faint */
+#calendar-table tbody tr:hover td {
+  background: oklch(0.985 0.003 250);
+}
+
+/* ---- soften Velzon's *-subtle row tints to brand-tuned washes ----
+   The JS colours each ride row by type using bg-*-subtle. We re-tint them. */
+#calendar-table .table-danger,
+#calendar-table .bg-danger-subtle {
+  background: oklch(0.975 0.018 28) !important;
+}
+#calendar-table .table-success,
+#calendar-table .bg-success-subtle {
+  background: oklch(0.975 0.022 162) !important;
+}
+#calendar-table .table-info,
+#calendar-table .bg-info-subtle {
+  background: var(--bp-accent-bg) !important;
+}
+#calendar-table .table-warning,
+#calendar-table .bg-warning-subtle {
+  background: oklch(0.98 0.03 80) !important;
+}
+
+/* the agency span chips inside cells (e.g. "Galileo") */
+#calendar-table td b,
+#calendar-table td strong,
+#calendar-table .agency-label {
+  font-family: var(--bp-display);
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--bp-ink);
+}
+
+/* prettier scrollbar on the responsive wrapper */
+.table-responsive::-webkit-scrollbar {
+  height: 10px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+  background: oklch(0.85 0.01 260);
+  border-radius: 99px;
+  border: 2px solid var(--bp-surface);
+}
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: var(--bp-accent);
+}
+.table-responsive::-webkit-scrollbar-track {
+  background: transparent;
+}

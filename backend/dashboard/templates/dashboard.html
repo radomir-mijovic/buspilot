@@ -6,21 +6,18 @@
 {% block extra_css %}
 {% endblock extra_css %}
 {% block content %}
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    <div class="main-page-wrapper">
-        {% include "partials/table.html" with rides=transfers table_title="Transferi" table_title_key="t-transfers" %}
-        {% include "partials/table.html" with rides=excursions table_title="Eksurzije" table_title_key="t-excursions" %}
-        {% include "partials/table.html" with rides=lines rides_count=lines.count table_title="Linije" table_title_key="t-lines" %}
-        {% block footer %}
-            {% include "partials/footer.html" %}
-        {% endblock footer %}
+    <div class="main-content">
+        <div class="main-page-wrapper">
+            {% include "partials/table.html" with rides=transfers table_title="Transferi" table_title_key="t-transfers" %}
+            {% include "partials/table.html" with rides=excursions table_title="Eksurzije" table_title_key="t-excursions" %}
+            {% include "partials/table.html" with rides=lines rides_count=lines.count table_title="Linije" table_title_key="t-lines" %}
+            {% block footer %}
+                {% include "partials/footer.html" %}
+            {% endblock footer %}
+        </div>
     </div>
 {% endblock content %}
 {% block extra_js %}
-    <!-- apexcharts -->
     <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js'%}"></script>
-    <!-- Dashboard init -->
     <script src="{% static 'js/pages/dashboard-crm.init.js'%}"></script>
 {% endblock extra_js %}

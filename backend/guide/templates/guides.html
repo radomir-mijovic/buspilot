@@ -8,10 +8,10 @@
     <link href="{% static 'libs/sweetalert2/dist/sweetalert2.min.css' %}"
           rel="stylesheet"
           type="text/css" />
+    <link href="{% static 'css/buspilot-drivers.css' %}" rel="stylesheet" />
 {% endblock extra_css %}
 {% block content %}
-    <div class="main-content">
-        <div class="page-content">
+    <div class="main-page-wrapper">
             <div class="container-fluid">
                 {% block pagetitle %}
                     {% include "partials/page-title.html" with pagetitle="Vodici" %}
@@ -300,9 +300,6 @@
             </div>
             <!--end row-->
         </div>
-        <!-- container-fluid -->
-    </div>
-    <!-- End Page-content -->
     {% block footer %}
         {% include "partials/footer.html" %}
     {% endblock footer %}

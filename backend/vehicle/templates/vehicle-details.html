@@ -9,186 +9,183 @@
           href="{% static 'libs/swiper/swiper-bundle.min.css' %}">
     <link rel="stylesheet"
           href="{% static 'libs/flatpickr/dist/flatpickr.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/buspilot-vehicle-detail.css' %}" />
 {% endblock extra_css %}
 {% block content %}
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    <div class="main-content">
-        <div class="page-content">
-            <div class="container-fluid">
-                <div class="profile-foreground position-relative mx-n4 mt-n4">
-                    <div class="profile-wid-bg">
-                        <img src="{% static 'images/profile-bg.jpg' %}"
-                             alt=""
-                             class="profile-wid-img" />
-                    </div>
+    <div class="main-page-wrapper">
+        <div class="container-fluid">
+            <div class="profile-foreground position-relative mx-n4 mt-n4">
+                <div class="profile-wid-bg">
+                    <img src="{% static 'images/profile-bg.jpg' %}"
+                         alt=""
+                         class="profile-wid-img" />
                 </div>
-                <div class="pt-4 mb-4 mb-lg-3 pb-lg-4"></div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div>
-                            <div class="d-flex">
-                                <!-- Nav tabs -->
-                                <ul class="nav nav-pills animation-nav profile-nav gap-2 gap-lg-3 flex-grow-1"
-                                    role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link fs-14 active"
-                                           data-bs-toggle="tab"
-                                           href="#overview-tab"
-                                           role="tab">
-                                            <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-overview">Pregled</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link fs-14"
-                                           data-bs-toggle="tab"
-                                           href="#activities"
-                                           role="tab">
-                                            <i class="ri-list-unordered d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-calendar">Kalendar</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link fs-14"
-                                           data-bs-toggle="tab"
-                                           href="#vehicle-documents"
-                                           role="tab">
-                                            <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-documents-tab">Dokumenti</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Tab panes -->
-                            <div class="tab-content pt-4 text-muted">
-                                <div class="tab-pane active" id="overview-tab" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-xxl-3">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title mb-3" data-key="t-vehicle-data">Podaci</h5>
-                                                    <div class="table-responsive">
-                                                        <table class="table table-borderless mb-0">
-                                                            <tbody id="vehicle-details-tbody">
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-brand">Marka</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.brand }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-model">Model</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.model }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-vehicle-type">Vrsta</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.get_vehicle_type_display }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-year-of-production">Godina proizvodnje</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.year_of_production }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-num-seats">Broj sjedišta</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.number_of_seats }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-chassis-number">Broj šasije</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.chassis_number }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-engine-number">Broj motora</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.engine_number }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-horse-power">Konjska snaga</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.horse_power }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-weight">Kilaža (KG)</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.weight }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-licence-number">Broj tablica</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.licence_number }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="ps-0" scope="row">
-                                                                        <span data-key="t-color">Boja</span> :
-                                                                    </th>
-                                                                    <td class="text-muted">{{ vehicle.color }}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <a data-bs-toggle="modal"
-                                                           data-bs-target="#showUpdateModal-{{ vehicle.id }}"
-                                                           type="button"
-                                                           class="btn btn-small btn-primary"
-                                                           onclick="event.stopPropagation();"
-                                                           data-key="t-edit-vehicle-data">Izmjeni podatke</a>
-                                                    </div>
+            </div>
+            <div class="pt-4 mb-4 mb-lg-3 pb-lg-4"></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <div class="d-flex">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-pills animation-nav profile-nav gap-2 gap-lg-3 flex-grow-1"
+                                role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link fs-14 active"
+                                       data-bs-toggle="tab"
+                                       href="#overview-tab"
+                                       role="tab">
+                                        <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-overview">Pregled</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fs-14"
+                                       data-bs-toggle="tab"
+                                       href="#activities"
+                                       role="tab">
+                                        <i class="ri-list-unordered d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-calendar">Kalendar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fs-14"
+                                       data-bs-toggle="tab"
+                                       href="#vehicle-documents"
+                                       role="tab">
+                                        <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block" data-key="t-documents-tab">Dokumenti</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Tab panes -->
+                        <div class="tab-content pt-4 text-muted">
+                            <div class="tab-pane active" id="overview-tab" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-xxl-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-3" data-key="t-vehicle-data">Podaci</h5>
+                                                <div class="table-responsive">
+                                                    <table class="table table-borderless mb-0">
+                                                        <tbody id="vehicle-details-tbody">
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-brand">Marka</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.brand }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-model">Model</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.model }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-vehicle-type">Vrsta</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.get_vehicle_type_display }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-year-of-production">Godina proizvodnje</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.year_of_production }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-num-seats">Broj sjedišta</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.number_of_seats }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-chassis-number">Broj šasije</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.chassis_number }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-engine-number">Broj motora</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.engine_number }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-horse-power">Konjska snaga</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.horse_power }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-weight">Kilaža (KG)</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.weight }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-licence-number">Broj tablica</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.licence_number }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="ps-0" scope="row">
+                                                                    <span data-key="t-color">Boja</span> :
+                                                                </th>
+                                                                <td class="text-muted">{{ vehicle.color }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <a data-bs-toggle="modal"
+                                                       data-bs-target="#showUpdateModal-{{ vehicle.id }}"
+                                                       type="button"
+                                                       class="btn btn-small btn-primary"
+                                                       onclick="event.stopPropagation();"
+                                                       data-key="t-edit-vehicle-data">Izmjeni podatke</a>
                                                 </div>
-                                                <!-- end card body -->
                                             </div>
-                                            <!-- end card -->
+                                            <!-- end card body -->
                                         </div>
-                                        <!--end col-->
-                                        <div class="col-xxl-9">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="card">
-                                                        <div class="card-header align-items-center d-flex">
-                                                            <h4 class="card-title mb-0  me-2" data-key="t-vehicle-rides-title">Zakazane Vožnje</h4>
-                                                            <div class="flex-shrink-0 ms-auto">
-                                                                <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs border-bottom-0"
-                                                                    role="tablist">
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link active"
-                                                                           data-bs-toggle="tab"
-                                                                           href="#today"
-                                                                           role="tab"
-                                                                           data-key="t-today">Danas</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link"
-                                                                           data-bs-toggle="tab"
-                                                                           href="#tomorrow"
-                                                                           role="tab"
-                                                                           data-key="t-tomorrow">Sjutra</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link"
-                                                                           data-bs-toggle="tab"
-                                                                           href="#after-tomorrow"
-                                                                           role="tab"
-                                                                           data-key="t-upcoming">Sledeće</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
+                                        <!-- end card -->
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-xxl-9">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="card">
+                                                    <div class="card-header align-items-center d-flex">
+                                                        <h4 class="card-title mb-0  me-2" data-key="t-vehicle-rides-title">Zakazane Vožnje</h4>
+                                                        <div class="flex-shrink-0 ms-auto">
+                                                            <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                                                                role="tablist">
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link active"
+                                                                       data-bs-toggle="tab"
+                                                                       href="#today"
+                                                                       role="tab"
+                                                                       data-key="t-today">Danas</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link"
+                                                                       data-bs-toggle="tab"
+                                                                       href="#tomorrow"
+                                                                       role="tab"
+                                                                       data-key="t-tomorrow">Sjutra</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link"
+                                                                       data-bs-toggle="tab"
+                                                                       href="#after-tomorrow"
+                                                                       role="tab"
+                                                                       data-key="t-upcoming">Sledeće</a>
+                                                                </li>
+                                                            </ul>
                                                         </div>
-                                                        <div class="card-body">
-                                                            <div class="tab-content text-muted">
-                                                                {% include "partials/vehicle-rides.html" with time="today" rides=vehicle.today_rides %}
-                                                                {% include "partials/vehicle-rides.html" with time="tomorrow" rides=vehicle.tomorrow_rides %}
-                                                                {% include "partials/vehicle-rides.html" with time="after-tomorrow" rides=vehicle.after_tomorrow_rides %}
-                                                            </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="tab-content text-muted">
+                                                            {% include "partials/vehicle-rides.html" with time="today" rides=vehicle.today_rides %}
+                                                            {% include "partials/vehicle-rides.html" with time="tomorrow" rides=vehicle.tomorrow_rides %}
+                                                            {% include "partials/vehicle-rides.html" with time="after-tomorrow" rides=vehicle.after_tomorrow_rides %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -196,117 +193,117 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="activities" role="tabpanel">
-                                    {% include "partials/calendar.html" with vehicle=vehicle ride_form=ride_form %}
-                                    {% include "partials/calendar-update.html" with vehicle=vehicle ride_form=ride_form %}
-                                    <!--end card-->
-                                </div>
-                                <!--end tab-pane-->
-                                <div class="tab-pane fade" id="vehicle-documents" role="tabpanel">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center mb-4">
-                                                <h5 class="card-title flex-grow-1 mb-0" data-key="t-documents-tab">Dokumenti</h5>
-                                                <div class="flex-shrink-0">
-                                                    <button type="button"
-                                                            class="btn btn-danger"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#addDocumentModal">
-                                                        <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add-document">Dodaj Dokument</span>
-                                                    </button>
-                                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="activities" role="tabpanel">
+                                {% include "partials/calendar.html" with vehicle=vehicle ride_form=ride_form %}
+                                {% include "partials/calendar-update.html" with vehicle=vehicle ride_form=ride_form %}
+                                <!--end card-->
+                            </div>
+                            <!--end tab-pane-->
+                            <div class="tab-pane fade" id="vehicle-documents" role="tabpanel">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <h5 class="card-title flex-grow-1 mb-0" data-key="t-documents-tab">Dokumenti</h5>
+                                            <div class="flex-shrink-0">
+                                                <button type="button"
+                                                        class="btn btn-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#addDocumentModal">
+                                                    <i class="ri-upload-2-fill me-1 align-bottom"></i> <span data-key="t-add-document">Dodaj Dokument</span>
+                                                </button>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="table-responsive "  style="min-height: 400px;">
-                                                        <table class="table table-borderless align-middle mb-0">
-                                                            <thead class="table-light">
-                                                                <tr>
-                                                                    <th scope="col" data-key="t-doc-name">Ime Dokumenta</th>
-                                                                    <th scope="col" data-key="t-ride-type">Tip</th>
-                                                                    <th scope="col" data-key="t-doc-size">Veličina</th>
-                                                                    <th scope="col" data-key="t-doc-expires">Važi do</th>
-                                                                    <th scope="col" data-key="t-status">Status</th>
-                                                                    <th scope="col" data-key="t-action">Action</th>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive "  style="min-height: 400px;">
+                                                    <table class="table table-borderless align-middle mb-0">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th scope="col" data-key="t-doc-name">Ime Dokumenta</th>
+                                                                <th scope="col" data-key="t-ride-type">Tip</th>
+                                                                <th scope="col" data-key="t-doc-size">Veličina</th>
+                                                                <th scope="col" data-key="t-doc-expires">Važi do</th>
+                                                                <th scope="col" data-key="t-status">Status</th>
+                                                                <th scope="col" data-key="t-action">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="documents-t-body">
+                                                            {% for document, document_form in documents_with_forms %}
+                                                                <tr id="row-{{ document.id }}">
+                                                                    <td>
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="avatar-sm">
+                                                                                <div class="avatar-title bg-primary-subtle text-primary rounded fs-20">
+                                                                                    <i class="ri-file-zip-fill"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ms-3 flex-grow-1">
+                                                                                <h6 class="fs-14 mb-0">
+                                                                                    {% if document.file %}
+                                                                                        <a href="{{ document.file.url }}" target="_blank" class="text-body">{{ document.title }}</a>
+                                                                                    {% endif %}
+                                                                                </h6>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>{{ document.document_type }}</td>
+                                                                    <td>{{ document.file_size_mb|floatformat:2 }} MB</td>
+                                                                    <td>{{ document.expiring_at }}</td>
+                                                                    {% if document.has_expired %}
+                                                                        <td>
+                                                                            <span class="badge bg-danger">Istekao</span>
+                                                                        </td>
+                                                                    {% elif document.expiring_soon %}
+                                                                        <td>
+                                                                            <span class="badge bg-warning">Opasnost</span>
+                                                                        </td>
+                                                                    {% else %}
+                                                                        <td>
+                                                                            <span class="badge bg-success">Aktivan</span>
+                                                                        </td>
+                                                                    {% endif %}
+                                                                    <td>
+                                                                        <div class="dropdown">
+                                                                            <a href=""
+                                                                               class="btn btn-light btn-icon"
+                                                                               id="dropdownMenuLink15"
+                                                                               data-bs-toggle="dropdown"
+                                                                               aria-expanded="true">
+                                                                                <i class="ri-equalizer-fill"></i>
+                                                                            </a>
+                                                                            <ul class="dropdown-menu dropdown-menu-end"
+                                                                                aria-labelledby="dropdownMenuLink15">
+                                                                                <li>
+                                                                                    <a class="dropdown-item" href="{{ document.file.url }}" target="_blank"><i class="ri-eye-fill me-2 align-middle text-muted"></i><span data-key="t-preview">Pregled</span></a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
+                                                                                </li>
+                                                                                <button type="button"
+                                                                                        class="dropdown-item"
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#updateVehicleDocumentModal-{{ document.pk }}">
+                                                                                    <i class="ri-edit-fill me-1 align-bottom"></i> <span data-key="t-update-document">Imijeni</span>
+                                                                                </button>
+                                                                                <li class="dropdown-divider"></li>
+                                                                                <li>
+                                                                                    <a class="dropdown-item"
+                                                                                       style="cursor:pointer"
+                                                                                       hx-target="#row-{{ document.id }}"
+                                                                                       hx-swap="delete"
+                                                                                       hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                                                                                       hx-post="{% url 'vehicle:document_delete' pk=document.pk %}">
+                                                                                        <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i><span data-key="t-delete">Obriši</span></a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        {% include "partials/update-vehicle-document-modal.html" with document=document document_form=document_form %}
+                                                                    </td>
                                                                 </tr>
-                                                            </thead>
-                                                            <tbody id="documents-t-body">
-                                                                {% for document, document_form in documents_with_forms %}
-                                                                    <tr id="row-{{ document.id }}">
-                                                                        <td>
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="avatar-sm">
-                                                                                    <div class="avatar-title bg-primary-subtle text-primary rounded fs-20">
-                                                                                        <i class="ri-file-zip-fill"></i>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="ms-3 flex-grow-1">
-                                                                                    <h6 class="fs-14 mb-0">
-                                                                                        {% if document.file %}
-                                                                                            <a href="{{ document.file.url }}" target="_blank" class="text-body">{{ document.title }}</a>
-                                                                                        {% endif %}
-                                                                                    </h6>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>{{ document.document_type }}</td>
-                                                                        <td>{{ document.file_size_mb|floatformat:2 }} MB</td>
-                                                                        <td>{{ document.expiring_at }}</td>
-                                                                        {% if document.has_expired %}
-                                                                            <td>
-                                                                                <span class="badge bg-danger">Istekao</span>
-                                                                            </td>
-                                                                        {% elif document.expiring_soon %}
-                                                                            <td>
-                                                                                <span class="badge bg-warning">Opasnost</span>
-                                                                            </td>
-                                                                        {% else %}
-                                                                            <td>
-                                                                                <span class="badge bg-success">Aktivan</span>
-                                                                            </td>
-                                                                        {% endif %}
-                                                                        <td>
-                                                                            <div class="dropdown">
-                                                                                <a href=""
-                                                                                   class="btn btn-light btn-icon"
-                                                                                   id="dropdownMenuLink15"
-                                                                                   data-bs-toggle="dropdown"
-                                                                                   aria-expanded="true">
-                                                                                    <i class="ri-equalizer-fill"></i>
-                                                                                </a>
-                                                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                                                    aria-labelledby="dropdownMenuLink15">
-                                                                                    <li>
-                                                                                        <a class="dropdown-item" href="{{ document.file.url }}" target="_blank"><i class="ri-eye-fill me-2 align-middle text-muted"></i><span data-key="t-preview">Pregled</span></a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
-                                                                                    </li>
-                                                                                    <button type="button"
-                                                                                            class="dropdown-item"
-                                                                                            data-bs-toggle="modal"
-                                                                                            data-bs-target="#updateVehicleDocumentModal-{{ document.pk }}">
-                                                                                        <i class="ri-edit-fill me-1 align-bottom"></i> <span data-key="t-update-document">Imijeni</span>
-                                                                                    </button>
-                                                                                    <li class="dropdown-divider"></li>
-                                                                                    <li>
-                                                                                        <a class="dropdown-item"
-                                                                                           style="cursor:pointer"
-                                                                                           hx-target="#row-{{ document.id }}"
-                                                                                           hx-swap="delete"
-                                                                                           hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                                                                                           hx-post="{% url 'vehicle:document_delete' pk=document.pk %}">
-                                                                                            <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i><span data-key="t-delete">Obriši</span></a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            {% include "partials/update-vehicle-document-modal.html" with document=document document_form=document_form %}
-                                                                        </td>
-                                                                    </tr>
-                                                                {% endfor %}
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -317,108 +314,109 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade"
-                 id="showUpdateModal-{{ vehicle.id }}"
-                 tabindex="-1"
-                 aria-labelledby="addVehicleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title"
-                                id="addVehicleModalLabel"
-                                data-key="t-update-vehicle-title">Izmjeni Vozilo</h5>
-                        </div>
-                        <form hx-post="{% url 'vehicle:vehicles_update' vehicle.id %}"
-                              hx-target="#vehicle-details-tbody"
-                              hx-swap="innerHTML"
-                              hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('showUpdateModal-{{ vehicle.id }}')).hide();}">
-                            {% csrf_token %}
-                            <input type="hidden" name="source" value="details" />
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="brand-field" class="form-label" data-key="t-brand">Marka</label>
-                                    {{ form.brand }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="model-field" class="form-label" data-key="t-model">Model</label>
-                                    {{ form.model }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="vehicle-type-field" class="form-label" data-key="t-vehicle-type">Vrsta</label>
-                                    {{ form.vehicle_type }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="year-field" class="form-label" data-key="t-year-of-production">Godina proizvodnje</label>
-                                    {{ form.year_of_production }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="seats-field" class="form-label" data-key="t-num-seats">Broj sjedišta</label>
-                                    {{ form.number_of_seats }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="chassis_number" class="form-label" data-key="t-chassis-number">Broj šasije</label>
-                                    {{ form.chassis_number }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="engine_number" class="form-label" data-key="t-engine-number">Broj motora</label>
-                                    {{ form.engine_number }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="horse_power" class="form-label" data-key="t-horse-power">Konjska snaga</label>
-                                    {{ form.horse_power }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="weight" class="form-label" data-key="t-weight">Kilaža (KG)</label>
-                                    {{ form.weight }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="licence_number" class="form-label" data-key="t-licence-number">Broj Tablica</label>
-                                    {{ form.licence_number }}
-                                </div>
-                                <div class="mb-3">
-                                    <label for="color" class="form-label" data-key="t-color">Boja</label>
-                                    {{ form.color }}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="hstack gap-2 justify-content-end">
-                                    <button type="button"
-                                            class="btn btn-light"
-                                            data-bs-dismiss="modal"
-                                            data-key="t-close">Zatvori</button>
-                                    <button type="submit" class="btn btn-success" data-key="t-update-vehicle-btn">Izmjeni vozilo</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {% include "partials/add-vehicle-document-modal.html" %}
-            <!-- End Page-content -->
-            {% block footer %}
-                {% include "partials/footer.html" %}
-            {% endblock footer %}
         </div>
-        <!-- end main content-->
-    {% endblock content %}
-    {% block extra_js %}
-        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-        <!-- swiper js -->
-        <script src="{% static 'libs/swiper/swiper-bundle.min.js'%}"></script>
-        <!-- profile init js -->
-        <script src="{% static 'js/pages/profile.init.js'%}"></script>
-        <script src="{% static 'libs/flatpickr/dist/flatpickr.min.js' %}"></script>
-        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
-        <script src="{% static 'libs/fullcalendar/index.global.min.js' %}"></script>
-        <script src="{% static 'js/pages/calendar.init.js' %}"></script>
-        <script>
+        <div class="modal fade"
+             id="showUpdateModal-{{ vehicle.id }}"
+             tabindex="-1"
+             aria-labelledby="addVehicleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-light p-3">
+                        <h5 class="modal-title"
+                            id="addVehicleModalLabel"
+                            data-key="t-update-vehicle-title">Izmjeni Vozilo</h5>
+                    </div>
+                    <form hx-post="{% url 'vehicle:vehicles_update' vehicle.id %}"
+                          hx-target="#vehicle-details-tbody"
+                          hx-swap="innerHTML"
+                          hx-on::after-request="if(event.detail.successful){bootstrap.Modal.getInstance(document.getElementById('showUpdateModal-{{ vehicle.id }}')).hide();}">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="details" />
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="brand-field" class="form-label" data-key="t-brand">Marka</label>
+                                {{ form.brand }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="model-field" class="form-label" data-key="t-model">Model</label>
+                                {{ form.model }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="vehicle-type-field" class="form-label" data-key="t-vehicle-type">Vrsta</label>
+                                {{ form.vehicle_type }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="year-field" class="form-label" data-key="t-year-of-production">Godina proizvodnje</label>
+                                {{ form.year_of_production }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="seats-field" class="form-label" data-key="t-num-seats">Broj sjedišta</label>
+                                {{ form.number_of_seats }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="chassis_number" class="form-label" data-key="t-chassis-number">Broj šasije</label>
+                                {{ form.chassis_number }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="engine_number" class="form-label" data-key="t-engine-number">Broj motora</label>
+                                {{ form.engine_number }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="horse_power" class="form-label" data-key="t-horse-power">Konjska snaga</label>
+                                {{ form.horse_power }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="weight" class="form-label" data-key="t-weight">Kilaža (KG)</label>
+                                {{ form.weight }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="licence_number" class="form-label" data-key="t-licence-number">Broj Tablica</label>
+                                {{ form.licence_number }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="color" class="form-label" data-key="t-color">Boja</label>
+                                {{ form.color }}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="hstack gap-2 justify-content-end">
+                                <button type="button"
+                                        class="btn btn-light"
+                                        data-bs-dismiss="modal"
+                                        data-key="t-close">Zatvori</button>
+                                <button type="submit" class="btn btn-success" data-key="t-update-vehicle-btn">Izmjeni vozilo</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% include "partials/add-vehicle-document-modal.html" %}
+        <!-- End Page-content -->
+        {% block footer %}
+            {% include "partials/footer.html" %}
+        {% endblock footer %}
+    </div>
+    <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <!-- swiper js -->
+    <script src="{% static 'libs/swiper/swiper-bundle.min.js'%}"></script>
+    <!-- profile init js -->
+    <script src="{% static 'js/pages/profile.init.js'%}"></script>
+    <script src="{% static 'libs/flatpickr/dist/flatpickr.min.js' %}"></script>
+    <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+    <script src="{% static 'libs/fullcalendar/index.global.min.js' %}"></script>
+    <script src="{% static 'js/pages/calendar.init.js' %}"></script>
+    <script>
             document.getElementById('addDocumentModal').addEventListener('hidden.bs.modal', function() {
                 this.querySelector('.alert-danger')?.remove();
                 this.querySelector('form')?.reset();
             });
-        </script>
-        <script>
+    </script>
+    <script>
             var activitiesTab = document.querySelector('a[href="#activities"]');
             if (activitiesTab) {
                 activitiesTab.addEventListener('shown.bs.tab', function () {
@@ -427,9 +425,9 @@
                     }
                 });
             }
-        </script>
-    {% endblock extra_js %}
-    <script>
+    </script>
+{% endblock extra_js %}
+<script>
     // Set up CSRF token for all HTMX requests
     document.body.addEventListener('htmx:configRequest', function(event) {
         const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
@@ -437,4 +435,4 @@
             event.detail.headers['X-CSRFToken'] = csrfToken;
         }
     });
-    </script>
+</script>

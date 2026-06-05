@@ -1,0 +1,240 @@
+/* ============================================================================
+   buspilot-drivers.css  —  cosmetic restyle of the Vozači (drivers) page.
+   PURE CSS. No markup changes. Works with htmx-added rows.
+   Load LAST, after Velzon app.min.css + sweetalert2 css.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-accent-line: oklch(0.86 0.05 256);
+  --bp-danger: oklch(0.58 0.2 25);
+  --bp-danger-bg: oklch(0.96 0.04 28);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-body: "Hanken Grotesk", system-ui, sans-serif;
+  --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --bp-r: 11px;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264/0.05), 0 1px 1px oklch(0.4 0.03 264/0.04);
+  --bp-shadow:
+    0 4px 12px oklch(0.4 0.03 264/0.06), 0 1px 3px oklch(0.4 0.03 264/0.05);
+}
+
+/* card shells on this page */
+.main-page-wrapper .card {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+.main-page-wrapper .card-header {
+  background: transparent !important;
+  padding: 18px 22px !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+}
+
+/* ---- "Dodaj Vozača": btn-info (cyan) -> brand blue ---- */
+.add-btn.btn-info {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  color: #fff !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+  padding: 10px 18px !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+.add-btn.btn-info:hover {
+  box-shadow: var(--bp-shadow) !important;
+}
+
+/* ---- bulk-delete (soft danger) ---- */
+#remove-actions.btn-soft-danger {
+  background: var(--bp-danger-bg) !important;
+  color: oklch(0.52 0.2 25) !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--bp-r) !important;
+}
+#remove-actions.btn-soft-danger:hover {
+  background: oklch(0.93 0.06 28) !important;
+}
+
+/* ---- search ---- */
+#drivers-list .search-box .form-control.search {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 12px 14px 12px 38px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+}
+#drivers-list .search-box .form-control.search:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+#drivers-list .search-box .search-icon {
+  color: var(--bp-ink-3) !important;
+}
+
+/* ---- table ---- */
+#customerTable thead.table-light th,
+#customerTable thead th {
+  font-family: var(--bp-mono) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-3) !important;
+  font-weight: 500 !important;
+  background: var(--bp-surface-2) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line) !important;
+  padding: 14px 18px !important;
+  white-space: nowrap;
+}
+#customerTable tbody td {
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 15px 18px !important;
+  font-size: 14px;
+  color: var(--bp-ink-2);
+  vertical-align: middle;
+}
+#customerTable tbody tr {
+  transition: background 0.12s;
+}
+#customerTable tbody tr:hover {
+  background: var(--bp-accent-bg) !important;
+}
+#customerTable tbody tr:hover td:first-child {
+  box-shadow: inset 3px 0 0 var(--bp-accent);
+}
+#customerTable tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* name column -> display semibold (anchor) */
+#customerTable tbody td.name .name,
+#customerTable tbody td.name {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 14.5px;
+  color: var(--bp-ink) !important;
+  letter-spacing: -0.01em;
+}
+/* phone in mono for tabular feel */
+#customerTable tbody td.company_name {
+  font-family: var(--bp-mono) !important;
+  font-size: 13px;
+  color: var(--bp-ink-2) !important;
+}
+
+/* ---- action icons (call / message) -> round ghost buttons ---- */
+#customerTable .list-inline-item.edit a {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--bp-line);
+  background: var(--bp-surface);
+  display: inline-grid !important;
+  place-items: center;
+  color: var(--bp-ink-2) !important;
+  transition: all 0.12s;
+}
+#customerTable .list-inline-item.edit a:hover {
+  background: var(--bp-accent-bg);
+  border-color: var(--bp-accent-line);
+  color: var(--bp-accent) !important;
+}
+#customerTable .list-inline-item.edit a i {
+  font-size: 15px !important;
+}
+
+/* ============================== MODALS (add / edit) ============================== */
+#showModal .modal-content,
+#editDriverModal .modal-content,
+#deleteDriverModal .modal-content {
+  border-radius: var(--bp-r-lg) !important;
+  border: 1px solid var(--bp-line) !important;
+  overflow: hidden;
+}
+
+#showModal .modal-header.bg-info-subtle,
+#editDriverModal .modal-header.bg-info-subtle {
+  background: var(--bp-accent-bg) !important;
+  border-bottom: 1px solid var(--bp-accent-line) !important;
+  padding: 18px 22px !important;
+}
+#showModal .modal-title,
+#editDriverModal .modal-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16.5px !important;
+  color: var(--bp-accent-ink) !important;
+}
+
+#showModal .form-label,
+#editDriverModal .form-label {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-2) !important;
+}
+#showModal .form-control,
+#showModal .form-select,
+#editDriverModal .form-control,
+#editDriverModal .form-select {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 13px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+}
+#showModal .form-control:focus,
+#showModal .form-select:focus,
+#editDriverModal .form-control:focus,
+#editDriverModal .form-select:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+#showModal .btn-success {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+#showModal .btn-light,
+#deleteDriverModal .btn-link {
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+}
+#showModal .btn-light {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  color: var(--bp-ink-2) !important;
+  border-radius: var(--bp-r) !important;
+}
+
+/* delete confirm */
+#deleteDriverModal .btn-danger {
+  background: var(--bp-danger) !important;
+  border-color: var(--bp-danger) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+#deleteDriverModal h4 {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  color: var(--bp-ink) !important;
+}

@@ -7,164 +7,164 @@
     <!-- glightbox css -->
     <link rel="stylesheet"
           href="{% static 'libs/glightbox/dist/css/glightbox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buspilot-documents.css' %}" />
 {% endblock extra_css %}
 {% block content %}
-    <div class="main-content">
-        <div class="page-content">
-            <div class="container-fluid">
-                <div class="chat-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-1">
-                    <div class="file-manager-sidebar">
-                        <div class="p-3 d-flex flex-column h-100">
-                            <div class="mb-3">
-                                <h5 class="mb-0 fw-bold" data-key="t-documents">Dokumenti</h5>
+    <div class="main-page-wrapper">
+        <div class="container-fluid">
+            <div class="chat-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-1">
+                <div class="file-manager-sidebar">
+                    <div class="p-3 d-flex flex-column h-100">
+                        <div class="mb-3">
+                            <h5 class="mb-0 fw-bold" data-key="t-documents">Dokumenti</h5>
+                        </div>
+                        <form method="GET" action="{% url 'company:company_documents' %}">
+                            <input type="hidden" name="owner" value="{{ owner }}">
+                            <input type="hidden" name="page" value="{{ page_obj.number }}">
+                            <div class="search-box">
+                                <input type="text"
+                                       name="search_param"
+                                       class="form-control bg-light border-light"
+                                       placeholder="Search ...">
+                                <i class="ri-search-2-line search-icon"></i>
                             </div>
-                            <form method="GET" action="{% url 'company:company_documents' %}">
-                                <input type="hidden" name="owner" value="{{ owner }}">
-                                <input type="hidden" name="page" value="{{ page_obj.number }}">
-                                <div class="search-box">
-                                    <input type="text"
-                                           name="search_param"
-                                           class="form-control bg-light border-light"
-                                           placeholder="Search ...">
-                                    <i class="ri-search-2-line search-icon"></i>
-                                </div>
-                            </form>
-                            <div class="mt-3 mx-n4 px-4 file-menu-sidebar-scroll" data-simplebar>
-                                <ul class="list-unstyled file-manager-menu">
-                                    <li>
-                                        <a href="{% url 'company:company_documents' %}?owner=company"><i class="ri-community-line align-bottom me-2"></i> <span data-key="t-company" class="file-list-link">Firma</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'company:company_documents' %}?owner=driver"><i class="ri-team-line align-bottom me-2"></i> <span data-key="t-drivers"class="file-list-link">Vozači</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'company:company_documents' %}?owner=agency"><i class="ri-building-line align-bottom me-2"></i> <span data-key="t-agencies" class="file-list-link">Agencije</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'company:company_documents' %}?owner=vehicle"><i class="ri-bus-line align-bottom me-2"></i> <span data-key="t-vehicles" class="file-list-link">Vozila</span></a>
-                                    </li>
-                                </ul>
-                            </div>
+                        </form>
+                        <div class="mt-3 mx-n4 px-4 file-menu-sidebar-scroll" data-simplebar>
+                            <ul class="list-unstyled file-manager-menu">
+                                <li>
+                                    <a href="{% url 'company:company_documents' %}?owner=company"><i class="ri-community-line align-bottom me-2"></i> <span data-key="t-company" class="file-list-link">Firma</span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'company:company_documents' %}?owner=driver"><i class="ri-team-line align-bottom me-2"></i> <span data-key="t-drivers"class="file-list-link">Vozači</span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'company:company_documents' %}?owner=agency"><i class="ri-building-line align-bottom me-2"></i> <span data-key="t-agencies" class="file-list-link">Agencije</span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'company:company_documents' %}?owner=vehicle"><i class="ri-bus-line align-bottom me-2"></i> <span data-key="t-vehicles" class="file-list-link">Vozila</span></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="file-manager-content w-100 p-3 py-0">
-                        <div class="mx-n3 pt-4 px-4 file-manager-content-scroll" data-simplebar>
-                            <div>
-                                <div class="d-flex align-items-center mb-3">
-                                    <h5 class="flex-grow-1 fs-16 mb-0" id="filetype-title">{{ owner|capfirst }}</h5>
-                                    <div class="flex-shrink-0">
-                                        <button class="btn btn-success createFile-modal"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#createFileModal"
-                                                data-key="t-add-document">
-                                            <i class="ri-add-line align-bottom me-1"></i> Dodaj Dokument
-                                        </button>
-                                    </div>
+                </div>
+                <div class="file-manager-content w-100 p-3 py-0">
+                    <div class="mx-n3 pt-4 px-4 file-manager-content-scroll" data-simplebar>
+                        <div>
+                            <div class="d-flex align-items-center mb-3">
+                                <h5 class="flex-grow-1 fs-16 mb-0" id="filetype-title">{{ owner|capfirst }}</h5>
+                                <div class="flex-shrink-0">
+                                    <button class="btn btn-success createFile-modal"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#createFileModal"
+                                            data-key="t-add-document">
+                                        <i class="ri-add-line align-bottom me-1"></i> Dodaj Dokument
+                                    </button>
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="table align-middle table-nowrap mb-0">
-                                        <thead class="table-active">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap mb-0">
+                                    <thead class="table-active">
+                                        <tr>
+                                            <th scope="col" data-key="t-doc-owner">Vlasnik</th>
+                                            <th scope="col" data-key="t-doc-name">Ime Dokumenta</th>
+                                            <th scope="col" data-key="t-ride-type">Tip</th>
+                                            <th scope="col" data-key="t-doc-size">Veličina</th>
+                                            <th scope="col" data-key="t-doc-expires">Važi do</th>
+                                            <th scope="col" data-key="t-status">Status</th>
+                                            <th scope="col" data-key="t-action">Akcija</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for document in documents %}
                                             <tr>
-                                                <th scope="col" data-key="t-doc-owner">Vlasnik</th>
-                                                <th scope="col" data-key="t-doc-name">Ime Dokumenta</th>
-                                                <th scope="col" data-key="t-ride-type">Tip</th>
-                                                <th scope="col" data-key="t-doc-size">Veličina</th>
-                                                <th scope="col" data-key="t-doc-expires">Važi do</th>
-                                                <th scope="col" data-key="t-status">Status</th>
-                                                <th scope="col" data-key="t-action">Akcija</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for document in documents %}
-                                                <tr>
-                                                    {% if document.driver %}
-                                                        <td>{{ document.driver.get_full_name }}</td>
-                                                    {% elif document.agency %}
-                                                        <td>{{ document.agency.name }}</td>
-                                                    {% elif document.vehicle %}
-                                                        <td>{{ document.vehicle }}</td>
-                                                    {% else %}
-                                                        <td>{{ document.company.name }}</td>
-                                                    {% endif %}
-                                                    <td>{{ document.title }}</td>
-                                                    <td>{{ document.document_type }}</td>
-                                                    <td>{{ document.file_size_mb|floatformat:2 }} MB</td>
-                                                    <td>{{ document.expiring_at }}</td>
-                                                    {% if document.has_expired %}
-                                                        <td>
-                                                            <span class="badge bg-danger">Istekao</span>
-                                                        </td>
-                                                    {% elif document.expiring_soon %}
-                                                        <td>
-                                                            <span class="badge bg-warning">Opasnost</span>
-                                                        </td>
-                                                    {% else %}
-                                                        <td>
-                                                            <span class="badge bg-success">Aktivan</span>
-                                                        </td>
-                                                    {% endif %}
+                                                {% if document.driver %}
+                                                    <td>{{ document.driver.get_full_name }}</td>
+                                                {% elif document.agency %}
+                                                    <td>{{ document.agency.name }}</td>
+                                                {% elif document.vehicle %}
+                                                    <td>{{ document.vehicle }}</td>
+                                                {% else %}
+                                                    <td>{{ document.company.name }}</td>
+                                                {% endif %}
+                                                <td>{{ document.title }}</td>
+                                                <td>{{ document.document_type }}</td>
+                                                <td>{{ document.file_size_mb|floatformat:2 }} MB</td>
+                                                <td>{{ document.expiring_at }}</td>
+                                                {% if document.has_expired %}
                                                     <td>
-                                                        <div class="dropdown">
-                                                            <a href=""
-                                                               class="btn btn-light btn-icon"
-                                                               id="dropdownMenuLink15"
-                                                               data-bs-toggle="dropdown"
-                                                               aria-expanded="true">
-                                                                <i class="ri-equalizer-fill"></i>
-                                                            </a>
-                                                            <ul class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuLink15">
-                                                                {% if document.file %}
-                                                                    <li>
-                                                                        <a class="dropdown-item" href="{{ document.file.url }}" target="_blank"><i class="ri-eye-fill me-2 align-middle text-muted"></i><span data-key="t-preview">Pregled</span></a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
-                                                                    </li>
-                                                                {% endif %}
-                                                                <li class="dropdown-divider"></li>
-                                                                <li>
-                                                                    <a class="dropdown-item"
-                                                                       href="{% url 'company:document_delete' document.pk %}?owner={{ owner }}">
-                                                                        <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i><span data-key="t-delete">Obriši</span></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                        <span class="badge bg-danger">Istekao</span>
                                                     </td>
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <ul id="pagination" class="pagination pagination-lg">
-                                </ul>
-                                <div class="align-items-center mt-2 row g-3 text-center text-sm-start">
-                                    <div class="col-sm-auto">
-                                        <ul class="pagination pagination-separated pagination-sm justify-content-center justify-content-sm-start mb-0">
-                                            {% if page_obj.has_previous %}
-                                                <li class="page-item">
-                                                    <a href="?owner={{ owner }}&page=1&search_param={{search_param}}" class="page-link">First</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a href="?owner={{ owner }}&page={{ page_obj.previous_page_number }}&search_param={{search_param}}"
-                                                       class="page-link">←</a>
-                                                </li>
-                                            {% endif %}
-                                            <li class="page-item active">
-                                                <a href="#" class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+                                                {% elif document.expiring_soon %}
+                                                    <td>
+                                                        <span class="badge bg-warning">Opasnost</span>
+                                                    </td>
+                                                {% else %}
+                                                    <td>
+                                                        <span class="badge bg-success">Aktivan</span>
+                                                    </td>
+                                                {% endif %}
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a href=""
+                                                           class="btn btn-light btn-icon"
+                                                           id="dropdownMenuLink15"
+                                                           data-bs-toggle="dropdown"
+                                                           aria-expanded="true">
+                                                            <i class="ri-equalizer-fill"></i>
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="dropdownMenuLink15">
+                                                            {% if document.file %}
+                                                                <li>
+                                                                    <a class="dropdown-item" href="{{ document.file.url }}" target="_blank"><i class="ri-eye-fill me-2 align-middle text-muted"></i><span data-key="t-preview">Pregled</span></a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
+                                                                </li>
+                                                            {% endif %}
+                                                            <li class="dropdown-divider"></li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                   href="{% url 'company:document_delete' document.pk %}?owner={{ owner }}">
+                                                                    <i class="ri-delete-bin-5-line me-2 align-middle text-muted"></i><span data-key="t-delete">Obriši</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ul id="pagination" class="pagination pagination-lg">
+                            </ul>
+                            <div class="align-items-center mt-2 row g-3 text-center text-sm-start">
+                                <div class="col-sm-auto">
+                                    <ul class="pagination pagination-separated pagination-sm justify-content-center justify-content-sm-start mb-0">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item">
+                                                <a href="?owner={{ owner }}&page=1&search_param={{ search_param }}"
+                                                   class="page-link">First</a>
                                             </li>
-                                            {% if page_obj.has_next %}
-                                                <li class="page-item">
-                                                    <a href="?owner={{ owner }}&page={{ page_obj.next_page_number }}&search_param={{search_param}}"
-                                                       class="page-link">→</a>
-                                                </li>
-                                                <li class="page-item">
-                                            <a href="?owner={{ owner }}&page={{ page_obj.paginator.num_pages }}&search_param={{search_param}}"
-                                                       class="page-link">Last</a>
-                                                </li>
-                                            {% endif %}
-                                        </ul>
-                                    </div>
+                                            <li class="page-item">
+                                                <a href="?owner={{ owner }}&page={{ page_obj.previous_page_number }}&search_param={{ search_param }}"
+                                                   class="page-link">←</a>
+                                            </li>
+                                        {% endif %}
+                                        <li class="page-item active">
+                                            <a href="#" class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+                                        </li>
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item">
+                                                <a href="?owner={{ owner }}&page={{ page_obj.next_page_number }}&search_param={{ search_param }}"
+                                                   class="page-link">→</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="?owner={{ owner }}&page={{ page_obj.paginator.num_pages }}&search_param={{ search_param }}"
+                                                   class="page-link">Last</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
                                 </div>
                             </div>
                         </div>

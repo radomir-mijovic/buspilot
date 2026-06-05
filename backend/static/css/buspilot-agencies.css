@@ -1,0 +1,176 @@
+/* ============================================================================
+   buspilot-agencies.css  —  cosmetic restyle of the Agencije page.
+   PURE CSS. No markup changes. Load LAST, after Velzon app.min.css.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-body: "Hanken Grotesk", system-ui, sans-serif;
+  --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --bp-r: 11px;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264/0.05), 0 1px 1px oklch(0.4 0.03 264/0.04);
+  --bp-shadow:
+    0 8px 24px -10px oklch(0.4 0.03 264/0.16),
+    0 2px 6px oklch(0.4 0.03 264/0.06);
+}
+
+/* ---- "Dodaj Novu Agenciju": green -> brand blue ---- */
+.main-page-wrapper .btn-success[data-bs-target="#createAgencyModal"] {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+  padding: 10px 18px !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+.main-page-wrapper .btn-success[data-bs-target="#createAgencyModal"]:hover {
+  box-shadow: var(--bp-shadow) !important;
+}
+
+/* ============================== AGENCY CARDS ============================== */
+.project-card .card {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+  overflow: hidden;
+  transition:
+    box-shadow 0.15s,
+    transform 0.12s;
+}
+.project-card .card:hover {
+  box-shadow: var(--bp-shadow) !important;
+  transform: translateY(-3px);
+}
+.project-card a {
+  text-decoration: none !important;
+}
+
+/* coloured header tint — softened to brand-tuned washes, name in display font */
+.project-card .card-body > [class*="bg-"][class*="-subtle"] {
+  padding: 16px 18px !important;
+  margin: -16px -18px 0 !important;
+}
+.project-card h5.fs-14 {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  color: var(--bp-ink) !important;
+  letter-spacing: -0.01em;
+}
+
+/* re-tint Velzon's *-subtle header colours to gentle versions, keeping the hue */
+.project-card .bg-primary-subtle {
+  background: var(--bp-accent-bg) !important;
+}
+.project-card .bg-secondary-subtle {
+  background: oklch(0.96 0.015 286) !important;
+}
+.project-card .bg-success-subtle {
+  background: oklch(0.965 0.03 162) !important;
+}
+.project-card .bg-info-subtle {
+  background: oklch(0.96 0.03 232) !important;
+}
+.project-card .bg-warning-subtle {
+  background: oklch(0.97 0.035 85) !important;
+}
+.project-card .bg-danger-subtle {
+  background: oklch(0.97 0.025 28) !important;
+}
+.project-card .bg-dark-subtle {
+  background: oklch(0.93 0.006 264) !important;
+}
+
+/* ---- stats row ---- */
+.project-card .py-3 {
+  padding-top: 18px !important;
+  padding-bottom: 4px !important;
+}
+.project-card .text-center p.text-muted {
+  font-family: var(--bp-mono) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bp-ink-3) !important;
+  margin-bottom: 6px !important;
+}
+.project-card .text-center h5.fs-13 {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 24px !important;
+  color: var(--bp-ink) !important;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+/* subtle divider between the two stats */
+.project-card .row.gy-3 > .col-6:first-child {
+  border-right: 1px solid var(--bp-line-soft);
+}
+
+/* ============================== CREATE MODAL ============================== */
+#createAgencyModal .modal-content {
+  border-radius: var(--bp-r-lg) !important;
+  border: 1px solid var(--bp-line) !important;
+  overflow: hidden;
+}
+#createAgencyModal .modal-header {
+  background: var(--bp-surface-2) !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 18px 22px !important;
+}
+#createAgencyModal .modal-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16.5px !important;
+  color: var(--bp-ink) !important;
+}
+#createAgencyModal .form-label {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-2) !important;
+}
+#createAgencyModal .form-control,
+#createAgencyModal .form-select {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 13px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+}
+#createAgencyModal .form-control:focus,
+#createAgencyModal .form-select:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+#createAgencyModal .btn-success {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+#createAgencyModal .btn-light {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  color: var(--bp-ink-2) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}

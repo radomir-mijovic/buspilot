@@ -4,10 +4,10 @@
     Defects
 {% endblock title %}
 {% block extra_css %}
+    <link href="{% static 'css/buspilot-defects.css' %}" rel="stylesheet" />
 {% endblock extra_css %}
 {% block content %}
-    <div class="main-content">
-        <div class="page-content">
+    <div class="main-page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-lg-4 col-xl-3 mb-3">
@@ -32,7 +32,7 @@
                                                     <a href="{% url 'defect:defects' %}?vehicle={{ vehicle.pk }}"
                                                        class="d-flex py-1 align-items-center">
                                                         <div class="flex-grow-1">
-                                                    <h5 class="fs-12 mb-0 listname">{{vehicle.brand}} - {{ vehicle.model}} - {{ vehicle.licence_number}}</h5>
+                                                            <h5 class="fs-12 mb-0 listname">{{ vehicle.brand }} - {{ vehicle.model }} - {{ vehicle.licence_number }}</h5>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -81,7 +81,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         {% block footer %}
             {% include "partials/footer.html" %}
         {% endblock footer %}

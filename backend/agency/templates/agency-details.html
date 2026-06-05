@@ -4,32 +4,30 @@
     Agency Details
 {% endblock title %}
 {% block extra_css %}
-    <link rel="stylesheet"
-        <link href="{% static 'libs/swiper/swiper-bundle.min.css' %}"
-              rel="stylesheet"
-              type="text/css" />
-    {% endblock extra_css %}
-    {% block content %}
-        <div class="main-content">
-            <div class="page-content">
-                <div class="container-fluid">
-                    {% block pagetitle %}
-                        {% include "partials/page-title.html" with pagetitle="Ecommerce" title="Detalji" %}
-                    {% endblock pagetitle %}
-                    <div class="row align-items-stretch">
-                        {% include "partials/details.html" with agency=agency %}
-                        {% include "partials/documents.html" with agency=agency %}
-                    </div>
-                    {% if agency.rides_to_come %}
-                        {% include "partials/rides.html" %}
-                    {% endif %}
-                </div>
-                {% include "partials/delete-agency-modal.html" with agency=agency %}
-                {% include "partials/edit-agency-modal.html" with agency=agency form=form %}
-                {% include "partials/add-agency-document-modal.html" with agency=agency document_form=document_form %}
+    <link href="{% static 'libs/swiper/swiper-bundle.min.css' %}"
+          rel="stylesheet"
+          type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/buspilot-agency-detail.css' %}" />
+{% endblock extra_css %}
+{% block content %}
+    <div class="main-page-wrapper">
+        <div class="container-fluid">
+            {% block pagetitle %}
+                {% include "partials/page-title.html" with pagetitle="Ecommerce" title="Detalji" %}
+            {% endblock pagetitle %}
+            <div class="row align-items-stretch">
+                {% include "partials/details.html" with agency=agency %}
+                {% include "partials/documents.html" with agency=agency %}
             </div>
-            {% block footer %}
-                {% include "partials/footer.html" %}
-            {% endblock footer %}
+            {% if agency.rides_to_come %}
+                {% include "partials/rides.html" %}
+            {% endif %}
         </div>
-    {% endblock content %}
+        {% include "partials/delete-agency-modal.html" with agency=agency %}
+        {% include "partials/edit-agency-modal.html" with agency=agency form=form %}
+        {% include "partials/add-agency-document-modal.html" with agency=agency document_form=document_form %}
+        {% block footer %}
+            {% include "partials/footer.html" %}
+        {% endblock footer %}
+    </div>
+{% endblock content %}

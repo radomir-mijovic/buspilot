@@ -1,0 +1,254 @@
+/* ============================================================================
+   buspilot-vehicles.css  —  cosmetic restyle of the Vozila (vehicles) page.
+   PURE CSS. No markup changes. Works with htmx-added rows automatically.
+   Load LAST, after Velzon app.min.css (and sweetalert2 css).
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-accent-line: oklch(0.86 0.05 256);
+  --bp-ok: oklch(0.62 0.13 162);
+  --bp-ok-bg: oklch(0.955 0.04 162);
+  --bp-danger: oklch(0.58 0.2 25);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-body: "Hanken Grotesk", system-ui, sans-serif;
+  --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --bp-r: 11px;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264/0.05), 0 1px 1px oklch(0.4 0.03 264/0.04);
+  --bp-shadow:
+    0 4px 12px oklch(0.4 0.03 264/0.06), 0 1px 3px oklch(0.4 0.03 264/0.05);
+}
+
+/* scope everything to the vehicles card so we don't touch other pages */
+#orderList {
+  font-family: var(--bp-body);
+}
+
+/* ---- card shell ---- */
+#orderList.card {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+#orderList .card-header {
+  background: transparent !important;
+  padding: 20px 24px !important;
+}
+#orderList .card-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink) !important;
+}
+/* the dashed divider rows -> soft solid hairlines */
+#orderList .border-dashed {
+  border-style: solid !important;
+  border-color: var(--bp-line-soft) !important;
+}
+
+/* ---- "Dodaj Novo Vozilo" button: green -> brand blue ---- */
+#orderList .add-btn.btn-success,
+#orderList #create-btn {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+  padding: 10px 18px !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+#orderList .add-btn.btn-success:hover {
+  box-shadow: var(--bp-shadow) !important;
+}
+
+/* ---- search box ---- */
+#orderList .search-box .form-control.search {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 12px 14px 12px 38px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+  background: var(--bp-surface) !important;
+}
+#orderList .search-box .form-control.search:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+#orderList .search-box .search-icon {
+  color: var(--bp-ink-3) !important;
+  font-size: 15px;
+}
+
+/* ---- tabs (Sva vozila / Autobus / …): green -> brand blue ---- */
+#orderList .nav-tabs-custom {
+  border-bottom: 1px solid var(--bp-line) !important;
+  gap: 2px;
+}
+#orderList .nav-tabs-custom .nav-link {
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  font-size: 14.5px !important;
+  color: var(--bp-ink-2) !important;
+  border: 0 !important;
+  padding: 13px 16px !important;
+}
+#orderList .nav-tabs-custom .nav-link:hover {
+  color: var(--bp-ink) !important;
+}
+#orderList .nav-tabs-custom .nav-link.active {
+  color: var(--bp-accent-ink) !important;
+  background: transparent !important;
+}
+/* the underline indicator Velzon draws with ::after */
+#orderList .nav-tabs-custom .nav-link::after {
+  background: var(--bp-accent) !important;
+  height: 2px !important;
+}
+
+/* ---- table ---- */
+#orderList .table > thead.table-light > tr > th,
+#orderList #orderTable thead th {
+  font-family: var(--bp-mono) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-3) !important;
+  font-weight: 500 !important;
+  background: var(--bp-surface-2) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line) !important;
+  padding: 14px 18px !important;
+  white-space: nowrap;
+}
+#orderList #orderTable tbody td {
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 15px 18px !important;
+  font-size: 14px;
+  color: var(--bp-ink-2);
+  vertical-align: middle;
+}
+#orderList #orderTable tbody tr {
+  transition: background 0.12s;
+}
+#orderList #orderTable tbody tr:hover {
+  background: var(--bp-accent-bg) !important;
+}
+#orderList #orderTable tbody tr:hover td:first-child {
+  box-shadow: inset 3px 0 0 var(--bp-accent);
+}
+#orderList #orderTable tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* ID column -> mono blue */
+#orderList #orderTable tbody td.id {
+  font-family: var(--bp-mono) !important;
+  font-size: 13px;
+  color: var(--bp-accent-ink) !important;
+  font-weight: 500;
+}
+/* Marka (brand) -> display semibold to anchor the row */
+#orderList #orderTable tbody td.customer_name {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 14.5px;
+  color: var(--bp-ink) !important;
+  letter-spacing: -0.01em;
+}
+
+/* rides_count badge: green -> soft brand pill (keeps 0 muted) */
+#orderList .rides_count .badge.bg-success {
+  background: var(--bp-ok-bg) !important;
+  color: var(--bp-ok) !important;
+  font-family: var(--bp-mono) !important;
+  font-weight: 500 !important;
+  font-size: 11px !important;
+  border-radius: 99px !important;
+  padding: 4px 9px !important;
+}
+
+/* delete button -> round ghost icon, brand danger */
+#orderList .delete-vehicle-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px !important;
+  border: 1px solid var(--bp-line) !important;
+  background: var(--bp-surface) !important;
+  color: var(--bp-danger) !important;
+  display: inline-grid;
+  place-items: center;
+  transition: all 0.12s;
+  font-size: 15px;
+}
+#orderList .delete-vehicle-btn:hover {
+  background: oklch(0.96 0.04 28) !important;
+  border-color: oklch(0.85 0.08 25) !important;
+}
+
+/* ============================== ADD-VEHICLE MODAL ============================== */
+#showModal .modal-content {
+  border-radius: var(--bp-r-lg) !important;
+  border: 1px solid var(--bp-line) !important;
+  overflow: hidden;
+}
+#showModal .modal-header.bg-light {
+  background: var(--bp-surface-2) !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 18px 22px !important;
+}
+#showModal .modal-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16.5px !important;
+  color: var(--bp-ink) !important;
+}
+#showModal .form-label {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-2) !important;
+}
+#showModal .form-control,
+#showModal .form-select {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 13px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+}
+#showModal .form-control:focus,
+#showModal .form-select:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+#showModal .btn-success {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+#showModal .btn-light {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  color: var(--bp-ink-2) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}

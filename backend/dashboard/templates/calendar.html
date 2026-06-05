@@ -4,6 +4,7 @@
     Kalendar
 {% endblock title %}
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/buspilot-calendar.css' %}">
 {% endblock extra_css %}
 {% block content %}
     <div class="main-content">
@@ -19,11 +20,26 @@
                             <div class="card-body">
                                 <div class="live-preview">
                                     <div id="filter-buttons" class="d-flex flex-wrap gap-2">
-                                        <button id="all" type="button" class="btn btn-soft-primary waves-effect waves-light" data-key="t-all">Sve</button>
-                                        <button id="lines" type="button" class="btn bg-danger-subtle text-danger waves-effect waves-light" data-key="t-lines">Linije</button>
-                                        <button id="excursions" type="button" class="btn bg-success-subtle text-success waves-effect waves-light" data-key="t-excursions">Izleti</button>
-                                        <button id="transfers" type="button" class="btn bg-info-subtle text-info waves-effect waves-light" data-key="t-transfers">Transferi</button>
-                                        <button id="round" type="button" class="btn bg-warning-subtle text-warning waves-effect waves-light" data-key="t-round-tours">Kruzne ture</button>
+                                        <button id="all"
+                                                type="button"
+                                                class="btn btn-soft-primary waves-effect waves-light"
+                                                data-key="t-all">Sve</button>
+                                        <button id="lines"
+                                                type="button"
+                                                class="btn bg-danger-subtle text-danger waves-effect waves-light"
+                                                data-key="t-lines">Linije</button>
+                                        <button id="excursions"
+                                                type="button"
+                                                class="btn bg-success-subtle text-success waves-effect waves-light"
+                                                data-key="t-excursions">Izleti</button>
+                                        <button id="transfers"
+                                                type="button"
+                                                class="btn bg-info-subtle text-info waves-effect waves-light"
+                                                data-key="t-transfers">Transferi</button>
+                                        <button id="round"
+                                                type="button"
+                                                class="btn bg-warning-subtle text-warning waves-effect waves-light"
+                                                data-key="t-round-tours">Kruzne ture</button>
                                     </div>
                                 </div>
                             </div>

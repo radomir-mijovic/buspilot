@@ -1,0 +1,93 @@
+/* ============================================================================
+   buspilot-expired.css  —  cosmetic restyle of the Istekli dokumenti page.
+   PURE CSS. No markup changes. Load LAST, after Velzon app.min.css.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --bp-surface:#fff;
+  --bp-surface-2:oklch(0.972 0.004 250);
+  --bp-line:oklch(0.915 0.006 255);
+  --bp-line-soft:oklch(0.945 0.005 255);
+  --bp-ink:oklch(0.255 0.022 264);
+  --bp-ink-2:oklch(0.44 0.018 262);
+  --bp-ink-3:oklch(0.60 0.014 260);
+  --bp-accent:oklch(0.55 0.155 256);
+  --bp-accent-ink:oklch(0.43 0.16 256);
+  --bp-accent-bg:oklch(0.955 0.028 256);
+  --bp-accent-line:oklch(0.86 0.05 256);
+  --bp-warn:oklch(0.74 0.13 75); --bp-warn-bg:oklch(0.96 0.05 80); --bp-warn-ink:oklch(0.52 0.12 70);
+  --bp-danger:oklch(0.58 0.2 25); --bp-danger-bg:oklch(0.96 0.04 28); --bp-danger-ink:oklch(0.52 0.2 25);
+  --bp-display:'Space Grotesk',system-ui,sans-serif;
+  --bp-body:'Hanken Grotesk',system-ui,sans-serif;
+  --bp-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --bp-r:11px; --bp-r-lg:16px;
+  --bp-shadow-sm:0 1px 2px oklch(0.4 0.03 264/0.05),0 1px 1px oklch(0.4 0.03 264/0.04);
+  --bp-shadow:0 8px 24px -10px oklch(0.4 0.03 264/0.16),0 2px 6px oklch(0.4 0.03 264/0.06);
+}
+
+/* card shell */
+.page-content .card{
+  border:1px solid var(--bp-line) !important;
+  border-radius:var(--bp-r-lg) !important;
+  box-shadow:var(--bp-shadow-sm) !important;
+}
+.page-content .card-header{ background:transparent !important; border-bottom:1px solid var(--bp-line-soft) !important; padding:16px 20px !important; }
+
+/* ---- pill tabs (Vozila / Vozači) ---- */
+.card-header-pills.nav-pills{ gap:6px; }
+.card-header-pills .nav-link{
+  font-family:var(--bp-display) !important; font-weight:500 !important; font-size:14px !important;
+  color:var(--bp-ink-2) !important; background:transparent !important;
+  border:1px solid var(--bp-line) !important; border-radius:99px !important; padding:8px 18px !important;
+  transition:all .12s;
+}
+.card-header-pills .nav-link:hover{ color:var(--bp-ink) !important; border-color:var(--bp-ink-3) !important; }
+.card-header-pills .nav-link.active{
+  background:var(--bp-accent) !important; border-color:var(--bp-accent) !important; color:#fff !important;
+}
+
+/* ============================== EXPIRING ITEM CARD ============================== */
+/* each item is an <a> wrapping a flex row; wrap it as a bordered tile */
+.tab-pane .col-lg-4 > a,
+.tab-pane [class*="col-"] > a{
+  display:block; text-decoration:none !important;
+  background:var(--bp-surface); border:1px solid var(--bp-line);
+  border-left:3px solid var(--bp-danger);          /* expired = red rail */
+  border-radius:var(--bp-r-lg); padding:16px;
+  box-shadow:var(--bp-shadow-sm); transition:box-shadow .15s, transform .12s;
+  height:100%;
+}
+.tab-pane [class*="col-"] > a:hover{ box-shadow:var(--bp-shadow); transform:translateY(-2px); }
+
+/* file-type icon avatar */
+.tab-pane .avatar-sm{ width:44px; height:44px; }
+.tab-pane .avatar-title.bg-primary-subtle{
+  background:var(--bp-accent-bg) !important; color:var(--bp-accent-ink) !important;
+  border-radius:11px !important; font-size:20px !important;
+}
+
+/* title line */
+.tab-pane h6.fs-14{
+  font-family:var(--bp-display) !important; font-weight:600 !important; font-size:13.5px !important;
+  color:var(--bp-ink) !important; letter-spacing:-0.01em; line-height:1.4;
+}
+
+/* expired badge -> soft red pill (not a full-width block) */
+.tab-pane p.badge.bg-danger{
+  display:inline-block; background:var(--bp-danger-bg) !important; color:var(--bp-danger-ink) !important;
+  font-family:var(--bp-mono) !important; font-weight:500 !important; font-size:10.5px !important;
+  letter-spacing:0.03em; border-radius:99px !important; padding:5px 11px !important; margin:0;
+}
+/* "Ističe za X dana" (expiring soon) text */
+.tab-pane .flex-grow-1 > p.mb-0{
+  font-family:var(--bp-mono) !important; font-size:11.5px !important; color:var(--bp-warn-ink) !important;
+  letter-spacing:0.02em;
+}
+
+/* empty tab feels intentional */
+.tab-pane .row:empty::after{
+  content:'Nema dokumenata.'; display:block; padding:28px; text-align:center;
+  font-family:var(--bp-body); color:var(--bp-ink-3); font-size:14px;
+}

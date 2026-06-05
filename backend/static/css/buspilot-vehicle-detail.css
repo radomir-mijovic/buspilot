@@ -1,0 +1,336 @@
+/* ============================================================================
+   buspilot-vehicle-detail.css  —  cosmetic restyle of the Vozilo (profile) page.
+   Also covers driver/agency detail pages that share the same Velzon profile layout.
+   PURE CSS. No markup changes. Load LAST, after Velzon app.min.css + swiper/flatpickr.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-accent-line: oklch(0.86 0.05 256);
+  --bp-ok: oklch(0.62 0.13 162);
+  --bp-ok-bg: oklch(0.955 0.04 162);
+  --bp-ok-ink: oklch(0.43 0.12 162);
+  --bp-warn: oklch(0.74 0.13 75);
+  --bp-warn-bg: oklch(0.96 0.05 80);
+  --bp-warn-ink: oklch(0.52 0.12 70);
+  --bp-danger: oklch(0.58 0.2 25);
+  --bp-danger-bg: oklch(0.96 0.04 28);
+  --bp-danger-ink: oklch(0.52 0.2 25);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-body: "Hanken Grotesk", system-ui, sans-serif;
+  --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --bp-r: 11px;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264/0.05), 0 1px 1px oklch(0.4 0.03 264/0.04);
+  --bp-shadow:
+    0 4px 12px oklch(0.4 0.03 264/0.06), 0 1px 3px oklch(0.4 0.03 264/0.05);
+}
+
+/* ---- profile banner: gradient instead of photo, brand-tuned ---- */
+.profile-foreground .profile-wid-bg {
+  border-radius: 0 0 var(--bp-r-lg) var(--bp-r-lg);
+  overflow: hidden;
+}
+.profile-foreground .profile-wid-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, var(--bp-accent-ink), var(--bp-accent));
+}
+.profile-foreground .profile-wid-img {
+  opacity: 0;
+} /* hide stock photo; gradient shows */
+
+/* ---- profile nav pills ---- */
+.profile-nav.nav-pills .nav-link {
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  color: #fff !important;
+  background: oklch(1 0 0/0.14) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 9px 18px !important;
+  backdrop-filter: blur(4px);
+}
+.profile-nav.nav-pills .nav-link.active {
+  background: var(--bp-surface) !important;
+  color: var(--bp-accent-ink) !important;
+  box-shadow: var(--bp-shadow-sm);
+}
+
+/* ---- cards ---- */
+.main-page-wrapper .card {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+.main-page-wrapper .card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 16px 20px !important;
+}
+.main-page-wrapper .card-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink) !important;
+}
+
+/* ---- details table (Podaci) ---- */
+#vehicle-details-tbody th,
+.table-borderless th {
+  font-family: var(--bp-mono) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bp-ink-3) !important;
+  font-weight: 500 !important;
+  padding: 9px 0 !important;
+  vertical-align: top;
+}
+#vehicle-details-tbody td,
+.table-borderless td {
+  font-family: var(--bp-body) !important;
+  font-size: 14px !important;
+  color: var(--bp-ink) !important;
+  font-weight: 500;
+  padding: 9px 0 !important;
+}
+
+/* "Izmjeni podatke" primary button */
+.main-page-wrapper .btn-primary {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+
+/* ---- day tabs on the rides card (Danas / Sjutra / Sledeće) ---- */
+.card-header-tabs.nav-tabs-custom {
+  gap: 2px;
+}
+.card-header-tabs .nav-link {
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  font-size: 13.5px !important;
+  color: var(--bp-ink-2) !important;
+  border: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  background: transparent !important;
+  padding: 8px 13px !important;
+}
+.card-header-tabs .nav-link.active {
+  color: var(--bp-accent-ink) !important;
+  border-bottom-color: var(--bp-accent) !important;
+}
+
+/* ---- rides accordion (profile-timeline) ---- */
+.profile-timeline .accordion-item {
+  border: 0 !important;
+  margin-bottom: 8px;
+}
+.profile-timeline .accordion-button {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 12px !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+  transition:
+    box-shadow 0.15s,
+    transform 0.12s;
+}
+.profile-timeline .accordion-button:hover {
+  box-shadow: var(--bp-shadow) !important;
+  transform: translateY(-1px);
+}
+.profile-timeline .accordion-button::after {
+  display: none !important;
+} /* drop the chevron */
+.profile-timeline .avatar-xs {
+  width: 38px;
+  height: 38px;
+}
+.profile-timeline h6.fs-14 {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: var(--bp-ink) !important;
+  letter-spacing: -0.01em;
+}
+.profile-timeline small.text-muted {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  color: var(--bp-ink-3) !important;
+  line-height: 1.7;
+}
+
+/* ---- documents tab ---- */
+#vehicle-documents .btn-danger {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important; /* upload = brand, not red */
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+#vehicle-documents .table thead.table-light th,
+#vehicle-documents .table thead th {
+  font-family: var(--bp-mono) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-3) !important;
+  font-weight: 500 !important;
+  background: var(--bp-surface-2) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line) !important;
+  padding: 13px 16px !important;
+}
+#vehicle-documents .table tbody td {
+  border: 0 !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 13px 16px !important;
+  font-size: 14px;
+  color: var(--bp-ink-2);
+  vertical-align: middle;
+}
+#vehicle-documents .table tbody tr:hover td {
+  background: var(--bp-accent-bg) !important;
+}
+#vehicle-documents .avatar-title.bg-primary-subtle {
+  background: var(--bp-accent-bg) !important;
+  color: var(--bp-accent-ink) !important;
+  border-radius: 10px !important;
+}
+#vehicle-documents h6.fs-14 a.text-body {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  color: var(--bp-ink) !important;
+  text-decoration: none;
+}
+
+/* status badges (shared) */
+.page-content .badge.bg-success {
+  background: var(--bp-ok-bg) !important;
+  color: var(--bp-ok-ink) !important;
+}
+.page-content .badge.bg-warning {
+  background: var(--bp-warn-bg) !important;
+  color: var(--bp-warn-ink) !important;
+}
+.page-content .badge.bg-danger {
+  background: var(--bp-danger-bg) !important;
+  color: var(--bp-danger-ink) !important;
+}
+#vehicle-documents .badge {
+  font-family: var(--bp-mono) !important;
+  font-weight: 500 !important;
+  font-size: 10.5px !important;
+  border-radius: 99px !important;
+  padding: 5px 11px !important;
+}
+
+/* action dropdown trigger */
+#vehicle-documents .btn-light.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px !important;
+  border: 1px solid var(--bp-line) !important;
+  background: var(--bp-surface) !important;
+  color: var(--bp-ink-2) !important;
+}
+#vehicle-documents .btn-light.btn-icon:hover {
+  background: var(--bp-surface-2) !important;
+  border-color: var(--bp-accent-line) !important;
+  color: var(--bp-accent) !important;
+}
+.dropdown-menu {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--bp-shadow) !important;
+  padding: 6px !important;
+}
+.dropdown-item {
+  font-family: var(--bp-body) !important;
+  font-size: 14px !important;
+  color: var(--bp-ink-2) !important;
+  border-radius: 9px !important;
+  padding: 9px 12px !important;
+}
+.dropdown-item:hover {
+  background: var(--bp-surface-2) !important;
+  color: var(--bp-ink) !important;
+}
+
+/* ============================== MODALS (shared) ============================== */
+.modal-content {
+  border-radius: var(--bp-r-lg) !important;
+  border: 1px solid var(--bp-line) !important;
+  overflow: hidden;
+}
+.modal-header.bg-light {
+  background: var(--bp-surface-2) !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 18px 22px !important;
+}
+.modal-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 16.5px !important;
+  color: var(--bp-ink) !important;
+}
+.modal .form-label {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bp-ink-2) !important;
+}
+.modal .form-control,
+.modal .form-select {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 13px !important;
+  font-family: var(--bp-body);
+  font-size: 14px;
+}
+.modal .form-control:focus,
+.modal .form-select:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+}
+.modal .btn-success {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+.modal .btn-light {
+  background: var(--bp-surface) !important;
+  border: 1px solid var(--bp-line) !important;
+  color: var(--bp-ink-2) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  border-radius: var(--bp-r) !important;
+}
+.modal .alert-danger {
+  background: var(--bp-danger-bg) !important;
+  border: 1px solid oklch(0.85 0.08 25) !important;
+  color: var(--bp-danger-ink) !important;
+  border-radius: var(--bp-r) !important;
+  font-family: var(--bp-body);
+}
