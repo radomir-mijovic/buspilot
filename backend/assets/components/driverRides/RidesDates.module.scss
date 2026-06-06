@@ -1,0 +1,23 @@
+.datesWrapper {
+  margin-top: 1.5rem;
+  overflow-y: hidden;
+  display: flex;
+  gap: 1rem;
+  padding-left: 1rem;
+}
+
+.dateWrapper {
+  display: grid;
+  place-items: center;
+  background: #FFFFFF;
+  border-radius: 25px;
+  padding: .7rem;
+
+  &>p {
+    font-family: var(--font-mono);
+    font-size: .8rem;
+    font-weight: 500;
+    margin: 0;
+    background: #FFFFFF;
+  }
+}

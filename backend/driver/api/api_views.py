@@ -1,10 +1,20 @@
+from django.shortcuts import get_object_or_404
+from django.utils.translation import gettext_lazy as _
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from ride.models import Ride
+
 from ..models import Driver, DriverDocument
-from .serializers import DriverDetailSerializer, ExpiringDocumentsSerializer
+from .permissions import BaseUserDriverPermission
+from .serializers import (
+    DriverDetailSerializer,
+    DriverRidesSerializer,
+    ExpiringDocumentsSerializer,
+    GetRideSerializer,
+)
 
 
 class DriverDetailViewSet(viewsets.ReadOnlyModelViewSet):
@@ -17,3 +27,51 @@ class DriverDetailViewSet(viewsets.ReadOnlyModelViewSet):
         data = DriverDocument.expiring.close_to_expire().select_related("driver")
         serializer = ExpiringDocumentsSerializer(data, many=True)
         return Response(serializer.data)
+
+
+class DriverRidesViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = DriverRidesSerializer
+    permission_classes = [BaseUserDriverPermission]
+
+    def get_queryset(self):
+        qs = self.driver.rides_from_today_and_on.select_related(
+            "agency",
+        )
+
+        if start_date := self.request.query_params.get("start_date"):
+            return qs.filter(start_date=start_date)
+
+        return qs
+
+    @property
+    def driver(self) -> Driver:
+        return Driver.objects.get(pk=self.request.user.pk)
+
+    @property
+    def ride(self) -> Ride:
+        serializer = GetRideSerializer(data=self.request.data)
+        serializer.is_valid(raise_exception=True)
+        return get_object_or_404(
+            self.driver.drivers_rides,
+            id=serializer.validated_data["ride_id"],
+        )
+
+    @action(methods=["GET"], detail=False, url_path="rides-count")
+    def rides_count(self, request, *args, **kwargs):
+        return Response(
+            {
+                "upcoming": self.driver.rides_from_today_and_on.count(),
+                "not_confirmed_rides": self.driver.rides_not_confirmed.count(),
+                "confirmed_rides": self.driver.rides_confirmed.count(),
+            }
+        )
+
+    @action(methods=["PATCH"], detail=False, url_path="confirm-ride")
+    def confirm_ride(self, request, *args, **kwargs):
+        self.ride.confirmed_by.add(self.driver)
+        return Response({"details": _(f"{self.ride} confirmed")})
+
+    @action(methods=["PATCH"], detail=False, url_path="cancel-ride")
+    def cancel_ride(self, request, *args, **kwargs):
+        self.ride.confirmed_by.remove(self.driver)
+        return Response({"details": _(f"{self.ride} canceled")})

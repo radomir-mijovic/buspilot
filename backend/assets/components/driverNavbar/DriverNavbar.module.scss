@@ -1,0 +1,41 @@
+.navbarWrapper {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+
+  &>h6 {
+    font-size: .7rem;
+    font-weight: 400;
+    color: #2970C9;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+  }
+
+  &>p {
+    font-size: .8rem;
+    font-family: var(--font-display);
+    color: #7B8189;
+  }
+}
+
+.textWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &>h4 {
+    font-size: 1.4rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+}
+
+.initialsWrapper {
+  background: #E4F1FF;
+  padding: .6rem;
+  border-radius: 50%;
+  color: #0f55aa;
+  font-family: var(--font-display);
+  font-weight: 500;
+}

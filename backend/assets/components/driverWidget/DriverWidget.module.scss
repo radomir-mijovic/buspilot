@@ -1,0 +1,28 @@
+.driverWidget {
+  border-radius: 15px;
+  background: #FFFFFF;
+  padding: .8rem .2rem;
+  display: grid;
+  gap: .2rem;
+  place-items: center;
+
+  &>h3,
+  &>p {
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    letter-spacing: 0.08em;
+  }
+
+  &>p{
+    font-size: .6rem;
+    font-weight: 500;
+    color: #9DA2A8;
+  }
+}
+
+.danger {
+  color: #d63e3e;
+}

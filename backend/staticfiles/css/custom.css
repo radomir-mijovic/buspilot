@@ -328,3 +328,8 @@ table.t2 tbody tr:last-child td {
   width: 11px;
   height: 11px;
 }
+
+.form-card {
+    border-radius: 20px;
+    overflow: hidden;
+}

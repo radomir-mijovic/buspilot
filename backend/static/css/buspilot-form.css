@@ -4,39 +4,65 @@
    PURE CSS. No markup changes. Load LAST, after Velzon app.min.css + flatpickr.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
 
-:root{
-  --bp-surface:#fff;
-  --bp-surface-2:oklch(0.972 0.004 250);
-  --bp-line:oklch(0.915 0.006 255);
-  --bp-line-soft:oklch(0.945 0.005 255);
-  --bp-ink:oklch(0.255 0.022 264);
-  --bp-ink-2:oklch(0.44 0.018 262);
-  --bp-ink-3:oklch(0.60 0.014 260);
-  --bp-accent:oklch(0.55 0.155 256);
-  --bp-accent-ink:oklch(0.43 0.16 256);
-  --bp-accent-bg:oklch(0.955 0.028 256);
-  --bp-display:'Space Grotesk',system-ui,sans-serif;
-  --bp-body:'Hanken Grotesk',system-ui,sans-serif;
-  --bp-mono:'IBM Plex Mono',ui-monospace,monospace;
-  --bp-r:11px; --bp-r-lg:16px;
-  --bp-shadow-sm:0 1px 2px oklch(0.4 0.03 264/0.05),0 1px 1px oklch(0.4 0.03 264/0.04);
+:root {
+  --bp-surface: #fff;
+  --bp-surface-2: oklch(0.972 0.004 250);
+  --bp-line: oklch(0.915 0.006 255);
+  --bp-line-soft: oklch(0.945 0.005 255);
+  --bp-ink: oklch(0.255 0.022 264);
+  --bp-ink-2: oklch(0.44 0.018 262);
+  --bp-ink-3: oklch(0.6 0.014 260);
+  --bp-accent: oklch(0.55 0.155 256);
+  --bp-accent-ink: oklch(0.43 0.16 256);
+  --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-display: "Space Grotesk", system-ui, sans-serif;
+  --bp-body: "Hanken Grotesk", system-ui, sans-serif;
+  --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --bp-r: 11px;
+  --bp-r-lg: 16px;
+  --bp-shadow-sm:
+    0 1px 2px oklch(0.4 0.03 264/0.05), 0 1px 1px oklch(0.4 0.03 264/0.04);
 }
 
 /* center the form card with comfortable width */
-.main-page-wrapper{ max-width:980px; margin:0 auto; padding:0 4px; }
+.main-page-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
 
 /* card */
-.form-card{ border:1px solid var(--bp-line) !important; border-radius:var(--bp-r-lg) !important; box-shadow:var(--bp-shadow-sm) !important; }
-.form-card .card-header{ background:transparent !important; border-bottom:1px solid var(--bp-line-soft) !important; padding:18px 24px !important; }
-.form-card .card-title{ font-family:var(--bp-display) !important; font-weight:600 !important; font-size:18px !important; letter-spacing:-0.02em; color:var(--bp-ink) !important; }
-.form-card .card-body{ padding:24px !important; }
+.form-card {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r-lg) !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+.form-card .card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--bp-line-soft) !important;
+  padding: 18px 24px !important;
+}
+.form-card .card-title {
+  font-family: var(--bp-display) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.02em;
+  color: var(--bp-ink) !important;
+}
+.form-card .card-body {
+  padding: 24px !important;
+}
 
 /* labels */
-.form-card .form-label{
-  font-family:var(--bp-mono) !important; font-size:11px !important; letter-spacing:0.07em;
-  text-transform:uppercase; color:var(--bp-ink-2) !important; margin-bottom:7px !important;
+.form-card .form-label {
+  font-family: var(--bp-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--bp-ink-2) !important;
+  margin-bottom: 7px !important;
 }
 
 /* inputs / selects / textareas */
@@ -44,41 +70,83 @@
 .form-card .form-select,
 .form-card textarea,
 .form-card .choices__inner,
-.form-card .flatpickr-input{
-  border:1px solid var(--bp-line) !important; border-radius:var(--bp-r) !important;
-  padding:11px 13px !important; font-family:var(--bp-body) !important; font-size:14px !important;
-  color:var(--bp-ink) !important; background:var(--bp-surface) !important; min-height:44px;
+.form-card .flatpickr-input {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: var(--bp-r) !important;
+  padding: 11px 13px !important;
+  font-family: var(--bp-body) !important;
+  font-size: 14px !important;
+  color: var(--bp-ink) !important;
+  background: var(--bp-surface) !important;
+  min-height: 44px;
 }
 .form-card .form-control:focus,
 .form-card .form-select:focus,
 .form-card textarea:focus,
 .form-card .choices.is-focused .choices__inner,
-.form-card .flatpickr-input:focus{
-  border-color:var(--bp-accent) !important; box-shadow:0 0 0 3px var(--bp-accent-bg) !important; outline:none !important;
+.form-card .flatpickr-input:focus {
+  border-color: var(--bp-accent) !important;
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+  outline: none !important;
 }
-.form-card textarea{ min-height:90px; }
+.form-card textarea {
+  min-height: 90px;
+}
 
 /* choices.js multi-select tags (vehicles/drivers/guides) */
-.form-card .choices__list--multiple .choices__item{
-  background:var(--bp-accent) !important; border-color:var(--bp-accent) !important;
-  border-radius:8px !important; font-family:var(--bp-display) !important; font-weight:500; font-size:12.5px;
+.form-card .choices__list--multiple .choices__item {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  border-radius: 8px !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500;
+  font-size: 12.5px;
 }
-.form-card .choices__list--dropdown .choices__item--selectable.is-highlighted{ background:var(--bp-accent-bg) !important; color:var(--bp-accent-ink) !important; }
+.form-card .choices__list--dropdown .choices__item--selectable.is-highlighted {
+  background: var(--bp-accent-bg) !important;
+  color: var(--bp-accent-ink) !important;
+}
 
 /* all-day checkbox */
-.form-card .form-check-input:checked{ background-color:var(--bp-accent) !important; border-color:var(--bp-accent) !important; }
-.form-card .form-check-input:focus{ box-shadow:0 0 0 3px var(--bp-accent-bg) !important; border-color:var(--bp-accent) !important; }
-.form-card .form-check-label{ font-family:var(--bp-body) !important; font-size:14px; color:var(--bp-ink-2) !important; }
+.form-card .form-check-input:checked {
+  background-color: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+}
+.form-card .form-check-input:focus {
+  box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
+  border-color: var(--bp-accent) !important;
+}
+.form-card .form-check-label {
+  font-family: var(--bp-body) !important;
+  font-size: 14px;
+  color: var(--bp-ink-2) !important;
+}
 
 /* submit */
-.form-card .btn-primary{
-  background:var(--bp-accent) !important; border-color:var(--bp-accent) !important;
-  font-family:var(--bp-display) !important; font-weight:500 !important; font-size:15px !important;
-  border-radius:var(--bp-r) !important; padding:12px 24px !important; box-shadow:var(--bp-shadow-sm) !important;
+.form-card .btn-primary {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  border-radius: var(--bp-r) !important;
+  padding: 12px 24px !important;
+  box-shadow: var(--bp-shadow-sm) !important;
 }
 
 /* flatpickr calendar popup -> brand */
-.flatpickr-day.selected,.flatpickr-day.selected:hover{ background:var(--bp-accent) !important; border-color:var(--bp-accent) !important; }
-.flatpickr-day.today{ border-color:var(--bp-accent) !important; }
-.flatpickr-day:hover{ background:var(--bp-accent-bg) !important; }
-.flatpickr-months .flatpickr-month, .flatpickr-current-month{ font-family:var(--bp-display) !important; }
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+  background: var(--bp-accent) !important;
+  border-color: var(--bp-accent) !important;
+}
+.flatpickr-day.today {
+  border-color: var(--bp-accent) !important;
+}
+.flatpickr-day:hover {
+  background: var(--bp-accent-bg) !important;
+}
+.flatpickr-months .flatpickr-month,
+.flatpickr-current-month {
+  font-family: var(--bp-display) !important;
+}

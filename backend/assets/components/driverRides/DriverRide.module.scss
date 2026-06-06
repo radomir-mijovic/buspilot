@@ -1,0 +1,157 @@
+.rideWrapper {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background: #FFFFFF;
+  border-radius: 15px;
+
+}
+
+.upperWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5rem;
+  background: #FFFFFF;
+  padding: 0 1rem;
+
+  &>p {
+    margin: 0;
+    width: auto;
+    display: inline-block;
+    border-radius: 15px;
+    background: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: .8rem;
+  }
+
+}
+
+.lowerWrapper {}
+
+.infoWrapper {
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  &>h4,
+  &>h5 {
+    margin: 0;
+    background: #FFFFFF;
+
+    &>span {
+      background: #FFFFFF;
+    }
+  }
+
+  &>h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: flex;
+    gap: 1rem;
+
+    &>span {
+      border-radius: 15px;
+      background: red;
+      padding: .2rem .4rem;
+      font-size: .6rem;
+      font-family: var(--font-display);
+      display: grid;
+      place-items: center;
+    }
+  }
+
+  &>h5 {
+    font-family: var(--font-display);
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+
+    &>span {
+      font-family: var(--font-mono);
+      color: #989DA4;
+      font-weight: 400;
+      font-size: .7rem;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.upperTextWrapper {
+  display: flex;
+  background: #FFFFFF;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+
+.timeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  flex-direction: column;
+  font-family: var(--font-mono);
+  background: #FFFFFF;
+
+  &>h2,
+  &>p {
+    margin: 0;
+    display: inline-block;
+    background: #FFFFFF;
+    font-weight: 500;
+  }
+
+  &>p {
+    text-transform: uppercase;
+    font-size: .7rem;
+    color: #2970C9;
+  }
+
+  &>h2 {
+    font-size: 1rem;
+  }
+}
+
+.lowerTextWrapper {
+  padding: 2rem .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.button {
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .8rem;
+  border-radius: 12px;
+  padding: .7rem 0;
+  letter-spacing: 0.06em;
+}
+
+.buttonConfirm {
+  background: #2970C9;
+  color: #FFFFFF;
+}
+
+.buttonCancel {
+  background: #D9F9E8;
+  color: #01663F;
+}
+
+.ridePConfirmed {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: #01663F;
+}
+
+.ridePNotConfirmed {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  color: #989DA4;
+}

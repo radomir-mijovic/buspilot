@@ -26,10 +26,13 @@ export default defineConfig(({ mode }) => {
       manifest: "manifest.json",
       rollupOptions: {
         input: {
-          finance: path.resolve(__dirname, "./assets/pages/finance.jsx"),
           index: path.resolve(__dirname, "./assets/pages/index.jsx"),
           navbar: path.resolve(__dirname, "./assets/pages/navbar.jsx"),
           navlinks: path.resolve(__dirname, "./assets/pages/navlinks.jsx"),
+          driverRidesPage: path.resolve(
+            __dirname,
+            "./assets/pages/driverRides.jsx",
+          ),
         },
         output: {
           entryFileNames: `js/[name]-bundle.js`,
