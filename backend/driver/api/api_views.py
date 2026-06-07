@@ -56,6 +56,12 @@ class DriverRidesViewSet(viewsets.ReadOnlyModelViewSet):
             id=serializer.validated_data["ride_id"],
         )
 
+    @action(methods=["GET"], detail=False, url_path="driver-details")
+    def driver_details(self, request, *args, **kwargs):
+        driver = self.request.user
+        serializer = DriverDetailSerializer(driver)
+        return Response(serializer.data)
+
     @action(methods=["GET"], detail=False, url_path="rides-count")
     def rides_count(self, request, *args, **kwargs):
         return Response(
