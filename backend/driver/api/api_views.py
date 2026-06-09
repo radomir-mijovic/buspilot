@@ -75,7 +75,6 @@ class DriverPortalViewSet(viewsets.ReadOnlyModelViewSet):
 
     @action(methods=["POST"], detail=False, url_path="report-defects")
     def report_defects(self, request, *args, **kwargs):
-        print(request.data)
         serializer = ReportDefectSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(company=self.driver.company, reported_by=self.driver)

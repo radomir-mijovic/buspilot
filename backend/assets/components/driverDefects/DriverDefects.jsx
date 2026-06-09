@@ -6,6 +6,7 @@ const DriverDefects = () => {
   const [vehicles, setVehicles] = useState([]);
   const [vehicleId, setVehicleId] = useState("");
   const [description, setDescription] = useState("");
+  const [isReport, setIsReport] = useState(false);
 
   useEffect(() => {
     const fetchVehicles = async () => {
@@ -17,14 +18,20 @@ const DriverDefects = () => {
         }
 
         const data = await res.json();
+
         setVehicles(data);
-        setVehicleId("");
-        setDescription("");
       } catch (err) {
         console.log(err);
       }
     };
     fetchVehicles();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsReport(false);
+    }, 6000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleFromSubmit = async (e) => {
@@ -43,6 +50,9 @@ const DriverDefects = () => {
           description: description,
         }),
       });
+      setVehicleId("");
+      setDescription("");
+      setIsReport(true);
     } catch (err) {
       console.log(err);
     }
@@ -54,6 +64,11 @@ const DriverDefects = () => {
         Prijavi kvar ili problem na vozilu. Tim za održavanje će biti
         obaviješten.
       </p>
+      {isReport && (
+        <div className={styles.reportWrapper}>
+          <h5>Kvar je uspjesno prijavljen</h5>
+        </div>
+      )}
       <form onSubmit={(e) => handleFromSubmit(e)}>
         <select
           className={styles.select}

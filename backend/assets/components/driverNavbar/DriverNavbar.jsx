@@ -47,7 +47,7 @@ const DriverNavbar = ({title}) => {
       <p>
         {driver.first_name} {driver.last_name}
       </p>
-      {menu && <DriverMenu />}
+      {menu && <DriverMenu setMenu={setMenu} />}
     </div>
   );
 };

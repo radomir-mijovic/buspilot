@@ -12,10 +12,10 @@
   margin-bottom: .5rem;
   background: #FFFFFF;
   padding: 1rem;
+  padding-bottom: 0;
   border-radius: 20px;
 
   &>p {
-    margin: 0;
     width: auto;
     display: inline-block;
     border-radius: 15px;
@@ -33,16 +33,6 @@
   display: flex;
   flex-direction: column;
   gap: .5rem;
-
-  &>h4,
-  &>h5 {
-    margin: 0;
-    background: #FFFFFF;
-
-    &>span {
-      background: #FFFFFF;
-    }
-  }
 
   &>h4 {
     font-family: var(--font-display);
@@ -80,7 +70,6 @@
 
 .upperTextWrapper {
   display: flex;
-  background: #FFFFFF;
   gap: 2rem;
   padding: 1rem;
 }
@@ -93,13 +82,10 @@
   gap: .3rem;
   flex-direction: column;
   font-family: var(--font-mono);
-  background: #FFFFFF;
 
   &>h2,
   &>p {
-    margin: 0;
     display: inline-block;
-    background: #FFFFFF;
     font-weight: 500;
   }
 
@@ -115,12 +101,13 @@
 }
 
 .lowerTextWrapper {
-  padding: 2rem .5rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: .4rem;
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
+  background: #F3F6F8;
 }
 
 .button {
@@ -144,17 +131,13 @@
 }
 
 .ridePConfirmed {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: .8rem;
   color: #01663F;
 }
 
 .ridePNotConfirmed {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: .8rem;
   color: #989DA4;
 }
