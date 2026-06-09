@@ -37,6 +37,10 @@ export default defineConfig(({ mode }) => {
             __dirname,
             "./assets/pages/driverPassRides.jsx",
           ),
+          driverDefectsPage: path.resolve(
+            __dirname,
+            "./assets/pages/driverDefectsPage.jsx",
+          ),
         },
         output: {
           entryFileNames: `js/[name]-bundle.js`,

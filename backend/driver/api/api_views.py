@@ -6,7 +6,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from auth.permissions import AdminPermission
+from defect.api.serializers import ReportDefectSerializer
 from ride.models import Ride
+from vehicle.api.serializers import VehicleDetailSerializer
+from vehicle.models import Vehicle
 
 from ..models import Driver, DriverDocument
 from .permissions import BaseUserDriverPermission
@@ -31,7 +34,7 @@ class DriverDetailViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(serializer.data)
 
 
-class DriverRidesViewSet(viewsets.ReadOnlyModelViewSet):
+class DriverPortalViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DriverRidesSerializer
     permission_classes = [BaseUserDriverPermission]
 
@@ -62,6 +65,20 @@ class DriverRidesViewSet(viewsets.ReadOnlyModelViewSet):
     def driver_details(self, request, *args, **kwargs):
         driver = self.request.user
         serializer = DriverDetailSerializer(driver)
+        return Response(serializer.data)
+
+    @action(methods=["GET"], detail=False, url_path="defect-vehicles")
+    def defect_vehicles(self, request, *args, **kwargs):
+        vehicles = Vehicle.objects.filter(company=self.driver.company)
+        serializer = VehicleDetailSerializer(vehicles, many=True)
+        return Response(serializer.data)
+
+    @action(methods=["POST"], detail=False, url_path="report-defects")
+    def report_defects(self, request, *args, **kwargs):
+        print(request.data)
+        serializer = ReportDefectSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(company=self.driver.company, reported_by=self.driver)
         return Response(serializer.data)
 
     @action(methods=["GET"], detail=False, url_path="rides-count")

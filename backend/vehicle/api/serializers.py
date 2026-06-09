@@ -9,6 +9,7 @@ class VehicleDetailSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "brand",
+            "licence_number",
             "model",
         ]
 
@@ -27,3 +28,4 @@ class ExpiringDocumentsSerializer(serializers.ModelSerializer):
             "title",
             "related_object",
         ]
+

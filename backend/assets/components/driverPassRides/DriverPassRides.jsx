@@ -20,7 +20,7 @@ const DriverPassRides = () => {
     const fetchRides = async () => {
       try {
         const res = await fetch(
-          `/api/driver-rides/pass-rides?filter_date=${date ? date : initialDate}`,
+          `/api/driver-portal/pass-rides?filter_date=${date ? date : initialDate}`,
         );
 
         if (!res.ok) {
@@ -35,8 +35,6 @@ const DriverPassRides = () => {
     };
     fetchRides();
   }, [date]);
-
-  console.log(passRides);
 
   return (
     <div className={styles.pageWrapper}>

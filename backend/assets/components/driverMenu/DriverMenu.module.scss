@@ -1,10 +1,19 @@
 .menuWrapper {
-  height: 5rem;
   width: 15rem;
+  padding: 1rem;
   background: #FFFFFF;
   position: absolute;
   right: 1rem;
   top: 5rem;
   border-radius: 15px;
-}
+  display: grid;
+  z-index: 10;
+  gap: .7rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
+  &>a {
+    text-decoration: none;
+    font-family: var(--font-display);
+    color: #888E95;
+  }
+}

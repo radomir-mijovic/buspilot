@@ -10,7 +10,7 @@ const DriverNavbar = ({title}) => {
   useEffect(() => {
     const fetchDriverDetails = async () => {
       try {
-        const res = await fetch("/api/driver-rides/driver-details/");
+        const res = await fetch("/api/driver-portal/driver-details/");
 
         if (!res.ok) {
           throw new Error("HTTP Error!");

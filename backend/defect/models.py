@@ -20,9 +20,7 @@ class Defect(CreatedUpdatedAtTimestampMixin, models.Model):
     )
     vehicle = models.ForeignKey(
         "vehicle.Vehicle",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.CASCADE,
         related_name="defects",
     )
 

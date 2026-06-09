@@ -7,9 +7,9 @@ const DriverRide = ({ ride }) => {
 
   const confirmUrl = (isRideConfirmed) => {
     if (isRideConfirmed === true) {
-      return "/api/driver-rides/cancel-ride/";
+      return "/api/driver-portal/cancel-ride/";
     } else {
-      return "/api/driver-rides/confirm-ride/";
+      return "/api/driver-portal/confirm-ride/";
     }
   };
 

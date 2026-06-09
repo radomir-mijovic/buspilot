@@ -12,7 +12,7 @@ const DriverWidgets = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/driver-rides/rides-count/");
+        const res = await fetch("/api/driver-portal/rides-count/");
         if (!res.ok) {
           throw new Error(`HTTP Error! status: ${res.status}`);
         }

@@ -19,7 +19,7 @@ const DriverRides = () => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `/api/driver-rides/?start_date=${backendFilterDate}`,
+          `/api/driver-portal/?start_date=${backendFilterDate}`,
         );
 
         if (!res.ok) {

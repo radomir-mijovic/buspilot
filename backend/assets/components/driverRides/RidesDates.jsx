@@ -9,7 +9,7 @@ const RidesDates = () => {
   useEffect(() => {
     const fetchDates = async () => {
       try {
-        const res = await fetch("/api/driver-rides/");
+        const res = await fetch("/api/driver-portal/");
 
         if (!res.ok) {
           throw new Error("HTTP Error!");
