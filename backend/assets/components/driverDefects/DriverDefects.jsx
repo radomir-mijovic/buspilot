@@ -27,8 +27,6 @@ const DriverDefects = () => {
     fetchVehicles();
   }, []);
 
-  console.log(vehicles);
-
   const handleFromSubmit = async (e) => {
     e.preventDefault();
 
