@@ -33,6 +33,10 @@ export default defineConfig(({ mode }) => {
             __dirname,
             "./assets/pages/driverRides.jsx",
           ),
+          driverPassRidesPage: path.resolve(
+            __dirname,
+            "./assets/pages/driverPassRides.jsx",
+          ),
         },
         output: {
           entryFileNames: `js/[name]-bundle.js`,

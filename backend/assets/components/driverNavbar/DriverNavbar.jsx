@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./DriverNavbar.module.scss";
+import DriverMenu from "../driverMenu/DriverMenu";
 
-const DriverNavbar = () => {
+const DriverNavbar = ({title}) => {
   const [driver, setDriver] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     const fetchDriverDetails = async () => {
@@ -33,8 +35,11 @@ const DriverNavbar = () => {
     <div className={styles.navbarWrapper}>
       <h6>Vozač portal</h6>
       <div className={styles.textWrapper}>
-        <h4>Moje vožnje</h4>
-        <div className={styles.initialsWrapper}>
+        <h4>{title}</h4>
+        <div
+          onClick={() => setMenu((prev) => !prev)}
+          className={styles.initialsWrapper}
+        >
           {driver.first_name[0]}
           {driver.last_name[0]}
         </div>
@@ -42,6 +47,7 @@ const DriverNavbar = () => {
       <p>
         {driver.first_name} {driver.last_name}
       </p>
+      {menu && <DriverMenu />}
     </div>
   );
 };

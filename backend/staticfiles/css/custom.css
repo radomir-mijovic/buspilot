@@ -130,10 +130,10 @@ table {
   padding: 4rem 5rem;
   overflow-y: hidden;
 
-    @media screen and (max-width: 800px) {
-        padding: 1rem;
-        gap: .5rem;
-    }
+  @media screen and (max-width: 800px) {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
 }
 
 /* ============================================================ (A) CARD */
@@ -330,6 +330,24 @@ table.t2 tbody tr:last-child td {
 }
 
 .form-card {
-    border-radius: 20px;
-    overflow: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
+/* Don't let Bootstrap/Velzon styles bleed into MUI components */
+.MuiInputBase-input,
+.MuiInputBase-root,
+.MuiPickersDay-root,
+.MuiPickersCalendarHeader-label {
+  font-family: var(--font-display) !important;
+  color: oklch(0.255 0.022 264) !important; /* dark ink */
+}
+
+/* The actual input where you type the date */
+.MuiOutlinedInput-input {
+  color: oklch(0.255 0.022 264) !important;
+}
+
+/* MUI popover stacks above Bootstrap modals/dropdowns */
+.MuiPickersPopper-root {
+  z-index: 1400;
 }

@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from auth.permissions import AdminPermission
 from ride.models import Ride
 
 from ..models import Driver, DriverDocument
@@ -14,13 +15,14 @@ from .serializers import (
     DriverRidesSerializer,
     ExpiringDocumentsSerializer,
     GetRideSerializer,
+    PassRideSerializer,
 )
 
 
 class DriverDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DriverDetailSerializer
     queryset = Driver.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, AdminPermission]
 
     @action(methods=["GET"], detail=False, url_path="expiring-documents")
     def expiring_documents(self, request, *args, **kwargs):
@@ -36,7 +38,7 @@ class DriverRidesViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         qs = self.driver.rides_from_today_and_on.select_related(
             "agency",
-        )
+        ).prefetch_related("guides")
 
         if start_date := self.request.query_params.get("start_date"):
             return qs.filter(start_date=start_date)
@@ -81,3 +83,16 @@ class DriverRidesViewSet(viewsets.ReadOnlyModelViewSet):
     def cancel_ride(self, request, *args, **kwargs):
         self.ride.confirmed_by.remove(self.driver)
         return Response({"details": _(f"{self.ride} canceled")})
+
+    @action(methods=["GET"], detail=False, url_path="pass-rides")
+    def pass_rides(self, request, *args, **kwargs):
+        qs = self.driver.pass_rides.select_related("agency")
+        if filter_date := request.query_params.get("filter_date"):
+            qs = qs.filter(start_date=filter_date)
+
+        serializer = PassRideSerializer(
+            qs,
+            context={"request": request},
+            many=True,
+        )
+        return Response(serializer.data)

@@ -1,0 +1,73 @@
+.pageWrapper {
+  padding: 1rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.ridesWrapper {
+  font-family: var(--font-display);
+  display: grid;
+  gap: 1rem;
+
+  &>h3 {
+    font-size: 1rem;
+    font-weight: 400;
+
+  }
+}
+
+.rideCard {
+  background: #FFFFFF;
+  border-radius: 15px;
+  padding: .7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .4rem;
+
+  &>h4 {
+    margin-bottom: .5rem;
+    font-family: var(--font-display);
+    background: inherit;
+    display: inline-block;
+    font-weight: 500;
+  }
+}
+
+.cardText {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  font-family: var(--font-display);
+  margin-top: .5rem;
+
+  &>p {
+    font-size: .9rem;
+    border-radius: 20px;
+    padding: 0 .4rem;
+  }
+}
+
+.dot {
+  height: 5px;
+  width: 5px;
+  background: #A2A6AC;
+  border-radius: 50%;
+}
+
+.excursion {
+  background: #D9F9E8;
+  color: #338a68;
+}
+.transfer {
+  background: #E4F1FF;
+  color: #004CA4;
+}
+.line {
+  background: #FFEBDA;
+  color: #A46435;
+}
+.roundTour {
+  background: #F3F6F8;
+  color: #828890;
+}

@@ -31,6 +31,12 @@ class Driver(User):
         ).order_by("start_date", "start_time")
 
     @property
+    def pass_rides(self):
+        return self.drivers_rides.filter(
+            start_date__lt=timezone.now().date()
+        ).order_by("-start_date", "-start_time")
+
+    @property
     def rides_confirmed(self):
         return self.rides_from_today_and_on.filter(
             confirmed_by=self,

@@ -1,5 +1,7 @@
+from django.utils import timezone
 from rest_framework import serializers
 
+from guide.api.serializers import GuideSerializer
 from ride.models import Ride
 
 from ..models import Driver, DriverDocument
@@ -40,6 +42,7 @@ class DriverRidesSerializer(serializers.ModelSerializer):
     start_date = serializers.DateField(format="%d.%m.%y")
     start_time = serializers.TimeField(format="%H:%M")
     is_confirmed = serializers.SerializerMethodField()
+    guides = GuideSerializer(read_only=True, many=True)
 
     def get_is_confirmed(self, obj):
         driver = self.context["request"].user
@@ -59,8 +62,36 @@ class DriverRidesSerializer(serializers.ModelSerializer):
             "start_location",
             "title",
             "ride_type",
+            "guides",
         ]
 
 
 class GetRideSerializer(serializers.Serializer):
     ride_id = serializers.IntegerField(required=True)
+
+
+class PassRideSerializer(serializers.ModelSerializer):
+    agency = serializers.SlugRelatedField(
+        slug_field="name",
+        read_only=True,
+    )
+    ride_type = serializers.SerializerMethodField()
+    start_date = serializers.DateField(format="%d.%m.%y")
+    in_progress = serializers.SerializerMethodField()
+
+    def get_in_progress(self, obj):
+        return obj.end_date >= timezone.now().date()
+
+    class Meta:
+        model = Ride
+        fields = [
+            "id",
+            "agency",
+            "in_progress",
+            "start_date",
+            "title",
+            "ride_type",
+        ]
+
+    def get_ride_type(self, obj):
+        return obj.get_ride_type_display()

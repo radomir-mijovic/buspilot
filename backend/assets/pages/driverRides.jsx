@@ -11,7 +11,7 @@ const driverRidesPage = document.getElementById("driverRidesPage");
 if (driverRidesPage) {
   ReactDOM.createRoot(driverRidesPage).render(
     <DriverProvider>
-      <DriverNavbar />
+      <DriverNavbar title="Moje vožnje" />
       <DriverWidgets />
       <RidesDates/>
       <DriverRides />

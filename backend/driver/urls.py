@@ -7,8 +7,10 @@ from .views import (
     DriverDeleteView,
     DriverDetailView,
     DriverListView,
-    DriverRidesView,
     DriverUpdateView,
+    driver_defects,
+    driver_pass_rides,
+    driver_rides,
 )
 
 app_name = "driver"
@@ -52,7 +54,17 @@ urlpatterns = [
     ),
     path(
         "driver-rides",
-        DriverRidesView.as_view(),
+        driver_rides,
         name="driver_rides",
+    ),
+    path(
+        "driver-pass-rides",
+        driver_pass_rides,
+        name="driver_pass_rides",
+    ),
+    path(
+        "driver-defects",
+        driver_defects,
+        name="driver_defects",
     ),
 ]

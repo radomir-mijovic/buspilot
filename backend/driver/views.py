@@ -152,24 +152,17 @@ class DriverRidesView(
     model = Ride
     template_name = "driver-rides.html"
 
-    def get_context_data(self, *args, **kwargs: Any) -> dict[str, Any]:
-        context = super().get_context_data(*args, **kwargs)
-        context["defect_form"] = DefectForm(company=self.company)
-        context["form"] = RideDateSearchForm()
-        return context
 
-    def get_queryset(self):
-        today = timezone.now().date()
-        qs = self.get_base_queryset()
+def driver_rides(request):
+    template = "driver-rides.html"
+    return render(request, template, {})
 
-        if start_date := self.request.GET.get("start_date"):
-            return qs.filter(start_date=start_date)
 
-        return qs.filter(start_date__gte=today)
+def driver_pass_rides(request):
+    template = "driver-pass-rides.html"
+    return render(request, template, {})
 
-    def get_base_queryset(self):
-        return (
-            Ride.objects.filter(drivers=self.request.user)
-            .order_by("start_time", "start_date")
-            .select_related("agency")
-        )
+
+def driver_defects(request):
+    template = "driver-defects.html"
+    return render(request, template, {})

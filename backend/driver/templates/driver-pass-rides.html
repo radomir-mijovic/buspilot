@@ -1,0 +1,28 @@
+{% load django_vite static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BusPilot</title>
+        <link rel="icon"
+              type="image/svg+xml"
+              href="{% static 'images/buspilot-favicon.svg' %}">
+        <style>
+        *,
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        body { background: #F2F4F7;}
+
+        </style>
+        {% vite_hmr_client %}
+        {% vite_react_refresh %}
+    </head>
+    <body>
+        <div id="driverPassRidesPage"></div>
+        {% vite_asset 'assets/pages/driverPassRides.jsx' %}
+    </body>
+</html>
