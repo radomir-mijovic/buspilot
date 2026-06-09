@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-import sentry_sdk
 from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 
@@ -173,9 +172,3 @@ LOGGING = {
 # Translation
 LOCALE_PATHS = [BASE_DIR / "locale"]
 
-# Sentry
-sentry_sdk.init(
-    dsn=os.environ.get("SENTRY_DSN"),
-    environment=os.environ.get("SENTRY_ENV", "dev"),
-    send_default_pii=True,
-)
