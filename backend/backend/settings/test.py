@@ -8,3 +8,9 @@ DATABASES = {
         "NAME": "test_db",
     }
 }
+
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": True,
+    },
+}

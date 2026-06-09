@@ -29,7 +29,10 @@ class TestDefect:
 
         self.vehicle = VehicleFactory(company=self.company)
 
-        self.defect = DefectFactory(company=self.company)
+        self.defect = DefectFactory(
+            company=self.company,
+            vehicle=self.vehicle,
+        )
         self.list_url = reverse("defect:defects")
         self.create_url = reverse("defect:defect_create")
 
@@ -39,7 +42,11 @@ class TestDefect:
 
     def test_list_filter_ok(self):
         other_company = CompanyFactory()
-        other_defect = DefectFactory(company=other_company)
+        other_vehicle = VehicleFactory(company=other_company)
+        other_defect = DefectFactory(
+            company=other_company,
+            vehicle=other_vehicle,
+        )
         response = self.client.get(self.list_url)
         assert other_defect.description not in response.text
 
