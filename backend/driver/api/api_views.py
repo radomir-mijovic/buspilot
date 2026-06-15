@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -75,10 +75,15 @@ class DriverPortalViewSet(viewsets.ReadOnlyModelViewSet):
 
     @action(methods=["POST"], detail=False, url_path="report-defects")
     def report_defects(self, request, *args, **kwargs):
-        serializer = ReportDefectSerializer(data=request.data)
+        serializer = ReportDefectSerializer(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save(company=self.driver.company, reported_by=self.driver)
-        return Response(serializer.data)
+        return Response(
+            {"details": _("Report successully reported.")},
+            status=status.HTTP_201_CREATED,
+        )
 
     @action(methods=["GET"], detail=False, url_path="rides-count")
     def rides_count(self, request, *args, **kwargs):

@@ -11,7 +11,9 @@ const Modernize = () => {
           platform designed for real operational workflows. Save time, stay
           organized, and keep your entire fleet under control.
         </h5>
-        <button className={styles.button} type="button">Request a Demo</button>
+        <button className={styles.button} type="button">
+          <a href="/request-demo">Request a Demo</a>
+        </button>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from django_countries.fields import CountryField
 
 from common.models import VALID_FILE_EXTENSIONS, DocumentAbstract
 
@@ -38,7 +39,7 @@ class CompanyAddress(models.Model):
         on_delete=models.CASCADE,
         related_name="addresses",
     )
-    country = models.CharField(max_length=255, blank=True)
+    country = CountryField()
     country_code = models.CharField(max_length=3, blank=True)
     post_code = models.CharField(max_length=100, blank=True)
     state_province = models.CharField(max_length=255, blank=True)

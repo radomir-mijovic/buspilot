@@ -14,12 +14,14 @@ urlpatterns = [
     path("", include("finance.urls")),
     path("", include("driver.urls")),
     path("", include("guide.urls")),
+    path("", include("requestdemo.urls")),
     path("", include("vehicle.urls")),
     path("", include("ride.urls")),
     path("api/auth/", include("auth.api.urls")),
     path("api/", include("driver.api.urls")),
     path("api/", include("ride.api.urls")),
     path("api/", include("vehicle.api.urls")),
+    path("api/", include("requestdemo.api.urls"))
 ]
 
 if settings.DEBUG:

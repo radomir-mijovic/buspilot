@@ -28,6 +28,7 @@ export default defineConfig(({ mode }) => {
         input: {
           index: path.resolve(__dirname, "./assets/pages/index.jsx"),
           navbar: path.resolve(__dirname, "./assets/pages/navbar.jsx"),
+          requestdemo: path.resolve(__dirname, "./assets/pages/requestDemoPage.jsx"),
           navlinks: path.resolve(__dirname, "./assets/pages/navlinks.jsx"),
           driverRidesPage: path.resolve(
             __dirname,

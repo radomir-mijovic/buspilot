@@ -1,0 +1,53 @@
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem;
+  margin-top: 1rem;
+
+  &>h6 {}
+
+  &>button {
+    background: #4580BE;
+    color: #FFFFFF;
+    padding: .9rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    font-family: var(--font-body);
+    margin-top: 1rem;
+  }
+}
+
+.innerWrapper {
+  display: grid;
+  gap: .3rem;
+  font-family: var(--font-body);
+
+  &>input,
+  &>select {
+    padding: .7rem;
+    border-radius: 10px;
+    border: 1px solid #E0E3E7;
+      font-family: var(--font-body);
+  }
+
+  &>input {
+    &>::placeholder {
+      font-family: var(--font-body);
+    }
+  }
+
+  &>select {
+    background: #FFFFFF;
+
+    &>option {
+      font-family: var(--font-body);
+    }
+  }
+}
+
+.pError{
+  color: red;
+  font-size: .8rem;
+}

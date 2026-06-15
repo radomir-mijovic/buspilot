@@ -44,6 +44,7 @@ LOCAL_APPS = [
     "guide.apps.GuideConfig",
     "driver.apps.DriverConfig",
     "ride.apps.RideConfig",
+    "requestdemo.apps.RequestdemoConfig",
     "vehicle.apps.VehicleConfig",
 ]
 
@@ -171,4 +172,3 @@ LOGGING = {
 
 # Translation
 LOCALE_PATHS = [BASE_DIR / "locale"]
-

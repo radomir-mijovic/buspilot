@@ -1,0 +1,140 @@
+.cardWrapper {
+  width: 70rem;
+  height: 40rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 2rem;
+  display: flex;
+}
+
+.rightSide {
+  width: 50%;
+  background: #3F73C1;
+  height: 100%;
+  border-bottom-left-radius: 2rem;
+  border-top-left-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  &>a {
+    text-decoration: none;
+  }
+}
+
+.leftSide {
+  width: 50%;
+  height: 100%;
+  border-radius: 2rem;
+
+  &>a {
+    font-family: var(--font-display);
+    text-align: center;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    color: #3F73C1;
+  }
+
+  &>h4 {
+    font-size: 2rem;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    color: #3F73C1;
+  }
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  margin-left: 2rem;
+
+  &>h3 {
+    font-family: var(--font-display);
+    color: #FFFFFF;
+  }
+}
+
+.textWrapper {
+  font-family: var(--font-display);
+  padding-left: 2rem;
+  padding-right: 1rem;
+  margin-top: 4rem;
+  color: #FFFFFF;
+
+  &>h5 {
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+    font-size: 1.1rem;
+    letter-spacing: .08em;
+  }
+
+  &>h2 {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+  }
+
+  &>p {
+    margin-bottom: 4rem;
+  }
+}
+
+.infoWrapper {
+  display: grid;
+  gap: .5rem;
+
+
+  &>h6 {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+
+    &>span {
+      display: grid;
+      place-items: center;
+    }
+  }
+}
+
+.lowerTextWrapper {
+  margin-left: 2rem;
+  margin-top: 2rem;
+
+  &>h5 {
+    color: #4580BE;
+    text-transform: uppercase;
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+
+
+  &>h2 {
+    font-size: 1.8rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    margin: .5rem 0;
+  }
+
+  &>p {
+    color: #8E939A;
+    font-family: var(--font-body);
+  }
+}
+
+.lowerPWrapper {
+  margin-top: 3rem;
+
+  &>p {
+    font-size: .9rem;
+    color: #FFFFFF;
+    font-family: var(--font-body);
+
+    &>a {
+      color: #FFFFFF;
+    }
+  }
+}

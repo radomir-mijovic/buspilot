@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" fill="none" role="img" aria-label="BusPilot">
+  
+  <g transform="translate(4 6)" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M4 24V10a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v14"></path>
+    <path d="M4 24h28"></path>
+    <path d="M4 24v3.5a1.5 1.5 0 0 0 1.5 1.5h2A1.5 1.5 0 0 0 9 27.5V24"></path>
+    <path d="M27 24v3.5a1.5 1.5 0 0 0 1.5 1.5h2a1.5 1.5 0 0 0 1.5-1.5V24"></path>
+    <path d="M10 11h16"></path>
+    <path d="M8.5 17.5h.01"></path>
+    <path d="M27.5 17.5h.01"></path>
+  </g>
+  
+  <text x="48" y="32" font-family="&#39;Space Grotesk&#39;, system-ui, sans-serif" font-size="25" font-weight="600" letter-spacing="-0.5" fill="#ffffff">BusPilot</text>
+</svg>
