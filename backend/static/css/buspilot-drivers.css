@@ -161,6 +161,7 @@
 /* ============================== MODALS (add / edit) ============================== */
 #showModal .modal-content,
 #editDriverModal .modal-content,
+#editguideModal .modal-content,
 #deleteDriverModal .modal-content {
   border-radius: var(--bp-r-lg) !important;
   border: 1px solid var(--bp-line) !important;
@@ -168,13 +169,15 @@
 }
 
 #showModal .modal-header.bg-info-subtle,
-#editDriverModal .modal-header.bg-info-subtle {
+#editDriverModal .modal-header.bg-info-subtle,
+#editguideModal .modal-header.bg-info-subtle {
   background: var(--bp-accent-bg) !important;
   border-bottom: 1px solid var(--bp-accent-line) !important;
   padding: 18px 22px !important;
 }
 #showModal .modal-title,
-#editDriverModal .modal-title {
+#editDriverModal .modal-title,
+#editguideModal .modal-title {
   font-family: var(--bp-display) !important;
   font-weight: 600 !important;
   font-size: 16.5px !important;
@@ -182,7 +185,8 @@
 }
 
 #showModal .form-label,
-#editDriverModal .form-label {
+#editDriverModal .form-label,
+#editguideModal .form-label {
   font-family: var(--bp-mono) !important;
   font-size: 11px !important;
   letter-spacing: 0.08em;
@@ -192,7 +196,9 @@
 #showModal .form-control,
 #showModal .form-select,
 #editDriverModal .form-control,
-#editDriverModal .form-select {
+#editDriverModal .form-select,
+#editguideModal .form-control,
+#editguideModal .form-select {
   border: 1px solid var(--bp-line) !important;
   border-radius: var(--bp-r) !important;
   padding: 11px 13px !important;
@@ -202,11 +208,14 @@
 #showModal .form-control:focus,
 #showModal .form-select:focus,
 #editDriverModal .form-control:focus,
-#editDriverModal .form-select:focus {
+#editDriverModal .form-select:focus,
+#editguideModal .form-control:focus,
+#editguideModal .form-select:focus {
   border-color: var(--bp-accent) !important;
   box-shadow: 0 0 0 3px var(--bp-accent-bg) !important;
 }
-#showModal .btn-success {
+#showModal .btn-success,
+#editguideModal .btn-success {
   background: var(--bp-accent) !important;
   border-color: var(--bp-accent) !important;
   font-family: var(--bp-display) !important;
@@ -214,11 +223,13 @@
   border-radius: var(--bp-r) !important;
 }
 #showModal .btn-light,
+#editguideModal .btn-light,
 #deleteDriverModal .btn-link {
   font-family: var(--bp-display) !important;
   font-weight: 500 !important;
 }
-#showModal .btn-light {
+#showModal .btn-light,
+#editguideModal .btn-light {
   background: var(--bp-surface) !important;
   border: 1px solid var(--bp-line) !important;
   color: var(--bp-ink-2) !important;
