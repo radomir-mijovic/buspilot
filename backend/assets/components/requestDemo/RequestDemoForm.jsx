@@ -64,7 +64,7 @@ const RequestDemoForm = ({ setResponse }) => {
       <div className={styles.innerWrapper}>
         <label htmlFor="company">Company</label>
         <input
-          placeholder="Naziv companije"
+          placeholder="e.g. Adriatic Transport d.o.o."
           value={company}
           onChange={(e) => setCompany(e.target.value)}
           id="company"
