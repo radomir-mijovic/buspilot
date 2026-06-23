@@ -11,9 +11,11 @@ const Modernize = () => {
           platform designed for real operational workflows. Save time, stay
           organized, and keep your entire fleet under control.
         </h5>
-        <button className={styles.button} type="button">
-          <a href="/request-demo">Request a Demo</a>
-        </button>
+        <a href="/request-demo">
+          <button className={styles.button} type="button">
+            Request a Demo
+          </button>
+        </a>
       </div>
     </section>
   );

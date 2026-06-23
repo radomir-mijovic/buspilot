@@ -10,7 +10,9 @@ const RequestDemoMobileCard = () => {
     <div className={styles.mobileCard}>
       <div className={styles.cardHeader}>
         <img src={brandLogo} alt="" width={20} height={20} />
-        <h3 className="font-display">BusPilot</h3>
+        <h3 className="font-display">
+          <a className={styles.logoA} href="/">BusPilot</a>
+        </h3>
       </div>
       {response ? (
         <>
