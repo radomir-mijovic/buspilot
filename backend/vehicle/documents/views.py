@@ -8,14 +8,20 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.utils.decorators import method_decorator
 from django.views import generic
 
+from auth.decorators import admin_permission_required
 from company.mixins import CompanyRequestMixin
 
 from ..models import Vehicle, VehicleDocument
 from .forms import VehicleDocumentUploadForm
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch"
+)
 class VehicleHtmxFormsViewHandlers(generic.CreateView):
     def handle_form_valid_htmx(
         self,
@@ -39,6 +45,10 @@ class VehicleHtmxFormsViewHandlers(generic.CreateView):
         return response
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch"
+)
 class VehicleDocumentUploadView(
     VehicleHtmxFormsViewHandlers,
     CompanyRequestMixin,
@@ -76,6 +86,10 @@ class VehicleDocumentUploadView(
         return get_object_or_404(Vehicle, pk=self.vehicle_pk)
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch"
+)
 class VehicleDocumentUpdateView(
     LoginRequiredMixin,
     CompanyRequestMixin,
@@ -105,6 +119,10 @@ class VehicleDocumentUpdateView(
         return redirect(f"{url}#vehicle-documents")
 
 
+@method_decorator(
+    admin_permission_required,
+    name="dispatch"
+)
 class VehicleDocumentDeleteView(
     LoginRequiredMixin,
     CompanyRequestMixin,
