@@ -5,4 +5,4 @@ from .models import RequestDemo
 
 @admin.register(RequestDemo)
 class RequestDemoAdmin(admin.ModelAdmin):
-    list_display = ["id", "email", "company"]
+    list_display = ["id", "email", "company", "created_at"]

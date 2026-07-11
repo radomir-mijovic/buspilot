@@ -1,6 +1,7 @@
 import pytest
-from auth.models import User
 from django.urls import reverse
+
+from auth.models import User
 
 
 @pytest.fixture

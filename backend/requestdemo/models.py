@@ -1,8 +1,10 @@
 from django.db import models
 from django_countries.fields import CountryField
 
+from common.models import CreatedUpdatedAtTimestampMixin
 
-class RequestDemo(models.Model):
+
+class RequestDemo(CreatedUpdatedAtTimestampMixin, models.Model):
     company = models.CharField()
     country = CountryField()
     email = models.EmailField()
