@@ -79,10 +79,10 @@ const Navbar = () => {
             />
           )}
         </div>
-        <div className={styles.languageWrapper}>
-          <img src={mneFlagIcon} alt="" width={25} height={25} />
-          <FaAngleDown />
-        </div>
+        {/* <div className={styles.languageWrapper}>
+      <img src={mneFlagIcon} alt="" width={25} height={25} />
+      <FaAngleDown />
+      </div> */}
         <div className={styles.line} />
         <div onClick={handleAdminDropdown} className={styles.adminWrapper}>
           <div className={styles.letter}>

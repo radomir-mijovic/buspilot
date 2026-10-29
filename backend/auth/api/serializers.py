@@ -1,3 +1,4 @@
+from django.contrib.auth import password_validation
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
@@ -9,4 +10,8 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate_old_password(self, value):
         if not self.context["request"].user.check_password(value):
             raise serializers.ValidationError(_("Old password incorect"))
+        return value
+
+    def validate_new_password(self, value):
+        password_validation.validate_password(value)
         return value
