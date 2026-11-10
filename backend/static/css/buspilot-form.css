@@ -17,6 +17,8 @@
   --bp-accent: oklch(0.55 0.155 256);
   --bp-accent-ink: oklch(0.43 0.16 256);
   --bp-accent-bg: oklch(0.955 0.028 256);
+  --bp-danger: oklch(0.58 0.19 25);
+  --bp-danger-lighter: oklch(0.60 0.20 28);
   --bp-display: "Space Grotesk", system-ui, sans-serif;
   --bp-body: "Hanken Grotesk", system-ui, sans-serif;
   --bp-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -126,6 +128,17 @@
 .form-card .btn-primary {
   background: var(--bp-accent) !important;
   border-color: var(--bp-accent) !important;
+  font-family: var(--bp-display) !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  border-radius: var(--bp-r) !important;
+  padding: 12px 24px !important;
+  box-shadow: var(--bp-shadow-sm) !important;
+}
+
+.form-card .btn-danger {
+  background: var(--bp-danger-lighter) !important;
+  border-color: var(--bp-danger) !important;
   font-family: var(--bp-display) !important;
   font-weight: 500 !important;
   font-size: 15px !important;

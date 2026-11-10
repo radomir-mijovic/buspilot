@@ -1,13 +1,10 @@
 import pytest
 from django.urls import reverse
-from parameterized import parameterized
 
 from auth.models import UserTypeChoices
 from common.tests.fixtures import user  # noqa: F401, F811
 from company.tests.factories import CompanyFactory
 from vehicle.tests.factories import VehicleFactory
-
-from .factories import DriverFactory
 
 
 @pytest.mark.django_db

@@ -45,12 +45,12 @@ class CompanyDocumentView(
         form.instance.company = self.company
         form.save()
         messages.success(self.request, _("File successfully added."))
-        return redirect("company:company_documents")
+        return redirect(f"{reverse('company:company_documents')}?owner=company")
 
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:
         for error in form.errors.values():
             messages.error(self.request, error.as_text())
-        return redirect("company:company_documents")
+        return redirect(f"{reverse('company:company_documents')}?owner=company")
 
     def get_queryset(self):
         owner = self.request.GET.get("owner", "")
