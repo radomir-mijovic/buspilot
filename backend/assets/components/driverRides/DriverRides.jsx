@@ -34,6 +34,10 @@ const DriverRides = () => {
       }
     };
     fetchData();
+
+    const interval = setInterval(fetchData, 10000)
+    return () => clearInterval(interval)
+
   }, [isRideChanged, filterDate]);
 
   if (loading) {

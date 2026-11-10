@@ -37,11 +37,7 @@
                             <td>
                                 {% if ride.vehicles.all %}
                                     <ul>
-                                        {% for vehicle in ride.vehicles.all %}
-                                            <li>
-                                                {{ vehicle }}
-                                            </li>
-                                        {% endfor %}
+                                        {% for vehicle in ride.vehicles.all %}<li>{{ vehicle }}</li>{% endfor %}
                                     </ul>
                                 {% else %}
                                     <span class="none">—</span>
@@ -65,6 +61,8 @@
                                                         </svg>
                                                         Potvrđeno
                                                     </span>
+                                                {% else %}
+                                                    <span class="badge2 badge2--no">Čeka potvrdu</span>
                                                 {% endif %}
                                             </li>
                                         {% endfor %}

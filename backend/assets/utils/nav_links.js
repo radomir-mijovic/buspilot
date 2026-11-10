@@ -1,4 +1,3 @@
-import RideIcon from "../icons/rides-route.svg";
 import { CiCalendar, CiClock1, CiMenuKebab, CiMoneyCheck1 } from "react-icons/ci";
 import { IoAdd, IoBusOutline, IoDocumentsOutline } from "react-icons/io5";
 import { GiGroundbreaker } from "react-icons/gi";
@@ -18,13 +17,13 @@ const nav_links = [
     has_sublinks: true,
     sublinkId: 1,
     sublinks: [
-      { id: 12, subtitle: "Kalendar", href: "/calendar", icon: CiCalendar },
       {
-        id: 13,
+        id: 12,
         subtitle: "Pregled dana",
         href: "/dashboard",
         icon: CiClock1,
       },
+      { id: 13, subtitle: "Kalendar", href: "/calendar", icon: CiCalendar },
       { id: 14, subtitle: "Pregled vožnji", href: "/rides", icon: CiMenuKebab },
       {
         id: 15,
