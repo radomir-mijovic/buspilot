@@ -15,8 +15,8 @@
   --bp-accent-bg: oklch(0.955 0.028 256);
   --bp-ok: oklch(0.62 0.13 162);
   --bp-ok-bg: oklch(0.955 0.04 162);
-  --bp-warn: oklch(0.64 0.20 15);
---bp-warn-bg: oklch(0.96 0.04 15);
+  --bp-warn: oklch(0.64 0.2 15);
+  --bp-warn-bg: oklch(0.96 0.04 15);
   --bp-display: "Space Grotesk", system-ui, sans-serif;
   --bp-mono: ui-monospace, "SF Mono", Menlo, monospace;
   --bp-r-lg: 16px;
