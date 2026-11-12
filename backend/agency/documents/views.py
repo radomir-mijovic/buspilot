@@ -52,6 +52,31 @@ class AgencyDocumentUploadView(
         return get_object_or_404(Agency, pk=self.agency_pk)
 
 
+class AgencyDocumentUpdateView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.UpdateView,
+):
+    model = AgencyDocument
+    form_class = AgencyDocumentUploadForm
+    template_name = "../templates/partials/update-agency-document-modal.html"
+
+    def get_queryset(self) -> models.query.QuerySet[AgencyDocument]:
+        return AgencyDocument.objects.filter(
+            agency__company=self.company,
+        )
+
+    def form_valid(self, form: AgencyDocumentUploadForm) -> HttpResponse:
+        form.save()
+        messages.success(self.request, _("Document updated successfully"))
+        return redirect("agency:agency_details", pk=self.kwargs["agency_pk"])
+
+    def form_invalid(self, form: AgencyDocumentUploadForm) -> HttpResponse:
+        for error in form.errors.values():
+            messages.error(self.request, error.as_text())
+        return redirect("agency:agency_details", pk=self.kwargs["agency_pk"])
+
+
 class AgencyDocumentDeleteView(
     LoginRequiredMixin,
     CompanyRequestMixin,

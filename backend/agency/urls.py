@@ -1,6 +1,10 @@
 from django.urls import path
 
-from agency.documents.views import AgencyDocumentDeleteView, AgencyDocumentUploadView
+from agency.documents.views import (
+    AgencyDocumentDeleteView,
+    AgencyDocumentUpdateView,
+    AgencyDocumentUploadView,
+)
 
 from .views import (
     AgencyCreateView,
@@ -42,6 +46,11 @@ urlpatterns = [
         "agency-documents/<int:agency_pk>/",
         AgencyDocumentUploadView.as_view(),
         name="document_upload",
+    ),
+    path(
+        "agency-documents-update/<int:pk>/<int:agency_pk>/",
+        AgencyDocumentUpdateView.as_view(),
+        name="document_update",
     ),
     path(
         "agency-document-delete/<int:pk>/<int:agency_pk>/",

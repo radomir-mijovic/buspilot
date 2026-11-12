@@ -56,6 +56,14 @@ class AgencyDetailView(
         context = super().get_context_data(**kwargs)
         context["form"] = AgencyCreateForm(instance=instance)
         context["document_form"] = AgencyDocumentUploadForm()
+
+        documents = instance.documents.all()
+        for doc in documents:
+            doc.update_form = AgencyDocumentUploadForm(
+                instance=doc, auto_id=f"id_doc{doc.pk}_%s"
+            )
+
+        context["documents"] = documents
         return context
 
 

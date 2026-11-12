@@ -76,12 +76,12 @@ class DriverDocumentUpdateView(
             driver__company=self.company,
         )
 
-    def form_valid(self, form):
+    def form_valid(self, form: DriverDocumentUploadForm) -> HttpResponse:
         form.save()
         messages.success(self.request, _("Document updated successfully"))
         return redirect("driver:driver_details", pk=self.kwargs["driver_pk"])
 
-    def form_invalid(self, form):
+    def form_invalid(self, form: DriverDocumentUploadForm) -> HttpResponse:
         for error in form.errors.values():
             messages.error(self.request, error.as_text())
         return redirect("driver:driver_details", pk=self.kwargs["driver_pk"])

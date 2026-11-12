@@ -27,7 +27,7 @@
                                 </tr>
                             </thead>
                             <tbody id="documents-t-body">
-                                {% for document in agency.documents.all %}
+                                {% for document in documents %}
                                     <tr id="row-{{ document.id }}">
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -76,6 +76,12 @@
                                                     <li>
                                                         <a class="dropdown-item" href="{{ document.file.url }}" download><i class="ri-download-2-fill me-2 align-middle text-muted"></i>Download</a>
                                                     </li>
+                                                    <button type="button"
+                                                            class="dropdown-item"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#updateAgencyDocumentModal-{{ document.pk }}">
+                                                        <i class="ri-edit-fill me-1 align-bottom"></i> <span data-key="t-update-document">Imijeni</span>
+                                                    </button>
                                                     <li class="dropdown-divider"></li>
                                                     <li>
                                                         <a class="dropdown-item"
@@ -84,6 +90,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                            {% include "partials/update-agency-document-modal.html" with document=document document_form=document.update_form %}
                                         </td>
                                     </tr>
                                 {% endfor %}

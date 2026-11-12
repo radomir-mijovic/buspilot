@@ -16,6 +16,13 @@
                 {% include "partials/page-title.html" with pagetitle="Ecommerce" title="Detalji" %}
             {% endblock pagetitle %}
             <div class="row align-items-stretch">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 {% include "partials/details.html" with agency=agency %}
                 {% include "partials/documents.html" with agency=agency %}
             </div>
