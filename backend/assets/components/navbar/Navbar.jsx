@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <nav className={styles.nav}>
-      <a href="/calendar">
+      <a href="/dashboard">
         <div className={styles.logoWrapper}>
           <img src={brandLogo} alt="" width={30} height={30} />
           {isBrowser && <h3>BusPilot</h3>}

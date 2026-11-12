@@ -13,9 +13,7 @@ from django.views import generic
 from auth.decorators import admin_permission_required
 from auth.models import UserTypeChoices
 from company.mixins import SetCompanyInKwargsMixin
-from defect.forms import DefectForm
 from driver.documents.forms import DriverDocumentUploadForm
-from ride.forms import RideDateSearchForm
 from ride.models import Ride
 
 from .forms import DriverForm
@@ -58,6 +56,13 @@ class DriverDetailView(
         context = super().get_context_data(**kwargs)
         context["form"] = DriverForm(instance=instance)
         context["document_form"] = DriverDocumentUploadForm()
+
+        documents = instance.documents.all()
+        for doc in documents:
+            doc.update_form = DriverDocumentUploadForm(
+                instance=doc, auto_id=f"id_doc{doc.pk}_%s"
+            )
+        context["documents"] = documents
         return context
 
 

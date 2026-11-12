@@ -1,6 +1,6 @@
 from django.urls import path
 
-from driver.documents.views import DriverDocumentDeleteView, DriverDocumentUploadView
+from driver.documents.views import DriverDocumentDeleteView, DriverDocumentUpdateView, DriverDocumentUploadView
 
 from .views import (
     DriverCreateView,
@@ -46,6 +46,11 @@ urlpatterns = [
         "driver-documents/<int:driver_pk>/",
         DriverDocumentUploadView.as_view(),
         name="document_upload",
+    ),
+    path(
+        "driver-document-update/<int:pk>/<int:driver_pk>/",
+        DriverDocumentUpdateView.as_view(),
+        name="document_update",
     ),
     path(
         "driver-document-delete/<int:pk>/<int:driver_pk>/",

@@ -7,6 +7,12 @@ from ..models import DriverDocument
 
 
 class DriverDocumentUploadForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk:
+            self.fields["file"].required = False
+            self.fields["file"].widget.attrs.pop("required", None)
+
     class Meta:
         model = DriverDocument
         fields = [

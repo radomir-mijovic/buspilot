@@ -62,6 +62,35 @@ class DriverDocumentUploadView(
     admin_permission_required,
     name="dispatch",
 )
+class DriverDocumentUpdateView(
+    LoginRequiredMixin,
+    CompanyRequestMixin,
+    generic.UpdateView,
+):
+    form_class = DriverDocumentUploadForm
+    model = DriverDocument
+    template_name = "../templates/partials/update-driver-document-modal.html"
+
+    def get_queryset(self) -> models.QuerySet[Any]:
+        return DriverDocument.objects.filter(
+            driver__company=self.company,
+        )
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, _("Document updated successfully"))
+        return redirect("driver:driver_details", pk=self.kwargs["driver_pk"])
+
+    def form_invalid(self, form):
+        for error in form.errors.values():
+            messages.error(self.request, error.as_text())
+        return redirect("driver:driver_details", pk=self.kwargs["driver_pk"])
+
+
+@method_decorator(
+    admin_permission_required,
+    name="dispatch",
+)
 class DriverDocumentDeleteView(
     LoginRequiredMixin,
     CompanyRequestMixin,
